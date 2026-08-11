@@ -1,0 +1,2 @@
+*.zip filter=lfs diff=lfs merge=lfs -text
+public/rich-fx/portfolio/The[[:space:]]Boma/The[[:space:]]Boma.zip filter=lfs diff=lfs merge=lfs -text
