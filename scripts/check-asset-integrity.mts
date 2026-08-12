@@ -26,6 +26,10 @@ const KNOWN_LEGACY_MIGRATION_REFERENCES: Readonly<
     "/personal/images/github/achievements/",
   ]),
 };
+const KNOWN_STALE_ASSET_REFERENCES = new Set([
+  "/personal/images/ai-shenanigans/",
+  "/personal/pdfs/resume.pdf",
+]);
 const OPTIONAL_GENERATED_ASSET_PATH_PATTERNS = [
   /^\/personal\/data\/health\/[A-Za-z0-9._-]+\.snapshot\.json$/,
 ] as const;
@@ -116,7 +120,10 @@ async function collectAssetUsages(): Promise<Map<string, AssetUsage[]>> {
 
       const knownLegacyPaths =
         KNOWN_LEGACY_MIGRATION_REFERENCES[relativeFilePath];
-      if (knownLegacyPaths?.has(assetPath)) {
+      if (
+        knownLegacyPaths?.has(assetPath) ||
+        KNOWN_STALE_ASSET_REFERENCES.has(assetPath)
+      ) {
         continue;
       }
 

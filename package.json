@@ -11,6 +11,7 @@
     "check:asset-integrity": "node --import tsx scripts/check-asset-integrity.mts",
     "check:file-budgets": "node --import tsx scripts/check-file-budgets.mts",
     "check:bundle-budget": "node --import tsx scripts/check-bundle-budget.mts",
+    "prune:deploy-assets": "node --import tsx scripts/prune-deploy-assets.mts",
     "analyze:bundle": "node --import tsx scripts/analyze-bundle.mts",
     "build:search-index": "node --import tsx scripts/build-search-index.mts",
     "clean": "node --import tsx scripts/clean.mts",
