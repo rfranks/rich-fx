@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-08-12T23:57:50.503Z",
+  "overallStatus": "warn",
+  "checks": {
+    "fileBudgets": "warn",
+    "testRunner": "pass"
+  },
+  "snapshots": {
+    "fileBudgets": {
+      "key": "fileBudgets",
+      "status": "warn",
+      "generatedAt": "2026-08-12T23:57:30.621Z",
+      "summary": "File budget check passed.",
+      "details": {
+        "totals": {
+          "scannedFileCount": 161,
+          "codeFileCount": 155,
+          "violationCount": 0,
+          "missingExactBudgetViolationCount": 0,
+          "exactBudgetUnderuseViolationCount": 0,
+          "staleExactBudgetViolationCount": 0
+        },
+        "budget": {
+          "defaultBudget": 900,
+          "exactBudgetOverrideCount": 5
+        },
+        "autofix": {
+          "enabled": false,
+          "applied": false,
+          "removedMissingOverrides": 0,
+          "removedBelowDefaultOverrides": 0,
+          "tightenedOverrides": 0
+        },
+        "testHealth": {
+          "status": "pass",
+          "totalTestFiles": 6,
+          "violatingTestFiles": 0
+        },
+        "a11yHealth": {
+          "status": "warn",
+          "totalA11yTestFiles": 0,
+          "violatingA11yTestFiles": 0
+        },
+        "schemaValidation": {
+          "schemaTestFileCount": 0
+        },
+        "topViolations": [],
+        "exactBudgetUnderuseViolations": [],
+        "missingExactBudgetViolations": []
+      }
+    },
+    "testRunner": {
+      "key": "testRunner",
+      "status": "pass",
+      "generatedAt": "2026-08-12T23:57:50.503Z",
+      "summary": "unit test runner passed for lane portfolio.",
+      "details": {
+        "suite": "unit",
+        "lane": "portfolio",
+        "exitCode": 0,
+        "jestArgs": []
+      }
+    }
+  }
+}

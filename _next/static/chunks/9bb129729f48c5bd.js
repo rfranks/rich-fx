@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,16645,e=>{"use strict";e.s(["CynefinModule",()=>n.CynefinModule,"createCynefinServices",()=>n.createCynefinServices],16645),e.s([],48802);var i=e.i(95461);e.i(89408),e.i(48802);var n=i}]);
