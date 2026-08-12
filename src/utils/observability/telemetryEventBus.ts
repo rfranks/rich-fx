@@ -16,7 +16,9 @@ const shouldSampleTelemetryEvent = (channel: PortfolioTelemetryChannel) => {
   return Math.random() <= rate;
 };
 
-export function emitPortfolioTelemetryEventThroughBus(detail: PortfolioTelemetryEventDetail): void {
+export function emitPortfolioTelemetryEventThroughBus(
+  detail: PortfolioTelemetryEventDetail,
+): void {
   if (typeof window === "undefined") {
     return;
   }
@@ -25,8 +27,11 @@ export function emitPortfolioTelemetryEventThroughBus(detail: PortfolioTelemetry
   }
 
   window.dispatchEvent(
-    new CustomEvent<PortfolioTelemetryEventDetail>(PORTFOLIO_TELEMETRY_EVENT.EMIT, {
-      detail,
-    }),
+    new CustomEvent<PortfolioTelemetryEventDetail>(
+      PORTFOLIO_TELEMETRY_EVENT.EMIT,
+      {
+        detail,
+      },
+    ),
   );
 }

@@ -23,7 +23,12 @@ export type InteractiveViewportSensitivityProfile = {
   panMinDeltaMultiplierScale: number;
   panMaxDeltaMultiplierScale: number;
 };
-export type PanZoomViewportZoomMode = "icon" | "click" | "doubleClick" | "wheel" | "pinch";
+export type PanZoomViewportZoomMode =
+  | "icon"
+  | "click"
+  | "doubleClick"
+  | "wheel"
+  | "pinch";
 export type PanZoomViewportAutoFitAlign = "top" | "center";
 export type PanZoomViewportPreferences = {
   showGridDots?: boolean;

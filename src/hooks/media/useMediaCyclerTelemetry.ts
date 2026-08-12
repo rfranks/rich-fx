@@ -1,7 +1,10 @@
 import * as React from "react";
 import { PORTFOLIO_MEDIA_TELEMETRY_ACTION } from "@/consts/observability/telemetryEvents";
 import type { MediaActionKind } from "@/types/media/mediaActionContract";
-import type { MediaCyclerItem, MediaCyclerMediaType } from "@/types/media/mediaCycler";
+import type {
+  MediaCyclerItem,
+  MediaCyclerMediaType,
+} from "@/types/media/mediaCycler";
 import type { PortfolioTelemetryTrigger } from "@/types/observability/telemetryEvents";
 import { resolveMediaActionContract } from "@/utils/components/shared/mediaCycler";
 import { emitMediaActionBusEvent } from "@/utils/media/mediaActionBus";
@@ -17,7 +20,10 @@ type UseMediaCyclerTelemetryArgs = {
 const isFirstRenderTrackedMediaType = (
   mediaType: MediaCyclerMediaType,
 ): mediaType is "image" | "video" | "pdf" | "diagram" =>
-  mediaType === "image" || mediaType === "video" || mediaType === "pdf" || mediaType === "diagram";
+  mediaType === "image" ||
+  mediaType === "video" ||
+  mediaType === "pdf" ||
+  mediaType === "diagram";
 
 export function useMediaCyclerTelemetry({
   renderedItem,
@@ -67,7 +73,11 @@ export function useMediaCyclerTelemetry({
   );
 
   const openMetadataDialog = React.useCallback(
-    (item: MediaCyclerItem, trigger: PortfolioTelemetryTrigger, control?: string) => {
+    (
+      item: MediaCyclerItem,
+      trigger: PortfolioTelemetryTrigger,
+      control?: string,
+    ) => {
       emitMediaTelemetry("details.open", trigger, item, control);
       setMetadataDialogItemKey(item.key);
     },
@@ -93,7 +103,8 @@ export function useMediaCyclerTelemetry({
       }
       mediaFirstRenderReportedKeysRef.current.add(item.key);
 
-      const startedAtMs = mediaFirstRenderStartMsRef.current[item.key] ?? performance.now();
+      const startedAtMs =
+        mediaFirstRenderStartMsRef.current[item.key] ?? performance.now();
       const durationMs = Math.max(0, performance.now() - startedAtMs);
 
       emitPortfolioTelemetryEvent({

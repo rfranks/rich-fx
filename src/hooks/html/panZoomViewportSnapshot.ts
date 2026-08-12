@@ -38,7 +38,9 @@ const clampNumber = (value: unknown, fallback: number) => {
   return value;
 };
 
-export const normalizeViewportSnapshot = (raw: unknown): PanZoomViewportSnapshot | null => {
+export const normalizeViewportSnapshot = (
+  raw: unknown,
+): PanZoomViewportSnapshot | null => {
   if (!raw || typeof raw !== "object") {
     return null;
   }
@@ -52,9 +54,12 @@ export const normalizeViewportSnapshot = (raw: unknown): PanZoomViewportSnapshot
     return null;
   }
 
-  const preset: InteractiveViewportPreset = candidate.preset === "diagram" ? "diagram" : "media";
+  const preset: InteractiveViewportPreset =
+    candidate.preset === "diagram" ? "diagram" : "media";
   const preferences =
-    candidate.preferences && typeof candidate.preferences === "object" ? candidate.preferences : {};
+    candidate.preferences && typeof candidate.preferences === "object"
+      ? candidate.preferences
+      : {};
 
   return {
     v: 1,
@@ -69,15 +74,21 @@ export const normalizeViewportSnapshot = (raw: unknown): PanZoomViewportSnapshot
 };
 
 const encodeBase64Url = (value: string): string => {
-  const utf8 = encodeURIComponent(value).replace(/%([0-9A-F]{2})/g, (_, hex: string) =>
-    String.fromCharCode(Number.parseInt(hex, 16)),
+  const utf8 = encodeURIComponent(value).replace(
+    /%([0-9A-F]{2})/g,
+    (_, hex: string) => String.fromCharCode(Number.parseInt(hex, 16)),
   );
-  return window.btoa(utf8).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+  return window
+    .btoa(utf8)
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
 };
 
 const decodeBase64Url = (value: string): string => {
   const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
-  const padding = normalized.length % 4 === 0 ? "" : "=".repeat(4 - (normalized.length % 4));
+  const padding =
+    normalized.length % 4 === 0 ? "" : "=".repeat(4 - (normalized.length % 4));
   const binary = window.atob(`${normalized}${padding}`);
   const escaped = Array.from(binary)
     .map((char) => `%${char.charCodeAt(0).toString(16).padStart(2, "0")}`)
@@ -85,7 +96,9 @@ const decodeBase64Url = (value: string): string => {
   return decodeURIComponent(escaped);
 };
 
-export const serializePanZoomViewportSnapshot = (state: PanZoomViewportSnapshot): string => {
+export const serializePanZoomViewportSnapshot = (
+  state: PanZoomViewportSnapshot,
+): string => {
   if (typeof window === "undefined") {
     return "";
   }

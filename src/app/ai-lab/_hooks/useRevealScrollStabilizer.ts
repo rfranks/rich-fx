@@ -4,8 +4,11 @@ type UseRevealScrollStabilizerArgs = {
   mobileFooterMediaQuery?: string;
 };
 
-export function useRevealScrollStabilizer(args?: UseRevealScrollStabilizerArgs) {
-  const mobileFooterMediaQuery = args?.mobileFooterMediaQuery ?? "(max-width:1199.95px)";
+export function useRevealScrollStabilizer(
+  args?: UseRevealScrollStabilizerArgs,
+) {
+  const mobileFooterMediaQuery =
+    args?.mobileFooterMediaQuery ?? "(max-width:1199.95px)";
   const scrollStabilizersRef = useRef<Array<() => void>>([]);
 
   const clearScrollStabilizers = useCallback(() => {

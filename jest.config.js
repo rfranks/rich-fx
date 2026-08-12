@@ -7,8 +7,21 @@ module.exports = {
     "^uuid$": "<rootDir>/src/tests/mocks/uuidMock.ts",
     "\\.(css|less|sass|scss)$": "<rootDir>/src/tests/mocks/styleMock.ts",
   },
-  testPathIgnorePatterns: ["/src/tests/resumeIngest.test.ts", "/src/tests/useDimensions.test.ts"],
-  moduleFileExtensions: ["js", "mjs", "cjs", "jsx", "ts", "tsx", "mts", "json", "node"],
+  testPathIgnorePatterns: [
+    "/src/tests/resumeIngest.test.ts",
+    "/src/tests/useDimensions.test.ts",
+  ],
+  moduleFileExtensions: [
+    "js",
+    "mjs",
+    "cjs",
+    "jsx",
+    "ts",
+    "tsx",
+    "mts",
+    "json",
+    "node",
+  ],
   setupFilesAfterEnv: ["<rootDir>/src/tests/setup.ts"],
   transform: {
     "^.+\\.(ts|tsx|mts)$": [

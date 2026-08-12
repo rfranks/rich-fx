@@ -67,7 +67,10 @@ export default function AILabPageClient() {
     () => normalizeAILabItems(aiLab.items as AILabDataItem[], ""),
     [aiLab.items],
   );
-  const filterOptions = useMemo(() => resolveAILabFilterOptions(labItems), [labItems]);
+  const filterOptions = useMemo(
+    () => resolveAILabFilterOptions(labItems),
+    [labItems],
+  );
   const allowedFilterValuesByCategory = useMemo(
     () => ({
       medium: new Set(filterOptions.medium.map((option) => option.value)),
@@ -115,7 +118,9 @@ export default function AILabPageClient() {
   });
   const theme = useMemo(() => getRichFxLabTheme(mode), [mode]);
   const { setDocumentTitle } = useDocumentTitle();
-  const [selectedFilters, setSelectedFilters] = useState<AILabFilterSelection>({});
+  const [selectedFilters, setSelectedFilters] = useState<AILabFilterSelection>(
+    {},
+  );
   const [currentSlug, setCurrentSlug] = useState<string | null>(null);
   const [isInitialLocationSynced, setIsInitialLocationSynced] = useState(false);
   const { replaceRoutePathIfChanged } = useRouteStateSync({
@@ -145,7 +150,9 @@ export default function AILabPageClient() {
       return 0;
     }
 
-    const resolvedIndex = filteredLabItems.findIndex((item) => item.slug === currentSlug);
+    const resolvedIndex = filteredLabItems.findIndex(
+      (item) => item.slug === currentSlug,
+    );
     return resolvedIndex >= 0 ? resolvedIndex : 0;
   }, [currentSlug, filteredLabItems]);
 
@@ -157,11 +164,19 @@ export default function AILabPageClient() {
     }
 
     setCurrentSlug((previousSlug) => {
-      const activeIndex = filteredLabItems.findIndex((item) => item.slug === previousSlug);
+      const activeIndex = filteredLabItems.findIndex(
+        (item) => item.slug === previousSlug,
+      );
       const currentActiveIndex = activeIndex >= 0 ? activeIndex : 0;
       const previousIndex =
-        currentActiveIndex <= 0 ? filteredLabItems.length - 1 : currentActiveIndex - 1;
-      return filteredLabItems[previousIndex]?.slug ?? filteredLabItems[0]?.slug ?? null;
+        currentActiveIndex <= 0
+          ? filteredLabItems.length - 1
+          : currentActiveIndex - 1;
+      return (
+        filteredLabItems[previousIndex]?.slug ??
+        filteredLabItems[0]?.slug ??
+        null
+      );
     });
   }, [filteredLabItems]);
 
@@ -171,11 +186,17 @@ export default function AILabPageClient() {
     }
 
     setCurrentSlug((previousSlug) => {
-      const activeIndex = filteredLabItems.findIndex((item) => item.slug === previousSlug);
+      const activeIndex = filteredLabItems.findIndex(
+        (item) => item.slug === previousSlug,
+      );
       const currentActiveIndex = activeIndex >= 0 ? activeIndex : 0;
       const nextIndex =
-        currentActiveIndex >= filteredLabItems.length - 1 ? 0 : currentActiveIndex + 1;
-      return filteredLabItems[nextIndex]?.slug ?? filteredLabItems[0]?.slug ?? null;
+        currentActiveIndex >= filteredLabItems.length - 1
+          ? 0
+          : currentActiveIndex + 1;
+      return (
+        filteredLabItems[nextIndex]?.slug ?? filteredLabItems[0]?.slug ?? null
+      );
     });
   }, [filteredLabItems]);
 
@@ -232,7 +253,10 @@ export default function AILabPageClient() {
       return;
     }
 
-    if (currentSlug && filteredLabItems.some((item) => item.slug === currentSlug)) {
+    if (
+      currentSlug &&
+      filteredLabItems.some((item) => item.slug === currentSlug)
+    ) {
       return;
     }
 
@@ -247,19 +271,28 @@ export default function AILabPageClient() {
     const nextUrl = new URL(window.location.href);
 
     if (selectedFilters.medium) {
-      nextUrl.searchParams.set(FILTER_QUERY_KEY_BY_CATEGORY.medium, selectedFilters.medium);
+      nextUrl.searchParams.set(
+        FILTER_QUERY_KEY_BY_CATEGORY.medium,
+        selectedFilters.medium,
+      );
     } else {
       nextUrl.searchParams.delete(FILTER_QUERY_KEY_BY_CATEGORY.medium);
     }
 
     if (selectedFilters.style) {
-      nextUrl.searchParams.set(FILTER_QUERY_KEY_BY_CATEGORY.style, selectedFilters.style);
+      nextUrl.searchParams.set(
+        FILTER_QUERY_KEY_BY_CATEGORY.style,
+        selectedFilters.style,
+      );
     } else {
       nextUrl.searchParams.delete(FILTER_QUERY_KEY_BY_CATEGORY.style);
     }
 
     if (selectedFilters.series) {
-      nextUrl.searchParams.set(FILTER_QUERY_KEY_BY_CATEGORY.series, selectedFilters.series);
+      nextUrl.searchParams.set(
+        FILTER_QUERY_KEY_BY_CATEGORY.series,
+        selectedFilters.series,
+      );
     } else {
       nextUrl.searchParams.delete(FILTER_QUERY_KEY_BY_CATEGORY.series);
     }
@@ -267,7 +300,12 @@ export default function AILabPageClient() {
     nextUrl.hash = currentItem ? encodeURIComponent(currentItem.slug) : "";
 
     replaceRoutePathIfChanged(nextUrl);
-  }, [currentItem, isInitialLocationSynced, replaceRoutePathIfChanged, selectedFilters]);
+  }, [
+    currentItem,
+    isInitialLocationSynced,
+    replaceRoutePathIfChanged,
+    selectedFilters,
+  ]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -335,7 +373,8 @@ export default function AILabPageClient() {
           "--fabric-bg-base": theme.fabric.background.base,
           "--fabric-bg-layer": theme.fabric.background.layer,
           "--fabric-bg-radial-primary": theme.fabric.background.radialPrimary,
-          "--fabric-bg-radial-secondary": theme.fabric.background.radialSecondary,
+          "--fabric-bg-radial-secondary":
+            theme.fabric.background.radialSecondary,
           "--fabric-surface-1": theme.fabric.surface.level1,
           "--fabric-surface-2": theme.fabric.surface.level2,
           "--fabric-surface-3": theme.fabric.surface.level3,
@@ -398,11 +437,19 @@ export default function AILabPageClient() {
               </Box>
               <IconButton
                 color="inherit"
-                aria-label={mode === "light" ? "Switch to dark mode" : "Switch to light mode"}
+                aria-label={
+                  mode === "light"
+                    ? "Switch to dark mode"
+                    : "Switch to light mode"
+                }
                 onClick={toggleColorMode}
                 size="small"
               >
-                {mode === "light" ? <DarkMode fontSize="small" /> : <LightMode fontSize="small" />}
+                {mode === "light" ? (
+                  <DarkMode fontSize="small" />
+                ) : (
+                  <LightMode fontSize="small" />
+                )}
               </IconButton>
               <IconButton
                 color="inherit"
@@ -420,13 +467,18 @@ export default function AILabPageClient() {
               alignItems={{ xs: "stretch", sm: "center" }}
               sx={{ display: { xs: "none", md: "flex" } }}
             >
-              <FormControl size="small" sx={{ minWidth: { xs: "100%", sm: 168 } }}>
+              <FormControl
+                size="small"
+                sx={{ minWidth: { xs: "100%", sm: 168 } }}
+              >
                 <InputLabel id="ai-lab-medium-filter-label">Medium</InputLabel>
                 <Select
                   labelId="ai-lab-medium-filter-label"
                   label="Medium"
                   value={selectedFilters.medium ?? ""}
-                  onChange={(event) => setFilterValue("medium", event.target.value)}
+                  onChange={(event) =>
+                    setFilterValue("medium", event.target.value)
+                  }
                 >
                   <MenuItem value="">All Mediums</MenuItem>
                   {filterOptions.medium.map((option) => (
@@ -437,13 +489,18 @@ export default function AILabPageClient() {
                 </Select>
               </FormControl>
 
-              <FormControl size="small" sx={{ minWidth: { xs: "100%", sm: 168 } }}>
+              <FormControl
+                size="small"
+                sx={{ minWidth: { xs: "100%", sm: 168 } }}
+              >
                 <InputLabel id="ai-lab-style-filter-label">Style</InputLabel>
                 <Select
                   labelId="ai-lab-style-filter-label"
                   label="Style"
                   value={selectedFilters.style ?? ""}
-                  onChange={(event) => setFilterValue("style", event.target.value)}
+                  onChange={(event) =>
+                    setFilterValue("style", event.target.value)
+                  }
                 >
                   <MenuItem value="">All Styles</MenuItem>
                   {filterOptions.style.map((option) => (
@@ -454,13 +511,18 @@ export default function AILabPageClient() {
                 </Select>
               </FormControl>
 
-              <FormControl size="small" sx={{ minWidth: { xs: "100%", sm: 198 } }}>
+              <FormControl
+                size="small"
+                sx={{ minWidth: { xs: "100%", sm: 198 } }}
+              >
                 <InputLabel id="ai-lab-series-filter-label">Series</InputLabel>
                 <Select
                   labelId="ai-lab-series-filter-label"
                   label="Series"
                   value={selectedFilters.series ?? ""}
-                  onChange={(event) => setFilterValue("series", event.target.value)}
+                  onChange={(event) =>
+                    setFilterValue("series", event.target.value)
+                  }
                 >
                   <MenuItem value="">All Series</MenuItem>
                   {filterOptions.series.map((option) => (
@@ -478,7 +540,11 @@ export default function AILabPageClient() {
                 sx={{ ml: { sm: "auto" }, pl: { sm: 0.5 } }}
               >
                 {hasActiveFilters ? (
-                  <Button variant="outlined" size="small" onClick={clearFilters}>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={clearFilters}
+                  >
                     Clear Filters
                   </Button>
                 ) : null}

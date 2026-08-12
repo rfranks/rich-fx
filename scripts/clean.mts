@@ -15,7 +15,9 @@ const cleanTargets = [
   "public/personal/data/search",
 ] as const;
 
-async function removeTarget(relativePath: string): Promise<"removed" | "skipped"> {
+async function removeTarget(
+  relativePath: string,
+): Promise<"removed" | "skipped"> {
   const absolutePath = path.join(rootDir, relativePath);
   try {
     await fs.stat(absolutePath);

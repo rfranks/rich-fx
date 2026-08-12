@@ -17,7 +17,9 @@ export function getTargetLabel(target: EventTarget | null): string | null {
     return null;
   }
 
-  const interactiveElement = target.closest("button,a,[role='button'],[aria-label]");
+  const interactiveElement = target.closest(
+    "button,a,[role='button'],[aria-label]",
+  );
   if (!interactiveElement) {
     return null;
   }
@@ -27,11 +29,15 @@ export function getTargetLabel(target: EventTarget | null): string | null {
     return truncateLabel(ariaLabel);
   }
 
-  const textContent = interactiveElement.textContent?.replace(/\s+/g, " ").trim();
+  const textContent = interactiveElement.textContent
+    ?.replace(/\s+/g, " ")
+    .trim();
   return textContent ? truncateLabel(textContent) : null;
 }
 
-export function getMediaActionLabelFromControlLabel(controlLabel: string | null): string | null {
+export function getMediaActionLabelFromControlLabel(
+  controlLabel: string | null,
+): string | null {
   if (!controlLabel) {
     return null;
   }

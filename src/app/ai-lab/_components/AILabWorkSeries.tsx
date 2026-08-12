@@ -72,7 +72,8 @@ export default function AILabWorkSeries({
   const workFooterRefs = useRef<Array<HTMLDivElement | null>>([]);
   const seriesFooterRefs = useRef<Array<HTMLDivElement | null>>([]);
   const seriesVideoRefs = useRef<Array<HTMLVideoElement | null>>([]);
-  const { clearScrollStabilizers, scrollRevealIntoView } = useRevealScrollStabilizer();
+  const { clearScrollStabilizers, scrollRevealIntoView } =
+    useRevealScrollStabilizer();
   const isPortrait = orientation === "portrait";
   const mediaAspectRatio = isPortrait ? "9 / 16" : "16 / 9";
   const mediaMaxWidth = isPortrait ? 360 : "100%";
@@ -127,7 +128,11 @@ export default function AILabWorkSeries({
     }
 
     return (
-      <Typography variant="caption" color="text.secondary" sx={{ mt: 1.5, display: "block" }}>
+      <Typography
+        variant="caption"
+        color="text.secondary"
+        sx={{ mt: 1.5, display: "block" }}
+      >
         Source:{" "}
         {href ? (
           <Link
@@ -171,7 +176,8 @@ export default function AILabWorkSeries({
           letterSpacing: "0.08em",
           textTransform: "uppercase",
           transform: `rotate(${rightsStampAngle}deg)`,
-          boxShadow: "0 0 0 2px rgba(255,255,255,0.22) inset, 0 10px 24px rgba(127,29,29,0.18)",
+          boxShadow:
+            "0 0 0 2px rgba(255,255,255,0.22) inset, 0 10px 24px rgba(127,29,29,0.18)",
           textShadow: "0 1px 0 rgba(255,255,255,0.3)",
           opacity: 0.92,
         }}
@@ -213,16 +219,27 @@ export default function AILabWorkSeries({
       return null;
     }
 
-    const subtitleLine = source?.trim() ? `${subtitle} • ${source.trim()}` : subtitle;
+    const subtitleLine = source?.trim()
+      ? `${subtitle} • ${source.trim()}`
+      : subtitle;
 
     return (
       <Box sx={{ mb: 1.25 }}>
-        <Stack direction="row" spacing={1} alignItems="flex-start" justifyContent="space-between">
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="flex-start"
+          justifyContent="space-between"
+        >
           <Box sx={{ minWidth: 0, flex: 1 }}>
             <Typography variant="h6" sx={{ lineHeight: 1.15 }}>
               {title}
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 0.35, lineHeight: 1.3 }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ mt: 0.35, lineHeight: 1.3 }}
+            >
               {subtitleLine}
             </Typography>
           </Box>
@@ -323,7 +340,10 @@ export default function AILabWorkSeries({
     );
   };
 
-  const currentStep = currentRevealStep({ revealedWorkCount, revealedSeriesCount });
+  const currentStep = currentRevealStep({
+    revealedWorkCount,
+    revealedSeriesCount,
+  });
   const nextStep = nextRevealStep({
     revealedWorkCount,
     revealedSeriesCount,
@@ -502,7 +522,10 @@ export default function AILabWorkSeries({
       }}
       sx={mediaPanelSx}
     >
-      {renderMobilePanelHeader(getWorkLabel(title, index, totalWorkParts), part.source)}
+      {renderMobilePanelHeader(
+        getWorkLabel(title, index, totalWorkParts),
+        part.source,
+      )}
       {!isSmDown && (
         <>
           <Typography variant="subtitle2" sx={{ mb: 1 }}>
@@ -517,9 +540,14 @@ export default function AILabWorkSeries({
         part.src,
         `${title} ${getWorkLabel(title, index, totalWorkParts)}`,
         () => {
-          scrollRevealIntoView(workCardRefs.current[index], workFooterRefs.current[index]);
+          scrollRevealIntoView(
+            workCardRefs.current[index],
+            workFooterRefs.current[index],
+          );
         },
-        index > 0 ? () => rewindToStep({ kind: "work", index: index - 1 }) : undefined,
+        index > 0
+          ? () => rewindToStep({ kind: "work", index: index - 1 })
+          : undefined,
         () => {
           handleRevealNextStep();
         },
@@ -537,7 +565,11 @@ export default function AILabWorkSeries({
       )}
       {!isSmDown && renderSource(part.source, part.sourceHref)}
       {!isSmDown && part.caption && (
-        <Typography variant="body2" color="text.secondary" sx={{ mt: part.source ? 0.75 : 1.5 }}>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ mt: part.source ? 0.75 : 1.5 }}
+        >
           {part.caption}
         </Typography>
       )}
@@ -601,7 +633,9 @@ export default function AILabWorkSeries({
             rewindToStep({ kind: "series", index: index + 1 });
           }
         }}
-        disableChevronPrevious={transitioning !== null || (index === 0 && totalWorkParts === 0)}
+        disableChevronPrevious={
+          transitioning !== null || (index === 0 && totalWorkParts === 0)
+        }
         disableChevronNext={
           transitioning !== null ||
           !(
@@ -647,7 +681,10 @@ export default function AILabWorkSeries({
             autoPlay: index === revealedSeriesCount - 1,
             playsInline: true,
             onMediaLoaded: () => {
-              scrollRevealIntoView(seriesCardRefs.current[index], seriesFooterRefs.current[index]);
+              scrollRevealIntoView(
+                seriesCardRefs.current[index],
+                seriesFooterRefs.current[index],
+              );
             },
             onMediaActivate: () => {
               if (transitioning) {
@@ -680,7 +717,8 @@ export default function AILabWorkSeries({
               minHeight: 0,
               display: "flex",
             },
-            previewVideoClassName: "block w-full rounded-[22px] bg-black/10 object-contain",
+            previewVideoClassName:
+              "block w-full rounded-[22px] bg-black/10 object-contain",
             previewVideoSx: {
               aspectRatio: mediaAspectRatio,
               maxWidth: mediaMaxWidth,
@@ -728,7 +766,9 @@ export default function AILabWorkSeries({
               minWidth: 0,
               flex: {
                 xs: "0 0 auto",
-                md: hasVisibleMedia ? `0 1 ${desktopInfoPanelBasis}` : "1 1 100%",
+                md: hasVisibleMedia
+                  ? `0 1 ${desktopInfoPanelBasis}`
+                  : "1 1 100%",
               },
               flexBasis: {
                 md: hasVisibleMedia ? desktopInfoPanelBasis : "100%",
@@ -837,7 +877,9 @@ export default function AILabWorkSeries({
                           mode={revealMode}
                           onModeChange={setRevealMode}
                           onSelect={(key) => {
-                            const target = chronologySteps.find((item) => item.key === key);
+                            const target = chronologySteps.find(
+                              (item) => item.key === key,
+                            );
                             if (!target?.reached) {
                               return;
                             }
@@ -923,7 +965,9 @@ export default function AILabWorkSeries({
                 md: hasVisibleMedia ? 0 : "0px",
               },
               opacity: hasVisibleMedia ? 1 : 0,
-              transform: hasVisibleMedia ? "translate3d(0, 0, 0)" : "translate3d(28px, 0, 0)",
+              transform: hasVisibleMedia
+                ? "translate3d(0, 0, 0)"
+                : "translate3d(28px, 0, 0)",
               pointerEvents: hasVisibleMedia ? "auto" : "none",
               order: { xs: 1, md: 1 },
               transition:
@@ -936,7 +980,10 @@ export default function AILabWorkSeries({
 
             {current?.kind === "series" &&
               normalizedSeriesParts[current.index] &&
-              renderSeriesPart(normalizedSeriesParts[current.index], current.index)}
+              renderSeriesPart(
+                normalizedSeriesParts[current.index],
+                current.index,
+              )}
           </Stack>
         </Stack>
       </Stack>

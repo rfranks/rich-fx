@@ -2,7 +2,8 @@ import type {
   InteractiveViewportInputType,
   InteractiveViewportSensitivityProfile,
 } from "@/types/hooks/panZoomViewport";
-export type InteractionSensitivityProfile = InteractiveViewportSensitivityProfile;
+export type InteractionSensitivityProfile =
+  InteractiveViewportSensitivityProfile;
 
 type InteractionProfileOverrides = Partial<InteractionSensitivityProfile>;
 
@@ -119,7 +120,8 @@ export function resolveInteractionSensitivityProfile(args: {
   const appKey = normalizeScopeToken(args.appKey);
   const sectionKey = normalizeScopeToken(args.section);
   const mediaType = normalizeScopeToken(args.mediaType);
-  const sectionOverrides = SECTION_INTERACTION_OVERRIDES[sectionKey]?.[args.inputType];
+  const sectionOverrides =
+    SECTION_INTERACTION_OVERRIDES[sectionKey]?.[args.inputType];
   const appOverrides = APP_INTERACTION_OVERRIDES[appKey]?.[args.inputType];
   const mediaTypeOverrides =
     mediaType && sectionKey !== mediaType

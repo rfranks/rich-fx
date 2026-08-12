@@ -2,7 +2,14 @@
 
 import * as React from "react";
 import { Close, OpenInFull } from "@mui/icons-material";
-import { Box, Dialog, IconButton, Typography, Tooltip, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  IconButton,
+  Typography,
+  Tooltip,
+  useMediaQuery,
+} from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
 import { Diagram } from "../visualization";
 import type { DiagramLightBoxProps } from "@/types/components/shared/media";
@@ -23,8 +30,14 @@ export default function DiagramLightBox({
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
-  const expandButtonSxArray = React.useMemo(() => toSxArray(expandButtonSx), [expandButtonSx]);
-  const containerSxArray = React.useMemo(() => toSxArray(containerSx), [containerSx]);
+  const expandButtonSxArray = React.useMemo(
+    () => toSxArray(expandButtonSx),
+    [expandButtonSx],
+  );
+  const containerSxArray = React.useMemo(
+    () => toSxArray(containerSx),
+    [containerSx],
+  );
 
   const baseId = diagramProps?.id;
   const inlineId = baseId ? `${baseId}-inline` : undefined;
@@ -49,7 +62,10 @@ export default function DiagramLightBox({
       <>
         <Box sx={{ flexGrow: 1 }} />
         <Tooltip title={`Open full diagram: ${lightboxLabel}`}>
-          <IconButton aria-label={`Open full diagram: ${lightboxLabel}`} onClick={handleOpen}>
+          <IconButton
+            aria-label={`Open full diagram: ${lightboxLabel}`}
+            onClick={handleOpen}
+          >
             <OpenInFull fontSize="small" />
           </IconButton>
         </Tooltip>
@@ -124,7 +140,10 @@ export default function DiagramLightBox({
             minHeight: 0,
             display: "flex",
             flexDirection: "column",
-            bgcolor: nextTheme.palette.mode === "dark" ? "rgba(0,0,0,0.96)" : "rgba(11,18,30,0.92)",
+            bgcolor:
+              nextTheme.palette.mode === "dark"
+                ? "rgba(0,0,0,0.96)"
+                : "rgba(11,18,30,0.92)",
           })}
         >
           <Box

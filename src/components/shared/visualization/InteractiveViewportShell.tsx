@@ -32,8 +32,14 @@ export default function InteractiveViewportShell({
   gridSpacingPx = 30,
   children,
 }: InteractiveViewportShellProps) {
-  const containerSxArray = React.useMemo(() => toSxArray(containerSx), [containerSx]);
-  const viewportSxArray = React.useMemo(() => toSxArray(viewportSx), [viewportSx]);
+  const containerSxArray = React.useMemo(
+    () => toSxArray(containerSx),
+    [containerSx],
+  );
+  const viewportSxArray = React.useMemo(
+    () => toSxArray(viewportSx),
+    [viewportSx],
+  );
 
   return (
     <Box

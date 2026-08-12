@@ -6,7 +6,10 @@ import { CloseOutlined } from "@mui/icons-material";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { FormField, type FormFieldProps } from "./FormField";
 
-export interface FileUploaderProps extends Omit<FormFieldProps, "input" | "variant" | "onChange"> {
+export interface FileUploaderProps extends Omit<
+  FormFieldProps,
+  "input" | "variant" | "onChange"
+> {
   /**
    * The id for the `FileUploader`.
    *
@@ -36,7 +39,11 @@ export interface FileUploaderProps extends Omit<FormFieldProps, "input" | "varia
    * Callback fired when the value of the `FileUploader` is changed.
    */
   onChange?: (
-    value: File[] | string | { filename: string; type: string; content: string } | undefined,
+    value:
+      | File[]
+      | string
+      | { filename: string; type: string; content: string }
+      | undefined,
   ) => void;
   /**
    * The type of output to return from the FileUploader in its onChange callback.
@@ -64,7 +71,9 @@ export default function FileUploader(props: FileUploaderProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const getFileSize = (size: number) =>
-    size < 1000000 ? `${Math.floor(size / 1000)} KB` : `${(size / 1000000).toFixed(1)} MB`;
+    size < 1000000
+      ? `${Math.floor(size / 1000)} KB`
+      : `${(size / 1000000).toFixed(1)} MB`;
 
   const handleFileInputChange = useCallback(
     (e: React.SyntheticEvent<EventTarget>) => {
@@ -139,7 +148,16 @@ export default function FileUploader(props: FileUploaderProps) {
         }
       }
     },
-    [files, fileErrors, limit, maxFileSize, onChange, outputType, value, variant],
+    [
+      files,
+      fileErrors,
+      limit,
+      maxFileSize,
+      onChange,
+      outputType,
+      value,
+      variant,
+    ],
   );
 
   const fileRemove = (file: File) => {
@@ -182,7 +200,8 @@ export default function FileUploader(props: FileUploaderProps) {
     });
 
     if (acceptsText.length > 1) {
-      acceptsText[acceptsText.length - 1] = `or ${acceptsText[acceptsText.length - 1]}`;
+      acceptsText[acceptsText.length - 1] =
+        `or ${acceptsText[acceptsText.length - 1]}`;
     }
 
     return acceptsText.join(", ");
@@ -269,7 +288,9 @@ export default function FileUploader(props: FileUploaderProps) {
                     <Box display="flex">
                       <Box sx={{ ml: 1 }}>
                         <Typography variant="body1">{file.name}</Typography>
-                        <Typography variant="body2">{getFileSize(file.size)}</Typography>
+                        <Typography variant="body2">
+                          {getFileSize(file.size)}
+                        </Typography>
                         {fileErrors?.[file.name] && (
                           <Typography
                             variant="body2"

@@ -16,11 +16,15 @@ const candidateManifestRoots = [
 
 const maxTotalKb = Number(process.env.BUNDLE_MAX_TOTAL_KB ?? 25000);
 const maxLargestKb = Number(process.env.BUNDLE_MAX_LARGEST_CHUNK_KB ?? 3000);
-const defaultRouteMaxTotalKb = Number(process.env.BUNDLE_ROUTE_MAX_TOTAL_KB ?? maxTotalKb);
+const defaultRouteMaxTotalKb = Number(
+  process.env.BUNDLE_ROUTE_MAX_TOTAL_KB ?? maxTotalKb,
+);
 const defaultRouteMaxLargestKb = Number(
   process.env.BUNDLE_ROUTE_MAX_LARGEST_CHUNK_KB ?? maxLargestKb,
 );
-const defaultSectionMaxTotalKb = Number(process.env.BUNDLE_SECTION_MAX_TOTAL_KB ?? maxTotalKb);
+const defaultSectionMaxTotalKb = Number(
+  process.env.BUNDLE_SECTION_MAX_TOTAL_KB ?? maxTotalKb,
+);
 const defaultSectionMaxLargestKb = Number(
   process.env.BUNDLE_SECTION_MAX_LARGEST_CHUNK_KB ?? maxLargestKb,
 );
@@ -28,7 +32,8 @@ const defaultSectionMaxLargestKb = Number(
 const isCi = process.env.CI === "true" || process.env.GITHUB_ACTIONS === "true";
 const routeGroupPattern = /^\(.*\)$/;
 const dynamicSegmentPattern = /^\[.*\]$/;
-const chunkReferencePattern = /\/_next\/static\/chunks\/[^"'`\s)]+?\.js(?:\?[^"'`\s)]*)?/g;
+const chunkReferencePattern =
+  /\/_next\/static\/chunks\/[^"'`\s)]+?\.js(?:\?[^"'`\s)]*)?/g;
 type QualityLane =
   | "portfolio"
   | "pathforger"
@@ -205,7 +210,10 @@ function validateBudget(name: string, value: number): void {
   }
 }
 
-function findOverride(key: string, overrides: BudgetOverrides): Partial<BudgetLimits> | undefined {
+function findOverride(
+  key: string,
+  overrides: BudgetOverrides,
+): Partial<BudgetLimits> | undefined {
   if (overrides[key]) {
     return overrides[key];
   }
@@ -251,7 +259,10 @@ function normalizeChunkReference(ref: string): string {
   }
 }
 
-function deriveRouteFromManifestPath(manifestRoot: string, manifestPath: string): string {
+function deriveRouteFromManifestPath(
+  manifestRoot: string,
+  manifestPath: string,
+): string {
   const manifestDir = path.dirname(manifestPath);
   const rel = path.relative(manifestRoot, manifestDir);
   if (!rel || rel === ".") {
@@ -261,7 +272,9 @@ function deriveRouteFromManifestPath(manifestRoot: string, manifestPath: string)
   const segments = rel
     .split(path.sep)
     .filter(Boolean)
-    .filter((segment) => !routeGroupPattern.test(segment) && !segment.startsWith("@"));
+    .filter(
+      (segment) => !routeGroupPattern.test(segment) && !segment.startsWith("@"),
+    );
 
   if (segments.length === 0) {
     return "/";
@@ -290,7 +303,10 @@ function mdEscape(value: string): string {
   return value.replace(/\|/g, "\\|");
 }
 
-async function collectManifestFiles(root: string, files: string[]): Promise<void> {
+async function collectManifestFiles(
+  root: string,
+  files: string[],
+): Promise<void> {
   const entries = await fs.readdir(root, { withFileTypes: true });
   for (const entry of entries) {
     const abs = path.join(root, entry.name);
@@ -305,7 +321,9 @@ async function collectManifestFiles(root: string, files: string[]): Promise<void
   }
 }
 
-async function resolveFirstExistingDirectory(candidates: string[]): Promise<string | null> {
+async function resolveFirstExistingDirectory(
+  candidates: string[],
+): Promise<string | null> {
   for (const candidate of candidates) {
     try {
       const stat = await fs.stat(candidate);
@@ -362,7 +380,9 @@ async function writeGitHubSummary(
   if (routes.length > 0) {
     lines.push("### Top Routes By Bundle Size");
     lines.push("");
-    lines.push("| Route | Section | Chunks | Total KB | Largest KB | Largest Chunk | Status |");
+    lines.push(
+      "| Route | Section | Chunks | Total KB | Largest KB | Largest Chunk | Status |",
+    );
     lines.push("|---|---|---:|---:|---:|---|---|");
     for (const route of routes.slice(0, 15)) {
       lines.push(
@@ -400,17 +420,29 @@ async function main(): Promise<void> {
     validateBudget("BUNDLE_MAX_TOTAL_KB", maxTotalKb);
     validateBudget("BUNDLE_MAX_LARGEST_CHUNK_KB", maxLargestKb);
     validateBudget("BUNDLE_ROUTE_MAX_TOTAL_KB", defaultRouteMaxTotalKb);
-    validateBudget("BUNDLE_ROUTE_MAX_LARGEST_CHUNK_KB", defaultRouteMaxLargestKb);
+    validateBudget(
+      "BUNDLE_ROUTE_MAX_LARGEST_CHUNK_KB",
+      defaultRouteMaxLargestKb,
+    );
     validateBudget("BUNDLE_SECTION_MAX_TOTAL_KB", defaultSectionMaxTotalKb);
-    validateBudget("BUNDLE_SECTION_MAX_LARGEST_CHUNK_KB", defaultSectionMaxLargestKb);
-    routeBudgetOverrides = parseBudgetOverrides(process.env.BUNDLE_ROUTE_BUDGETS_JSON, {
-      envName: "BUNDLE_ROUTE_BUDGETS_JSON",
-      valueLabel: "route",
-    });
-    sectionBudgetOverrides = parseBudgetOverrides(process.env.BUNDLE_SECTION_BUDGETS_JSON, {
-      envName: "BUNDLE_SECTION_BUDGETS_JSON",
-      valueLabel: "section",
-    });
+    validateBudget(
+      "BUNDLE_SECTION_MAX_LARGEST_CHUNK_KB",
+      defaultSectionMaxLargestKb,
+    );
+    routeBudgetOverrides = parseBudgetOverrides(
+      process.env.BUNDLE_ROUTE_BUDGETS_JSON,
+      {
+        envName: "BUNDLE_ROUTE_BUDGETS_JSON",
+        valueLabel: "route",
+      },
+    );
+    sectionBudgetOverrides = parseBudgetOverrides(
+      process.env.BUNDLE_SECTION_BUDGETS_JSON,
+      {
+        envName: "BUNDLE_SECTION_BUDGETS_JSON",
+        valueLabel: "section",
+      },
+    );
     if (lane !== "portfolio") {
       const routeKey = laneRouteKey(lane);
       if (routeKey) {
@@ -451,12 +483,16 @@ async function main(): Promise<void> {
   const chunksRoot = await resolveFirstExistingDirectory(candidateChunkRoots);
 
   if (!chunksRoot) {
-    out.error("Bundle budget check failed: no chunk directory found. Run npm run build first.");
+    out.error(
+      "Bundle budget check failed: no chunk directory found. Run npm run build first.",
+    );
     await writeBundleHealthSnapshot({
       status: "fail",
       summary: "No chunk directory found. Build artifacts are missing.",
       details: {
-        rootCandidates: candidateChunkRoots.map((candidate) => candidate.split(path.sep).join("/")),
+        rootCandidates: candidateChunkRoots.map((candidate) =>
+          candidate.split(path.sep).join("/"),
+        ),
       },
     });
     process.exit(1);
@@ -482,14 +518,22 @@ async function main(): Promise<void> {
   for (const file of files) {
     const fileStat = await fs.stat(file);
     const rel = path.relative(rootDir, file);
-    const chunkRelativePath = path.relative(chunksRoot, file).split(path.sep).join("/");
+    const chunkRelativePath = path
+      .relative(chunksRoot, file)
+      .split(path.sep)
+      .join("/");
     const webPath = `/_next/static/chunks/${chunkRelativePath}`;
     const encodedWebPath = `/_next/static/chunks/${chunkRelativePath
       .split("/")
       .map((segment) => encodeURIComponent(segment))
       .join("/")}`;
     sizes.push({ rel, size: fileStat.size });
-    const chunkInfo: ChunkInfo = { abs: file, rel, webPath, size: fileStat.size };
+    const chunkInfo: ChunkInfo = {
+      abs: file,
+      rel,
+      webPath,
+      size: fileStat.size,
+    };
     chunksByWebPath.set(webPath, chunkInfo);
     chunksByWebPath.set(encodedWebPath, chunkInfo);
   }
@@ -516,7 +560,9 @@ async function main(): Promise<void> {
     );
   }
 
-  const manifestRoot = await resolveFirstExistingDirectory(candidateManifestRoots);
+  const manifestRoot = await resolveFirstExistingDirectory(
+    candidateManifestRoots,
+  );
   const discoveredRouteStats: RouteStats[] = [];
   const routeStats: RouteStats[] = [];
   const sectionStats: SectionStats[] = [];
@@ -557,16 +603,24 @@ async function main(): Promise<void> {
       const matchedChunks = chunkRefs
         .map((ref) => chunksByWebPath.get(ref))
         .filter((entry): entry is ChunkInfo => Boolean(entry));
-      const missingChunkRefs = chunkRefs.filter((ref) => !chunksByWebPath.has(ref));
+      const missingChunkRefs = chunkRefs.filter(
+        (ref) => !chunksByWebPath.has(ref),
+      );
 
       matchedChunks.sort((a, b) => b.size - a.size);
       const largestChunk = matchedChunks[0];
-      const totalBytes = matchedChunks.reduce((sum, chunk) => sum + chunk.size, 0);
+      const totalBytes = matchedChunks.reduce(
+        (sum, chunk) => sum + chunk.size,
+        0,
+      );
       const routeTotalKb = Math.round(totalBytes / 1024);
-      const routeLargestKb = largestChunk ? Math.round(largestChunk.size / 1024) : 0;
+      const routeLargestKb = largestChunk
+        ? Math.round(largestChunk.size / 1024)
+        : 0;
       const routeLargestChunkRel = largestChunk ? largestChunk.rel : "n/a";
       const withinBudget =
-        routeTotalKb <= budget.maxTotalKb && routeLargestKb <= budget.maxLargestKb;
+        routeTotalKb <= budget.maxTotalKb &&
+        routeLargestKb <= budget.maxLargestKb;
 
       discoveredRouteStats.push({
         route,
@@ -586,7 +640,9 @@ async function main(): Promise<void> {
     const scopedRouteStats =
       lane === "portfolio"
         ? discoveredRouteStats
-        : discoveredRouteStats.filter((route) => routeMatchesLane(route.route, lane));
+        : discoveredRouteStats.filter((route) =>
+            routeMatchesLane(route.route, lane),
+          );
     routeStats.push(...scopedRouteStats);
 
     if (lane !== "portfolio") {
@@ -616,18 +672,28 @@ async function main(): Promise<void> {
     }
 
     for (const [section, refs] of sectionChunkRefs.entries()) {
-      const budget = resolveBudget(section, sectionDefaults, sectionBudgetOverrides);
+      const budget = resolveBudget(
+        section,
+        sectionDefaults,
+        sectionBudgetOverrides,
+      );
       const matchedChunks = Array.from(refs)
         .map((ref) => chunksByWebPath.get(ref))
         .filter((entry): entry is ChunkInfo => Boolean(entry));
       matchedChunks.sort((a, b) => b.size - a.size);
-      const totalBytes = matchedChunks.reduce((sum, chunk) => sum + chunk.size, 0);
+      const totalBytes = matchedChunks.reduce(
+        (sum, chunk) => sum + chunk.size,
+        0,
+      );
       const largestChunk = matchedChunks[0];
       const sectionTotalKb = Math.round(totalBytes / 1024);
-      const sectionLargestKb = largestChunk ? Math.round(largestChunk.size / 1024) : 0;
+      const sectionLargestKb = largestChunk
+        ? Math.round(largestChunk.size / 1024)
+        : 0;
       const sectionLargestChunkRel = largestChunk ? largestChunk.rel : "n/a";
       const withinBudget =
-        sectionTotalKb <= budget.maxTotalKb && sectionLargestKb <= budget.maxLargestKb;
+        sectionTotalKb <= budget.maxTotalKb &&
+        sectionLargestKb <= budget.maxLargestKb;
 
       sectionStats.push({
         section,
@@ -666,7 +732,9 @@ async function main(): Promise<void> {
         const sampleMissingRefs = route.missingChunkRefs.slice(0, 3);
         out.warning(
           `Route ${route.route} has ${route.missingChunkRefs.length} chunk references not found in built chunk output: ${sampleMissingRefs.join(", ")}${
-            route.missingChunkRefs.length > sampleMissingRefs.length ? ", ..." : ""
+            route.missingChunkRefs.length > sampleMissingRefs.length
+              ? ", ..."
+              : ""
           }`,
         );
       }
@@ -698,10 +766,15 @@ async function main(): Promise<void> {
   const sectionFailures = sectionStats.filter((stat) => !stat.withinBudget);
   const routeFailures = routeStats.filter((stat) => !stat.withinBudget);
   const scopedGlobalFailed = shouldEvaluateGlobalBudget ? globalFailed : false;
-  const hasFailures = scopedGlobalFailed || sectionFailures.length > 0 || routeFailures.length > 0;
+  const hasFailures =
+    scopedGlobalFailed ||
+    sectionFailures.length > 0 ||
+    routeFailures.length > 0;
 
   if (sectionFailures.length > 0) {
-    out.error(`Section budget exceeded for ${sectionFailures.length} section(s).`);
+    out.error(
+      `Section budget exceeded for ${sectionFailures.length} section(s).`,
+    );
   }
   if (routeFailures.length > 0) {
     out.error(`Route budget exceeded for ${routeFailures.length} route(s).`);

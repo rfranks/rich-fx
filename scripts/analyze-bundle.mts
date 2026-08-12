@@ -40,7 +40,9 @@ async function main(): Promise<void> {
   })();
 
   if (!chunksRoot) {
-    throw new Error("No bundle chunk directory found. Run npm run build before analysis.");
+    throw new Error(
+      "No bundle chunk directory found. Run npm run build before analysis.",
+    );
   }
 
   const files: string[] = [];
@@ -61,7 +63,9 @@ async function main(): Promise<void> {
   out.metric(`Analyzed ${sizes.length} chunks. Total: ${totalKb} KB.`);
   out.sparkle("Top 20 chunks:");
   sizes.slice(0, 20).forEach((chunk, index) => {
-    out.listItem(`${String(index + 1).padStart(2, "0")}. ${chunk.sizeKb} KB  ${chunk.rel}`);
+    out.listItem(
+      `${String(index + 1).padStart(2, "0")}. ${chunk.sizeKb} KB  ${chunk.rel}`,
+    );
   });
 }
 

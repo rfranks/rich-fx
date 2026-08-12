@@ -33,7 +33,9 @@ export type {
 } from "@/types/hooks/panZoomViewport";
 export type { UsePanZoomViewportOptions } from "@/types/hooks/usePanZoomViewport";
 
-const normalizeCalibrationToken = (value: string | null | undefined): string | null => {
+const normalizeCalibrationToken = (
+  value: string | null | undefined,
+): string | null => {
   if (!value) {
     return null;
   }
@@ -88,7 +90,9 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
   const viewportRef = React.useRef<HTMLDivElement>(null);
   const wheelFrameRef = React.useRef<number | null>(null);
   const pendingWheelScaleRef = React.useRef<number | null>(null);
-  const pendingWheelPointerRef = React.useRef<{ x: number; y: number } | null>(null);
+  const pendingWheelPointerRef = React.useRef<{ x: number; y: number } | null>(
+    null,
+  );
   const wheelDeltaEmaRef = React.useRef(16);
   const wheelCommitTimeoutRef = React.useRef<number | null>(null);
   const calibrationPersistTimeoutRef = React.useRef<number | null>(null);
@@ -99,9 +103,10 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
   const deviceProfileRef = React.useRef<InteractiveViewportInputType>(
     interactionInputTypeOverride ?? "mouse",
   );
-  const [resolvedInputType, setResolvedInputType] = React.useState<InteractiveViewportInputType>(
-    interactionInputTypeOverride ?? "mouse",
-  );
+  const [resolvedInputType, setResolvedInputType] =
+    React.useState<InteractiveViewportInputType>(
+      interactionInputTypeOverride ?? "mouse",
+    );
 
   const [scale, setScale] = React.useState(initialState.scale);
   const [translateX, setTranslateX] = React.useState(initialState.translateX);
@@ -126,18 +131,17 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
     },
   ]);
   const [historyIndex, setHistoryIndex] = React.useState(0);
-  const [viewportPreferences, setViewportPreferences] = React.useState<PanZoomViewportPreferences>(
-    initialPreferences ?? {},
-  );
+  const [viewportPreferences, setViewportPreferences] =
+    React.useState<PanZoomViewportPreferences>(initialPreferences ?? {});
 
   const canUndo = historyIndex > 0;
   const canRedo = historyIndex < history.length - 1;
-  const [resolvedCalibrationAppKey, setResolvedCalibrationAppKey] = React.useState<string | null>(
-    null,
-  );
-  const [resolvedCalibrationSection, setResolvedCalibrationSection] = React.useState<string | null>(
-    () => normalizeCalibrationToken(calibrationSection),
-  );
+  const [resolvedCalibrationAppKey, setResolvedCalibrationAppKey] =
+    React.useState<string | null>(null);
+  const [resolvedCalibrationSection, setResolvedCalibrationSection] =
+    React.useState<string | null>(() =>
+      normalizeCalibrationToken(calibrationSection),
+    );
 
   const interactionSensitivityProfile = React.useMemo(
     () =>
@@ -158,15 +162,19 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
   const minScale = minScaleOption ?? presetDefaults.minScale;
   const maxScale = maxScaleOption ?? presetDefaults.maxScale;
   const panStep =
-    panStepOption ?? presetDefaults.panStep * interactionSensitivityProfile.panStepMultiplier;
-  const clickZoomFactor = clickZoomFactorOption ?? presetDefaults.clickZoomFactor;
+    panStepOption ??
+    presetDefaults.panStep * interactionSensitivityProfile.panStepMultiplier;
+  const clickZoomFactor =
+    clickZoomFactorOption ?? presetDefaults.clickZoomFactor;
   const iconZoomFactor = iconZoomFactorOption ?? presetDefaults.iconZoomFactor;
-  const doubleClickZoomFactor = doubleClickZoomFactorOption ?? presetDefaults.doubleClickZoomFactor;
+  const doubleClickZoomFactor =
+    doubleClickZoomFactorOption ?? presetDefaults.doubleClickZoomFactor;
   const maxGestureStepFactor =
     Math.max(clickZoomFactor, iconZoomFactor, doubleClickZoomFactor) *
     interactionSensitivityProfile.gestureStepCapMultiplier;
   const minGestureStepFactor = 1 / Math.max(1.001, maxGestureStepFactor);
-  const panCalibrationAlpha = panCalibrationAlphaOption ?? presetDefaults.panCalibrationAlpha;
+  const panCalibrationAlpha =
+    panCalibrationAlphaOption ?? presetDefaults.panCalibrationAlpha;
   const panReferenceDelta =
     panReferenceDeltaOption ??
     panStep *
@@ -175,18 +183,24 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
   const minPanEma = minPanEmaOption ?? presetDefaults.minPanEma;
   const minPanDeltaMultiplier =
     minPanDeltaMultiplierOption ??
-    presetDefaults.minPanDeltaMultiplier * interactionSensitivityProfile.panMinDeltaMultiplierScale;
+    presetDefaults.minPanDeltaMultiplier *
+      interactionSensitivityProfile.panMinDeltaMultiplierScale;
   const maxPanDeltaMultiplier =
     maxPanDeltaMultiplierOption ??
-    presetDefaults.maxPanDeltaMultiplier * interactionSensitivityProfile.panMaxDeltaMultiplierScale;
-  const wheelCalibrationAlpha = wheelCalibrationAlphaOption ?? presetDefaults.wheelCalibrationAlpha;
+    presetDefaults.maxPanDeltaMultiplier *
+      interactionSensitivityProfile.panMaxDeltaMultiplierScale;
+  const wheelCalibrationAlpha =
+    wheelCalibrationAlphaOption ?? presetDefaults.wheelCalibrationAlpha;
   const wheelNormalizedGain =
     wheelNormalizedGainOption ??
-    presetDefaults.wheelNormalizedGain * interactionSensitivityProfile.wheelGainMultiplier;
-  const pinchCalibrationAlpha = pinchCalibrationAlphaOption ?? presetDefaults.pinchCalibrationAlpha;
+    presetDefaults.wheelNormalizedGain *
+      interactionSensitivityProfile.wheelGainMultiplier;
+  const pinchCalibrationAlpha =
+    pinchCalibrationAlphaOption ?? presetDefaults.pinchCalibrationAlpha;
   const pinchNormalizedGain =
     pinchNormalizedGainOption ??
-    presetDefaults.pinchNormalizedGain * interactionSensitivityProfile.pinchGainMultiplier;
+    presetDefaults.pinchNormalizedGain *
+      interactionSensitivityProfile.pinchGainMultiplier;
   const minWheelEma = minWheelEmaOption ?? presetDefaults.minWheelEma;
   const minPinchLogEma = minPinchLogEmaOption ?? presetDefaults.minPinchLogEma;
 
@@ -200,7 +214,9 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
       return;
     }
 
-    const pathnameSegments = window.location.pathname.split("/").filter(Boolean);
+    const pathnameSegments = window.location.pathname
+      .split("/")
+      .filter(Boolean);
     const inferredAppKey = normalizeCalibrationToken(pathnameSegments[0]);
     if (inferredAppKey) {
       setResolvedCalibrationAppKey(inferredAppKey);
@@ -267,7 +283,8 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
       return;
     }
 
-    const prefersCoarsePointer = window.matchMedia?.("(pointer: coarse)")?.matches ?? false;
+    const prefersCoarsePointer =
+      window.matchMedia?.("(pointer: coarse)")?.matches ?? false;
     const hasTouch = (window.navigator?.maxTouchPoints ?? 0) > 0;
     const inferredInputType: InteractiveViewportInputType =
       hasTouch || prefersCoarsePointer ? "touch" : "mouse";
@@ -318,19 +335,28 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
         typeof profileCalibration.wheelDeltaEma === "number" &&
         Number.isFinite(profileCalibration.wheelDeltaEma)
       ) {
-        wheelDeltaEmaRef.current = Math.max(minWheelEma, profileCalibration.wheelDeltaEma);
+        wheelDeltaEmaRef.current = Math.max(
+          minWheelEma,
+          profileCalibration.wheelDeltaEma,
+        );
       }
       if (
         typeof profileCalibration.pinchLogEma === "number" &&
         Number.isFinite(profileCalibration.pinchLogEma)
       ) {
-        pinchLogEmaRef.current = Math.max(minPinchLogEma, profileCalibration.pinchLogEma);
+        pinchLogEmaRef.current = Math.max(
+          minPinchLogEma,
+          profileCalibration.pinchLogEma,
+        );
       }
       if (
         typeof profileCalibration.panDeltaEma === "number" &&
         Number.isFinite(profileCalibration.panDeltaEma)
       ) {
-        panDeltaEmaRef.current = Math.max(minPanEma, profileCalibration.panDeltaEma);
+        panDeltaEmaRef.current = Math.max(
+          minPanEma,
+          profileCalibration.panDeltaEma,
+        );
       }
     } catch {
       // ignore malformed calibration payloads
@@ -349,7 +375,9 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
       calibrationPersistTimeoutRef.current = null;
       try {
         const currentRaw = window.localStorage.getItem(calibrationStorageKey);
-        const current = currentRaw ? (JSON.parse(currentRaw) as Record<string, unknown>) : {};
+        const current = currentRaw
+          ? (JSON.parse(currentRaw) as Record<string, unknown>)
+          : {};
         const profile = deviceProfileRef.current;
         const next = {
           ...(typeof current === "object" && current ? current : {}),
@@ -359,7 +387,10 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
             panDeltaEma: panDeltaEmaRef.current,
           },
         };
-        window.localStorage.setItem(calibrationStorageKey, JSON.stringify(next));
+        window.localStorage.setItem(
+          calibrationStorageKey,
+          JSON.stringify(next),
+        );
       } catch {
         // ignore storage errors
       }
@@ -372,7 +403,10 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
         const next = { ...current, ...patch };
         if (preferencesStorageKey && typeof window !== "undefined") {
           try {
-            window.localStorage.setItem(preferencesStorageKey, JSON.stringify(next));
+            window.localStorage.setItem(
+              preferencesStorageKey,
+              JSON.stringify(next),
+            );
           } catch {
             // ignore storage write failures
           }
@@ -436,7 +470,11 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
     (clientX: number, clientY: number, nextScale: number) => {
       const viewport = viewportRef.current;
       if (!viewport) {
-        doTransform(nextScale, transformRef.current.translateX, transformRef.current.translateY);
+        doTransform(
+          nextScale,
+          transformRef.current.translateX,
+          transformRef.current.translateY,
+        );
         return;
       }
 
@@ -465,7 +503,8 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
       }
 
       panDeltaEmaRef.current =
-        panDeltaEmaRef.current * (1 - panCalibrationAlpha) + magnitude * panCalibrationAlpha;
+        panDeltaEmaRef.current * (1 - panCalibrationAlpha) +
+        magnitude * panCalibrationAlpha;
       queueCalibrationPersist();
       const panDeltaMultiplier = Math.min(
         maxPanDeltaMultiplier,
@@ -492,13 +531,21 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
 
   const handleZoomIn = React.useCallback(() => {
     const nextScale = clampScale(transformRef.current.scale * iconZoomFactor);
-    doTransform(nextScale, transformRef.current.translateX, transformRef.current.translateY);
+    doTransform(
+      nextScale,
+      transformRef.current.translateX,
+      transformRef.current.translateY,
+    );
     updateViewportPreferences({ lastZoomMode: "icon" });
   }, [clampScale, doTransform, iconZoomFactor, updateViewportPreferences]);
 
   const handleZoomOut = React.useCallback(() => {
     const nextScale = clampScale(transformRef.current.scale / iconZoomFactor);
-    doTransform(nextScale, transformRef.current.translateX, transformRef.current.translateY);
+    doTransform(
+      nextScale,
+      transformRef.current.translateX,
+      transformRef.current.translateY,
+    );
     updateViewportPreferences({ lastZoomMode: "icon" });
   }, [clampScale, doTransform, iconZoomFactor, updateViewportPreferences]);
 
@@ -570,7 +617,9 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
       if (e.ctrlKey && e.button === 0) {
         e.stopPropagation();
         e.preventDefault();
-        const nextScale = clampScale(transformRef.current.scale * clickZoomFactor);
+        const nextScale = clampScale(
+          transformRef.current.scale * clickZoomFactor,
+        );
         zoomAtViewportPoint(e.clientX, e.clientY, nextScale);
         updateViewportPreferences({ lastZoomMode: "click" });
         return;
@@ -578,7 +627,9 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
       if (e.shiftKey && e.button === 0) {
         e.stopPropagation();
         e.preventDefault();
-        const nextScale = clampScale(transformRef.current.scale / clickZoomFactor);
+        const nextScale = clampScale(
+          transformRef.current.scale / clickZoomFactor,
+        );
         zoomAtViewportPoint(e.clientX, e.clientY, nextScale);
         updateViewportPreferences({ lastZoomMode: "click" });
         return;
@@ -647,7 +698,9 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
 
       e.stopPropagation();
       e.preventDefault();
-      const nextScale = clampScale(transformRef.current.scale * doubleClickZoomFactor);
+      const nextScale = clampScale(
+        transformRef.current.scale * doubleClickZoomFactor,
+      );
       zoomAtViewportPoint(e.clientX, e.clientY, nextScale);
       updateViewportPreferences({ lastZoomMode: "doubleClick" });
     },
@@ -661,7 +714,10 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
   );
 
   const getTouchDistance = (touchA: Touch, touchB: Touch) =>
-    Math.hypot(touchA.clientX - touchB.clientX, touchA.clientY - touchB.clientY);
+    Math.hypot(
+      touchA.clientX - touchB.clientX,
+      touchA.clientY - touchB.clientY,
+    );
   const getTouchMidpoint = (touchA: Touch, touchB: Touch) => ({
     x: (touchA.clientX + touchB.clientX) / 2,
     y: (touchA.clientY + touchB.clientY) / 2,
@@ -681,12 +737,15 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
         setResolvedInputType(inferredInputType);
       }
 
-      const baseScale = pendingWheelScaleRef.current ?? transformRef.current.scale;
+      const baseScale =
+        pendingWheelScaleRef.current ?? transformRef.current.scale;
       const absDelta = Math.abs(e.deltaY);
       wheelDeltaEmaRef.current =
-        wheelDeltaEmaRef.current * (1 - wheelCalibrationAlpha) + absDelta * wheelCalibrationAlpha;
+        wheelDeltaEmaRef.current * (1 - wheelCalibrationAlpha) +
+        absDelta * wheelCalibrationAlpha;
       queueCalibrationPersist();
-      const normalizedDelta = e.deltaY / Math.max(minWheelEma, wheelDeltaEmaRef.current);
+      const normalizedDelta =
+        e.deltaY / Math.max(minWheelEma, wheelDeltaEmaRef.current);
       const rawWheelFactor = Math.exp(-normalizedDelta * wheelNormalizedGain);
       const boundedWheelFactor = Math.min(
         maxGestureStepFactor,
@@ -797,10 +856,14 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
           Math.abs(pinchLogDelta) * pinchCalibrationAlpha;
         queueCalibrationPersist();
       }
-      const normalizedPinchDelta = pinchLogDelta / Math.max(minPinchLogEma, pinchLogEmaRef.current);
+      const normalizedPinchDelta =
+        pinchLogDelta / Math.max(minPinchLogEma, pinchLogEmaRef.current);
       const amplifiedRatio = Math.min(
         maxGestureStepFactor,
-        Math.max(minGestureStepFactor, Math.exp(normalizedPinchDelta * pinchNormalizedGain)),
+        Math.max(
+          minGestureStepFactor,
+          Math.exp(normalizedPinchDelta * pinchNormalizedGain),
+        ),
       );
       const currentScale = transformRef.current.scale;
       const nextScale = clampScale(currentScale * amplifiedRatio);
@@ -891,9 +954,21 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
     container.addEventListener("touchmove", handleTouchMove, listenerOptions);
     container.addEventListener("touchend", handleTouchEnd, listenerOptions);
     container.addEventListener("touchcancel", handleTouchEnd, listenerOptions);
-    container.addEventListener("gesturestart", preventGesture as EventListener, listenerOptions);
-    container.addEventListener("gesturechange", preventGesture as EventListener, listenerOptions);
-    container.addEventListener("gestureend", preventGesture as EventListener, listenerOptions);
+    container.addEventListener(
+      "gesturestart",
+      preventGesture as EventListener,
+      listenerOptions,
+    );
+    container.addEventListener(
+      "gesturechange",
+      preventGesture as EventListener,
+      listenerOptions,
+    );
+    container.addEventListener(
+      "gestureend",
+      preventGesture as EventListener,
+      listenerOptions,
+    );
 
     return () => {
       if (wheelFrameRef.current !== null) {
@@ -910,10 +985,26 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
       }
       pendingWheelPointerRef.current = null;
       container.removeEventListener("wheel", handleWheel, listenerOptions);
-      container.removeEventListener("touchstart", handleTouchStart, listenerOptions);
-      container.removeEventListener("touchmove", handleTouchMove, listenerOptions);
-      container.removeEventListener("touchend", handleTouchEnd, listenerOptions);
-      container.removeEventListener("touchcancel", handleTouchEnd, listenerOptions);
+      container.removeEventListener(
+        "touchstart",
+        handleTouchStart,
+        listenerOptions,
+      );
+      container.removeEventListener(
+        "touchmove",
+        handleTouchMove,
+        listenerOptions,
+      );
+      container.removeEventListener(
+        "touchend",
+        handleTouchEnd,
+        listenerOptions,
+      );
+      container.removeEventListener(
+        "touchcancel",
+        handleTouchEnd,
+        listenerOptions,
+      );
       container.removeEventListener(
         "gesturestart",
         preventGesture as EventListener,
@@ -924,7 +1015,11 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
         preventGesture as EventListener,
         listenerOptions,
       );
-      container.removeEventListener("gestureend", preventGesture as EventListener, listenerOptions);
+      container.removeEventListener(
+        "gestureend",
+        preventGesture as EventListener,
+        listenerOptions,
+      );
     };
   }, [handleTouchEnd, handleTouchMove, handleTouchStart, handleWheel]);
 
@@ -945,7 +1040,10 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
         const profile = deviceProfileRef.current;
         const next = { ...current };
         delete (next as Record<string, unknown>)[profile];
-        window.localStorage.setItem(calibrationStorageKey, JSON.stringify(next));
+        window.localStorage.setItem(
+          calibrationStorageKey,
+          JSON.stringify(next),
+        );
       } catch {
         // ignore
       }
@@ -968,7 +1066,10 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
   }, [preset, viewportPreferences]);
 
   const applyViewportSnapshot = React.useCallback(
-    (snapshot: PanZoomViewportSnapshot, options?: { resetHistory?: boolean }) => {
+    (
+      snapshot: PanZoomViewportSnapshot,
+      options?: { resetHistory?: boolean },
+    ) => {
       const normalized = normalizeViewportSnapshot(snapshot);
       if (!normalized) {
         return;
@@ -981,12 +1082,19 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
       };
 
       if (options?.resetHistory === false) {
-        doTransform(nextTransform.scale, nextTransform.translateX, nextTransform.translateY);
+        doTransform(
+          nextTransform.scale,
+          nextTransform.translateX,
+          nextTransform.translateY,
+        );
       } else {
         applyFitTransform(nextTransform);
       }
 
-      if (normalized.preferences && typeof normalized.preferences === "object") {
+      if (
+        normalized.preferences &&
+        typeof normalized.preferences === "object"
+      ) {
         updateViewportPreferences(normalized.preferences);
       }
     },
@@ -1029,8 +1137,9 @@ export function usePanZoomViewport(options: UsePanZoomViewportOptions = {}) {
     setViewportAutoFitVerticalAlignPreference: (
       autoFitVerticalAlign: PanZoomViewportAutoFitAlign,
     ) => updateViewportPreferences({ autoFitVerticalAlign }),
-    setViewportLastZoomModePreference: (lastZoomMode: PanZoomViewportZoomMode) =>
-      updateViewportPreferences({ lastZoomMode }),
+    setViewportLastZoomModePreference: (
+      lastZoomMode: PanZoomViewportZoomMode,
+    ) => updateViewportPreferences({ lastZoomMode }),
     resetDeviceGestureCalibration,
   };
 }

@@ -55,7 +55,9 @@ export default function DiagramToolbar({
       sx={{
         minHeight: "40px",
         py: 1,
-        ...(alwaysShowToolbar ? null : { "@media (max-width: 600px)": { display: "none" } }),
+        ...(alwaysShowToolbar
+          ? null
+          : { "@media (max-width: 600px)": { display: "none" } }),
       }}
     >
       <Tooltip title="Undo">
@@ -142,7 +144,13 @@ export default function DiagramToolbar({
           <DataObject />
         </IconButton>
       </Tooltip>
-      <Tooltip title={deepLinkCopySucceeded ? "Deep Link Copied" : "Copy Deep Link with Viewport"}>
+      <Tooltip
+        title={
+          deepLinkCopySucceeded
+            ? "Deep Link Copied"
+            : "Copy Deep Link with Viewport"
+        }
+      >
         <IconButton
           onClick={onCopyDeepLinkWithViewport}
           aria-label="Copy deep link with viewport state"

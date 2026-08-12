@@ -2,10 +2,15 @@ import { useCallback, useEffect, useRef } from "react";
 
 type RouteStateSyncEvent = "hashchange" | "popstate";
 
-const DEFAULT_ROUTE_STATE_SYNC_EVENTS: readonly RouteStateSyncEvent[] = ["hashchange", "popstate"];
+const DEFAULT_ROUTE_STATE_SYNC_EVENTS: readonly RouteStateSyncEvent[] = [
+  "hashchange",
+  "popstate",
+];
 
 const toRoutePath = (value: string | URL): string =>
-  value instanceof URL ? `${value.pathname}${value.search}${value.hash}` : value;
+  value instanceof URL
+    ? `${value.pathname}${value.search}${value.hash}`
+    : value;
 
 type UseRouteStateSyncParams = {
   enabled?: boolean;
@@ -126,7 +131,13 @@ export function useRouteStateSync({
         window.removeEventListener(eventName, handleLocationChange);
       });
     };
-  }, [enabled, listenToLocationEvents, locationEvents, syncFromLocation, syncOnMount]);
+  }, [
+    enabled,
+    listenToLocationEvents,
+    locationEvents,
+    syncFromLocation,
+    syncOnMount,
+  ]);
 
   return {
     getCurrentRoutePath,

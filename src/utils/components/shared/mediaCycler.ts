@@ -1,5 +1,8 @@
 import type { MediaCyclerMediaType } from "@/types/media/mediaCycler";
-import type { MediaActionContract, MediaActionKind } from "@/types/media/mediaActionContract";
+import type {
+  MediaActionContract,
+  MediaActionKind,
+} from "@/types/media/mediaActionContract";
 import type { PortfolioTelemetryTrigger } from "@/types/observability/telemetryEvents";
 import {
   MEDIA_SECTION_DEMO_HINTS,
@@ -14,7 +17,11 @@ export const assertNever = (value: never): never => {
 export const resolveMediaSectionPrefetchOrder = (
   searchParams: URLSearchParams,
 ): MediaCyclerMediaType[] => {
-  const sectionToken = (searchParams.get("section") || searchParams.get("slide") || "")
+  const sectionToken = (
+    searchParams.get("section") ||
+    searchParams.get("slide") ||
+    ""
+  )
     .trim()
     .toLowerCase();
 
@@ -23,7 +30,8 @@ export const resolveMediaSectionPrefetchOrder = (
   }
 
   const sectionSegments = sectionToken.split(/[\\s/_-]+/).filter(Boolean);
-  const hasToken = (hints: Set<string>) => sectionSegments.some((segment) => hints.has(segment));
+  const hasToken = (hints: Set<string>) =>
+    sectionSegments.some((segment) => hints.has(segment));
 
   if (hasToken(MEDIA_SECTION_DIAGRAM_HINTS)) {
     return ["diagram", "pdf"];

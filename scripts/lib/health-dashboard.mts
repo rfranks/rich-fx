@@ -7,8 +7,17 @@ const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..", "..");
 
 export const HEALTH_SNAPSHOT_PUBLIC_BASE_PATH = "/personal/data/health";
-export const HEALTH_SNAPSHOT_DIR = path.join(repoRoot, "public", "personal", "data", "health");
-const AGGREGATE_SNAPSHOT_PATH = path.join(HEALTH_SNAPSHOT_DIR, "app-health.snapshot.json");
+export const HEALTH_SNAPSHOT_DIR = path.join(
+  repoRoot,
+  "public",
+  "personal",
+  "data",
+  "health",
+);
+const AGGREGATE_SNAPSHOT_PATH = path.join(
+  HEALTH_SNAPSHOT_DIR,
+  "app-health.snapshot.json",
+);
 
 export type HealthStatus = "pass" | "warn" | "fail" | "unknown";
 export type HealthSnapshotKey =
@@ -46,7 +55,10 @@ function withPosixPath(value: string): string {
 }
 
 function toPublicPath(filename: string): string {
-  return `${HEALTH_SNAPSHOT_PUBLIC_BASE_PATH}/${filename}`.replace(/\/{2,}/g, "/");
+  return `${HEALTH_SNAPSHOT_PUBLIC_BASE_PATH}/${filename}`.replace(
+    /\/{2,}/g,
+    "/",
+  );
 }
 
 function computeOverallStatus(statuses: HealthStatus[]): HealthStatus {
@@ -74,7 +86,11 @@ export async function writeHealthSnapshot(args: {
   status: HealthStatus;
   summary: string;
   details: Record<string, unknown>;
-}): Promise<{ absolutePath: string; publicPath: string; aggregatePublicPath: string }> {
+}): Promise<{
+  absolutePath: string;
+  publicPath: string;
+  aggregatePublicPath: string;
+}> {
   await fs.mkdir(HEALTH_SNAPSHOT_DIR, { recursive: true });
 
   const generatedAt = new Date().toISOString();
@@ -106,13 +122,18 @@ export async function writeHealthSnapshot(args: {
   };
 
   const nextChecks: AggregateHealthSnapshot["checks"] = Object.fromEntries(
-    Object.entries(nextSnapshots).map(([key, snapshot]) => [key, snapshot?.status ?? "unknown"]),
+    Object.entries(nextSnapshots).map(([key, snapshot]) => [
+      key,
+      snapshot?.status ?? "unknown",
+    ]),
   ) as AggregateHealthSnapshot["checks"];
 
   const nextAggregate: AggregateHealthSnapshot = {
     generatedAt,
     overallStatus: computeOverallStatus(
-      Object.values(nextChecks).filter((status): status is HealthStatus => Boolean(status)),
+      Object.values(nextChecks).filter((status): status is HealthStatus =>
+        Boolean(status),
+      ),
     ),
     checks: nextChecks,
     snapshots: nextSnapshots,

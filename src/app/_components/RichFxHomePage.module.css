@@ -10,7 +10,8 @@
   --richfx-orange-soft: rgba(255, 106, 0, 0.2);
   min-height: 100vh;
   background:
-    linear-gradient(180deg, rgba(3, 3, 3, 0.08), var(--richfx-black) 18%), var(--richfx-black);
+    linear-gradient(180deg, rgba(3, 3, 3, 0.08), var(--richfx-black) 18%),
+    var(--richfx-black);
   color: var(--richfx-text);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -226,7 +227,9 @@
   overflow: hidden;
   border: 1px solid var(--richfx-border);
   border-radius: 8px;
-  background: linear-gradient(120deg, rgba(255, 106, 0, 0.1), rgba(255, 243, 223, 0.04)), #050505;
+  background:
+    linear-gradient(120deg, rgba(255, 106, 0, 0.1), rgba(255, 243, 223, 0.04)),
+    #050505;
 }
 
 .stepMedia {
@@ -268,7 +271,11 @@
   place-items: end start;
   overflow: hidden;
   background:
-    radial-gradient(circle at 78% 18%, rgba(255, 106, 0, 0.24), transparent 32%),
+    radial-gradient(
+      circle at 78% 18%,
+      rgba(255, 106, 0, 0.24),
+      transparent 32%
+    ),
     linear-gradient(180deg, rgba(3, 3, 3, 0.05), rgba(3, 3, 3, 0.86)), #050505;
 }
 
@@ -405,7 +412,8 @@
 
 .audio {
   background:
-    linear-gradient(180deg, rgba(255, 106, 0, 0.1), rgba(3, 3, 3, 0) 45%), var(--richfx-ink);
+    linear-gradient(180deg, rgba(255, 106, 0, 0.1), rgba(3, 3, 3, 0) 45%),
+    var(--richfx-ink);
 }
 
 .audioImage {
@@ -525,7 +533,8 @@
   display: grid;
   place-content: center;
   text-align: center;
-  background: linear-gradient(180deg, rgba(3, 3, 3, 0), rgba(255, 106, 0, 0.12)), #030303;
+  background:
+    linear-gradient(180deg, rgba(3, 3, 3, 0), rgba(255, 106, 0, 0.12)), #030303;
 }
 
 .finalCta p {
@@ -682,7 +691,11 @@
     overflow-y: auto;
     padding: 16px 0 18px 18px;
     border-top: 1px solid var(--richfx-border);
-    background: linear-gradient(180deg, rgba(3, 3, 3, 0.82), var(--richfx-black));
+    background: linear-gradient(
+      180deg,
+      rgba(3, 3, 3, 0.82),
+      var(--richfx-black)
+    );
     overscroll-behavior: contain;
   }
 

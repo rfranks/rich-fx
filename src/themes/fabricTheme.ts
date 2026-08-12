@@ -142,7 +142,9 @@ export const fabricNestedSurfaceSx = (theme: Theme) => ({
   backdropFilter: "blur(var(--fabric-blur-sm))",
 });
 
-const createComponentOverrides = (mode: PaletteMode): ThemeOptions["components"] => {
+const createComponentOverrides = (
+  mode: PaletteMode,
+): ThemeOptions["components"] => {
   const tokens = getFabricTokens(mode);
 
   return {
@@ -199,7 +201,8 @@ const createComponentOverrides = (mode: PaletteMode): ThemeOptions["components"]
           borderRadius: "var(--fabric-radius-lg)",
           border: "1px solid var(--fabric-surface-border)",
           backgroundColor: "var(--fabric-surface-1)",
-          backgroundImage: "linear-gradient(180deg, var(--fabric-inner-glow), transparent 34%)",
+          backgroundImage:
+            "linear-gradient(180deg, var(--fabric-inner-glow), transparent 34%)",
           backdropFilter: "blur(var(--fabric-blur-sm))",
           boxShadow: "var(--fabric-shadow-soft)",
           ...(ownerState.variant === "outlined" && {
@@ -228,14 +231,18 @@ const createComponentOverrides = (mode: PaletteMode): ThemeOptions["components"]
         root: {
           "& .MuiBackdrop-root": {
             backdropFilter: "blur(var(--fabric-blur-md))",
-            backgroundColor: mode === "dark" ? "rgba(3, 9, 18, 0.48)" : "rgba(12, 18, 34, 0.32)",
+            backgroundColor:
+              mode === "dark"
+                ? "rgba(3, 9, 18, 0.48)"
+                : "rgba(12, 18, 34, 0.32)",
           },
         },
         paper: {
           borderRadius: "var(--fabric-radius-xl)",
           border: "1px solid var(--fabric-surface-border-strong)",
           backgroundColor: "var(--fabric-surface-2)",
-          backgroundImage: "linear-gradient(180deg, var(--fabric-inner-glow), transparent 30%)",
+          backgroundImage:
+            "linear-gradient(180deg, var(--fabric-inner-glow), transparent 30%)",
           backdropFilter: "blur(var(--fabric-blur-lg))",
           boxShadow: "var(--fabric-shadow-soft)",
         },
@@ -247,7 +254,8 @@ const createComponentOverrides = (mode: PaletteMode): ThemeOptions["components"]
           border: "1px solid var(--fabric-surface-border)",
           borderRightColor: "var(--fabric-surface-border-strong)",
           backgroundColor: "var(--fabric-surface-2)",
-          backgroundImage: "linear-gradient(180deg, var(--fabric-inner-glow), transparent 22%)",
+          backgroundImage:
+            "linear-gradient(180deg, var(--fabric-inner-glow), transparent 22%)",
           backdropFilter: "blur(var(--fabric-blur-md))",
           boxShadow: "var(--fabric-shadow-tight)",
         },
@@ -263,7 +271,8 @@ const createComponentOverrides = (mode: PaletteMode): ThemeOptions["components"]
           borderRadius: "var(--fabric-radius-xl)",
           border: "1px solid var(--fabric-surface-border)",
           backgroundColor: "var(--fabric-surface-2)",
-          backgroundImage: "linear-gradient(180deg, var(--fabric-inner-glow), transparent 44%)",
+          backgroundImage:
+            "linear-gradient(180deg, var(--fabric-inner-glow), transparent 44%)",
           backdropFilter: "blur(var(--fabric-blur-md))",
           boxShadow: "var(--fabric-shadow-tight)",
         },
@@ -353,7 +362,10 @@ const createComponentOverrides = (mode: PaletteMode): ThemeOptions["components"]
           fontWeight: 500,
         }),
         filled: ({ theme }) => ({
-          backgroundColor: alpha(theme.palette.primary.main, mode === "dark" ? 0.34 : 0.2),
+          backgroundColor: alpha(
+            theme.palette.primary.main,
+            mode === "dark" ? 0.34 : 0.2,
+          ),
           borderColor: alpha(theme.palette.primary.main, 0.32),
         }),
       },
@@ -407,7 +419,10 @@ const createComponentOverrides = (mode: PaletteMode): ThemeOptions["components"]
           borderRadius: "var(--fabric-radius-capsule)",
           height: "calc(100% - 8px)",
           margin: 4,
-          backgroundColor: alpha(theme.palette.primary.main, mode === "dark" ? 0.34 : 0.2),
+          backgroundColor: alpha(
+            theme.palette.primary.main,
+            mode === "dark" ? 0.34 : 0.2,
+          ),
           border: `1px solid ${alpha(theme.palette.primary.main, 0.36)}`,
         }),
       },
@@ -441,15 +456,24 @@ const createComponentOverrides = (mode: PaletteMode): ThemeOptions["components"]
           borderRadius: "var(--fabric-radius-md)",
           border: "1px solid transparent",
           "&:hover": {
-            backgroundColor: alpha(theme.palette.primary.main, mode === "dark" ? 0.16 : 0.1),
+            backgroundColor: alpha(
+              theme.palette.primary.main,
+              mode === "dark" ? 0.16 : 0.1,
+            ),
             borderColor: "var(--fabric-surface-border)",
           },
           "&.Mui-selected": {
-            backgroundColor: alpha(theme.palette.primary.main, mode === "dark" ? 0.22 : 0.14),
+            backgroundColor: alpha(
+              theme.palette.primary.main,
+              mode === "dark" ? 0.22 : 0.14,
+            ),
             borderColor: "var(--fabric-surface-border-strong)",
           },
           "&.Mui-selected:hover": {
-            backgroundColor: alpha(theme.palette.primary.main, mode === "dark" ? 0.26 : 0.18),
+            backgroundColor: alpha(
+              theme.palette.primary.main,
+              mode === "dark" ? 0.26 : 0.18,
+            ),
           },
         }),
       },
@@ -488,7 +512,10 @@ const createComponentOverrides = (mode: PaletteMode): ThemeOptions["components"]
   };
 };
 
-export default function getFabricTheme(mode: PaletteMode, config: FabricThemeConfig = {}) {
+export default function getFabricTheme(
+  mode: PaletteMode,
+  config: FabricThemeConfig = {},
+) {
   const fabric = getFabricTokens(mode);
 
   return createTheme({
@@ -516,7 +543,10 @@ export default function getFabricTheme(mode: PaletteMode, config: FabricThemeCon
         secondary: mode === "dark" ? "#B6C6E2" : "#4B6289",
       },
       action: {
-        selected: alpha(mode === "dark" ? "#8CB3FF" : "#4C79DE", mode === "dark" ? 0.2 : 0.12),
+        selected: alpha(
+          mode === "dark" ? "#8CB3FF" : "#4C79DE",
+          mode === "dark" ? 0.2 : 0.12,
+        ),
       },
     },
     fabric,
@@ -524,7 +554,8 @@ export default function getFabricTheme(mode: PaletteMode, config: FabricThemeCon
       borderRadius: fabric.radius.md,
     },
     typography: {
-      fontFamily: '"Inter", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily:
+        '"Inter", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif',
       h1: {
         fontWeight: 700,
         letterSpacing: -0.6,

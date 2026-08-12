@@ -73,7 +73,9 @@ export default function AILabAdaptation({
   const [showManuscriptArrow, setShowManuscriptArrow] = useState(false);
   const [showTrailerArrow, setShowTrailerArrow] = useState(false);
   const [showEpisodesArrow, setShowEpisodesArrow] = useState(false);
-  const [transitioningTo, setTransitioningTo] = useState<RevealStage | null>(null);
+  const [transitioningTo, setTransitioningTo] = useState<RevealStage | null>(
+    null,
+  );
   const manuscriptTimeoutRef = useRef<number | null>(null);
   const trailerTimeoutRef = useRef<number | null>(null);
   const episodesTimeoutRef = useRef<number | null>(null);
@@ -90,9 +92,10 @@ export default function AILabAdaptation({
   const episodeFooterRefs = useRef<Array<HTMLDivElement | null>>([]);
   const trailerVideoRef = useRef<HTMLVideoElement | null>(null);
   const episodeVideoRefs = useRef<Array<HTMLVideoElement | null>>([]);
-  const { clearScrollStabilizers, scrollRevealIntoView } = useRevealScrollStabilizer({
-    mobileFooterMediaQuery: "(max-width:899.95px)",
-  });
+  const { clearScrollStabilizers, scrollRevealIntoView } =
+    useRevealScrollStabilizer({
+      mobileFooterMediaQuery: "(max-width:899.95px)",
+    });
   const formattedRank = `#${String(rank).padStart(2, "0")}`;
   const rightsLabel = rightsNotice || "Intent to Copyright";
   const rightsStampAngle = ((rank * 7) % 17) - 8;
@@ -171,7 +174,11 @@ export default function AILabAdaptation({
     }
 
     return (
-      <Typography variant="caption" color="text.secondary" sx={{ mt: 1.5, display: "block" }}>
+      <Typography
+        variant="caption"
+        color="text.secondary"
+        sx={{ mt: 1.5, display: "block" }}
+      >
         Source:{" "}
         {href ? (
           <Link
@@ -215,7 +222,8 @@ export default function AILabAdaptation({
           letterSpacing: "0.08em",
           textTransform: "uppercase",
           transform: `rotate(${rightsStampAngle}deg)`,
-          boxShadow: "0 0 0 2px rgba(255,255,255,0.22) inset, 0 10px 24px rgba(127,29,29,0.18)",
+          boxShadow:
+            "0 0 0 2px rgba(255,255,255,0.22) inset, 0 10px 24px rgba(127,29,29,0.18)",
           textShadow: "0 1px 0 rgba(255,255,255,0.3)",
           opacity: 0.92,
         }}
@@ -257,16 +265,27 @@ export default function AILabAdaptation({
       return null;
     }
 
-    const subtitleLine = source?.trim() ? `${subtitle} • ${source.trim()}` : subtitle;
+    const subtitleLine = source?.trim()
+      ? `${subtitle} • ${source.trim()}`
+      : subtitle;
 
     return (
       <Box sx={{ mb: 1.25 }}>
-        <Stack direction="row" spacing={1} alignItems="flex-start" justifyContent="space-between">
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="flex-start"
+          justifyContent="space-between"
+        >
           <Box sx={{ minWidth: 0, flex: 1 }}>
             <Typography variant="h6" sx={{ lineHeight: 1.15 }}>
               {title}
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 0.35, lineHeight: 1.3 }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ mt: 0.35, lineHeight: 1.3 }}
+            >
               {subtitleLine}
             </Typography>
           </Box>
@@ -440,7 +459,12 @@ export default function AILabAdaptation({
   };
 
   const handleChronologySelect = (
-    target: "book" | "manuscript" | "trailer" | "episodes" | `episode-${number}`,
+    target:
+      | "book"
+      | "manuscript"
+      | "trailer"
+      | "episodes"
+      | `episode-${number}`,
   ) => {
     if (transitioningTo !== null) {
       return;
@@ -453,12 +477,18 @@ export default function AILabAdaptation({
     setBookCoverLoaded(true);
     setShowManuscriptArrow(target !== "book");
     setManuscriptVisible(target !== "book");
-    const targetsEpisodes = target === "episodes" || target.startsWith("episode-");
-    const targetsTrailer = hasTrailer && (target === "trailer" || targetsEpisodes);
-    setShowTrailerArrow(hasTrailer && target !== "book" && target !== "manuscript");
+    const targetsEpisodes =
+      target === "episodes" || target.startsWith("episode-");
+    const targetsTrailer =
+      hasTrailer && (target === "trailer" || targetsEpisodes);
+    setShowTrailerArrow(
+      hasTrailer && target !== "book" && target !== "manuscript",
+    );
     setTrailerVisible(targetsTrailer);
     setShowEpisodesArrow(
-      hasTrailer ? targetsEpisodes : target === "episodes" || target.startsWith("episode-"),
+      hasTrailer
+        ? targetsEpisodes
+        : target === "episodes" || target.startsWith("episode-"),
     );
     setEpisodesVisible(targetsEpisodes);
 
@@ -467,7 +497,10 @@ export default function AILabAdaptation({
       setRevealedEpisodeCount(0);
       stopMediaVideos();
       window.requestAnimationFrame(() => {
-        scrollRevealIntoView(bookCoverRef.current || bookSectionRef.current, bookFooterRef.current);
+        scrollRevealIntoView(
+          bookCoverRef.current || bookSectionRef.current,
+          bookFooterRef.current,
+        );
       });
       return;
     }
@@ -477,7 +510,10 @@ export default function AILabAdaptation({
       setRevealedEpisodeCount(0);
       stopMediaVideos();
       window.requestAnimationFrame(() => {
-        scrollRevealIntoView(manuscriptSectionRef.current, manuscriptFooterRef.current);
+        scrollRevealIntoView(
+          manuscriptSectionRef.current,
+          manuscriptFooterRef.current,
+        );
       });
       return;
     }
@@ -495,7 +531,10 @@ export default function AILabAdaptation({
       setRevealedEpisodeCount(0);
       stopMediaVideos();
       window.requestAnimationFrame(() => {
-        scrollRevealIntoView(episodesSectionRef.current, episodesFooterRef.current);
+        scrollRevealIntoView(
+          episodesSectionRef.current,
+          episodesFooterRef.current,
+        );
       });
       return;
     }
@@ -533,7 +572,10 @@ export default function AILabAdaptation({
     }
 
     const rafId = window.requestAnimationFrame(() => {
-      scrollRevealIntoView(bookCoverRef.current || bookSectionRef.current, bookFooterRef.current);
+      scrollRevealIntoView(
+        bookCoverRef.current || bookSectionRef.current,
+        bookFooterRef.current,
+      );
     });
 
     return () => {
@@ -542,7 +584,12 @@ export default function AILabAdaptation({
   }, [bookCoverLoaded, bookVisible, scrollRevealIntoView]);
 
   useEffect(() => {
-    if (!pendingTrailerReveal || !trailerVisible || stage !== "trailer" || !trailerLoaded) {
+    if (
+      !pendingTrailerReveal ||
+      !trailerVisible ||
+      stage !== "trailer" ||
+      !trailerLoaded
+    ) {
       return;
     }
 
@@ -557,7 +604,13 @@ export default function AILabAdaptation({
     return () => {
       window.cancelAnimationFrame(rafId);
     };
-  }, [pendingTrailerReveal, trailerVisible, stage, trailerLoaded, scrollRevealIntoView]);
+  }, [
+    pendingTrailerReveal,
+    trailerVisible,
+    stage,
+    trailerLoaded,
+    scrollRevealIntoView,
+  ]);
 
   useEffect(() => {
     return () => {
@@ -616,7 +669,10 @@ export default function AILabAdaptation({
       setTransitioningTo(null);
       manuscriptTimeoutRef.current = null;
       window.requestAnimationFrame(() => {
-        scrollRevealIntoView(manuscriptSectionRef.current, manuscriptFooterRef.current);
+        scrollRevealIntoView(
+          manuscriptSectionRef.current,
+          manuscriptFooterRef.current,
+        );
       });
     }, ARROW_REVEAL_MS);
   };
@@ -650,7 +706,10 @@ export default function AILabAdaptation({
       setTransitioningTo(null);
       episodesTimeoutRef.current = null;
       window.requestAnimationFrame(() => {
-        scrollRevealIntoView(episodesSectionRef.current, episodesFooterRef.current);
+        scrollRevealIntoView(
+          episodesSectionRef.current,
+          episodesFooterRef.current,
+        );
       });
     }, ARROW_REVEAL_MS);
   };
@@ -687,7 +746,9 @@ export default function AILabAdaptation({
   };
 
   const activeEpisodeIndex =
-    stage === "episodes" && revealedEpisodeCount > 0 ? revealedEpisodeCount - 1 : -1;
+    stage === "episodes" && revealedEpisodeCount > 0
+      ? revealedEpisodeCount - 1
+      : -1;
 
   return (
     <AILabPanel className="overflow-hidden">
@@ -721,7 +782,9 @@ export default function AILabAdaptation({
               minWidth: 0,
               flex: {
                 xs: "0 0 auto",
-                md: hasVisibleMedia ? `0 1 ${desktopInfoPanelBasis}` : "1 1 100%",
+                md: hasVisibleMedia
+                  ? `0 1 ${desktopInfoPanelBasis}`
+                  : "1 1 100%",
               },
               flexBasis: {
                 md: hasVisibleMedia ? desktopInfoPanelBasis : "100%",
@@ -908,7 +971,9 @@ export default function AILabAdaptation({
                 md: hasVisibleMedia ? 0 : "0px",
               },
               opacity: hasVisibleMedia ? 1 : 0,
-              transform: hasVisibleMedia ? "translate3d(0, 0, 0)" : "translate3d(28px, 0, 0)",
+              transform: hasVisibleMedia
+                ? "translate3d(0, 0, 0)"
+                : "translate3d(28px, 0, 0)",
               pointerEvents: hasVisibleMedia ? "auto" : "none",
               order: { xs: 1, md: 1 },
               transition:
@@ -924,7 +989,11 @@ export default function AILabAdaptation({
                     <Typography variant="subtitle2" sx={{ mb: 1 }}>
                       Book cover
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ mb: 2 }}
+                    >
                       Start with the originating book-side artifact.
                     </Typography>
                   </>
@@ -1022,7 +1091,8 @@ export default function AILabAdaptation({
                         },
                         imageWidth: 1400,
                         imageHeight: 900,
-                        imageClassName: "rounded-[22px] bg-black/10 object-contain",
+                        imageClassName:
+                          "rounded-[22px] bg-black/10 object-contain",
                         imageStyle: {
                           width: "100%",
                           height: "auto",
@@ -1047,7 +1117,11 @@ export default function AILabAdaptation({
                     <Typography variant="subtitle2" sx={{ mb: 1 }}>
                       Manuscript
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ mb: 2 }}
+                    >
                       The book-side narrative source before adaptation.
                     </Typography>
                   </>
@@ -1056,7 +1130,10 @@ export default function AILabAdaptation({
                   manuscriptPdf,
                   `${title} manuscript`,
                   () => {
-                    scrollRevealIntoView(manuscriptSectionRef.current, manuscriptFooterRef.current);
+                    scrollRevealIntoView(
+                      manuscriptSectionRef.current,
+                      manuscriptFooterRef.current,
+                    );
                   },
                   () => {
                     if (transitioningTo) {
@@ -1101,7 +1178,8 @@ export default function AILabAdaptation({
                   undefined,
                   transitioningTo !== null,
                 )}
-                {!isSmDown && renderSource(manuscriptSource, manuscriptSourceHref)}
+                {!isSmDown &&
+                  renderSource(manuscriptSource, manuscriptSourceHref)}
                 {!isSmDown && manuscriptCaption && (
                   <Typography
                     variant="body2"
@@ -1123,8 +1201,13 @@ export default function AILabAdaptation({
                     <Typography variant="subtitle2" sx={{ mb: 1 }}>
                       Trailer
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                      Preview the adaptation trailer before opening the full episodes draft.
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ mb: 2 }}
+                    >
+                      Preview the adaptation trailer before opening the full
+                      episodes draft.
                     </Typography>
                   </>
                 )}
@@ -1223,80 +1306,90 @@ export default function AILabAdaptation({
               </Box>
             )}
 
-            {episodesVisible && stage === "episodes" && activeEpisodeIndex < 0 && (
-              <Box ref={episodesSectionRef} sx={mediaPanelSx}>
-                {isSmDown ? (
-                  renderMobilePanelHeader("Episodes Draft", episodesSource)
-                ) : (
-                  <>
-                    <Typography variant="subtitle2" sx={{ mb: 1 }}>
-                      Episodes Draft
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                      Reveal the episodic adaptation plan first, then step through each episode
-                      concept one at a time.
-                    </Typography>
-                  </>
-                )}
-                {hasEpisodesPdf &&
-                  renderPdfFrame(
-                    episodesPdf,
-                    `${title} episodes`,
-                    () => {
-                      scrollRevealIntoView(episodesSectionRef.current, episodesFooterRef.current);
-                    },
-                    () => {
-                      if (transitioningTo) {
-                        return;
-                      }
-
-                      if (revealedEpisodeCount < episodeMedia.length) {
-                        handleRevealNextEpisode();
-                        return;
-                      }
-
-                      handleChronologySelect("episodes");
-                    },
-                    () => {
-                      if (hasTrailer) {
-                        handleChronologySelect("trailer");
-                        return;
-                      }
-
-                      handleChronologySelect("manuscript");
-                    },
-                    () => {
-                      if (transitioningTo) {
-                        return;
-                      }
-
-                      if (revealedEpisodeCount < episodeMedia.length) {
-                        handleRevealNextEpisode();
-                        return;
-                      }
-
-                      handleChronologySelect("episodes");
-                    },
-                    transitioningTo !== null,
-                    transitioningTo !== null || episodeMedia.length === 0,
-                    episodeMedia.length === 0,
-                    () => {
-                      handleChronologySelect("book");
-                    },
-                    transitioningTo !== null,
+            {episodesVisible &&
+              stage === "episodes" &&
+              activeEpisodeIndex < 0 && (
+                <Box ref={episodesSectionRef} sx={mediaPanelSx}>
+                  {isSmDown ? (
+                    renderMobilePanelHeader("Episodes Draft", episodesSource)
+                  ) : (
+                    <>
+                      <Typography variant="subtitle2" sx={{ mb: 1 }}>
+                        Episodes Draft
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ mb: 2 }}
+                      >
+                        Reveal the episodic adaptation plan first, then step
+                        through each episode concept one at a time.
+                      </Typography>
+                    </>
                   )}
-                {!isSmDown && renderSource(episodesSource, episodesSourceHref)}
-                {!isSmDown && episodesCaption && (
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ mt: episodesSource ? 0.75 : 1.5 }}
-                  >
-                    {episodesCaption}
-                  </Typography>
-                )}
-              </Box>
-            )}
+                  {hasEpisodesPdf &&
+                    renderPdfFrame(
+                      episodesPdf,
+                      `${title} episodes`,
+                      () => {
+                        scrollRevealIntoView(
+                          episodesSectionRef.current,
+                          episodesFooterRef.current,
+                        );
+                      },
+                      () => {
+                        if (transitioningTo) {
+                          return;
+                        }
+
+                        if (revealedEpisodeCount < episodeMedia.length) {
+                          handleRevealNextEpisode();
+                          return;
+                        }
+
+                        handleChronologySelect("episodes");
+                      },
+                      () => {
+                        if (hasTrailer) {
+                          handleChronologySelect("trailer");
+                          return;
+                        }
+
+                        handleChronologySelect("manuscript");
+                      },
+                      () => {
+                        if (transitioningTo) {
+                          return;
+                        }
+
+                        if (revealedEpisodeCount < episodeMedia.length) {
+                          handleRevealNextEpisode();
+                          return;
+                        }
+
+                        handleChronologySelect("episodes");
+                      },
+                      transitioningTo !== null,
+                      transitioningTo !== null || episodeMedia.length === 0,
+                      episodeMedia.length === 0,
+                      () => {
+                        handleChronologySelect("book");
+                      },
+                      transitioningTo !== null,
+                    )}
+                  {!isSmDown &&
+                    renderSource(episodesSource, episodesSourceHref)}
+                  {!isSmDown && episodesCaption && (
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ mt: episodesSource ? 0.75 : 1.5 }}
+                    >
+                      {episodesCaption}
+                    </Typography>
+                  )}
+                </Box>
+              )}
 
             {episodesVisible &&
               stage === "episodes" &&
@@ -1315,15 +1408,22 @@ export default function AILabAdaptation({
                 >
                   {isSmDown ? (
                     renderMobilePanelHeader(
-                      getEpisodeChronologyLabel(episodeMedia[activeEpisodeIndex]),
+                      getEpisodeChronologyLabel(
+                        episodeMedia[activeEpisodeIndex],
+                      ),
                       episodeMedia[activeEpisodeIndex].source,
                     )
                   ) : (
                     <>
                       <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                        {getEpisodeChronologyLabel(episodeMedia[activeEpisodeIndex])}
+                        {getEpisodeChronologyLabel(
+                          episodeMedia[activeEpisodeIndex],
+                        )}
                       </Typography>
-                      <Typography variant="body1" sx={{ mb: 1, fontWeight: 700 }}>
+                      <Typography
+                        variant="body1"
+                        sx={{ mb: 1, fontWeight: 700 }}
+                      >
                         {episodeMedia[activeEpisodeIndex].title}
                       </Typography>
                     </>
@@ -1344,7 +1444,9 @@ export default function AILabAdaptation({
                       }
 
                       if (activeEpisodeIndex > 0) {
-                        handleChronologySelect(`episode-${activeEpisodeIndex - 1}`);
+                        handleChronologySelect(
+                          `episode-${activeEpisodeIndex - 1}`,
+                        );
                         return;
                       }
 
@@ -1361,7 +1463,8 @@ export default function AILabAdaptation({
                     }}
                     disableChevronPrevious={transitioningTo !== null}
                     disableChevronNext={
-                      transitioningTo !== null || activeEpisodeIndex >= episodeMedia.length - 1
+                      transitioningTo !== null ||
+                      activeEpisodeIndex >= episodeMedia.length - 1
                     }
                     loopNavigation={
                       activeEpisodeIndex === episodeMedia.length - 1 &&
@@ -1383,11 +1486,14 @@ export default function AILabAdaptation({
                         title: isSmDown ? title : "",
                         description: undefined,
                         mediaType: "video",
-                        mediaUrl: withBasePath(episodeMedia[activeEpisodeIndex].src),
+                        mediaUrl: withBasePath(
+                          episodeMedia[activeEpisodeIndex].src,
+                        ),
                         mediaLightboxTitle: `${title} ${episodeMedia[activeEpisodeIndex].title}`,
                         mediaCaption: episodeMedia[activeEpisodeIndex].caption,
                         mediaSource: episodeMedia[activeEpisodeIndex].source,
-                        mediaSourceHref: episodeMedia[activeEpisodeIndex].sourceHref,
+                        mediaSourceHref:
+                          episodeMedia[activeEpisodeIndex].sourceHref,
                         videoRef: (node: HTMLVideoElement | null) => {
                           episodeVideoRefs.current[activeEpisodeIndex] = node;
                         },
@@ -1404,14 +1510,17 @@ export default function AILabAdaptation({
                             return;
                           }
 
-                          const hasNextEpisodeToReveal = revealedEpisodeCount < episodeMedia.length;
+                          const hasNextEpisodeToReveal =
+                            revealedEpisodeCount < episodeMedia.length;
 
                           if (hasNextEpisodeToReveal) {
                             handleRevealNextEpisode();
                             return;
                           }
 
-                          handleChronologySelect(`episode-${activeEpisodeIndex}`);
+                          handleChronologySelect(
+                            `episode-${activeEpisodeIndex}`,
+                          );
                         },
                         panelSx: {
                           height: "100%",

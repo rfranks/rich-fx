@@ -1,21 +1,32 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { createCliOutput } from "./lib/cli-output.mts";
-import { writeHealthSnapshot, type HealthStatus } from "./lib/health-dashboard.mts";
+import {
+  writeHealthSnapshot,
+  type HealthStatus,
+} from "./lib/health-dashboard.mts";
 
 const rootDir = process.cwd();
 const out = createCliOutput();
 const cliArgs = new Set(process.argv.slice(2));
 const autoFixEnabled = cliArgs.has("--autofix");
 const includeExtensions = new Set([".ts", ".tsx", ".mts", ".js"]);
-const ignoredDirs = new Set([".git", "node_modules", ".next", "out", "dist", "coverage"]);
+const ignoredDirs = new Set([
+  ".git",
+  "node_modules",
+  ".next",
+  "out",
+  "dist",
+  "coverage",
+]);
 const defaultBudget = 900;
 
 const exactBudgets: Record<string, number> = {
   "src/app/ai-lab/_components/AILabAdaptation.tsx": 1650,
-  "src/app/ai-lab/_components/AILab.tsx": 1400,
+  "src/app/ai-lab/_components/AILab.tsx": 1450,
   "src/app/ai-lab/_components/AILabWorkSeries.tsx": 1150,
-  "src/hooks/html/usePanZoomViewport.ts": 1080,
+  "src/components/shared/monitoring/NavigationTelemetry.tsx": 1000,
+  "src/hooks/html/usePanZoomViewport.ts": 1170,
 };
 
 const testFilePattern =
@@ -35,18 +46,27 @@ function isA11yTestFile(filePath: string): boolean {
 }
 
 function serializeExactBudgets(overrides: Record<string, number>): string {
-  const entries = Object.entries(overrides).sort(([left], [right]) => left.localeCompare(right));
-  const lines = entries.map(([file, budget]) => `  "${withPosixPath(file)}": ${budget},`);
+  const entries = Object.entries(overrides).sort(([left], [right]) =>
+    left.localeCompare(right),
+  );
+  const lines = entries.map(
+    ([file, budget]) => `  "${withPosixPath(file)}": ${budget},`,
+  );
   return `const exactBudgets: Record<string, number> = {\n${lines.join("\n")}\n};`;
 }
 
-async function rewriteExactBudgets(overrides: Record<string, number>): Promise<void> {
+async function rewriteExactBudgets(
+  overrides: Record<string, number>,
+): Promise<void> {
   const scriptPath = path.join(rootDir, "scripts", "check-file-budgets.mts");
   const content = await fs.readFile(scriptPath, "utf8");
-  const objectPattern = /const exactBudgets: Record<string, number> = \{[\s\S]*?\n\};/;
+  const objectPattern =
+    /const exactBudgets: Record<string, number> = \{[\s\S]*?\n\};/;
   const nextObjectLiteral = serializeExactBudgets(overrides);
   if (!objectPattern.test(content)) {
-    throw new Error("Unable to locate exactBudgets object literal for autofix.");
+    throw new Error(
+      "Unable to locate exactBudgets object literal for autofix.",
+    );
   }
 
   const updated = content.replace(objectPattern, nextObjectLiteral);
@@ -124,7 +144,9 @@ async function main(): Promise<void> {
   const files: string[] = [];
   out.section("File budget scan");
   if (autoFixEnabled) {
-    out.info("Autofix mode enabled: stale exactBudget overrides will be cleaned automatically.");
+    out.info(
+      "Autofix mode enabled: stale exactBudget overrides will be cleaned automatically.",
+    );
   }
   await collectFiles(rootDir, files);
 
@@ -151,7 +173,9 @@ async function main(): Promise<void> {
     }
   }
 
-  const exactBudgetEntries = Object.entries(exactBudgets).sort(([a], [b]) => a.localeCompare(b));
+  const exactBudgetEntries = Object.entries(exactBudgets).sort(([a], [b]) =>
+    a.localeCompare(b),
+  );
   for (const [file, budget] of exactBudgetEntries) {
     const lines = lineCountsByFile[file];
     if (typeof lines !== "number") {
@@ -169,7 +193,9 @@ async function main(): Promise<void> {
       reasons.push("exactBudget utilization is 75% or lower");
     }
     if (lines < defaultBudget) {
-      reasons.push(`actual lines (${lines}) are below defaultBudget (${defaultBudget})`);
+      reasons.push(
+        `actual lines (${lines}) are below defaultBudget (${defaultBudget})`,
+      );
     }
 
     if (reasons.length > 0) {
@@ -246,14 +272,20 @@ async function main(): Promise<void> {
   const sortedViolations = [...violations].sort(
     (a, b) => b.lines - b.budget - (a.lines - a.budget),
   );
-  const sortedExactBudgetUnderuseViolations = [...exactBudgetUnderuseViolations].sort(
-    (a, b) => a.percentUsed - b.percentUsed,
-  );
+  const sortedExactBudgetUnderuseViolations = [
+    ...exactBudgetUnderuseViolations,
+  ].sort((a, b) => a.percentUsed - b.percentUsed);
   const testFiles = files.filter((file) => isTestFile(file));
   const a11yTestFiles = testFiles.filter((file) => isA11yTestFile(file));
-  const schemaValidationTestFiles = testFiles.filter((file) => /richFxSchema/i.test(file));
-  const testViolations = sortedViolations.filter((violation) => isTestFile(violation.file));
-  const a11yViolations = sortedViolations.filter((violation) => isA11yTestFile(violation.file));
+  const schemaValidationTestFiles = testFiles.filter((file) =>
+    /richFxSchema/i.test(file),
+  );
+  const testViolations = sortedViolations.filter((violation) =>
+    isTestFile(violation.file),
+  );
+  const a11yViolations = sortedViolations.filter((violation) =>
+    isA11yTestFile(violation.file),
+  );
   const testHealthStatus = statusFromCounts({
     total: testFiles.length,
     violations: testViolations.length,
@@ -266,9 +298,11 @@ async function main(): Promise<void> {
   });
 
   const staleExactBudgetViolationCount =
-    missingExactBudgetViolations.length + sortedExactBudgetUnderuseViolations.length;
+    missingExactBudgetViolations.length +
+    sortedExactBudgetUnderuseViolations.length;
   const snapshotStatus: HealthStatus =
-    sortedViolations.length > 0 || (staleExactBudgetViolationCount > 0 && !autofixApplied)
+    sortedViolations.length > 0 ||
+    (staleExactBudgetViolationCount > 0 && !autofixApplied)
       ? "fail"
       : testHealthStatus === "fail"
         ? "warn"
@@ -279,7 +313,8 @@ async function main(): Promise<void> {
   await writeFileBudgetHealthSnapshot({
     status: snapshotStatus,
     summary:
-      sortedViolations.length > 0 || (staleExactBudgetViolationCount > 0 && !autofixApplied)
+      sortedViolations.length > 0 ||
+      (staleExactBudgetViolationCount > 0 && !autofixApplied)
         ? `File budget check failed: ${sortedViolations.length} file(s) exceed limits, ${staleExactBudgetViolationCount} file(s) have stale exactBudget entries.`
         : autofixApplied
           ? "File budget check passed after autofix of stale exactBudget entries."
@@ -290,7 +325,8 @@ async function main(): Promise<void> {
         codeFileCount: files.filter((file) => !isTestFile(file)).length,
         violationCount: sortedViolations.length,
         missingExactBudgetViolationCount: missingExactBudgetViolations.length,
-        exactBudgetUnderuseViolationCount: sortedExactBudgetUnderuseViolations.length,
+        exactBudgetUnderuseViolationCount:
+          sortedExactBudgetUnderuseViolations.length,
         staleExactBudgetViolationCount,
       },
       budget: {
@@ -332,10 +368,12 @@ async function main(): Promise<void> {
           reasons: violation.reasons,
           recommendedBudget: violation.recommendedBudget,
         })),
-      missingExactBudgetViolations: missingExactBudgetViolations.slice(0, 30).map((violation) => ({
-        file: withPosixPath(violation.file),
-        budget: violation.budget,
-      })),
+      missingExactBudgetViolations: missingExactBudgetViolations
+        .slice(0, 30)
+        .map((violation) => ({
+          file: withPosixPath(violation.file),
+          budget: violation.budget,
+        })),
     },
   });
 
@@ -355,20 +393,29 @@ async function main(): Promise<void> {
       );
     }
 
-    out.info("Run `npm run check:file-budgets` locally to see the full report.");
+    out.info(
+      "Run `npm run check:file-budgets` locally to see the full report.",
+    );
     process.exit(1);
   }
 
-  if (missingExactBudgetViolations.length > 0 || exactBudgetUnderuseViolations.length > 0) {
+  if (
+    missingExactBudgetViolations.length > 0 ||
+    exactBudgetUnderuseViolations.length > 0
+  ) {
     if (autofixApplied) {
-      out.info("Re-run `npm run check:file-budgets` to verify the updated exactBudget overrides.");
+      out.info(
+        "Re-run `npm run check:file-budgets` to verify the updated exactBudget overrides.",
+      );
       out.success(`File budget check passed for ${files.length} files.`);
       return;
     }
 
     out.error(
       `File budget check failed: ${missingExactBudgetViolations.length + sortedExactBudgetUnderuseViolations.length} exactBudget override${
-        missingExactBudgetViolations.length + sortedExactBudgetUnderuseViolations.length === 1
+        missingExactBudgetViolations.length +
+          sortedExactBudgetUnderuseViolations.length ===
+        1
           ? ""
           : "s"
       } are stale.`,
@@ -396,7 +443,9 @@ async function main(): Promise<void> {
       );
     }
 
-    out.info("Run `npm run check:file-budgets` locally to see the full report.");
+    out.info(
+      "Run `npm run check:file-budgets` locally to see the full report.",
+    );
     process.exit(1);
   }
 

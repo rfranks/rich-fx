@@ -5,7 +5,8 @@ export const safeImport = (loadPromise: Promise<unknown>) => {
 };
 
 export const createMediaActivateKeyDownHandler =
-  (onMediaActivate?: () => void) => (event: React.KeyboardEvent<HTMLElement>) => {
+  (onMediaActivate?: () => void) =>
+  (event: React.KeyboardEvent<HTMLElement>) => {
     if (!onMediaActivate) {
       return;
     }

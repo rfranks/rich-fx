@@ -162,7 +162,10 @@ export type MediaCyclerItemRendererProps = {
     trigger: PortfolioTelemetryTrigger,
     control?: string,
   ) => void;
-  handleRendererFirstRenderReady: (item: MediaCyclerItem, control?: string) => void;
+  handleRendererFirstRenderReady: (
+    item: MediaCyclerItem,
+    control?: string,
+  ) => void;
   emitRendererMediaAction: (
     item: MediaCyclerItem,
     params: {

@@ -32,7 +32,9 @@ type AILabBuilderContext = {
   itemRecord: Record<string, unknown>;
 };
 type AILabNonDefaultRegistry = {
-  [K in AILabNonDefaultType]: (context: AILabBuilderContext) => AILabNonDefaultPropsByType[K];
+  [K in AILabNonDefaultType]: (
+    context: AILabBuilderContext,
+  ) => AILabNonDefaultPropsByType[K];
 };
 
 const KNOWN_SHENANIGAN_TYPES: readonly AILabType[] = [
@@ -79,14 +81,20 @@ const readOptionalString = (value: unknown) => {
   return trimmedValue.length ? trimmedValue : undefined;
 };
 
-const readOptionalBoolean = (value: unknown) => (typeof value === "boolean" ? value : undefined);
+const readOptionalBoolean = (value: unknown) =>
+  typeof value === "boolean" ? value : undefined;
 
-const getString = (record: Record<string, unknown>, key: string) => readOptionalString(record[key]);
+const getString = (record: Record<string, unknown>, key: string) =>
+  readOptionalString(record[key]);
 
 const normalizeOrientation = (value: unknown): AILabMovieOrientation =>
   value === "landscape" || value === "portrait" ? value : undefined;
 
-const createMissingFieldError = (item: AILabDataItem, labType: AILabType, fieldName: string) => {
+const createMissingFieldError = (
+  item: AILabDataItem,
+  labType: AILabType,
+  fieldName: string,
+) => {
   const slug = readOptionalString(item.slug) ?? "<unknown-slug>";
   return new Error(
     `[ai-lab] Missing required field "${fieldName}" for type "${labType}" on item "${slug}".`,
@@ -122,7 +130,10 @@ const requireArrayField = <T>(
 };
 
 const resolveAILabType = (value: unknown): AILabType => {
-  if (typeof value === "string" && KNOWN_SHENANIGAN_TYPES.includes(value as AILabType)) {
+  if (
+    typeof value === "string" &&
+    KNOWN_SHENANIGAN_TYPES.includes(value as AILabType)
+  ) {
     return value as AILabType;
   }
 
@@ -168,7 +179,8 @@ const hasVideoMedia = (item: AILabDataItem): boolean => {
     readOptionalString(item.trailerMovie) ||
     getString(itemRecord, "seriesMovie") ||
     (Array.isArray(item.episodeMedia) && item.episodeMedia.length > 0) ||
-    (Array.isArray(itemRecord.seriesParts) && itemRecord.seriesParts.length > 0),
+    (Array.isArray(itemRecord.seriesParts) &&
+      itemRecord.seriesParts.length > 0),
   );
 };
 
@@ -189,7 +201,10 @@ const resolveMediumTags = (item: AILabDataItem, labType: AILabType) => {
   ) {
     tags.add("document");
   }
-  if (labType === "book-to-limited-series" || labType === "work-to-series-adaptation") {
+  if (
+    labType === "book-to-limited-series" ||
+    labType === "work-to-series-adaptation"
+  ) {
     tags.add("adaptation");
   }
   if (labType === "palmylyzer-pro") {
@@ -222,7 +237,15 @@ const resolveStyleTags = (item: AILabDataItem, labType: AILabType) => {
   if (hasKeywordMatch(itemText, ["wonderland", "storybook", "fairytale"])) {
     tags.add("storybook");
   }
-  if (hasKeywordMatch(itemText, ["zombie", "monster", "cryptid", "horror", "undead"])) {
+  if (
+    hasKeywordMatch(itemText, [
+      "zombie",
+      "monster",
+      "cryptid",
+      "horror",
+      "undead",
+    ])
+  ) {
     tags.add("horror");
   }
   if (hasKeywordMatch(itemText, ["retro", "arcade", "victorian"])) {
@@ -250,7 +273,10 @@ const resolveSeriesTag = (
   const slug = readOptionalString(item.slug) ?? "";
   const itemText = getItemTextBlob(item);
 
-  if (labType === "book-to-limited-series" || labType === "work-to-series-adaptation") {
+  if (
+    labType === "book-to-limited-series" ||
+    labType === "work-to-series-adaptation"
+  ) {
     return slugifyToken(slug || item.title);
   }
 
@@ -281,7 +307,10 @@ const resolveSeriesTag = (
   return "standalone";
 };
 
-const buildOptionList = (counts: Map<string, number>, labels: Record<string, string>) =>
+const buildOptionList = (
+  counts: Map<string, number>,
+  labels: Record<string, string>,
+) =>
   Array.from(counts.entries())
     .map(([value, count]) => ({
       value,
@@ -292,7 +321,10 @@ const buildOptionList = (counts: Map<string, number>, labels: Record<string, str
       left.label.localeCompare(right.label, undefined, { sensitivity: "base" }),
     );
 
-const buildCommonBaseProps = (item: AILabDataItem, rank: number): AILabCommonBase => {
+const buildCommonBaseProps = (
+  item: AILabDataItem,
+  rank: number,
+): AILabCommonBase => {
   return {
     rank,
     title: item.title,
@@ -348,7 +380,12 @@ const nonDefaultRegistry: AILabNonDefaultRegistry = {
     workSource: readOptionalString(item.workSource),
     workSourceHref: getString(itemRecord, "workSourceHref"),
     workCaption: readOptionalString(item.workCaption),
-    workParts: requireArrayField(item, "work-to-series-adaptation", "workParts", item.workParts),
+    workParts: requireArrayField(
+      item,
+      "work-to-series-adaptation",
+      "workParts",
+      item.workParts,
+    ),
     seriesMovie: readOptionalString(item.seriesMovie),
     seriesSource: readOptionalString(item.seriesSource),
     seriesSourceHref: getString(itemRecord, "seriesSourceHref"),
@@ -363,11 +400,21 @@ const nonDefaultRegistry: AILabNonDefaultRegistry = {
   "palmylyzer-pro": ({ commonBase, item, itemRecord }) => ({
     ...commonBase,
     type: "palmylyzer-pro",
-    rawImage: requireStringField(item, "palmylyzer-pro", "rawImage", item.rawImage),
+    rawImage: requireStringField(
+      item,
+      "palmylyzer-pro",
+      "rawImage",
+      item.rawImage,
+    ),
     rawSource: readOptionalString(item.rawSource),
     rawSourceHref: getString(itemRecord, "rawSourceHref"),
     rawCaption: readOptionalString(item.rawCaption),
-    analyzedImage: requireStringField(item, "palmylyzer-pro", "analyzedImage", item.analyzedImage),
+    analyzedImage: requireStringField(
+      item,
+      "palmylyzer-pro",
+      "analyzedImage",
+      item.analyzedImage,
+    ),
     analyzedSource: readOptionalString(item.analyzedSource),
     analyzedSourceHref: getString(itemRecord, "analyzedSourceHref"),
     analyzedCaption: readOptionalString(item.analyzedCaption),
@@ -378,7 +425,10 @@ const nonDefaultRegistry: AILabNonDefaultRegistry = {
       item.palmLineAnalysisImage,
     ),
     palmLineAnalysisSource: readOptionalString(item.palmLineAnalysisSource),
-    palmLineAnalysisSourceHref: getString(itemRecord, "palmLineAnalysisSourceHref"),
+    palmLineAnalysisSourceHref: getString(
+      itemRecord,
+      "palmLineAnalysisSourceHref",
+    ),
     palmLineAnalysisCaption: readOptionalString(item.palmLineAnalysisCaption),
     palmReadingTitle: readOptionalString(item.palmReadingTitle),
     palmReadingText: getString(itemRecord, "palmReadingText"),
@@ -398,7 +448,12 @@ const nonDefaultRegistry: AILabNonDefaultRegistry = {
     songAlbumSource: readOptionalString(item.songAlbumSource),
     songAlbumSourceHref: getString(itemRecord, "songAlbumSourceHref"),
     songAlbumCaption: getString(itemRecord, "songAlbumCaption"),
-    songAudio: requireStringField(item, "song-recording", "songAudio", item.songAudio),
+    songAudio: requireStringField(
+      item,
+      "song-recording",
+      "songAudio",
+      item.songAudio,
+    ),
     songAudioSource: readOptionalString(item.songAudioSource),
     songAudioSourceHref: getString(itemRecord, "songAudioSourceHref"),
     songAudioCaption: readOptionalString(item.songAudioCaption),
@@ -416,7 +471,12 @@ const buildDefaultProps = (context: AILabBuilderContext): AILabDefaultProps => {
   return {
     ...commonBase,
     type: "default",
-    realisticImage: requireStringField(item, "default", "realisticImage", item.realisticImage),
+    realisticImage: requireStringField(
+      item,
+      "default",
+      "realisticImage",
+      item.realisticImage,
+    ),
     realisticSource: readOptionalString(item.realisticSource),
     realisticSourceHref: getString(itemRecord, "realisticSourceHref"),
     realisticCaption: readOptionalString(item.realisticCaption),
@@ -440,7 +500,10 @@ const buildDefaultProps = (context: AILabBuilderContext): AILabDefaultProps => {
   };
 };
 
-export const buildAILabProps = (item: AILabDataItem, rank: number): AILabProps => {
+export const buildAILabProps = (
+  item: AILabDataItem,
+  rank: number,
+): AILabProps => {
   const itemRecord = item as Record<string, unknown>;
   const context: AILabBuilderContext = {
     item,
@@ -456,7 +519,11 @@ export const buildAILabProps = (item: AILabDataItem, rank: number): AILabProps =
   return nonDefaultRegistry[labType](context);
 };
 
-const getPagerPreviewImage = (item: AILabDataItem, labType: AILabType, fallbackImage: string) => {
+const getPagerPreviewImage = (
+  item: AILabDataItem,
+  labType: AILabType,
+  fallbackImage: string,
+) => {
   const itemRecord = item as Record<string, unknown>;
   const explicitPreview = readOptionalString(item.pagerOptionImage);
 
@@ -514,7 +581,9 @@ export const normalizeAILabItems = (
   });
 };
 
-export const resolveAILabFilterOptions = (items: AILabPageItem[]): AILabFilterOptionByCategory => {
+export const resolveAILabFilterOptions = (
+  items: AILabPageItem[],
+): AILabFilterOptionByCategory => {
   const mediumCounts = new Map<string, number>();
   const styleCounts = new Map<string, number>();
   const seriesCounts = new Map<string, number>();
@@ -526,7 +595,10 @@ export const resolveAILabFilterOptions = (items: AILabPageItem[]): AILabFilterOp
     item.styleTags.forEach((tag) => {
       styleCounts.set(tag, (styleCounts.get(tag) ?? 0) + 1);
     });
-    seriesCounts.set(item.seriesTag, (seriesCounts.get(item.seriesTag) ?? 0) + 1);
+    seriesCounts.set(
+      item.seriesTag,
+      (seriesCounts.get(item.seriesTag) ?? 0) + 1,
+    );
   });
 
   return {
@@ -541,9 +613,15 @@ export const filterAILabItems = (
   filters: AILabFilterSelection,
 ): AILabPageItem[] =>
   items.filter((item) => {
-    const matchesMedium = filters.medium ? item.mediumTags.includes(filters.medium) : true;
-    const matchesStyle = filters.style ? item.styleTags.includes(filters.style) : true;
-    const matchesSeries = filters.series ? item.seriesTag === filters.series : true;
+    const matchesMedium = filters.medium
+      ? item.mediumTags.includes(filters.medium)
+      : true;
+    const matchesStyle = filters.style
+      ? item.styleTags.includes(filters.style)
+      : true;
+    const matchesSeries = filters.series
+      ? item.seriesTag === filters.series
+      : true;
 
     return matchesMedium && matchesStyle && matchesSeries;
   });

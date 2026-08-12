@@ -104,7 +104,11 @@ function getJestCommandPath(cwd: string): string {
   return path.join(cwd, "node_modules", ".bin", executable);
 }
 
-async function runJest(args: { suite: Suite; cwd: string; jestArgs: string[] }): Promise<number> {
+async function runJest(args: {
+  suite: Suite;
+  cwd: string;
+  jestArgs: string[];
+}): Promise<number> {
   const jestCommand = getJestCommandPath(args.cwd);
 
   return new Promise<number>((resolve) => {
@@ -193,7 +197,10 @@ main().catch(async (error: unknown) => {
     lane: parsed.lane,
     status: "fail",
     exitCode: 1,
-    jestArgs: [...getDefaultJestArgs(parsed.suite, parsed.lane), ...parsed.passthrough],
+    jestArgs: [
+      ...getDefaultJestArgs(parsed.suite, parsed.lane),
+      ...parsed.passthrough,
+    ],
   });
   process.exit(1);
 });

@@ -1,4 +1,7 @@
-export const normalizeDiagramExportBaseName = (title?: string, resolvedId?: string): string => {
+export const normalizeDiagramExportBaseName = (
+  title?: string,
+  resolvedId?: string,
+): string => {
   const preferred = (title?.trim() || resolvedId || "diagram").toLowerCase();
   const normalized = preferred
     .replace(/[^a-z0-9]+/g, "-")
@@ -30,7 +33,9 @@ export const copyTextToClipboard = async (text: string) => {
 
 export const triggerJsonDownload = (payload: unknown, fileName: string) => {
   const serialized = JSON.stringify(payload, null, 2);
-  const blob = new Blob([serialized], { type: "application/json;charset=utf-8" });
+  const blob = new Blob([serialized], {
+    type: "application/json;charset=utf-8",
+  });
   const blobUrl = window.URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = blobUrl;

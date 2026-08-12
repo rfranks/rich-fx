@@ -18,6 +18,10 @@ export type FetchJsonOptions = {
   timeoutMs?: number;
   retries?: number;
   retryDelayMs?: number;
-  shouldRetry?: (response: Response | null, error: unknown, attempt: number) => boolean;
+  shouldRetry?: (
+    response: Response | null,
+    error: unknown,
+    attempt: number,
+  ) => boolean;
   signal?: AbortSignal;
 };

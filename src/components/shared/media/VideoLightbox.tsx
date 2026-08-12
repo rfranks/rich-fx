@@ -36,10 +36,22 @@ const VideoLightbox = React.forwardRef<HTMLVideoElement, VideoLightboxProps>(
       ...previewVideoProps
     } = props;
     const [open, setOpen] = React.useState(false);
-    const triggerSxArray = React.useMemo(() => toSxArray(triggerSx), [triggerSx]);
-    const expandButtonSxArray = React.useMemo(() => toSxArray(expandButtonSx), [expandButtonSx]);
-    const previewVideoSxArray = React.useMemo(() => toSxArray(previewVideoSx), [previewVideoSx]);
-    const lightboxVideoSxArray = React.useMemo(() => toSxArray(lightboxVideoSx), [lightboxVideoSx]);
+    const triggerSxArray = React.useMemo(
+      () => toSxArray(triggerSx),
+      [triggerSx],
+    );
+    const expandButtonSxArray = React.useMemo(
+      () => toSxArray(expandButtonSx),
+      [expandButtonSx],
+    );
+    const previewVideoSxArray = React.useMemo(
+      () => toSxArray(previewVideoSx),
+      [previewVideoSx],
+    );
+    const lightboxVideoSxArray = React.useMemo(
+      () => toSxArray(lightboxVideoSx),
+      [lightboxVideoSx],
+    );
     const previewVideoRef = React.useRef<HTMLVideoElement | null>(null);
 
     const assignPreviewRef = React.useCallback(
@@ -151,7 +163,10 @@ const VideoLightbox = React.forwardRef<HTMLVideoElement, VideoLightboxProps>(
               minHeight: 0,
               display: "flex",
               flexDirection: "column",
-              bgcolor: theme.palette.mode === "dark" ? "rgba(0,0,0,0.96)" : "rgba(11,18,30,0.92)",
+              bgcolor:
+                theme.palette.mode === "dark"
+                  ? "rgba(0,0,0,0.96)"
+                  : "rgba(11,18,30,0.92)",
             })}
           >
             <Box

@@ -9,7 +9,10 @@ import Typography from "@mui/material/Typography";
 import { alpha } from "@mui/material/styles";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { useRevealStateEngine } from "../_hooks/useRevealStateEngine";
-import type { RevealTimelineItem, RevealViewMode } from "../_types/revealStateEngine";
+import type {
+  RevealTimelineItem,
+  RevealViewMode,
+} from "../_types/revealStateEngine";
 
 type AILabRevealNavigatorProps<TKey extends string> = {
   items: RevealTimelineItem<TKey>[];
@@ -47,7 +50,9 @@ export default function AILabRevealNavigator<TKey extends string>({
   });
 
   const displayedIndices =
-    revealState.mode === "timeline" ? items.map((_, index) => index) : revealState.displayedIndices;
+    revealState.mode === "timeline"
+      ? items.map((_, index) => index)
+      : revealState.displayedIndices;
 
   return (
     <Stack spacing={1.25} sx={{ mt: 2.25 }}>
@@ -100,7 +105,9 @@ export default function AILabRevealNavigator<TKey extends string>({
                         flex: 1,
                         minHeight: 12,
                         my: 0.4,
-                        bgcolor: item.reached ? "divider" : alpha("#94a3b8", 0.45),
+                        bgcolor: item.reached
+                          ? "divider"
+                          : alpha("#94a3b8", 0.45),
                       }}
                     />
                   )}
@@ -119,7 +126,13 @@ export default function AILabRevealNavigator<TKey extends string>({
           })}
         </Stack>
       ) : (
-        <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ alignItems: "center" }}>
+        <Stack
+          direction="row"
+          spacing={1}
+          useFlexGap
+          flexWrap="wrap"
+          sx={{ alignItems: "center" }}
+        >
           {displayedIndices.map((index, chipPosition) => {
             const item = items[index];
             if (!item) {

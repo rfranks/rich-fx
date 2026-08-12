@@ -7,13 +7,19 @@ const LEVEL_PRIORITY: Record<LogLevel, number> = {
   error: 40,
 };
 
-const defaultLevel: LogLevel = process.env.NODE_ENV === "production" ? "warn" : "debug";
+const defaultLevel: LogLevel =
+  process.env.NODE_ENV === "production" ? "warn" : "debug";
 
 function shouldLog(level: LogLevel, minLevel: LogLevel): boolean {
   return LEVEL_PRIORITY[level] >= LEVEL_PRIORITY[minLevel];
 }
 
-function emit(level: LogLevel, scope: string, message: string, metadata?: unknown): void {
+function emit(
+  level: LogLevel,
+  scope: string,
+  message: string,
+  metadata?: unknown,
+): void {
   const tag = `[${scope}]`;
 
   if (level === "error") {

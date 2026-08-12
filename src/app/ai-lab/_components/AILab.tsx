@@ -24,7 +24,13 @@ import type { AILabDefaultProps, AILabProps } from "../_types/aiLab";
 import type { RevealViewMode } from "../_types/revealStateEngine";
 export type { AILabMovieOrientation, AILabType } from "../_types/aiLab";
 
-type RevealStage = "intro" | "realistic" | "stylized" | "storyboard" | "movie" | "alternateMovie";
+type RevealStage =
+  | "intro"
+  | "realistic"
+  | "stylized"
+  | "storyboard"
+  | "movie"
+  | "alternateMovie";
 const REVEAL_TRANSITION_MS = 0;
 
 export default function AILab(props: AILabProps) {
@@ -181,7 +187,9 @@ function DefaultAILab({
   const [storyboardVisible, setStoryboardVisible] = useState(false);
   const [movieVisible, setMovieVisible] = useState(false);
   const [alternateMovieVisible, setAlternateMovieVisible] = useState(false);
-  const [transitioningTo, setTransitioningTo] = useState<RevealStage | null>(null);
+  const [transitioningTo, setTransitioningTo] = useState<RevealStage | null>(
+    null,
+  );
   const realisticSectionRef = useRef<HTMLDivElement | null>(null);
   const stylizedSectionRef = useRef<HTMLDivElement | null>(null);
   const storyboardSectionRef = useRef<HTMLDivElement | null>(null);
@@ -197,12 +205,18 @@ function DefaultAILab({
   const hasStoryboard = Boolean(storyboardImage);
   const primaryMovieRendering = movieRendering || movieRendering2 || null;
   const primaryMovieSource = movieRendering ? movieSource : movieSource2;
-  const primaryMovieSourceHref = movieRendering ? movieSourceHref : movieSourceHref2;
+  const primaryMovieSourceHref = movieRendering
+    ? movieSourceHref
+    : movieSourceHref2;
   const primaryMovieCaption = movieRendering ? movieCaption : movieCaption2;
-  const secondaryMovieRendering = movieRendering && movieRendering2 ? movieRendering2 : null;
-  const secondaryMovieSource = movieRendering && movieRendering2 ? movieSource2 : undefined;
-  const secondaryMovieSourceHref = movieRendering && movieRendering2 ? movieSourceHref2 : undefined;
-  const secondaryMovieCaption = movieRendering && movieRendering2 ? movieCaption2 : undefined;
+  const secondaryMovieRendering =
+    movieRendering && movieRendering2 ? movieRendering2 : null;
+  const secondaryMovieSource =
+    movieRendering && movieRendering2 ? movieSource2 : undefined;
+  const secondaryMovieSourceHref =
+    movieRendering && movieRendering2 ? movieSourceHref2 : undefined;
+  const secondaryMovieCaption =
+    movieRendering && movieRendering2 ? movieCaption2 : undefined;
   const hasMovie = Boolean(primaryMovieRendering);
   const hasAlternateMovie = Boolean(secondaryMovieRendering);
   const isPortrait = orientation === "portrait";
@@ -221,7 +235,8 @@ function DefaultAILab({
     border: "1px solid",
     borderColor: "var(--fabric-surface-border)",
     backgroundColor: "var(--fabric-surface-1)",
-    backgroundImage: "linear-gradient(180deg, var(--fabric-inner-glow), transparent 34%)",
+    backgroundImage:
+      "linear-gradient(180deg, var(--fabric-inner-glow), transparent 34%)",
     boxShadow: "inset 0 1px 0 var(--fabric-inner-glow)",
     backdropFilter: "blur(var(--fabric-blur-sm))",
   } as const;
@@ -324,14 +339,17 @@ function DefaultAILab({
     }
   };
 
-  const stopVideo = useCallback((videoRef: { current: HTMLVideoElement | null }) => {
-    if (!videoRef.current) {
-      return;
-    }
-    videoRef.current.pause();
-    videoRef.current.muted = false;
-    videoRef.current.currentTime = 0;
-  }, []);
+  const stopVideo = useCallback(
+    (videoRef: { current: HTMLVideoElement | null }) => {
+      if (!videoRef.current) {
+        return;
+      }
+      videoRef.current.pause();
+      videoRef.current.muted = false;
+      videoRef.current.currentTime = 0;
+    },
+    [],
+  );
 
   const stopMotionVideo = useCallback(() => {
     stopVideo(motionVideoRef);
@@ -377,7 +395,8 @@ function DefaultAILab({
       applicableStages.push({
         key: "movie",
         title: "Motion rendering",
-        active: movieVisible || ((hasStylized || hasStoryboard) && showMovieArrow),
+        active:
+          movieVisible || ((hasStylized || hasStoryboard) && showMovieArrow),
         reached: movieVisible,
       });
     }
@@ -436,7 +455,8 @@ function DefaultAILab({
           letterSpacing: "0.08em",
           textTransform: "uppercase",
           transform: `rotate(${rightsStampAngle}deg)`,
-          boxShadow: "0 0 0 2px rgba(255,255,255,0.22) inset, 0 10px 24px rgba(127,29,29,0.18)",
+          boxShadow:
+            "0 0 0 2px rgba(255,255,255,0.22) inset, 0 10px 24px rgba(127,29,29,0.18)",
           textShadow: "0 1px 0 rgba(255,255,255,0.3)",
           opacity: 0.92,
         }}
@@ -523,7 +543,12 @@ function DefaultAILab({
   };
 
   const handleChronologySelect = (
-    target: "realistic" | "stylized" | "storyboard" | "movie" | "alternateMovie",
+    target:
+      | "realistic"
+      | "stylized"
+      | "storyboard"
+      | "movie"
+      | "alternateMovie",
   ) => {
     if (transitioningTo !== null) {
       return;
@@ -534,14 +559,18 @@ function DefaultAILab({
     setRealisticVisible(true);
     setShowStylizedArrow(hasStylized && target !== "realistic");
     setShowStoryboardArrow(
-      target === "storyboard" || target === "movie" || target === "alternateMovie",
+      target === "storyboard" ||
+        target === "movie" ||
+        target === "alternateMovie",
     );
     setShowMovieArrow(target === "movie" || target === "alternateMovie");
     setShowAlternateMovieArrow(target === "alternateMovie");
     setStylizedVisible(hasStylized && target !== "realistic");
     setStoryboardVisible(
       hasStoryboard &&
-        (target === "storyboard" || target === "movie" || target === "alternateMovie"),
+        (target === "storyboard" ||
+          target === "movie" ||
+          target === "alternateMovie"),
     );
     setMovieVisible(target === "movie" || target === "alternateMovie");
     setAlternateMovieVisible(target === "alternateMovie");
@@ -575,8 +604,12 @@ function DefaultAILab({
       return;
     }
 
-    const video = isAlternateMovieStage ? alternateMotionVideoRef.current : motionVideoRef.current;
-    const inactiveVideoRef = isAlternateMovieStage ? motionVideoRef : alternateMotionVideoRef;
+    const video = isAlternateMovieStage
+      ? alternateMotionVideoRef.current
+      : motionVideoRef.current;
+    const inactiveVideoRef = isAlternateMovieStage
+      ? motionVideoRef
+      : alternateMotionVideoRef;
     stopVideo(inactiveVideoRef);
 
     if (!video) {
@@ -929,7 +962,8 @@ function DefaultAILab({
           controls: true,
           autoPlay: true,
           playsInline: true,
-          previewVideoClassName: "block w-full rounded-[22px] bg-black/10 object-contain",
+          previewVideoClassName:
+            "block w-full rounded-[22px] bg-black/10 object-contain",
           previewVideoSx: {
             width: "100%",
             height: "100%",
@@ -952,7 +986,10 @@ function DefaultAILab({
           key: "alternateMovie",
           title: isSmDown ? title : "Alternate motion rendering",
           description: isSmDown
-            ? buildMobilePanelSubtext("Alternate motion rendering", secondaryMovieSource)
+            ? buildMobilePanelSubtext(
+                "Alternate motion rendering",
+                secondaryMovieSource,
+              )
             : undefined,
           mediaType: "video",
           mediaUrl: withBasePath(secondaryMovieRendering),
@@ -974,7 +1011,8 @@ function DefaultAILab({
           controls: true,
           autoPlay: true,
           playsInline: true,
-          previewVideoClassName: "block w-full rounded-[22px] bg-black/10 object-contain",
+          previewVideoClassName:
+            "block w-full rounded-[22px] bg-black/10 object-contain",
           previewVideoSx: {
             width: "100%",
             height: "100%",
@@ -1030,10 +1068,14 @@ function DefaultAILab({
 
   const activeMediaKey = activeMediaItem?.key;
   const activeMediaIndex =
-    activeMediaKey == null ? -1 : mediaItems.findIndex((item) => item.key === activeMediaKey);
+    activeMediaKey == null
+      ? -1
+      : mediaItems.findIndex((item) => item.key === activeMediaKey);
   const hasPreviousMedia = activeMediaIndex > 0;
-  const hasNextRevealedMedia = activeMediaIndex >= 0 && activeMediaIndex < mediaItems.length - 1;
-  const isAtFinalMedia = activeMediaIndex >= 0 && activeMediaIndex === mediaItems.length - 1;
+  const hasNextRevealedMedia =
+    activeMediaIndex >= 0 && activeMediaIndex < mediaItems.length - 1;
+  const isAtFinalMedia =
+    activeMediaIndex >= 0 && activeMediaIndex === mediaItems.length - 1;
   const enableLoopNavigation = true;
   const canRevealNextFromCurrent =
     (stage === "realistic" &&
@@ -1041,13 +1083,16 @@ function DefaultAILab({
         (!hasStylized && hasStoryboard && !storyboardVisible) ||
         (!hasStylized && !hasStoryboard && hasMovie && !movieVisible))) ||
     (stage === "stylized" &&
-      ((hasStoryboard && !storyboardVisible) || (!hasStoryboard && hasMovie && !movieVisible))) ||
+      ((hasStoryboard && !storyboardVisible) ||
+        (!hasStoryboard && hasMovie && !movieVisible))) ||
     (stage === "storyboard" && hasMovie && !movieVisible) ||
     (stage === "movie" && hasAlternateMovie && !alternateMovieVisible);
   const disableChevronPrevious = transitioningTo !== null || !hasPreviousMedia;
   const disableChevronNext =
-    transitioningTo !== null || (!hasNextRevealedMedia && !canRevealNextFromCurrent);
-  const showLoopNavigation = enableLoopNavigation && isAtFinalMedia && !canRevealNextFromCurrent;
+    transitioningTo !== null ||
+    (!hasNextRevealedMedia && !canRevealNextFromCurrent);
+  const showLoopNavigation =
+    enableLoopNavigation && isAtFinalMedia && !canRevealNextFromCurrent;
 
   const handleChevronPrevious = () => {
     if (disableChevronPrevious || activeMediaIndex <= 0) {
@@ -1160,7 +1205,9 @@ function DefaultAILab({
                   md: hasVisibleMedia ? 0 : "0px",
                 },
                 opacity: hasVisibleMedia ? 1 : 0,
-                transform: hasVisibleMedia ? "translate3d(0, 0, 0)" : "translate3d(28px, 0, 0)",
+                transform: hasVisibleMedia
+                  ? "translate3d(0, 0, 0)"
+                  : "translate3d(28px, 0, 0)",
                 pointerEvents: hasVisibleMedia ? "auto" : "none",
                 order: { xs: 1, md: 1 },
                 transition:
@@ -1204,11 +1251,16 @@ function DefaultAILab({
                 md: "100%",
               },
               width: { xs: "100%", md: "auto" },
-              maxWidth: { xs: "100%", md: hasVisibleMedia ? desktopInfoPanelMaxWidth : "100%" },
+              maxWidth: {
+                xs: "100%",
+                md: hasVisibleMedia ? desktopInfoPanelMaxWidth : "100%",
+              },
               minWidth: 0,
               flex: {
                 xs: "0 0 auto",
-                md: hasVisibleMedia ? `0 1 ${desktopInfoPanelBasis}` : "1 1 100%",
+                md: hasVisibleMedia
+                  ? `0 1 ${desktopInfoPanelBasis}`
+                  : "1 1 100%",
               },
               flexBasis: {
                 md: hasVisibleMedia ? desktopInfoPanelBasis : "100%",
@@ -1329,15 +1381,17 @@ function DefaultAILab({
                       }}
                     >
                       <Box>
-                        {stage !== "intro" && renderNextAction() && !isSmallScreen && (
-                          <IconButton
-                            aria-label="Start over"
-                            onClick={resetReveal}
-                            sx={restartActionSx}
-                          >
-                            <Loop fontSize="small" />
-                          </IconButton>
-                        )}
+                        {stage !== "intro" &&
+                          renderNextAction() &&
+                          !isSmallScreen && (
+                            <IconButton
+                              aria-label="Start over"
+                              onClick={resetReveal}
+                              sx={restartActionSx}
+                            >
+                              <Loop fontSize="small" />
+                            </IconButton>
+                          )}
                       </Box>
                       <Box
                         sx={{

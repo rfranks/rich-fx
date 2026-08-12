@@ -2,10 +2,12 @@ import type { RichFx } from "@/consts/richFx";
 
 export type PortfolioAppsContract = RichFx["portfolioApps"];
 export type PortfolioAppRouteKey = Exclude<keyof PortfolioAppsContract, "site">;
-export type PortfolioAppRouteContract<K extends PortfolioAppRouteKey = PortfolioAppRouteKey> =
-  PortfolioAppsContract[K];
+export type PortfolioAppRouteContract<
+  K extends PortfolioAppRouteKey = PortfolioAppRouteKey,
+> = PortfolioAppsContract[K];
 
-const isPortfolioAppRouteKey = (value: string): value is PortfolioAppRouteKey => value !== "site";
+const isPortfolioAppRouteKey = (value: string): value is PortfolioAppRouteKey =>
+  value !== "site";
 
 export function getPortfolioAppRouteContract<K extends PortfolioAppRouteKey>(
   portfolioApps: PortfolioAppsContract,
@@ -27,7 +29,10 @@ export function getPortfolioAppRouteEntries(
 export function resolvePortfolioAppRouteBySlug(
   portfolioApps: PortfolioAppsContract,
   slug: string,
-): { routeKey: PortfolioAppRouteKey; routeContract: PortfolioAppRouteContract } | null {
+): {
+  routeKey: PortfolioAppRouteKey;
+  routeContract: PortfolioAppRouteContract;
+} | null {
   const normalizedRoute = `/${slug.replace(/^\/+/, "")}`;
   const matched = getPortfolioAppRouteEntries(portfolioApps).find(
     ([, routeContract]) => routeContract.route === normalizedRoute,
@@ -52,7 +57,9 @@ export function getPortfolioAppPageMetadata<K extends PortfolioAppRouteKey>(
 } {
   const routeContract = getPortfolioAppRouteContract(portfolioApps, routeKey);
   const metadataTitle =
-    "metadataTitle" in routeContract ? (routeContract.metadataTitle ?? undefined) : undefined;
+    "metadataTitle" in routeContract
+      ? (routeContract.metadataTitle ?? undefined)
+      : undefined;
   const metadataDescription =
     "metadataDescription" in routeContract
       ? (routeContract.metadataDescription ?? undefined)
@@ -64,18 +71,27 @@ export function getPortfolioAppPageMetadata<K extends PortfolioAppRouteKey>(
   };
 }
 
-export function getPortfolioAppLauncherConfig(routeContract: PortfolioAppRouteContract): {
+export function getPortfolioAppLauncherConfig(
+  routeContract: PortfolioAppRouteContract,
+): {
   coreComponent?: string;
   coreComponentTarget?: string;
 } {
-  const coreComponent = "coreComponent" in routeContract ? routeContract.coreComponent : undefined;
+  const coreComponent =
+    "coreComponent" in routeContract ? routeContract.coreComponent : undefined;
   const coreComponentTarget =
-    "coreComponentTarget" in routeContract ? routeContract.coreComponentTarget : undefined;
+    "coreComponentTarget" in routeContract
+      ? routeContract.coreComponentTarget
+      : undefined;
 
   return {
     coreComponent:
-      typeof coreComponent === "string" ? coreComponent.trim() || undefined : undefined,
+      typeof coreComponent === "string"
+        ? coreComponent.trim() || undefined
+        : undefined,
     coreComponentTarget:
-      typeof coreComponentTarget === "string" ? coreComponentTarget.trim() || undefined : undefined,
+      typeof coreComponentTarget === "string"
+        ? coreComponentTarget.trim() || undefined
+        : undefined,
   };
 }

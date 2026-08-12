@@ -9,6 +9,18 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "scripts/**/*.ts", "scripts/**/*.mts"],
-  "exclude": ["node_modules", ".next", "out", "**/*.test.ts", "**/*.test.tsx", "src/tests/**"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "scripts/**/*.ts",
+    "scripts/**/*.mts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "src/tests/**"
+  ]
 }

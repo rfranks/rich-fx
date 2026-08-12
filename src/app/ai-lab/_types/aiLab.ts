@@ -143,7 +143,9 @@ type AILabNeverProps<Keys extends PropertyKey> = {
   [K in Keys]?: never;
 };
 
-type AILabDefaultAllowedMediaKeys = keyof AILabRealisticMediaProps | keyof AILabDefaultMediaProps;
+type AILabDefaultAllowedMediaKeys =
+  | keyof AILabRealisticMediaProps
+  | keyof AILabDefaultMediaProps;
 type AILabBookAllowedMediaKeys = keyof AILabAdaptationMediaProps;
 type AILabWorkSeriesAllowedMediaKeys = keyof AILabWorkSeriesMediaProps;
 type AILabPalmAllowedMediaKeys = keyof AILabPalmReadingMediaProps;
@@ -164,7 +166,9 @@ export type AILabBookToLimitedSeriesProps = AILabCoreProps &
 
 export type AILabWorkToSeriesAdaptationProps = AILabCoreProps &
   AILabWorkSeriesMediaProps &
-  AILabNeverProps<Exclude<AILabAllMediaKeys, AILabWorkSeriesAllowedMediaKeys>> & {
+  AILabNeverProps<
+    Exclude<AILabAllMediaKeys, AILabWorkSeriesAllowedMediaKeys>
+  > & {
     type: "work-to-series-adaptation";
   };
 

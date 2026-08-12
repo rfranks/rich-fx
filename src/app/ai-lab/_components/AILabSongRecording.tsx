@@ -65,7 +65,9 @@ export default function AILabSongRecording({
   const [isLyricsLoading, setIsLyricsLoading] = useState(false);
   const [hasLyricsError, setHasLyricsError] = useState(false);
   const [songRevealed, setSongRevealed] = useState(false);
-  const [activeSongPanelKey, setActiveSongPanelKey] = useState<"album" | "lyrics">("album");
+  const [activeSongPanelKey, setActiveSongPanelKey] = useState<
+    "album" | "lyrics"
+  >("album");
   const activeAudioRef = useRef<HTMLAudioElement | null>(null);
   const pendingAudioSyncRef = useRef(false);
   const audioSnapshotRef = useRef({
@@ -118,7 +120,8 @@ export default function AILabSongRecording({
           letterSpacing: "0.08em",
           textTransform: "uppercase",
           transform: `rotate(${rightsStampAngle}deg)`,
-          boxShadow: "0 0 0 2px rgba(255,255,255,0.22) inset, 0 10px 24px rgba(127,29,29,0.18)",
+          boxShadow:
+            "0 0 0 2px rgba(255,255,255,0.22) inset, 0 10px 24px rgba(127,29,29,0.18)",
           textShadow: "0 1px 0 rgba(255,255,255,0.3)",
           opacity: 0.92,
         }}
@@ -188,7 +191,11 @@ export default function AILabSongRecording({
     }
 
     return (
-      <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1 }}>
+      <Typography
+        variant="caption"
+        color="text.secondary"
+        sx={{ display: "block", mt: 1 }}
+      >
         Source:{" "}
         {href ? (
           <Link href={href} target="_blank" rel="noreferrer">
@@ -292,7 +299,9 @@ export default function AILabSongRecording({
     </Box>
   );
 
-  const songPanelOrder: ("album" | "lyrics")[] = hasLyricsPanel ? ["album", "lyrics"] : ["album"];
+  const songPanelOrder: ("album" | "lyrics")[] = hasLyricsPanel
+    ? ["album", "lyrics"]
+    : ["album"];
 
   const songPanelItems: MediaCyclerItem[] = (() => {
     const items: MediaCyclerItem[] = [
@@ -479,7 +488,10 @@ export default function AILabSongRecording({
         >
           <Box
             sx={{
-              display: { xs: isSmDown && hasVisibleMedia ? "none" : "flex", md: "flex" },
+              display: {
+                xs: isSmDown && hasVisibleMedia ? "none" : "flex",
+                md: "flex",
+              },
               height: {
                 xs: hasVisibleMedia ? mobileInfoPanelHeight : "100%",
                 md: "100%",
@@ -492,7 +504,9 @@ export default function AILabSongRecording({
               minWidth: 0,
               flex: {
                 xs: "0 0 auto",
-                md: hasVisibleMedia ? `0 1 ${desktopInfoPanelBasis}` : "1 1 100%",
+                md: hasVisibleMedia
+                  ? `0 1 ${desktopInfoPanelBasis}`
+                  : "1 1 100%",
               },
               flexBasis: {
                 md: hasVisibleMedia ? desktopInfoPanelBasis : "100%",
@@ -551,7 +565,9 @@ export default function AILabSongRecording({
                   {title}
                 </Typography>
                 {renderCredits()}
-                {!isInfoPanelMinimized && <Typography color="text.secondary">{blurb}</Typography>}
+                {!isInfoPanelMinimized && (
+                  <Typography color="text.secondary">{blurb}</Typography>
+                )}
                 {!songRevealed ? (
                   <Box
                     sx={{
@@ -582,7 +598,11 @@ export default function AILabSongRecording({
                 sx={{
                   minWidth: 0,
                   flex: {
-                    xs: hasVisibleMedia ? (isSmDown ? "1 1 0px" : "1 1 0px") : "0 0 auto",
+                    xs: hasVisibleMedia
+                      ? isSmDown
+                        ? "1 1 0px"
+                        : "1 1 0px"
+                      : "0 0 auto",
                     md: "1 1 0%",
                   },
                   width: { xs: "100%", md: 0 },
@@ -624,13 +644,16 @@ export default function AILabSongRecording({
                     showChevronNavigation={songPanelOrder.length > 1}
                     hideDisabledNextChevron
                     disableChevronPrevious={activeSongPanelIndex <= 0}
-                    disableChevronNext={activeSongPanelIndex >= songPanelOrder.length - 1}
+                    disableChevronNext={
+                      activeSongPanelIndex >= songPanelOrder.length - 1
+                    }
                     onChevronPrevious={() => {
                       if (activeSongPanelIndex <= 0) {
                         return;
                       }
 
-                      const previousKey = songPanelOrder[activeSongPanelIndex - 1];
+                      const previousKey =
+                        songPanelOrder[activeSongPanelIndex - 1];
                       if (previousKey) {
                         switchSongPanel(previousKey);
                       }

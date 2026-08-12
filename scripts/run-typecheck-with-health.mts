@@ -2,7 +2,10 @@
 
 import { spawn } from "node:child_process";
 import { createCliOutput } from "./lib/cli-output.mts";
-import { writeHealthSnapshot, type HealthStatus } from "./lib/health-dashboard.mts";
+import {
+  writeHealthSnapshot,
+  type HealthStatus,
+} from "./lib/health-dashboard.mts";
 
 const out = createCliOutput();
 
@@ -20,12 +23,17 @@ async function runTypecheck(): Promise<number> {
   });
 }
 
-async function writeTypecheckSnapshot(status: HealthStatus, exitCode: number): Promise<void> {
+async function writeTypecheckSnapshot(
+  status: HealthStatus,
+  exitCode: number,
+): Promise<void> {
   const snapshot = await writeHealthSnapshot({
     key: "typecheckRunner",
     status,
     summary:
-      status === "pass" ? "Typecheck passed." : `Typecheck failed with exit code ${exitCode}.`,
+      status === "pass"
+        ? "Typecheck passed."
+        : `Typecheck failed with exit code ${exitCode}.`,
     details: {
       exitCode,
     },

@@ -28,7 +28,11 @@ const renderSource = (label?: string, href?: string) => {
   }
 
   return (
-    <Typography variant="caption" color="text.secondary" sx={{ mt: 1.5, display: "block" }}>
+    <Typography
+      variant="caption"
+      color="text.secondary"
+      sx={{ mt: 1.5, display: "block" }}
+    >
       Source:{" "}
       {href ? (
         <Link
@@ -345,7 +349,9 @@ export default function MediaCyclerItemRenderer({
               <IconButton
                 size="small"
                 aria-label={`Open media details: ${lightboxTitle}`}
-                onClick={() => openMetadataDialog(item, "pointer", "open-media-details")}
+                onClick={() =>
+                  openMetadataDialog(item, "pointer", "open-media-details")
+                }
                 sx={(theme) => ({
                   display: { xs: "inline-flex", md: "none" },
                   flexShrink: 0,
@@ -366,7 +372,11 @@ export default function MediaCyclerItemRenderer({
             ) : null}
           </Box>
           {item.description ? (
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 0.35 }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ mt: 0.35 }}
+            >
               {item.description}
             </Typography>
           ) : null}
@@ -389,7 +399,9 @@ export default function MediaCyclerItemRenderer({
         {navigationOverlay}
       </Box>
 
-      {sourceNode ? <Box sx={{ display: inlineMetadataDisplay }}>{sourceNode}</Box> : null}
+      {sourceNode ? (
+        <Box sx={{ display: inlineMetadataDisplay }}>{sourceNode}</Box>
+      ) : null}
       {item.mediaCaption ? (
         <Typography
           variant="body2"
@@ -418,7 +430,9 @@ export default function MediaCyclerItemRenderer({
             component="button"
             type="button"
             underline="hover"
-            color={canGoBackToPreviousDiagram ? "primary.main" : "text.disabled"}
+            color={
+              canGoBackToPreviousDiagram ? "primary.main" : "text.disabled"
+            }
             aria-disabled={!canGoBackToPreviousDiagram}
             tabIndex={canGoBackToPreviousDiagram ? 0 : -1}
             onClick={() => {

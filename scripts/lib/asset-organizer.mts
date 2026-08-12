@@ -68,7 +68,11 @@ export function resolvePublicPath(
 
   let absolutePath = trimmed;
   if (!path.isAbsolute(trimmed)) {
-    const relativePath = trimmed.replace(/^\/+/, "").split(path.sep).join("/").replace(/\/+/g, "/");
+    const relativePath = trimmed
+      .replace(/^\/+/, "")
+      .split(path.sep)
+      .join("/")
+      .replace(/\/+/g, "/");
     if (!relativePath || relativePath.startsWith("..")) {
       return null;
     }
@@ -78,11 +82,17 @@ export function resolvePublicPath(
   const normalizedAbs = path.resolve(absolutePath);
   const publicRoot = path.resolve(publicDir);
   const publicRootWithSep = `${publicRoot}${path.sep}`;
-  if (normalizedAbs !== publicRoot && !normalizedAbs.startsWith(publicRootWithSep)) {
+  if (
+    normalizedAbs !== publicRoot &&
+    !normalizedAbs.startsWith(publicRootWithSep)
+  ) {
     return null;
   }
 
-  const rel = path.relative(publicRoot, normalizedAbs).split(path.sep).join("/");
+  const rel = path
+    .relative(publicRoot, normalizedAbs)
+    .split(path.sep)
+    .join("/");
   if (!rel || rel.startsWith("..")) {
     return null;
   }
@@ -94,12 +104,16 @@ export function resolvePublicPath(
   };
 }
 
-export async function moveFileSafely(sourcePath: string, destinationPath: string): Promise<void> {
+export async function moveFileSafely(
+  sourcePath: string,
+  destinationPath: string,
+): Promise<void> {
   try {
     await fs.rename(sourcePath, destinationPath);
     return;
   } catch (error) {
-    const isCrossDevice = isPlainObject(error) && "code" in error && error.code === "EXDEV";
+    const isCrossDevice =
+      isPlainObject(error) && "code" in error && error.code === "EXDEV";
     if (!isCrossDevice) {
       throw error;
     }

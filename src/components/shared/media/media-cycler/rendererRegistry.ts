@@ -5,10 +5,18 @@ import type { MediaCyclerMediaType } from "@/types/media/mediaCycler";
 import { safeImport } from "@/utils/components/shared/media";
 import { resolveMediaSectionPrefetchOrder } from "@/utils/components/shared/mediaCycler";
 
-export const LazyDiagramRenderer = React.lazy(() => import("./renderers/DiagramRenderer"));
-export const LazyImageRenderer = React.lazy(() => import("./renderers/ImageRenderer"));
-export const LazyPdfRenderer = React.lazy(() => import("./renderers/PdfRenderer"));
-export const LazyVideoRenderer = React.lazy(() => import("./renderers/VideoRenderer"));
+export const LazyDiagramRenderer = React.lazy(
+  () => import("./renderers/DiagramRenderer"),
+);
+export const LazyImageRenderer = React.lazy(
+  () => import("./renderers/ImageRenderer"),
+);
+export const LazyPdfRenderer = React.lazy(
+  () => import("./renderers/PdfRenderer"),
+);
+export const LazyVideoRenderer = React.lazy(
+  () => import("./renderers/VideoRenderer"),
+);
 
 const prefetchedMediaTypeSet = new Set<MediaCyclerMediaType>();
 
@@ -46,7 +54,9 @@ const mediaTypePrefetchLoaders: Record<MediaCyclerMediaType, () => void> = {
   markdown: () => undefined,
 };
 
-export function prefetchMediaTypeByIntent(mediaType: MediaCyclerMediaType): void {
+export function prefetchMediaTypeByIntent(
+  mediaType: MediaCyclerMediaType,
+): void {
   if (prefetchedMediaTypeSet.has(mediaType)) {
     return;
   }
@@ -59,5 +69,7 @@ export function resolveSectionPrefetchOrder(): MediaCyclerMediaType[] {
     return [];
   }
 
-  return resolveMediaSectionPrefetchOrder(new URLSearchParams(window.location.search));
+  return resolveMediaSectionPrefetchOrder(
+    new URLSearchParams(window.location.search),
+  );
 }

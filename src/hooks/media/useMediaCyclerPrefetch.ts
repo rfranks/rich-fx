@@ -1,5 +1,8 @@
 import * as React from "react";
-import type { MediaCyclerItem, MediaCyclerMediaType } from "@/types/media/mediaCycler";
+import type {
+  MediaCyclerItem,
+  MediaCyclerMediaType,
+} from "@/types/media/mediaCycler";
 import {
   prefetchMediaTypeByIntent,
   resolveSectionPrefetchOrder,
@@ -23,9 +26,12 @@ export function useMediaCyclerPrefetch({
     edge: "left" | "right";
   } | null>(null);
 
-  const prefetchMediaType = React.useCallback((mediaType: MediaCyclerMediaType) => {
-    prefetchMediaTypeByIntent(mediaType);
-  }, []);
+  const prefetchMediaType = React.useCallback(
+    (mediaType: MediaCyclerMediaType) => {
+      prefetchMediaTypeByIntent(mediaType);
+    },
+    [],
+  );
 
   const prefetchItemMediaByIntent = React.useCallback(
     (item: MediaCyclerItem) => {
@@ -69,7 +75,11 @@ export function useMediaCyclerPrefetch({
       }
 
       const lastIntent = pointerIntentPrefetchRef.current;
-      if (lastIntent && lastIntent.itemKey === targetItem.key && lastIntent.edge === edge) {
+      if (
+        lastIntent &&
+        lastIntent.itemKey === targetItem.key &&
+        lastIntent.edge === edge
+      ) {
         return;
       }
 

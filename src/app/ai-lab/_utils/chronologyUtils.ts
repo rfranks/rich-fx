@@ -3,7 +3,9 @@ type RevealLike = {
   reached: boolean;
 };
 
-export function resolveCurrentRevealIndex<TItem extends RevealLike>(labels: TItem[]): number {
+export function resolveCurrentRevealIndex<TItem extends RevealLike>(
+  labels: TItem[],
+): number {
   const activeIndex = labels.findIndex((item) => item.active);
   if (activeIndex !== -1) {
     return activeIndex;
@@ -25,7 +27,11 @@ export function buildCondensedChronologyIndices(params: {
 }): number[] {
   const firstIndex = 0;
   const lastIndex = Math.max(params.labelCount - 1, 0);
-  const condensedIndices = new Set([firstIndex, params.currentIndex, lastIndex]);
+  const condensedIndices = new Set([
+    firstIndex,
+    params.currentIndex,
+    lastIndex,
+  ]);
 
   params.pinnedIndices?.forEach((index) => {
     if (index >= firstIndex && index <= lastIndex) {

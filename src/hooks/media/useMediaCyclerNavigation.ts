@@ -104,7 +104,12 @@ export function useMediaCyclerNavigation({
         if (renderedItem?.onMediaActivate) {
           renderedItem.onMediaActivate();
         }
-        emitMediaTelemetry("open", "keyboard", renderedItem, "open-media-action");
+        emitMediaTelemetry(
+          "open",
+          "keyboard",
+          renderedItem,
+          "open-media-action",
+        );
         return;
       }
 
@@ -118,22 +123,43 @@ export function useMediaCyclerNavigation({
         if (copyValue?.trim()) {
           void copyTextToClipboard(copyValue);
         }
-        emitMediaTelemetry("copy", "keyboard", renderedItem, "copy-media-action");
+        emitMediaTelemetry(
+          "copy",
+          "keyboard",
+          renderedItem,
+          "copy-media-action",
+        );
         return;
       }
 
       if (event.key.toLowerCase() === "e") {
         event.preventDefault();
-        emitMediaTelemetry("export", "keyboard", renderedItem, "export-media-action");
+        emitMediaTelemetry(
+          "export",
+          "keyboard",
+          renderedItem,
+          "export-media-action",
+        );
         return;
       }
 
       if (event.key === "+" || event.key === "=" || event.key === "-") {
         event.preventDefault();
-        emitMediaTelemetry("zoom", "keyboard", renderedItem, "zoom-media-action");
+        emitMediaTelemetry(
+          "zoom",
+          "keyboard",
+          renderedItem,
+          "zoom-media-action",
+        );
       }
     },
-    [emitMediaTelemetry, navigateLoop, navigateNext, navigatePrevious, renderedItem],
+    [
+      emitMediaTelemetry,
+      navigateLoop,
+      navigateNext,
+      navigatePrevious,
+      renderedItem,
+    ],
   );
 
   return {

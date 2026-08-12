@@ -5,7 +5,10 @@ import {
   buildCondensedChronologyIndices,
   resolveCurrentRevealIndex,
 } from "../_utils/chronologyUtils";
-import type { RevealTimelineItem, RevealViewMode } from "../_types/revealStateEngine";
+import type {
+  RevealTimelineItem,
+  RevealViewMode,
+} from "../_types/revealStateEngine";
 
 type UseRevealStateEngineArgs<TKey extends string> = {
   items: RevealTimelineItem<TKey>[];
@@ -22,7 +25,8 @@ export function useRevealStateEngine<TKey extends string>({
   defaultMode = "chips",
   condensedThreshold = 3,
 }: UseRevealStateEngineArgs<TKey>) {
-  const [uncontrolledMode, setUncontrolledMode] = useState<RevealViewMode>(defaultMode);
+  const [uncontrolledMode, setUncontrolledMode] =
+    useState<RevealViewMode>(defaultMode);
   const mode = controlledMode ?? uncontrolledMode;
 
   const setMode = useCallback(
@@ -37,10 +41,13 @@ export function useRevealStateEngine<TKey extends string>({
 
   const currentIndex = useMemo(() => resolveCurrentRevealIndex(items), [items]);
 
-  const useCondensedChips = mode === "chips" && items.length > condensedThreshold;
+  const useCondensedChips =
+    mode === "chips" && items.length > condensedThreshold;
   const pinnedIndices = useMemo(
     () =>
-      items.map((item, index) => (item.pinnedInChips ? index : -1)).filter((index) => index >= 0),
+      items
+        .map((item, index) => (item.pinnedInChips ? index : -1))
+        .filter((index) => index >= 0),
     [items],
   );
 

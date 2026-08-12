@@ -16,7 +16,10 @@ import type { MediaCyclerItem } from "@/components/shared/media";
 import AILabPanel from "./AILabPanel";
 import AILabRevealNavigator from "./AILabRevealNavigator";
 import { withBasePath } from "@/utils/basePath";
-import type { RevealTimelineItem, RevealViewMode } from "../_types/revealStateEngine";
+import type {
+  RevealTimelineItem,
+  RevealViewMode,
+} from "../_types/revealStateEngine";
 
 type RevealStage = "intro" | "raw" | "analyzed" | "lines" | "reading";
 type PalmRevealStage = Exclude<RevealStage, "intro">;
@@ -98,7 +101,8 @@ export default function AILabPalmReading({
     border: "1px solid",
     borderColor: "var(--fabric-surface-border)",
     backgroundColor: "var(--fabric-surface-1)",
-    backgroundImage: "linear-gradient(180deg, var(--fabric-inner-glow), transparent 34%)",
+    backgroundImage:
+      "linear-gradient(180deg, var(--fabric-inner-glow), transparent 34%)",
     boxShadow: "inset 0 1px 0 var(--fabric-inner-glow)",
     backdropFilter: "blur(var(--fabric-blur-sm))",
   } as const;
@@ -146,7 +150,9 @@ export default function AILabPalmReading({
           signal: controller.signal,
         });
         if (!response.ok) {
-          throw new Error(`Failed to load markdown: ${response.status} ${response.statusText}`);
+          throw new Error(
+            `Failed to load markdown: ${response.status} ${response.statusText}`,
+          );
         }
         const text = await response.text();
         setMarkdownContent(text);
@@ -185,7 +191,9 @@ export default function AILabPalmReading({
 
   const stageIndex = stage === "intro" ? -1 : stageSequence.indexOf(stage);
 
-  const revealTimelineItems = useMemo<RevealTimelineItem<PalmRevealStage>[]>(() => {
+  const revealTimelineItems = useMemo<
+    RevealTimelineItem<PalmRevealStage>[]
+  >(() => {
     return stageSequence.map((stageKey, index) => ({
       label: STAGE_LABELS[stageKey],
       key: stageKey,
@@ -230,12 +238,17 @@ export default function AILabPalmReading({
   };
 
   const effectiveReadingContent = markdownContent ?? palmReadingText ?? "";
-  const isChatGptGptLink = (href?: string) => Boolean(href && href.includes("chatgpt.com/g/"));
+  const isChatGptGptLink = (href?: string) =>
+    Boolean(href && href.includes("chatgpt.com/g/"));
 
   const renderProNote = useCallback(
     (href?: string) =>
       isChatGptGptLink(href) ? (
-        <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 0.25 }}>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          sx={{ display: "block", mt: 0.25 }}
+        >
           Requires ChatGPT Pro subscription.
         </Typography>
       ) : null,
@@ -250,7 +263,8 @@ export default function AILabPalmReading({
           borderRadius: "16px",
           border: "1px solid",
           borderColor: "var(--fabric-surface-border)",
-          backgroundColor: (currentTheme) => alpha(currentTheme.palette.background.paper, 0.4),
+          backgroundColor: (currentTheme) =>
+            alpha(currentTheme.palette.background.paper, 0.4),
           overflowY: "auto",
         }}
       >
@@ -331,7 +345,8 @@ export default function AILabPalmReading({
         assetFrameSx: commonImageFrameSx,
         imageWidth: 1200,
         imageHeight: 900,
-        imageClassName: "h-auto w-full rounded-[22px] bg-black/10 object-contain",
+        imageClassName:
+          "h-auto w-full rounded-[22px] bg-black/10 object-contain",
         imageStyle: {
           aspectRatio: "4 / 3",
           marginInline: "auto",
@@ -356,7 +371,8 @@ export default function AILabPalmReading({
         assetFrameSx: commonImageFrameSx,
         imageWidth: 1200,
         imageHeight: 900,
-        imageClassName: "h-auto w-full rounded-[22px] bg-black/10 object-contain",
+        imageClassName:
+          "h-auto w-full rounded-[22px] bg-black/10 object-contain",
         imageStyle: {
           aspectRatio: "4 / 3",
           marginInline: "auto",
@@ -381,7 +397,8 @@ export default function AILabPalmReading({
         assetFrameSx: commonImageFrameSx,
         imageWidth: 1200,
         imageHeight: 900,
-        imageClassName: "h-auto w-full rounded-[22px] bg-black/10 object-contain",
+        imageClassName:
+          "h-auto w-full rounded-[22px] bg-black/10 object-contain",
         imageStyle: {
           aspectRatio: "4 / 3",
           marginInline: "auto",
@@ -456,9 +473,12 @@ export default function AILabPalmReading({
 
   const activeMediaKey = stage === "intro" ? undefined : stage;
   const activeMediaIndex =
-    activeMediaKey == null ? -1 : revealedItems.findIndex((item) => item.key === activeMediaKey);
+    activeMediaKey == null
+      ? -1
+      : revealedItems.findIndex((item) => item.key === activeMediaKey);
   const hasPreviousMedia = activeMediaIndex > 0;
-  const hasNextRevealedMedia = activeMediaIndex >= 0 && activeMediaIndex < revealedItems.length - 1;
+  const hasNextRevealedMedia =
+    activeMediaIndex >= 0 && activeMediaIndex < revealedItems.length - 1;
   const canRevealNextFromCurrent = Boolean(nextStage);
   const showLoopNavigation =
     activeMediaIndex >= 0 &&
@@ -470,7 +490,10 @@ export default function AILabPalmReading({
       return;
     }
     const previousMedia = revealedItems[activeMediaIndex - 1];
-    if (previousMedia && stageSequence.includes(previousMedia.key as PalmRevealStage)) {
+    if (
+      previousMedia &&
+      stageSequence.includes(previousMedia.key as PalmRevealStage)
+    ) {
       setStage(previousMedia.key as PalmRevealStage);
     }
   };
@@ -478,7 +501,10 @@ export default function AILabPalmReading({
   const handleChevronNext = () => {
     if (hasNextRevealedMedia) {
       const nextRevealedMedia = revealedItems[activeMediaIndex + 1];
-      if (nextRevealedMedia && stageSequence.includes(nextRevealedMedia.key as PalmRevealStage)) {
+      if (
+        nextRevealedMedia &&
+        stageSequence.includes(nextRevealedMedia.key as PalmRevealStage)
+      ) {
         setStage(nextRevealedMedia.key as PalmRevealStage);
       }
       return;
@@ -513,7 +539,8 @@ export default function AILabPalmReading({
           letterSpacing: "0.08em",
           textTransform: "uppercase",
           transform: `rotate(${rightsStampAngle}deg)`,
-          boxShadow: "0 0 0 2px rgba(255,255,255,0.22) inset, 0 10px 24px rgba(127,29,29,0.18)",
+          boxShadow:
+            "0 0 0 2px rgba(255,255,255,0.22) inset, 0 10px 24px rgba(127,29,29,0.18)",
           textShadow: "0 1px 0 rgba(255,255,255,0.3)",
           opacity: 0.92,
         }}
@@ -636,7 +663,9 @@ export default function AILabPalmReading({
                           <Button
                             variant="contained"
                             onClick={() => navigateToStage(nextStage!)}
-                            endIcon={<EmojiGlyph glyph={nextAction.glyph} slot="end" />}
+                            endIcon={
+                              <EmojiGlyph glyph={nextAction.glyph} slot="end" />
+                            }
                           >
                             {nextAction.label}
                           </Button>
@@ -673,7 +702,9 @@ export default function AILabPalmReading({
                 md: hasVisibleMedia ? "calc(100% - 340px)" : "0px",
               },
               opacity: hasVisibleMedia ? 1 : 0,
-              transform: hasVisibleMedia ? "translate3d(0, 0, 0)" : "translate3d(28px, 0, 0)",
+              transform: hasVisibleMedia
+                ? "translate3d(0, 0, 0)"
+                : "translate3d(28px, 0, 0)",
               overflow: "hidden",
               pointerEvents: hasVisibleMedia ? "auto" : "none",
               transition:
@@ -701,7 +732,9 @@ export default function AILabPalmReading({
                   navigationControlSx={mediaControlSx(theme)}
                   expandControlSx={mediaControlSx(theme)}
                   disableChevronPrevious={!hasPreviousMedia}
-                  disableChevronNext={!hasNextRevealedMedia && !canRevealNextFromCurrent}
+                  disableChevronNext={
+                    !hasNextRevealedMedia && !canRevealNextFromCurrent
+                  }
                   onChevronPrevious={handleChevronPrevious}
                   onChevronNext={handleChevronNext}
                   loopNavigation={showLoopNavigation}

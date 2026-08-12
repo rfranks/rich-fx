@@ -1,4 +1,7 @@
-import { cleanPdfText, parseResumeText } from "@/app/talentforge/_utils/resumeIngest";
+import {
+  cleanPdfText,
+  parseResumeText,
+} from "@/app/talentforge/_utils/resumeIngest";
 
 // pdfjs-dist is only needed for pdf parsing, which these tests don't exercise.
 // Mock it to avoid issues loading the actual ESM bundle in Jest.
@@ -17,11 +20,18 @@ describe("cleanPdfText", () => {
 
   test("collapses duplicate spaces and joins broken lines", () => {
     const pages = [
-      ["Summary", "Experienced developer", "with focus on web", "Skills  React  Node"],
+      [
+        "Summary",
+        "Experienced developer",
+        "with focus on web",
+        "Skills  React  Node",
+      ],
     ];
 
     const result = cleanPdfText(pages);
-    expect(result).toBe("Summary\nExperienced developer with focus on web\nSkills React Node");
+    expect(result).toBe(
+      "Summary\nExperienced developer with focus on web\nSkills React Node",
+    );
   });
 
   test("handles single-page input", () => {

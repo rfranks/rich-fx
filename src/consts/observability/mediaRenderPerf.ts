@@ -2,7 +2,10 @@ import type { MediaRenderTrackedType } from "@/types/observability/mediaRenderPe
 
 export const MEDIA_RENDER_PERF_STORAGE_KEY = "portfolio:media-render-perf";
 
-export const MEDIA_RENDER_FIRST_RENDER_BUDGET_MS: Record<MediaRenderTrackedType, number> = {
+export const MEDIA_RENDER_FIRST_RENDER_BUDGET_MS: Record<
+  MediaRenderTrackedType,
+  number
+> = {
   image: 220,
   video: 300,
   pdf: 650,

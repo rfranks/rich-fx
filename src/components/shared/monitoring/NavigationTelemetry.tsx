@@ -67,13 +67,22 @@ export default function NavigationTelemetry() {
   const nextTimelineEventIdRef = useRef(0);
   const [showOverlay, setShowOverlay] = useState(false);
   const [timelinePaused, setTimelinePaused] = useState(false);
-  const [latestRouteRenderMs, setLatestRouteRenderMs] = useState<number | null>(null);
-  const [latestRouteTransitionMs, setLatestRouteTransitionMs] = useState<number | null>(null);
-  const [latestInteractionMs, setLatestInteractionMs] = useState<number | null>(null);
+  const [latestRouteRenderMs, setLatestRouteRenderMs] = useState<number | null>(
+    null,
+  );
+  const [latestRouteTransitionMs, setLatestRouteTransitionMs] = useState<
+    number | null
+  >(null);
+  const [latestInteractionMs, setLatestInteractionMs] = useState<number | null>(
+    null,
+  );
   const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([]);
   const [longTasks, setLongTasks] = useState<SessionReplayLongTaskSample[]>([]);
-  const [timelineViewMode, setTimelineViewMode] = useState<"live" | "replay">("live");
-  const [replayPayload, setReplayPayload] = useState<SessionReplayLitePayload | null>(null);
+  const [timelineViewMode, setTimelineViewMode] = useState<"live" | "replay">(
+    "live",
+  );
+  const [replayPayload, setReplayPayload] =
+    useState<SessionReplayLitePayload | null>(null);
   const [replayError, setReplayError] = useState<string | null>(null);
   const [replayPlaying, setReplayPlaying] = useState(false);
   const [replaySpeed, setReplaySpeed] = useState<number>(1);
@@ -84,8 +93,11 @@ export default function NavigationTelemetry() {
   const replayCursorMsRef = useRef(0);
   const timelinePausedRef = useRef(timelinePaused);
   const timelineEventsRef = useRef<TimelineEvent[]>([]);
-  const routeInteractionBudgetSnapshotRef = useRef<RouteInteractionBudgetSnapshot | null>(null);
-  const mediaRenderPerfSnapshotRef = useRef(loadMediaRenderPerfSnapshotFromStorage());
+  const routeInteractionBudgetSnapshotRef =
+    useRef<RouteInteractionBudgetSnapshot | null>(null);
+  const mediaRenderPerfSnapshotRef = useRef(
+    loadMediaRenderPerfSnapshotFromStorage(),
+  );
   const replayMaxRelativeMs = replayPayload?.events.at(-1)?.relativeMs ?? 0;
 
   useEffect(() => {
@@ -106,12 +118,18 @@ export default function NavigationTelemetry() {
   }, [timelinePaused]);
 
   useEffect(() => {
-    routeInteractionBudgetSnapshotRef.current = loadRouteInteractionBudgetSnapshotFromStorage();
-    mediaRenderPerfSnapshotRef.current = loadMediaRenderPerfSnapshotFromStorage();
+    routeInteractionBudgetSnapshotRef.current =
+      loadRouteInteractionBudgetSnapshotFromStorage();
+    mediaRenderPerfSnapshotRef.current =
+      loadMediaRenderPerfSnapshotFromStorage();
   }, []);
 
   const appendTimelineEvent = useCallback(
-    (kind: TimelineEventKind, action: string, options?: AppendTimelineOptions) => {
+    (
+      kind: TimelineEventKind,
+      action: string,
+      options?: AppendTimelineOptions,
+    ) => {
       if (!isDev || timelinePausedRef.current) {
         return;
       }
@@ -127,12 +145,15 @@ export default function NavigationTelemetry() {
       };
       nextTimelineEventIdRef.current = timelineEvent.id;
 
-      routeInteractionBudgetSnapshotRef.current = updateRouteInteractionBudgetFromTimelineEvent({
-        current: routeInteractionBudgetSnapshotRef.current,
-        event: timelineEvent,
-      });
+      routeInteractionBudgetSnapshotRef.current =
+        updateRouteInteractionBudgetFromTimelineEvent({
+          current: routeInteractionBudgetSnapshotRef.current,
+          event: timelineEvent,
+        });
       if (routeInteractionBudgetSnapshotRef.current) {
-        saveRouteInteractionBudgetSnapshotToStorage(routeInteractionBudgetSnapshotRef.current);
+        saveRouteInteractionBudgetSnapshotToStorage(
+          routeInteractionBudgetSnapshotRef.current,
+        );
       }
 
       if (options?.durationMs !== undefined && options.durationMs !== null) {
@@ -143,7 +164,10 @@ export default function NavigationTelemetry() {
       }
 
       setTimelineEvents((current) => {
-        const next = [timelineEvent, ...current].slice(0, NAVIGATION_TELEMETRY_MAX_TIMELINE_EVENTS);
+        const next = [timelineEvent, ...current].slice(
+          0,
+          NAVIGATION_TELEMETRY_MAX_TIMELINE_EVENTS,
+        );
         timelineEventsRef.current = next;
         return next;
       });
@@ -173,34 +197,42 @@ export default function NavigationTelemetry() {
       logger.info("Route transition", {
         from: previousPath,
         to: activePathname,
-        durationMs: transitionDuration === null ? null : Math.round(transitionDuration),
+        durationMs:
+          transitionDuration === null ? null : Math.round(transitionDuration),
       });
     }
 
     const routeRenderMarkName = `route-render:${activePathname}`;
     markStart(routeRenderMarkName);
-    const cancelPaintMeasure = measureAfterNextPaint(routeRenderMarkName, (durationMs) => {
-      if (isDev && durationMs !== null) {
-        setLatestRouteRenderMs(Math.round(durationMs));
-      }
-      appendTimelineEvent("route", "route-render", {
-        durationMs,
+    const cancelPaintMeasure = measureAfterNextPaint(
+      routeRenderMarkName,
+      (durationMs) => {
+        if (isDev && durationMs !== null) {
+          setLatestRouteRenderMs(Math.round(durationMs));
+        }
+        appendTimelineEvent("route", "route-render", {
+          durationMs,
+          metadata: {
+            route: activePathname,
+          },
+        });
+        logger.debug("Route render", {
+          route: activePathname,
+          durationMs: durationMs === null ? null : Math.round(durationMs),
+        });
+      },
+    );
+
+    appendTimelineEvent(
+      "route",
+      previousPath ? "route-enter" : "session-entry",
+      {
         metadata: {
           route: activePathname,
+          from: previousPath,
         },
-      });
-      logger.debug("Route render", {
-        route: activePathname,
-        durationMs: durationMs === null ? null : Math.round(durationMs),
-      });
-    });
-
-    appendTimelineEvent("route", previousPath ? "route-enter" : "session-entry", {
-      metadata: {
-        route: activePathname,
-        from: previousPath,
       },
-    });
+    );
 
     previousPathRef.current = activePathname;
     markStart("route-transition");
@@ -213,7 +245,10 @@ export default function NavigationTelemetry() {
       if (isDev) {
         setLongTasks((current) =>
           [
-            { durationMs: Math.round(sample.duration), atMs: Math.round(sample.startTime) },
+            {
+              durationMs: Math.round(sample.duration),
+              atMs: Math.round(sample.startTime),
+            },
             ...current,
           ].slice(0, NAVIGATION_TELEMETRY_MAX_LONG_TASKS),
         );
@@ -275,7 +310,9 @@ export default function NavigationTelemetry() {
       });
     };
 
-    window.addEventListener("pointerdown", recordInteraction, { passive: true });
+    window.addEventListener("pointerdown", recordInteraction, {
+      passive: true,
+    });
     window.addEventListener("keydown", recordInteraction);
 
     return () => {
@@ -307,7 +344,8 @@ export default function NavigationTelemetry() {
             title: detail.title ?? null,
             source: detail.source ?? null,
             durationMs:
-              typeof detail.durationMs === "number" && Number.isFinite(detail.durationMs)
+              typeof detail.durationMs === "number" &&
+              Number.isFinite(detail.durationMs)
                 ? Math.round(detail.durationMs)
                 : null,
           },
@@ -329,7 +367,9 @@ export default function NavigationTelemetry() {
           });
 
           if (mediaRenderPerfSnapshotRef.current) {
-            saveMediaRenderPerfSnapshotToStorage(mediaRenderPerfSnapshotRef.current);
+            saveMediaRenderPerfSnapshotToStorage(
+              mediaRenderPerfSnapshotRef.current,
+            );
           }
         }
       },
@@ -474,7 +514,8 @@ export default function NavigationTelemetry() {
     }
 
     const runFrame = (timestampMs: number) => {
-      const previousAnimationMs = replayLastAnimationMsRef.current ?? timestampMs;
+      const previousAnimationMs =
+        replayLastAnimationMsRef.current ?? timestampMs;
       replayLastAnimationMsRef.current = timestampMs;
       const elapsedMs = Math.max(0, timestampMs - previousAnimationMs);
       const nextCursor = Math.min(
@@ -528,7 +569,9 @@ export default function NavigationTelemetry() {
 
       try {
         const text = await file.text();
-        const parsed = parseSessionReplayLitePayload(JSON.parse(text) as unknown);
+        const parsed = parseSessionReplayLitePayload(
+          JSON.parse(text) as unknown,
+        );
         if (!parsed) {
           setReplayError("Invalid replay JSON shape.");
           setReplayPayload(null);
@@ -571,7 +614,10 @@ export default function NavigationTelemetry() {
 
   const jumpReplayCursor = useCallback(
     (nextCursorMs: number) => {
-      const clamped = Math.max(0, Math.min(replayMaxRelativeMs, Math.round(nextCursorMs)));
+      const clamped = Math.max(
+        0,
+        Math.min(replayMaxRelativeMs, Math.round(nextCursorMs)),
+      );
       setReplayCursorMs(clamped);
       replayCursorMsRef.current = clamped;
       replayLastAnimationMsRef.current = null;
@@ -584,7 +630,9 @@ export default function NavigationTelemetry() {
       return [];
     }
 
-    return replayPayload.events.filter((event) => event.relativeMs <= replayCursorMs);
+    return replayPayload.events.filter(
+      (event) => event.relativeMs <= replayCursorMs,
+    );
   }, [replayCursorMs, replayPayload]);
 
   const displayedTimelineEvents = useMemo(() => {
@@ -595,7 +643,9 @@ export default function NavigationTelemetry() {
   }, [timelineEvents, timelineViewMode, replayPayload, replayVisibleEvents]);
 
   const activeRoute =
-    timelineViewMode === "replay" && replayPayload ? replayPayload.currentRoute : activePathname;
+    timelineViewMode === "replay" && replayPayload
+      ? replayPayload.currentRoute
+      : activePathname;
   const activeMetrics =
     timelineViewMode === "replay" && replayPayload
       ? replayPayload.metrics
@@ -630,7 +680,10 @@ export default function NavigationTelemetry() {
           theme.palette.mode === "dark"
             ? alpha(theme.palette.grey[900], 0.88)
             : alpha(theme.palette.common.white, 0.9),
-        color: theme.palette.mode === "dark" ? theme.palette.grey[100] : theme.palette.grey[900],
+        color:
+          theme.palette.mode === "dark"
+            ? theme.palette.grey[100]
+            : theme.palette.grey[900],
         backdropFilter: "blur(8px)",
         p: 1.1,
         maxHeight: "70vh",
@@ -742,7 +795,11 @@ export default function NavigationTelemetry() {
         style={{ display: "none" }}
       />
       {replayError ? (
-        <Typography variant="caption" color="error.main" sx={{ display: "block" }}>
+        <Typography
+          variant="caption"
+          color="error.main"
+          sx={{ display: "block" }}
+        >
           {replayError}
         </Typography>
       ) : null}
@@ -765,7 +822,8 @@ export default function NavigationTelemetry() {
             Replay Viewer
           </Typography>
           <Typography variant="caption" sx={{ opacity: 0.78 }}>
-            {replayPayload.events.length} events · {replayCursorMs}ms / {replayMaxRelativeMs}ms
+            {replayPayload.events.length} events · {replayCursorMs}ms /{" "}
+            {replayMaxRelativeMs}ms
           </Typography>
           <Box sx={{ display: "flex", gap: 0.55, flexWrap: "wrap" }}>
             <Button
@@ -795,7 +853,9 @@ export default function NavigationTelemetry() {
             <Button
               size="small"
               variant="outlined"
-              onClick={() => setReplaySpeed((current) => (current < 4 ? current * 2 : 0.5))}
+              onClick={() =>
+                setReplaySpeed((current) => (current < 4 ? current * 2 : 0.5))
+              }
               sx={{ minWidth: 0, px: 0.8, py: 0.05, fontSize: "0.64rem" }}
             >
               Speed {replaySpeed}x
@@ -817,7 +877,10 @@ export default function NavigationTelemetry() {
               }}
               sx={{ width: "100%" }}
             />
-            <Typography variant="caption" sx={{ minWidth: 42, textAlign: "right" }}>
+            <Typography
+              variant="caption"
+              sx={{ minWidth: 42, textAlign: "right" }}
+            >
               {replayMaxRelativeMs}
             </Typography>
           </Box>
@@ -826,7 +889,11 @@ export default function NavigationTelemetry() {
               <Button
                 key={speedValue}
                 size="small"
-                variant={Math.abs(replaySpeed - speedValue) < 0.001 ? "contained" : "outlined"}
+                variant={
+                  Math.abs(replaySpeed - speedValue) < 0.001
+                    ? "contained"
+                    : "outlined"
+                }
                 onClick={() => setReplaySpeed(speedValue)}
                 sx={{ minWidth: 0, px: 0.65, py: 0.05, fontSize: "0.62rem" }}
               >
@@ -846,9 +913,14 @@ export default function NavigationTelemetry() {
         })}
       />
 
-      <Box sx={{ overflow: "auto", minHeight: 120, maxHeight: "44vh", pr: 0.2 }}>
+      <Box
+        sx={{ overflow: "auto", minHeight: 120, maxHeight: "44vh", pr: 0.2 }}
+      >
         {displayedTimelineEvents.length === 0 ? (
-          <Typography variant="caption" sx={{ display: "block", opacity: 0.72 }}>
+          <Typography
+            variant="caption"
+            sx={{ display: "block", opacity: 0.72 }}
+          >
             no events yet
           </Typography>
         ) : (
@@ -869,7 +941,9 @@ export default function NavigationTelemetry() {
                 }}
               >
                 {timelineEvent.action}
-                {timelineEvent.durationMs !== undefined ? ` (${timelineEvent.durationMs}ms)` : ""}
+                {timelineEvent.durationMs !== undefined
+                  ? ` (${timelineEvent.durationMs}ms)`
+                  : ""}
               </Typography>
               {timelineEvent.metadata ? (
                 <Typography

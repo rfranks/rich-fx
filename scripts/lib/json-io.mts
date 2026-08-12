@@ -37,7 +37,11 @@ type WriteJsonOptions = {
   dryRun?: boolean;
   showDiff?: boolean;
   fileLabel?: string;
-  renderDiff?: (currentContent: string, nextContent: string, fileLabel: string) => string;
+  renderDiff?: (
+    currentContent: string,
+    nextContent: string,
+    fileLabel: string,
+  ) => string;
   onInfo?: (message: string) => void;
   onWarning?: (message: string) => void;
   onSuccess?: (message: string) => void;

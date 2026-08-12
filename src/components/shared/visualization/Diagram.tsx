@@ -1,4 +1,11 @@
-import React, { useEffect, useRef, useState, useCallback, ReactNode, useId } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  ReactNode,
+  useId,
+} from "react";
 import type mermaidType from "mermaid";
 
 import type { DiagramProps } from "@/types/components/shared";
@@ -61,7 +68,9 @@ export const Diagram: React.FC<DiagramProps> = ({
 }: DiagramProps): ReactNode => {
   const shouldShowGridDots = showGridDots ?? showDots;
   const reactId = useId();
-  const resolvedId = id?.trim() ? id : `diagramId_${reactId.replace(/[:]/g, "_")}`;
+  const resolvedId = id?.trim()
+    ? id
+    : `diagramId_${reactId.replace(/[:]/g, "_")}`;
 
   // The raw diagram code
   const diagramCode =
@@ -129,7 +138,8 @@ ${steps?.join("\n  ")}
     shouldIgnorePointerTarget: (target) =>
       Boolean(target.closest(".MuiToolbar-root") || target.closest("button")),
   });
-  const resolvedGridDots = viewportPreferences.showGridDots ?? shouldShowGridDots;
+  const resolvedGridDots =
+    viewportPreferences.showGridDots ?? shouldShowGridDots;
   const resolvedAutoFitVerticalAlign =
     viewportPreferences.autoFitVerticalAlign ?? autoFitVerticalAlign;
   const emitDiagramAction = useCallback(
@@ -196,7 +206,9 @@ ${steps?.join("\n  ")}
     const unscaledSvgWidth = svgRect.width / currentScale;
     const unscaledSvgHeight = svgRect.height / currentScale;
     const viewBox = svgElement.viewBox?.baseVal;
-    const hasViewBox = Boolean(viewBox && viewBox.width > 0 && viewBox.height > 0);
+    const hasViewBox = Boolean(
+      viewBox && viewBox.width > 0 && viewBox.height > 0,
+    );
 
     let contentWidthUnits = 0;
     let contentHeightUnits = 0;
@@ -206,7 +218,9 @@ ${steps?.join("\n  ")}
     // Prefer rendered graph bounds (g.root) over the full SVG canvas; Mermaid often keeps
     // extra outer canvas space that can make initial fit feel overly zoomed-out.
     const measurementCandidates: Array<SVGGraphicsElement | SVGSVGElement> = [];
-    const graphRoot = svgElement.querySelector("g.root") as SVGGraphicsElement | null;
+    const graphRoot = svgElement.querySelector(
+      "g.root",
+    ) as SVGGraphicsElement | null;
     if (graphRoot) {
       measurementCandidates.push(graphRoot);
     }
@@ -246,8 +260,14 @@ ${steps?.join("\n  ")}
     }
 
     // Convert SVG units to unscaled CSS pixels so fit math uses a consistent unit system.
-    const scaleX = hasViewBox && viewBox ? unscaledSvgWidth / Math.max(0.0001, viewBox.width) : 1;
-    const scaleY = hasViewBox && viewBox ? unscaledSvgHeight / Math.max(0.0001, viewBox.height) : 1;
+    const scaleX =
+      hasViewBox && viewBox
+        ? unscaledSvgWidth / Math.max(0.0001, viewBox.width)
+        : 1;
+    const scaleY =
+      hasViewBox && viewBox
+        ? unscaledSvgHeight / Math.max(0.0001, viewBox.height)
+        : 1;
     const contentWidth = contentWidthUnits * scaleX;
     const contentHeight = contentHeightUnits * scaleY;
     const viewBoxOriginX = hasViewBox && viewBox ? viewBox.x : 0;
@@ -264,9 +284,13 @@ ${steps?.join("\n  ")}
     const fitScaleX = availableWidth / contentWidth;
     const baseScale = Math.max(0.05, Math.min(fitScaleY, fitScaleX));
     const scaleMultiplier = Math.max(0.1, autoFitScaleMultiplier);
-    const fittedScale = Math.min(8, Math.max(0.05, baseScale * scaleMultiplier));
+    const fittedScale = Math.min(
+      8,
+      Math.max(0.05, baseScale * scaleMultiplier),
+    );
     const verticalSlack = availableHeight - contentHeight * fittedScale;
-    const verticalAlignOffset = resolvedAutoFitVerticalAlign === "center" ? verticalSlack / 2 : 0;
+    const verticalAlignOffset =
+      resolvedAutoFitVerticalAlign === "center" ? verticalSlack / 2 : 0;
 
     const translatedX =
       safePadding +
@@ -274,7 +298,10 @@ ${steps?.join("\n  ")}
       contentOffsetX * fittedScale +
       autoFitOffsetX;
     const translatedY =
-      safePadding + verticalAlignOffset - contentOffsetY * fittedScale + autoFitOffsetY;
+      safePadding +
+      verticalAlignOffset -
+      contentOffsetY * fittedScale +
+      autoFitOffsetY;
 
     applyFitTransform({
       scale: fittedScale,
@@ -324,11 +351,15 @@ ${steps?.join("\n  ")}
 
     const tick = () => {
       const diagramNode = diagramRef.current;
-      const svgElement = diagramNode?.querySelector("svg") as SVGSVGElement | null;
+      const svgElement = diagramNode?.querySelector(
+        "svg",
+      ) as SVGSVGElement | null;
 
       if (!svgElement) {
         attempts += 1;
-        if (attempts >= VISUALIZATION_ANIMATION_TOKENS.diagramAutoFitMaxFrames) {
+        if (
+          attempts >= VISUALIZATION_ANIMATION_TOKENS.diagramAutoFitMaxFrames
+        ) {
           autoFitSettleFrameRef.current = null;
           scheduleAutoFitToViewport();
           return;
@@ -342,7 +373,10 @@ ${steps?.join("\n  ")}
       const heightNow = rect.height;
 
       if (widthNow > 0 && heightNow > 0) {
-        if (Math.abs(widthNow - lastWidth) < 0.5 && Math.abs(heightNow - lastHeight) < 0.5) {
+        if (
+          Math.abs(widthNow - lastWidth) < 0.5 &&
+          Math.abs(heightNow - lastHeight) < 0.5
+        ) {
           stableFrames += 1;
         } else {
           stableFrames = 0;
@@ -353,7 +387,8 @@ ${steps?.join("\n  ")}
 
       attempts += 1;
       if (
-        stableFrames >= VISUALIZATION_ANIMATION_TOKENS.diagramAutoFitSettleFrames ||
+        stableFrames >=
+          VISUALIZATION_ANIMATION_TOKENS.diagramAutoFitSettleFrames ||
         attempts >= VISUALIZATION_ANIMATION_TOKENS.diagramAutoFitMaxFrames
       ) {
         autoFitSettleFrameRef.current = null;
@@ -381,13 +416,17 @@ ${steps?.join("\n  ")}
     handleZoomOut();
   }, [emitDiagramAction, handleZoomOut]);
 
-  const { copySucceeded, handleCopyDiagramCode, handleExportSvg, handleExportPng } =
-    useDiagramExports({
-      diagramCode,
-      diagramRef,
-      resolvedId,
-      title,
-    });
+  const {
+    copySucceeded,
+    handleCopyDiagramCode,
+    handleExportSvg,
+    handleExportPng,
+  } = useDiagramExports({
+    diagramCode,
+    diagramRef,
+    resolvedId,
+    title,
+  });
 
   const handleCanvasKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -400,7 +439,8 @@ ${steps?.join("\n  ")}
 
       if (normalizedKey === "v") {
         event.preventDefault();
-        const nextAlign = resolvedAutoFitVerticalAlign === "top" ? "center" : "top";
+        const nextAlign =
+          resolvedAutoFitVerticalAlign === "top" ? "center" : "top";
         setViewportAutoFitVerticalAlignPreference(nextAlign);
         window.requestAnimationFrame(() => {
           fitDiagramToViewport();
@@ -487,9 +527,19 @@ ${steps?.join("\n  ")}
       diagramType: type,
       exportedAt: new Date().toISOString(),
     };
-    triggerJsonDownload(payload, `${resolveExportFileBaseName()}-viewport.json`);
+    triggerJsonDownload(
+      payload,
+      `${resolveExportFileBaseName()}-viewport.json`,
+    );
     emitDiagramAction("export", "diagram-export-viewport-json", "pointer");
-  }, [emitDiagramAction, getViewportSnapshot, resolveExportFileBaseName, resolvedId, title, type]);
+  }, [
+    emitDiagramAction,
+    getViewportSnapshot,
+    resolveExportFileBaseName,
+    resolvedId,
+    title,
+    type,
+  ]);
 
   const handleCopyDiagramCodeAction = useCallback(() => {
     emitDiagramAction("copy", "diagram-copy-code", "pointer");
@@ -518,7 +568,10 @@ ${steps?.join("\n  ")}
     }
 
     const deepLink = new URL(window.location.href);
-    deepLink.searchParams.set(DIAGRAM_VIEWPORT_DEEPLINK_PARAM, serializedSnapshot);
+    deepLink.searchParams.set(
+      DIAGRAM_VIEWPORT_DEEPLINK_PARAM,
+      serializedSnapshot,
+    );
     deepLink.searchParams.set("diagramViewportTarget", resolvedId);
 
     try {
@@ -538,7 +591,11 @@ ${steps?.join("\n  ")}
   }, [emitDiagramAction, getViewportSnapshot, resolvedId]);
 
   useEffect(() => {
-    if (!isHydrated || typeof window === "undefined" || deepLinkViewportAppliedRef.current) {
+    if (
+      !isHydrated ||
+      typeof window === "undefined" ||
+      deepLinkViewportAppliedRef.current
+    ) {
       return;
     }
 
@@ -603,7 +660,11 @@ ${steps?.join("\n  ")}
       });
       markMermaidRenderComplete(transformRef.current.scale);
 
-      if (!cancelled && autoFitOnRender && !deepLinkViewportAppliedRef.current) {
+      if (
+        !cancelled &&
+        autoFitOnRender &&
+        !deepLinkViewportAppliedRef.current
+      ) {
         scheduleAutoFitAfterRenderSettle();
       }
     };
@@ -718,7 +779,11 @@ ${steps?.join("\n  ")}
             onExportViewportJson={handleExportViewportJson}
             onCopyDeepLinkWithViewport={handleCopyDeepLinkWithViewport}
             onShowSource={() => {
-              emitDiagramAction("open", "diagram-show-source-toolbar", "pointer");
+              emitDiagramAction(
+                "open",
+                "diagram-show-source-toolbar",
+                "pointer",
+              );
               setShowingText(true);
             }}
             toolbarActions={toolbarActions}

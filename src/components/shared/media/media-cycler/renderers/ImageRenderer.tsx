@@ -17,7 +17,8 @@ export default function ImageRenderer({
   onMediaAction,
   onFirstRenderReady,
 }: ImageRendererProps) {
-  const resolvedExpandControlSxArray = flattenMediaCyclerSxArray(expandControlSxArray);
+  const resolvedExpandControlSxArray =
+    flattenMediaCyclerSxArray(expandControlSxArray);
   const hasReportedFirstRenderRef = React.useRef(false);
 
   const handleImageLoaded = React.useCallback(() => {
@@ -59,7 +60,9 @@ export default function ImageRenderer({
             src={mediaUrl}
             alt={imageAlt}
             title={lightboxTitle}
-            caption={item.lightboxCaption || item.mediaCaption || item.mediaSource}
+            caption={
+              item.lightboxCaption || item.mediaCaption || item.mediaSource
+            }
             onOpen={(trigger, control) => {
               onMediaAction?.({
                 kind: "open",

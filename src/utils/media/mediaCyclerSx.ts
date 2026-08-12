@@ -6,9 +6,14 @@ import type {
 } from "@/types/media/mediaCyclerSx";
 
 const isFlatSxValue = (entry: unknown): entry is MediaCyclerFlatSx =>
-  entry !== null && entry !== undefined && entry !== false && !Array.isArray(entry);
+  entry !== null &&
+  entry !== undefined &&
+  entry !== false &&
+  !Array.isArray(entry);
 
-export function toMediaCyclerSxArray(value?: SxProps<Theme>): MediaCyclerSxArray {
+export function toMediaCyclerSxArray(
+  value?: SxProps<Theme>,
+): MediaCyclerSxArray {
   if (value == null) {
     return [];
   }
@@ -33,7 +38,9 @@ export function toMediaCyclerSxArray(value?: SxProps<Theme>): MediaCyclerSxArray
   return flattened;
 }
 
-export function flattenMediaCyclerSxArray(values: MediaCyclerSxArray): MediaCyclerFlatSxArray {
+export function flattenMediaCyclerSxArray(
+  values: MediaCyclerSxArray,
+): MediaCyclerFlatSxArray {
   const flattened: MediaCyclerFlatSxArray = [];
 
   const append = (entry: unknown) => {

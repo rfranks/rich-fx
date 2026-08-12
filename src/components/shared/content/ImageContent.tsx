@@ -18,7 +18,8 @@ type ImageContentProps = {
 };
 
 const createMediaKeyDownHandler =
-  (onMediaActivate?: () => void) => (event: React.KeyboardEvent<HTMLElement>) => {
+  (onMediaActivate?: () => void) =>
+  (event: React.KeyboardEvent<HTMLElement>) => {
     if (!onMediaActivate) {
       return;
     }
@@ -54,7 +55,8 @@ export default function ImageContent({
   } = usePanZoomViewport({
     preset: "media",
     calibrationMediaType: "image",
-    shouldIgnorePointerTarget: (target) => Boolean(target.closest("button") || target.closest("a")),
+    shouldIgnorePointerTarget: (target) =>
+      Boolean(target.closest("button") || target.closest("a")),
   });
 
   return (

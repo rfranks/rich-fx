@@ -70,7 +70,10 @@ export function observeLongTasks(
       });
     });
 
-    observer.observe({ type: "longtask", buffered: true } as PerformanceObserverInit);
+    observer.observe({
+      type: "longtask",
+      buffered: true,
+    } as PerformanceObserverInit);
   } catch {
     observer?.disconnect();
     return () => {};

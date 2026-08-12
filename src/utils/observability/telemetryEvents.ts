@@ -32,15 +32,21 @@ export function emitPortfolioWindowEvent<K extends PortfolioWindowEventName>(
   );
 }
 
-export function emitPortfolioShortcutEvent(name: PortfolioWindowShortcutEventName): void {
+export function emitPortfolioShortcutEvent(
+  name: PortfolioWindowShortcutEventName,
+): void {
   emitPortfolioWindowEvent(name);
 }
 
-export function emitPortfolioTelemetryEvent(detail: PortfolioTelemetryEventDetail): void {
+export function emitPortfolioTelemetryEvent(
+  detail: PortfolioTelemetryEventDetail,
+): void {
   emitPortfolioTelemetryEventThroughBus(detail);
 }
 
-export function addPortfolioWindowEventListener<K extends PortfolioWindowEventName>(
+export function addPortfolioWindowEventListener<
+  K extends PortfolioWindowEventName,
+>(
   name: K,
   listener: (
     detail: PortfolioWindowEventDetailMap[K],

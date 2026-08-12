@@ -69,7 +69,10 @@ type MediaCyclerCommonItem = {
   playsInline?: boolean;
   loop?: boolean;
   muted?: boolean;
-  videoProps?: Omit<React.ComponentPropsWithoutRef<"video">, "src" | "children">;
+  videoProps?: Omit<
+    React.ComponentPropsWithoutRef<"video">,
+    "src" | "children"
+  >;
   extraContent?: React.ReactNode;
 };
 

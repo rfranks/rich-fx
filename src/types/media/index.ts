@@ -13,4 +13,7 @@ export type {
   MediaCyclerFlatSxArray,
   MediaCyclerSxArray,
 } from "./mediaCyclerSx";
-export type { MediaActionContract, MediaActionKind } from "./mediaActionContract";
+export type {
+  MediaActionContract,
+  MediaActionKind,
+} from "./mediaActionContract";

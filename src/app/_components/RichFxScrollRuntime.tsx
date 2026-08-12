@@ -7,9 +7,11 @@ const MOBILE_MEDIA_OPEN_CLASS = "richfx-mobile-media-open";
 const VISIBLE_CLASS = "richfx-visible";
 
 const prefersReducedMotion = () =>
-  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(Math.max(value, min), max);
 
 const getMediaTrackTopOffset = () => {
   if (window.innerWidth <= 640) {
@@ -37,10 +39,18 @@ const getStepObserverOptions = (): IntersectionObserverInit => {
 
 export default function RichFxScrollRuntime() {
   useEffect(() => {
-    const revealNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-richfx-reveal]"));
-    const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-richfx-nav]"));
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-richfx-section]"));
-    const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("[data-richfx-video]"));
+    const revealNodes = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-richfx-reveal]"),
+    );
+    const navLinks = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("[data-richfx-nav]"),
+    );
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-richfx-section]"),
+    );
+    const videos = Array.from(
+      document.querySelectorAll<HTMLVideoElement>("[data-richfx-video]"),
+    );
     const narratives = Array.from(
       document.querySelectorAll<HTMLElement>("[data-richfx-narrative]"),
     );
@@ -51,7 +61,9 @@ export default function RichFxScrollRuntime() {
         track,
         media: track.querySelector<HTMLElement>("[data-richfx-moving-media]"),
       }))
-      .filter((item): item is { media: HTMLElement; track: HTMLElement } => Boolean(item.media));
+      .filter((item): item is { media: HTMLElement; track: HTMLElement } =>
+        Boolean(item.media),
+      );
     const reduceMotion = prefersReducedMotion();
     let mediaPositionFrame = 0;
 
@@ -60,11 +72,14 @@ export default function RichFxScrollRuntime() {
       const narrative = video.closest<HTMLElement>("[data-richfx-narrative]");
       const stepKey = stepMedia?.dataset.richfxStepMedia;
       const matchingStep = stepKey
-        ? narrative?.querySelector<HTMLElement>(`[data-richfx-step="${stepKey}"]`)
+        ? narrative?.querySelector<HTMLElement>(
+            `[data-richfx-step="${stepKey}"]`,
+          )
         : undefined;
       const rect = video.getBoundingClientRect();
       const stepRect = matchingStep?.getBoundingClientRect();
-      const activeMediaPlate = !stepMedia || stepMedia.classList.contains(ACTIVE_CLASS);
+      const activeMediaPlate =
+        !stepMedia || stepMedia.classList.contains(ACTIVE_CLASS);
       const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
       const stepHasNotScrolledPast = !stepRect || stepRect.bottom > 0;
       return activeMediaPlate && inViewport && stepHasNotScrolledPast;
@@ -106,13 +121,18 @@ export default function RichFxScrollRuntime() {
       (entries) => {
         const visibleEntry = entries
           .filter((entry) => entry.isIntersecting)
-          .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
+          .sort(
+            (left, right) => right.intersectionRatio - left.intersectionRatio,
+          )[0];
         const activeId = visibleEntry?.target.getAttribute("id");
         if (!activeId) {
           return;
         }
         navLinks.forEach((link) => {
-          link.classList.toggle(ACTIVE_CLASS, link.dataset.richfxNav === activeId);
+          link.classList.toggle(
+            ACTIVE_CLASS,
+            link.dataset.richfxNav === activeId,
+          );
         });
       },
       { rootMargin: "-35% 0px -45% 0px", threshold: [0.05, 0.2, 0.4, 0.65] },
@@ -129,7 +149,9 @@ export default function RichFxScrollRuntime() {
     );
 
     const stepObservers = narratives.map((narrative) => {
-      const steps = Array.from(narrative.querySelectorAll<HTMLElement>("[data-richfx-step]"));
+      const steps = Array.from(
+        narrative.querySelectorAll<HTMLElement>("[data-richfx-step]"),
+      );
       const mediaNodes = Array.from(
         narrative.querySelectorAll<HTMLElement>("[data-richfx-step-media]"),
       );
@@ -141,7 +163,10 @@ export default function RichFxScrollRuntime() {
           step.classList.toggle(ACTIVE_CLASS, step.dataset.richfxStep === key);
         });
         mediaNodes.forEach((media) => {
-          media.classList.toggle(ACTIVE_CLASS, media.dataset.richfxStepMedia === key);
+          media.classList.toggle(
+            ACTIVE_CLASS,
+            media.dataset.richfxStepMedia === key,
+          );
         });
         mediaNodes.forEach((media) => {
           const stepVideos = Array.from(
@@ -156,8 +181,12 @@ export default function RichFxScrollRuntime() {
       const observer = new IntersectionObserver((entries) => {
         const activeEntry = entries
           .filter((entry) => entry.isIntersecting)
-          .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
-        setActiveStep((activeEntry?.target as HTMLElement | undefined)?.dataset.richfxStep);
+          .sort(
+            (left, right) => right.intersectionRatio - left.intersectionRatio,
+          )[0];
+        setActiveStep(
+          (activeEntry?.target as HTMLElement | undefined)?.dataset.richfxStep,
+        );
       }, getStepObserverOptions());
 
       steps.forEach((step) => observer.observe(step));
@@ -179,11 +208,13 @@ export default function RichFxScrollRuntime() {
       const activeNarrative = narratives
         .map((narrative) => {
           const mediaTrack =
-            narrative.querySelector<HTMLElement>("[data-richfx-media-track]") ?? narrative;
+            narrative.querySelector<HTMLElement>("[data-richfx-media-track]") ??
+            narrative;
           const rect = mediaTrack.getBoundingClientRect();
           const overlap = Math.max(
             0,
-            Math.min(rect.bottom, activeBandBottom) - Math.max(rect.top, activeBandTop),
+            Math.min(rect.bottom, activeBandBottom) -
+              Math.max(rect.top, activeBandTop),
           );
 
           return { narrative, overlap };
@@ -193,7 +224,8 @@ export default function RichFxScrollRuntime() {
       narratives.forEach((narrative) => {
         narrative.classList.toggle(
           MOBILE_MEDIA_OPEN_CLASS,
-          narrative === activeNarrative?.narrative && activeNarrative.overlap > 0,
+          narrative === activeNarrative?.narrative &&
+            activeNarrative.overlap > 0,
         );
       });
     };
@@ -235,7 +267,9 @@ export default function RichFxScrollRuntime() {
     sections.forEach((section) => sectionObserver.observe(section));
     videos.forEach((video) => videoObserver.observe(video));
     updateMediaPositions();
-    window.addEventListener("scroll", requestMediaPositionUpdate, { passive: true });
+    window.addEventListener("scroll", requestMediaPositionUpdate, {
+      passive: true,
+    });
     window.addEventListener("resize", requestMediaPositionUpdate);
 
     return () => {

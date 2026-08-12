@@ -4,7 +4,14 @@ import { createCliOutput } from "./lib/cli-output.mts";
 
 const rootDir = process.cwd();
 const out = createCliOutput();
-const ignoredDirs = new Set([".git", "node_modules", ".next", "out", "dist", "coverage"]);
+const ignoredDirs = new Set([
+  ".git",
+  "node_modules",
+  ".next",
+  "out",
+  "dist",
+  "coverage",
+]);
 
 async function walk(dir: string, found: string[]): Promise<void> {
   const entries = await fs.readdir(dir, { withFileTypes: true });

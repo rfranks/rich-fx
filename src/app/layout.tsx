@@ -24,7 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script src="https://cdn.jsdelivr.net/npm/pathseg@1.2.1/pathseg.js" async></script>
+        <script
+          src="https://cdn.jsdelivr.net/npm/pathseg@1.2.1/pathseg.js"
+          async
+        ></script>
         <script
           src="https://cdn.jsdelivr.net/npm/poly-decomp@0.3.0/build/decomp.min.js"
           async

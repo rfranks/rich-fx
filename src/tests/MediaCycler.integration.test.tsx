@@ -3,7 +3,11 @@ import { fireEvent, render, screen, within } from "@testing-library/react";
 import MediaCycler from "@/components/shared/media/MediaCycler";
 import type { MediaCyclerItem } from "@/types/media/mediaCycler";
 
-function buildCustomItem(key: string, label: string, onSelect?: () => void): MediaCyclerItem {
+function buildCustomItem(
+  key: string,
+  label: string,
+  onSelect?: () => void,
+): MediaCyclerItem {
   return {
     key,
     title: label,
@@ -34,7 +38,9 @@ describe("MediaCycler integration behaviors", () => {
       />,
     );
 
-    const swipeTarget = screen.getAllByText("First")[0].closest("[tabindex='0']") as HTMLElement;
+    const swipeTarget = screen
+      .getAllByText("First")[0]
+      .closest("[tabindex='0']") as HTMLElement;
     expect(swipeTarget).toBeTruthy();
 
     fireEvent.touchStart(swipeTarget, {
@@ -113,9 +119,13 @@ describe("MediaCycler integration behaviors", () => {
     fireEvent.click(screen.getByLabelText("Open media details: One"));
 
     const dialog = screen.getByRole("dialog");
-    expect(within(dialog).getByText("Compact caption detail")).toBeInTheDocument();
+    expect(
+      within(dialog).getByText("Compact caption detail"),
+    ).toBeInTheDocument();
     fireEvent.click(screen.getByLabelText("Close media details"));
     const dialogAfterClose = screen.getByRole("dialog");
-    expect(within(dialogAfterClose).queryByText("Compact caption detail")).toBeNull();
+    expect(
+      within(dialogAfterClose).queryByText("Compact caption detail"),
+    ).toBeNull();
   });
 });

@@ -7,10 +7,20 @@ const rootDir = process.cwd();
 
 const SCAN_ROOTS = ["src", "public/personal/data"] as const;
 const SCAN_EXTENSIONS = new Set([".ts", ".tsx", ".mts", ".js", ".json", ".md"]);
-const IGNORED_DIRS = new Set(["node_modules", ".next", "out", "dist", "coverage", ".git"]);
-const ASSET_PATH_PATTERN = /(["'`])((?:\/assets|\/personal|\/apps|\/rich-fx)\/[^"'`\s)]+)\1/g;
+const IGNORED_DIRS = new Set([
+  "node_modules",
+  ".next",
+  "out",
+  "dist",
+  "coverage",
+  ".git",
+]);
+const ASSET_PATH_PATTERN =
+  /(["'`])((?:\/assets|\/personal|\/apps|\/rich-fx)\/[^"'`\s)]+)\1/g;
 const TEST_FILE_PATTERN = /(?:^|\/)src\/tests\//;
-const KNOWN_LEGACY_MIGRATION_REFERENCES: Readonly<Record<string, ReadonlySet<string>>> = {
+const KNOWN_LEGACY_MIGRATION_REFERENCES: Readonly<
+  Record<string, ReadonlySet<string>>
+> = {
   "src/utils/data/migrations/richFxMigrations.ts": new Set([
     "/personal/images/github/achievments/",
     "/personal/images/github/achievements/",
@@ -104,7 +114,8 @@ async function collectAssetUsages(): Promise<Map<string, AssetUsage[]>> {
         line: resolveLineNumber(content, match.index ?? 0),
       };
 
-      const knownLegacyPaths = KNOWN_LEGACY_MIGRATION_REFERENCES[relativeFilePath];
+      const knownLegacyPaths =
+        KNOWN_LEGACY_MIGRATION_REFERENCES[relativeFilePath];
       if (knownLegacyPaths?.has(assetPath)) {
         continue;
       }
@@ -118,10 +129,16 @@ async function collectAssetUsages(): Promise<Map<string, AssetUsage[]>> {
   return usageMap;
 }
 
-async function findMissingAssets(usages: Map<string, AssetUsage[]>): Promise<AssetIssue[]> {
+async function findMissingAssets(
+  usages: Map<string, AssetUsage[]>,
+): Promise<AssetIssue[]> {
   const issues: AssetIssue[] = [];
   for (const [assetPath, references] of usages.entries()) {
-    const assetAbsolutePath = path.join(rootDir, "public", assetPath.replace(/^\/+/, ""));
+    const assetAbsolutePath = path.join(
+      rootDir,
+      "public",
+      assetPath.replace(/^\/+/, ""),
+    );
     try {
       const stat = await fs.stat(assetAbsolutePath);
       if (assetPath.endsWith("/") && !stat.isDirectory()) {
@@ -131,7 +148,11 @@ async function findMissingAssets(usages: Map<string, AssetUsage[]>): Promise<Ass
         });
       }
     } catch {
-      if (OPTIONAL_GENERATED_ASSET_PATH_PATTERNS.some((pattern) => pattern.test(assetPath))) {
+      if (
+        OPTIONAL_GENERATED_ASSET_PATH_PATTERNS.some((pattern) =>
+          pattern.test(assetPath),
+        )
+      ) {
         continue;
       }
       issues.push({
@@ -149,11 +170,15 @@ async function main(): Promise<void> {
   const missingAssets = await findMissingAssets(usages);
 
   if (missingAssets.length === 0) {
-    out.success(`Asset integrity check passed (${usages.size} referenced assets verified).`);
+    out.success(
+      `Asset integrity check passed (${usages.size} referenced assets verified).`,
+    );
     return;
   }
 
-  out.error(`Asset integrity check failed: ${missingAssets.length} missing asset reference(s).`);
+  out.error(
+    `Asset integrity check failed: ${missingAssets.length} missing asset reference(s).`,
+  );
   for (const issue of missingAssets) {
     out.listItem(`Missing ${issue.path}`);
     issue.references.slice(0, 5).forEach((usage) => {

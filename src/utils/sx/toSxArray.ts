@@ -2,7 +2,10 @@ import type { SxProps, Theme } from "@mui/material/styles";
 import type { FlatSx, FlatSxArray } from "@/types/sx/sx";
 
 const isFlatSxValue = (entry: unknown): entry is FlatSx =>
-  entry !== null && entry !== undefined && entry !== false && !Array.isArray(entry);
+  entry !== null &&
+  entry !== undefined &&
+  entry !== false &&
+  !Array.isArray(entry);
 
 export function toSxArray(value?: SxProps<Theme>): FlatSxArray {
   if (value == null) {

@@ -9,13 +9,21 @@ import type {
   MediaRenderTypeSnapshot,
 } from "@/types/observability/mediaRenderPerf";
 
-const MEDIA_RENDER_TYPES: readonly MediaRenderTrackedType[] = ["image", "video", "pdf", "diagram"];
+const MEDIA_RENDER_TYPES: readonly MediaRenderTrackedType[] = [
+  "image",
+  "video",
+  "pdf",
+  "diagram",
+];
 
 function isTrackedMediaType(value: string): value is MediaRenderTrackedType {
   return (MEDIA_RENDER_TYPES as readonly string[]).includes(value);
 }
 
-function resolveStatus(durationMs: number, budgetMs: number): MediaRenderPerfStatus {
+function resolveStatus(
+  durationMs: number,
+  budgetMs: number,
+): MediaRenderPerfStatus {
   if (!Number.isFinite(durationMs) || durationMs <= 0) {
     return "unknown";
   }
@@ -28,7 +36,9 @@ function resolveStatus(durationMs: number, budgetMs: number): MediaRenderPerfSta
   return "fail";
 }
 
-function sortEntries(entries: MediaRenderTypeSnapshot[]): MediaRenderTypeSnapshot[] {
+function sortEntries(
+  entries: MediaRenderTypeSnapshot[],
+): MediaRenderTypeSnapshot[] {
   const priority: Record<MediaRenderPerfStatus, number> = {
     fail: 4,
     warn: 3,
@@ -55,7 +65,11 @@ export function loadMediaRenderPerfSnapshotFromStorage(): MediaRenderPerfSnapsho
       return null;
     }
     const parsed = JSON.parse(raw) as MediaRenderPerfSnapshot;
-    if (!parsed || typeof parsed !== "object" || !Array.isArray(parsed.entries)) {
+    if (
+      !parsed ||
+      typeof parsed !== "object" ||
+      !Array.isArray(parsed.entries)
+    ) {
       return null;
     }
 
@@ -79,10 +93,14 @@ export function loadMediaRenderPerfSnapshotFromStorage(): MediaRenderPerfSnapsho
             entry.status === "unknown"
               ? entry.status
               : "unknown",
-          lastItemKey: typeof entry.lastItemKey === "string" ? entry.lastItemKey : null,
-          lastRoute: typeof entry.lastRoute === "string" ? entry.lastRoute : null,
+          lastItemKey:
+            typeof entry.lastItemKey === "string" ? entry.lastItemKey : null,
+          lastRoute:
+            typeof entry.lastRoute === "string" ? entry.lastRoute : null,
           lastRenderedAtIso:
-            typeof entry.lastRenderedAtIso === "string" ? entry.lastRenderedAtIso : null,
+            typeof entry.lastRenderedAtIso === "string"
+              ? entry.lastRenderedAtIso
+              : null,
         } satisfies MediaRenderTypeSnapshot;
       });
 
@@ -98,13 +116,18 @@ export function loadMediaRenderPerfSnapshotFromStorage(): MediaRenderPerfSnapsho
   }
 }
 
-export function saveMediaRenderPerfSnapshotToStorage(snapshot: MediaRenderPerfSnapshot): void {
+export function saveMediaRenderPerfSnapshotToStorage(
+  snapshot: MediaRenderPerfSnapshot,
+): void {
   if (typeof window === "undefined") {
     return;
   }
 
   try {
-    window.localStorage.setItem(MEDIA_RENDER_PERF_STORAGE_KEY, JSON.stringify(snapshot));
+    window.localStorage.setItem(
+      MEDIA_RENDER_PERF_STORAGE_KEY,
+      JSON.stringify(snapshot),
+    );
   } catch {
     // ignore localStorage write failures
   }
@@ -128,7 +151,9 @@ export function updateMediaRenderPerfSnapshot(args: {
   const nextGeneratedAt = args.atIso ?? new Date().toISOString();
   const currentEntries = args.current?.entries ?? [];
   const budgetMs = MEDIA_RENDER_FIRST_RENDER_BUDGET_MS[args.mediaType];
-  const currentEntry = currentEntries.find((entry) => entry.mediaType === args.mediaType);
+  const currentEntry = currentEntries.find(
+    (entry) => entry.mediaType === args.mediaType,
+  );
 
   const nextEntry: MediaRenderTypeSnapshot = currentEntry
     ? {

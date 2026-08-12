@@ -1,5 +1,7 @@
 const supportsColor =
-  Boolean(process.stdout.isTTY) && !("NO_COLOR" in process.env) && process.env.TERM !== "dumb";
+  Boolean(process.stdout.isTTY) &&
+  !("NO_COLOR" in process.env) &&
+  process.env.TERM !== "dumb";
 
 const supportsEmoji = !("NO_EMOJI" in process.env) && process.env.CI !== "true";
 
@@ -44,26 +46,50 @@ function line(label: string, message: string, styles: AnsiKey[] = []): string {
 }
 
 export function createCliOutput(prefix?: string) {
-  const withPrefix = (message: string) => (prefix ? `${prefix} ${message}` : message);
+  const withPrefix = (message: string) =>
+    prefix ? `${prefix} ${message}` : message;
 
   return {
     section: (message: string) =>
       console.log(
-        withPrefix(line(`${icon(glyphs.section, "#")} SECTION`, message, ["bold", "magenta"])),
+        withPrefix(
+          line(`${icon(glyphs.section, "#")} SECTION`, message, [
+            "bold",
+            "magenta",
+          ]),
+        ),
       ),
     info: (message: string) =>
-      console.log(withPrefix(line(`${icon(glyphs.info, "i")} INFO`, message, ["cyan"]))),
+      console.log(
+        withPrefix(line(`${icon(glyphs.info, "i")} INFO`, message, ["cyan"])),
+      ),
     success: (message: string) =>
-      console.log(withPrefix(line(`${icon(glyphs.success, "+")} OK`, message, ["green"]))),
+      console.log(
+        withPrefix(line(`${icon(glyphs.success, "+")} OK`, message, ["green"])),
+      ),
     warning: (message: string) =>
-      console.warn(withPrefix(line(`${icon(glyphs.warning, "!")} WARN`, message, ["yellow"]))),
+      console.warn(
+        withPrefix(
+          line(`${icon(glyphs.warning, "!")} WARN`, message, ["yellow"]),
+        ),
+      ),
     error: (message: string) =>
-      console.error(withPrefix(line(`${icon(glyphs.error, "x")} ERROR`, message, ["red"]))),
+      console.error(
+        withPrefix(line(`${icon(glyphs.error, "x")} ERROR`, message, ["red"])),
+      ),
     metric: (message: string) =>
-      console.log(withPrefix(line(`${icon(glyphs.chart, ">")} METRIC`, message, ["bold", "cyan"]))),
+      console.log(
+        withPrefix(
+          line(`${icon(glyphs.chart, ">")} METRIC`, message, ["bold", "cyan"]),
+        ),
+      ),
     listItem: (message: string) =>
-      console.log(withPrefix(`${styleText(icon("•", "-"), ["dim"])} ${message}`)),
+      console.log(
+        withPrefix(`${styleText(icon("•", "-"), ["dim"])} ${message}`),
+      ),
     sparkle: (message: string) =>
-      console.log(withPrefix(line(`${icon(glyphs.sparkle, "*")} NOTE`, message, ["dim"]))),
+      console.log(
+        withPrefix(line(`${icon(glyphs.sparkle, "*")} NOTE`, message, ["dim"])),
+      ),
   };
 }

@@ -1,7 +1,12 @@
 "use client";
 
 import { cloneElement, ReactElement } from "react";
-import { FormControl, FormControlProps, FormHelperText, InputLabel } from "@mui/material";
+import {
+  FormControl,
+  FormControlProps,
+  FormHelperText,
+  InputLabel,
+} from "@mui/material";
 import { v4 as uuid } from "uuid";
 
 export interface FormFieldProps extends FormControlProps {
@@ -21,7 +26,9 @@ export interface FormFieldProps extends FormControlProps {
    * The input field to be rendered.
    */
   input: ReactElement<
-    HTMLInputElement | HTMLTextAreaElement | (HTMLSelectElement & { "aria-describedby"?: string })
+    | HTMLInputElement
+    | HTMLTextAreaElement
+    | (HTMLSelectElement & { "aria-describedby"?: string })
   >;
 }
 
@@ -34,7 +41,9 @@ export function FormField(props: FormFieldProps) {
     <FormControl {...rest}>
       {label && <InputLabel htmlFor={inputId}>{label}</InputLabel>}
       {cloneElement(input, { id: inputId, "aria-describedby": helperId })}
-      {helperText && <FormHelperText id={helperId}>{helperText}</FormHelperText>}
+      {helperText && (
+        <FormHelperText id={helperId}>{helperText}</FormHelperText>
+      )}
     </FormControl>
   );
 }

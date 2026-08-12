@@ -6,7 +6,9 @@ import type { PdfRendererProps } from "@/types/components/shared/media";
 import { flattenMediaCyclerSxArray } from "@/utils/media/mediaCyclerSx";
 import { createMediaActivateKeyDownHandler } from "@/utils/components/shared/media";
 
-const LazyPDFContent = React.lazy(() => import("@/components/shared/content/PDFContent"));
+const LazyPDFContent = React.lazy(
+  () => import("@/components/shared/content/PDFContent"),
+);
 
 export default function PdfRenderer({
   item,
@@ -23,9 +25,12 @@ export default function PdfRenderer({
   onMediaAction,
   onFirstRenderReady,
 }: PdfRendererProps) {
-  const resolvedExpandControlSxArray = flattenMediaCyclerSxArray(expandControlSxArray);
-  const resolvedPdfPreviewSxArray = flattenMediaCyclerSxArray(pdfPreviewSxArray);
-  const resolvedPdfContainerSxArray = flattenMediaCyclerSxArray(pdfContainerSxArray);
+  const resolvedExpandControlSxArray =
+    flattenMediaCyclerSxArray(expandControlSxArray);
+  const resolvedPdfPreviewSxArray =
+    flattenMediaCyclerSxArray(pdfPreviewSxArray);
+  const resolvedPdfContainerSxArray =
+    flattenMediaCyclerSxArray(pdfContainerSxArray);
   const resolvedPdfFrameSxArray = flattenMediaCyclerSxArray(pdfFrameSxArray);
   const resolvedPdfObjectSxArray = flattenMediaCyclerSxArray(pdfObjectSxArray);
   const resolvedPdfIframeSxArray = flattenMediaCyclerSxArray(pdfIframeSxArray);

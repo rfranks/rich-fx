@@ -30,10 +30,16 @@ async function main(): Promise<void> {
   };
 
   await fs.mkdir(path.dirname(staticSearchIndexPath), { recursive: true });
-  await fs.writeFile(staticSearchIndexPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+  await fs.writeFile(
+    staticSearchIndexPath,
+    `${JSON.stringify(payload, null, 2)}\n`,
+    "utf8",
+  );
 
   const relativeOutputPath = path.relative(rootDir, staticSearchIndexPath);
-  out.success(`Wrote ${actions.length} static search actions to ${relativeOutputPath}.`);
+  out.success(
+    `Wrote ${actions.length} static search actions to ${relativeOutputPath}.`,
+  );
 }
 
 main().catch((error) => {

@@ -9,57 +9,103 @@ import type {
 
 type AILabRecord = (typeof aiLab.items)[number] & Record<string, unknown>;
 
-const imageDimensionsByPath: Record<string, Pick<RichFxImageAsset, "width" | "height">> = {
-  "/rich-fx/23AF43D5-745F-4A76-A5B3-94B733A60A3C.png": { width: 1672, height: 941 },
-  "/rich-fx/BC1631EC-DE1F-4F55-99E9-C38EC3877744.png": { width: 1402, height: 1122 },
-  "/rich-fx/portfolio/MattRyman_Krangor/IMG_5244.PNG": { width: 1170, height: 2532 },
-  "/rich-fx/portfolio/MattRyman_Krangor/02A69E48-7048-408D-94C5-7860CF8A60DD.PNG": {
-    width: 1122,
-    height: 1402,
-  },
-  "/rich-fx/portfolio/MattRyman_Krangor/52BBFAB7-C230-4D56-961D-0B4E5C6B0DB8.PNG": {
+const imageDimensionsByPath: Record<
+  string,
+  Pick<RichFxImageAsset, "width" | "height">
+> = {
+  "/rich-fx/23AF43D5-745F-4A76-A5B3-94B733A60A3C.png": {
     width: 1672,
     height: 941,
   },
-  "/rich-fx/portfolio/MattRyman_Krangor/D12A1792-8DCB-467C-A25B-5D99BF72CB51.PNG": {
-    width: 1672,
-    height: 941,
+  "/rich-fx/BC1631EC-DE1F-4F55-99E9-C38EC3877744.png": {
+    width: 1402,
+    height: 1122,
   },
-  "/rich-fx/portfolio/MattRyman_Krangor/0A341EE2-518A-4F61-8D74-E41B85C2E802.PNG": {
-    width: 1122,
-    height: 1402,
+  "/rich-fx/portfolio/MattRyman_Krangor/IMG_5244.PNG": {
+    width: 1170,
+    height: 2532,
   },
-  "/rich-fx/portfolio/MattRyman_Krangor/B87F8B13-D29E-4597-9033-D9DA1018E625.PNG": {
-    width: 1086,
-    height: 1448,
-  },
+  "/rich-fx/portfolio/MattRyman_Krangor/02A69E48-7048-408D-94C5-7860CF8A60DD.PNG":
+    {
+      width: 1122,
+      height: 1402,
+    },
+  "/rich-fx/portfolio/MattRyman_Krangor/52BBFAB7-C230-4D56-961D-0B4E5C6B0DB8.PNG":
+    {
+      width: 1672,
+      height: 941,
+    },
+  "/rich-fx/portfolio/MattRyman_Krangor/D12A1792-8DCB-467C-A25B-5D99BF72CB51.PNG":
+    {
+      width: 1672,
+      height: 941,
+    },
+  "/rich-fx/portfolio/MattRyman_Krangor/0A341EE2-518A-4F61-8D74-E41B85C2E802.PNG":
+    {
+      width: 1122,
+      height: 1402,
+    },
+  "/rich-fx/portfolio/MattRyman_Krangor/B87F8B13-D29E-4597-9033-D9DA1018E625.PNG":
+    {
+      width: 1086,
+      height: 1448,
+    },
   "/personal/images/ai-lab/kratos/stylistic.png": { width: 1122, height: 1402 },
   "/rich-fx/portfolio/RichardFranksIn/RichardFranksIn_Alien/stylized.png": {
     width: 1536,
     height: 1024,
   },
   "/personal/images/ai-lab/he-man/stylistic.png": { width: 1024, height: 1536 },
-  "/personal/images/ai-lab/stay-puffy/stylistic.png": { width: 1448, height: 1086 },
-  "/personal/images/ai-lab/dragonballz/stylistic.png": { width: 1536, height: 1024 },
-  "/personal/images/ai-lab/mad-hatter/stylistic.png": { width: 1024, height: 1536 },
-  "/personal/images/ai-lab/zombie-chaos/stylistic.png": { width: 1024, height: 1536 },
-  "/personal/images/ai-lab/the-rock/book-cover.png": { width: 1024, height: 1536 },
-  "/personal/images/ai-lab/the-rock/characters/mara.png": { width: 1025, height: 1534 },
-  "/personal/images/ai-lab/the-rock/characters/mercer.png": { width: 1024, height: 1536 },
-  "/personal/images/ai-lab/the-rock/characters/noah.png": { width: 1024, height: 1536 },
-  "/personal/images/ai-lab/the-rock/characters/tane.png": { width: 1024, height: 1536 },
+  "/personal/images/ai-lab/stay-puffy/stylistic.png": {
+    width: 1448,
+    height: 1086,
+  },
+  "/personal/images/ai-lab/dragonballz/stylistic.png": {
+    width: 1536,
+    height: 1024,
+  },
+  "/personal/images/ai-lab/mad-hatter/stylistic.png": {
+    width: 1024,
+    height: 1536,
+  },
+  "/personal/images/ai-lab/zombie-chaos/stylistic.png": {
+    width: 1024,
+    height: 1536,
+  },
+  "/personal/images/ai-lab/the-rock/book-cover.png": {
+    width: 1024,
+    height: 1536,
+  },
+  "/personal/images/ai-lab/the-rock/characters/mara.png": {
+    width: 1025,
+    height: 1534,
+  },
+  "/personal/images/ai-lab/the-rock/characters/mercer.png": {
+    width: 1024,
+    height: 1536,
+  },
+  "/personal/images/ai-lab/the-rock/characters/noah.png": {
+    width: 1024,
+    height: 1536,
+  },
+  "/personal/images/ai-lab/the-rock/characters/tane.png": {
+    width: 1024,
+    height: 1536,
+  },
   "/personal/images/ai-lab/the-rock/locations/drilling rig at uluru base.png": {
     width: 1536,
     height: 1024,
   },
-  "/personal/images/ai-lab/the-rock/locations/geological scan of uluru void.png": {
-    width: 1536,
-    height: 1024,
-  },
-  "/personal/images/ai-lab/the-rock/locations/uluru research control room.png": {
-    width: 1536,
-    height: 1024,
-  },
+  "/personal/images/ai-lab/the-rock/locations/geological scan of uluru void.png":
+    {
+      width: 1536,
+      height: 1024,
+    },
+  "/personal/images/ai-lab/the-rock/locations/uluru research control room.png":
+    {
+      width: 1536,
+      height: 1024,
+    },
   "/personal/images/ai-lab/the-rock/locations/uluru-am-dig-site.png": {
     width: 1536,
     height: 1024,
@@ -89,7 +135,11 @@ const imageAsset = (src: string, alt: string): RichFxImageAsset => {
   };
 };
 
-const videoAsset = (src: string | undefined, label: string, poster?: string): RichFxVideoAsset => {
+const videoAsset = (
+  src: string | undefined,
+  label: string,
+  poster?: string,
+): RichFxVideoAsset => {
   if (!src) {
     throw new Error(`[rich-fx-home] Missing video asset for ${label}`);
   }
@@ -114,13 +164,23 @@ const experimentFeature = (slug: string): RichFxExperimentFeature => {
     blurb: readString(item, "blurb") ?? "",
     previewImage: imageAsset(previewPath, `${item.title} preview`),
     beforeImage: readString(item, "realisticImage")
-      ? imageAsset(readString(item, "realisticImage")!, `${item.title} source image`)
+      ? imageAsset(
+          readString(item, "realisticImage")!,
+          `${item.title} source image`,
+        )
       : undefined,
     stylizedImage: readString(item, "stylizedRendering")
-      ? imageAsset(readString(item, "stylizedRendering")!, `${item.title} stylized rendering`)
+      ? imageAsset(
+          readString(item, "stylizedRendering")!,
+          `${item.title} stylized rendering`,
+        )
       : undefined,
     video: readString(item, "movieRendering")
-      ? videoAsset(readString(item, "movieRendering"), `${item.title} motion render`, previewPath)
+      ? videoAsset(
+          readString(item, "movieRendering"),
+          `${item.title} motion render`,
+          previewPath,
+        )
       : undefined,
   };
 };
@@ -154,7 +214,8 @@ export const richFxDndStages: RichFxPipelineStage[] = [
   {
     key: "character",
     eyebrow: "02 / Character",
-    title: "Identity, armor, weapon, and palette lock into a repeatable design.",
+    title:
+      "Identity, armor, weapon, and palette lock into a repeatable design.",
     body: "Krangor becomes a production character: readable silhouette, ornate holy-avenger weapon, warm metal, white cloth, and ember-lit atmosphere.",
     image: imageAsset(
       "/rich-fx/portfolio/MattRyman_Krangor/02A69E48-7048-408D-94C5-7860CF8A60DD.PNG",
@@ -258,10 +319,22 @@ export const richFxPipelineStages: RichFxPipelineStage[] = [
 ];
 
 export const richFxWorldImages: RichFxImageAsset[] = [
-  imageAsset("/personal/images/ai-lab/the-rock/characters/mara.png", "Mara character"),
-  imageAsset("/personal/images/ai-lab/the-rock/characters/mercer.png", "Mercer character"),
-  imageAsset("/personal/images/ai-lab/the-rock/characters/noah.png", "Noah character"),
-  imageAsset("/personal/images/ai-lab/the-rock/characters/tane.png", "Tane character"),
+  imageAsset(
+    "/personal/images/ai-lab/the-rock/characters/mara.png",
+    "Mara character",
+  ),
+  imageAsset(
+    "/personal/images/ai-lab/the-rock/characters/mercer.png",
+    "Mercer character",
+  ),
+  imageAsset(
+    "/personal/images/ai-lab/the-rock/characters/noah.png",
+    "Noah character",
+  ),
+  imageAsset(
+    "/personal/images/ai-lab/the-rock/characters/tane.png",
+    "Tane character",
+  ),
   imageAsset(
     "/personal/images/ai-lab/the-rock/locations/geological scan of uluru void.png",
     "Geological scan environment concept",
@@ -274,8 +347,12 @@ export const richFxWorldImages: RichFxImageAsset[] = [
 
 export const richFxAudioFeature: RichFxAudioFeature = {
   title: outtaTime.title,
-  body: readString(outtaTime, "shortText") ?? readString(outtaTime, "blurb") ?? "",
-  albumImage: imageAsset(readString(outtaTime, "songAlbumImage")!, `${outtaTime.title} album art`),
+  body:
+    readString(outtaTime, "shortText") ?? readString(outtaTime, "blurb") ?? "",
+  albumImage: imageAsset(
+    readString(outtaTime, "songAlbumImage")!,
+    `${outtaTime.title} album art`,
+  ),
   audioSrc: readString(outtaTime, "songAudio")!,
   credit: readString(outtaTime, "songPerformedBy"),
 };

@@ -1,6 +1,14 @@
-import { buildCondensedChronologyIndices, resolveCurrentRevealIndex } from "./chronologyUtils";
+import {
+  buildCondensedChronologyIndices,
+  resolveCurrentRevealIndex,
+} from "./chronologyUtils";
 
-export type RevealStage = "intro" | "book" | "manuscript" | "trailer" | "episodes";
+export type RevealStage =
+  | "intro"
+  | "book"
+  | "manuscript"
+  | "trailer"
+  | "episodes";
 export type TrailerOrientation = "landscape" | "portrait" | undefined;
 
 export const ARROW_REVEAL_MS = 280;
@@ -15,7 +23,12 @@ export type AdaptationEpisodeMediaItem = {
   caption?: string;
 };
 
-export type RevealLabelKey = "book" | "manuscript" | "trailer" | "episodes" | `episode-${number}`;
+export type RevealLabelKey =
+  | "book"
+  | "manuscript"
+  | "trailer"
+  | "episodes"
+  | `episode-${number}`;
 
 export type RevealLabel = {
   key: RevealLabelKey;

@@ -16,7 +16,9 @@ export type SeriesMediaPart = {
   caption?: string;
 };
 
-export type RevealStep = { kind: "work"; index: number } | { kind: "series"; index: number };
+export type RevealStep =
+  | { kind: "work"; index: number }
+  | { kind: "series"; index: number };
 
 export type WorkSeriesChronologyStep = {
   key: string;

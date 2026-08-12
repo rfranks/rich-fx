@@ -1,6 +1,9 @@
 import * as React from "react";
 import type { MediaCyclerItem } from "@/types/media/mediaCycler";
-import { flattenMediaCyclerSxArray, toMediaCyclerSxArray } from "@/utils/media/mediaCyclerSx";
+import {
+  flattenMediaCyclerSxArray,
+  toMediaCyclerSxArray,
+} from "@/utils/media/mediaCyclerSx";
 
 type UseMediaCyclerItemRendererArgs = {
   item: MediaCyclerItem;
@@ -104,17 +107,28 @@ export function useMediaCyclerItemRenderer({
       : "block";
     const resolvedMarkdownContent =
       item.mediaType === "markdown"
-        ? (item.markdownContent ?? markdownByKey[item.key] ?? item.mediaUrl ?? "")
+        ? (item.markdownContent ??
+          markdownByKey[item.key] ??
+          item.mediaUrl ??
+          "")
         : "";
 
-    const panelFlatSxArray = flattenMediaCyclerSxArray(toMediaCyclerSxArray(item.panelSx));
-    const titleIconFlatSxArray = flattenMediaCyclerSxArray(toMediaCyclerSxArray(item.titleIconSx));
-    const titleFlatSxArray = flattenMediaCyclerSxArray(toMediaCyclerSxArray(item.titleSx));
+    const panelFlatSxArray = flattenMediaCyclerSxArray(
+      toMediaCyclerSxArray(item.panelSx),
+    );
+    const titleIconFlatSxArray = flattenMediaCyclerSxArray(
+      toMediaCyclerSxArray(item.titleIconSx),
+    );
+    const titleFlatSxArray = flattenMediaCyclerSxArray(
+      toMediaCyclerSxArray(item.titleSx),
+    );
     const assetFrameFlatSxArray = flattenMediaCyclerSxArray(
       toMediaCyclerSxArray(item.assetFrameSx),
     );
     const previewVideoSxArray = toMediaCyclerSxArray(item.previewVideoSx);
-    const markdownFlatSxArray = flattenMediaCyclerSxArray(toMediaCyclerSxArray(item.markdownSx));
+    const markdownFlatSxArray = flattenMediaCyclerSxArray(
+      toMediaCyclerSxArray(item.markdownSx),
+    );
     const diagramSxArray = toMediaCyclerSxArray(item.diagramSx);
     const customContentFlatSxArray = flattenMediaCyclerSxArray(
       toMediaCyclerSxArray(item.customContentSx),
@@ -125,7 +139,9 @@ export function useMediaCyclerItemRenderer({
     const pdfObjectSxArray = toMediaCyclerSxArray(item.pdfObjectSx);
     const pdfIframeSxArray = toMediaCyclerSxArray(item.pdfIframeSx);
 
-    const itemIndex = items.findIndex((cycleItem) => cycleItem.key === item.key);
+    const itemIndex = items.findIndex(
+      (cycleItem) => cycleItem.key === item.key,
+    );
     const previousDiagramItem = resolvePreviousDiagramItem({
       isDiagramItem,
       itemIndex,

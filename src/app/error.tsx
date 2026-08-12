@@ -33,7 +33,8 @@ export default function GlobalError({
       <Stack spacing={1.5} sx={{ maxWidth: 560, textAlign: "center" }}>
         <Typography variant="h5">Something went wrong.</Typography>
         <Typography variant="body2" color="text.secondary">
-          The app hit an unexpected error. You can retry this view without losing your route.
+          The app hit an unexpected error. You can retry this view without
+          losing your route.
         </Typography>
         <Box>
           <Button variant="contained" onClick={reset}>

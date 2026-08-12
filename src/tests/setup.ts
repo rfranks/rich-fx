@@ -1,7 +1,10 @@
 export {};
 import "@testing-library/jest-dom";
 import { toHaveNoViolations } from "jest-axe";
-import { TextDecoder as NodeTextDecoder, TextEncoder as NodeTextEncoder } from "node:util";
+import {
+  TextDecoder as NodeTextDecoder,
+  TextEncoder as NodeTextEncoder,
+} from "node:util";
 import { MessageChannel as NodeMessageChannel } from "node:worker_threads";
 
 jest.mock("next/navigation");
@@ -51,7 +54,10 @@ const g = globalThis as unknown as {
 
 g.localStorage = localStorageMock;
 g.sessionStorage = sessionStorageMock;
-g.window = { localStorage: localStorageMock, sessionStorage: sessionStorageMock };
+g.window = {
+  localStorage: localStorageMock,
+  sessionStorage: sessionStorageMock,
+};
 
 type MessagePortLike = {
   close?: () => void;

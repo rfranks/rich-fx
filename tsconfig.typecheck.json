@@ -12,5 +12,12 @@
     "scripts/**/*.ts",
     "scripts/**/*.mts"
   ],
-  "exclude": ["node_modules", ".next", "out", "**/*.test.ts", "**/*.test.tsx", "src/tests/**"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "src/tests/**"
+  ]
 }

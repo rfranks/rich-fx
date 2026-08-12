@@ -1,4 +1,7 @@
-import type { MediaActionBusEventDetail, MediaActionBusSource } from "@/types/media/mediaActionBus";
+import type {
+  MediaActionBusEventDetail,
+  MediaActionBusSource,
+} from "@/types/media/mediaActionBus";
 import type { PortfolioMediaActionBusEventName } from "@/types/media/mediaActionBus";
 import { PORTFOLIO_MEDIA_ACTION_BUS_EVENT } from "@/consts/media/mediaActionBus";
 import type { MediaActionContract } from "@/types/media/mediaActionContract";
@@ -18,9 +21,12 @@ export function emitMediaActionBusEvent(args: {
   };
 
   window.dispatchEvent(
-    new CustomEvent<MediaActionBusEventDetail>(PORTFOLIO_MEDIA_ACTION_BUS_EVENT, {
-      detail,
-    }),
+    new CustomEvent<MediaActionBusEventDetail>(
+      PORTFOLIO_MEDIA_ACTION_BUS_EVENT,
+      {
+        detail,
+      },
+    ),
   );
 }
 
@@ -31,7 +37,8 @@ export function addMediaActionBusListener(
     return () => {};
   }
 
-  const eventName: PortfolioMediaActionBusEventName = PORTFOLIO_MEDIA_ACTION_BUS_EVENT;
+  const eventName: PortfolioMediaActionBusEventName =
+    PORTFOLIO_MEDIA_ACTION_BUS_EVENT;
   const handler = (event: Event) => {
     const typedEvent = event as CustomEvent<MediaActionBusEventDetail>;
     listener(typedEvent.detail);

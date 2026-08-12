@@ -60,7 +60,15 @@ export function useMermaidScaleSyncRedraw({
       nodes: [diagramNode],
       querySelector: ".diagram-mermaid",
     });
-  }, [diagramCode, diagramRef, isHydrated, isVisible, mermaidModuleRef, showingText, syntax]);
+  }, [
+    diagramCode,
+    diagramRef,
+    isHydrated,
+    isVisible,
+    mermaidModuleRef,
+    showingText,
+    syntax,
+  ]);
 
   useEffect(() => {
     if (
@@ -103,7 +111,14 @@ export function useMermaidScaleSyncRedraw({
         mermaidZoomRedrawTimeoutRef.current = null;
       }
     };
-  }, [isHydrated, isVisible, rerenderMermaidForScaleSync, scale, showingText, syntax]);
+  }, [
+    isHydrated,
+    isVisible,
+    rerenderMermaidForScaleSync,
+    scale,
+    showingText,
+    syntax,
+  ]);
 
   useEffect(() => {
     return () => {

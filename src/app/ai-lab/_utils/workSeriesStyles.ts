@@ -6,7 +6,8 @@ export const panelChromeSx = {
   border: "1px solid",
   borderColor: "var(--fabric-surface-border)",
   backgroundColor: "var(--fabric-surface-1)",
-  backgroundImage: "linear-gradient(180deg, var(--fabric-inner-glow), transparent 34%)",
+  backgroundImage:
+    "linear-gradient(180deg, var(--fabric-inner-glow), transparent 34%)",
   boxShadow: "inset 0 1px 0 var(--fabric-inner-glow)",
   backdropFilter: "blur(var(--fabric-blur-sm))",
 } as const;

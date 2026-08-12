@@ -10,7 +10,13 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-import { ChevronLeft, ChevronRight, MoreVert, InfoOutlined, Close } from "@mui/icons-material";
+import {
+  ChevronLeft,
+  ChevronRight,
+  MoreVert,
+  InfoOutlined,
+  Close,
+} from "@mui/icons-material";
 import type { AILabPagerItem } from "../_types/aiLabModels";
 import { withBasePath } from "@/utils/basePath";
 
@@ -22,8 +28,10 @@ type AILabPagerProps = {
   onSelectLab: (index: number) => void;
 };
 
-const formatPagerOptionLabel = (index: number, title: string) => `${index + 1}. ${title}`;
-const formatPagerSelectedLabel = (index: number, title: string) => `${index + 1}. ${title}`;
+const formatPagerOptionLabel = (index: number, title: string) =>
+  `${index + 1}. ${title}`;
+const formatPagerSelectedLabel = (index: number, title: string) =>
+  `${index + 1}. ${title}`;
 
 export default function AILabPager({
   currentIndex,
@@ -32,7 +40,9 @@ export default function AILabPager({
   onPrevious,
   onSelectLab,
 }: AILabPagerProps) {
-  const [selectorAnchorEl, setSelectorAnchorEl] = useState<HTMLElement | null>(null);
+  const [selectorAnchorEl, setSelectorAnchorEl] = useState<HTMLElement | null>(
+    null,
+  );
   const [infoOpen, setInfoOpen] = useState(false);
 
   if (!items.length) {
@@ -73,7 +83,11 @@ export default function AILabPager({
             gap: 1,
           }}
         >
-          <IconButton aria-label="Previous lab" size="small" onClick={onPrevious}>
+          <IconButton
+            aria-label="Previous lab"
+            size="small"
+            onClick={onPrevious}
+          >
             <ChevronLeft />
           </IconButton>
           <Chip
@@ -112,7 +126,11 @@ export default function AILabPager({
           <IconButton aria-label="Next lab" size="small" onClick={onNext}>
             <ChevronRight />
           </IconButton>
-          <IconButton aria-label="Open lab info" size="small" onClick={() => setInfoOpen(true)}>
+          <IconButton
+            aria-label="Open lab info"
+            size="small"
+            onClick={() => setInfoOpen(true)}
+          >
             <InfoOutlined fontSize="small" />
           </IconButton>
           <IconButton
@@ -204,7 +222,12 @@ export default function AILabPager({
           </MenuItem>
         ))}
       </Menu>
-      <Dialog open={infoOpen} onClose={() => setInfoOpen(false)} fullWidth maxWidth="sm">
+      <Dialog
+        open={infoOpen}
+        onClose={() => setInfoOpen(false)}
+        fullWidth
+        maxWidth="sm"
+      >
         <DialogTitle sx={{ pr: 6 }}>
           {formatPagerSelectedLabel(currentIndex, currentItem.title)}
           <IconButton

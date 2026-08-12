@@ -6,7 +6,9 @@ import { spawnSync } from "node:child_process";
 const repoRoot = process.cwd();
 const gitDir = path.join(repoRoot, ".git");
 const supportsColor =
-  Boolean(process.stdout.isTTY) && !("NO_COLOR" in process.env) && process.env.TERM !== "dumb";
+  Boolean(process.stdout.isTTY) &&
+  !("NO_COLOR" in process.env) &&
+  process.env.TERM !== "dumb";
 const useEmoji = !("NO_EMOJI" in process.env) && process.env.CI !== "true";
 
 const ansi = {

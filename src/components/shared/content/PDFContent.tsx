@@ -28,7 +28,8 @@ type PDFContentProps = {
 };
 
 const createMediaKeyDownHandler =
-  (onMediaActivate?: () => void) => (event: React.KeyboardEvent<HTMLElement>) => {
+  (onMediaActivate?: () => void) =>
+  (event: React.KeyboardEvent<HTMLElement>) => {
     if (!onMediaActivate) {
       return;
     }
@@ -76,7 +77,8 @@ export default function PDFContent({
   } = usePanZoomViewport({
     preset: "media",
     calibrationMediaType: "pdf",
-    shouldIgnorePointerTarget: (target) => Boolean(target.closest("a") || target.closest("button")),
+    shouldIgnorePointerTarget: (target) =>
+      Boolean(target.closest("a") || target.closest("button")),
   });
 
   return (

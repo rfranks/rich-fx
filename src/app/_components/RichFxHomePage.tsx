@@ -63,12 +63,20 @@ function AssetImage({
   );
 }
 
-function InlineVideo({ video, className }: { video: RichFxVideoAsset; className?: string }) {
+function InlineVideo({
+  video,
+  className,
+}: {
+  video: RichFxVideoAsset;
+  className?: string;
+}) {
   return (
     <video
       className={className}
       data-richfx-video
-      data-richfx-video-audio={richFxHomeVideoAudioEnabled ? "enabled" : "muted"}
+      data-richfx-video-audio={
+        richFxHomeVideoAudioEnabled ? "enabled" : "muted"
+      }
       controls={richFxHomeVideoAudioEnabled}
       muted={!richFxHomeVideoAudioEnabled}
       loop
@@ -131,7 +139,12 @@ function StickyNarrative({
   const hasInteractiveMedia = stages.some((stage) => stage.audio);
 
   return (
-    <section className={styles.stickyNarrative} id={id} data-richfx-section data-richfx-narrative>
+    <section
+      className={styles.stickyNarrative}
+      id={id}
+      data-richfx-section
+      data-richfx-narrative
+    >
       <div className={styles.stickyIntro}>
         <SectionKicker>{eyebrow}</SectionKicker>
         <h2 data-richfx-reveal>{title}</h2>
@@ -144,11 +157,18 @@ function StickyNarrative({
             aria-hidden={hasInteractiveMedia ? undefined : true}
           >
             {stages.map((stage) => (
-              <div className={styles.stepMedia} data-richfx-step-media={stage.key} key={stage.key}>
+              <div
+                className={styles.stepMedia}
+                data-richfx-step-media={stage.key}
+                key={stage.key}
+              >
                 {stage.audio ? (
                   <ScoreReveal stage={stage} />
                 ) : stage.video ? (
-                  <InlineVideo video={stage.video} className={styles.motionAsset} />
+                  <InlineVideo
+                    video={stage.video}
+                    className={styles.motionAsset}
+                  />
                 ) : stage.image ? (
                   <AssetImage
                     asset={stage.image}
@@ -162,7 +182,11 @@ function StickyNarrative({
         </div>
         <div className={styles.stepCopyList}>
           {stages.map((stage) => (
-            <article className={styles.stepCopy} data-richfx-step={stage.key} key={stage.key}>
+            <article
+              className={styles.stepCopy}
+              data-richfx-step={stage.key}
+              key={stage.key}
+            >
               <span>{stage.eyebrow}</span>
               <h3>{stage.title}</h3>
               <p>{stage.body}</p>
@@ -195,7 +219,8 @@ export default function RichFxHomePage() {
       eyebrow: "01 / Plate",
       title: "Start with a grounded image.",
       body:
-        richFxVfxFeature.beforeImage?.alt ?? "A source frame gives the transformation an anchor.",
+        richFxVfxFeature.beforeImage?.alt ??
+        "A source frame gives the transformation an anchor.",
       image: richFxVfxFeature.beforeImage,
     },
     {
@@ -254,22 +279,26 @@ export default function RichFxHomePage() {
             Building Better Worlds Since 2026.
           </p>
           <p className={styles.heroStatement} data-richfx-reveal>
-            A cinematic playground for story, software, generated imagery, motion experiments, and
-            production-ready imagination.
+            A cinematic playground for story, software, generated imagery,
+            motion experiments, and production-ready imagination.
           </p>
         </div>
       </section>
 
       <section className={styles.showreel} id="showreel" data-richfx-section>
         <div className={styles.showreelFrame}>
-          <AssetImage asset={richFxServicePlate} sizes="(max-width: 900px) 92vw, 66vw" />
+          <AssetImage
+            asset={richFxServicePlate}
+            sizes="(max-width: 900px) 92vw, 66vw"
+          />
         </div>
         <div className={styles.editorialCopy}>
           <SectionKicker>Showreel / Introduction</SectionKicker>
           <h2 data-richfx-reveal>The page is the reel.</h2>
           <p data-richfx-reveal>
-            RichFX treats scroll as a production timeline: source material, style exploration,
-            motion, continuity, sound, and story all revealed with deliberate pacing.
+            RichFX treats scroll as a production timeline: source material,
+            style exploration, motion, continuity, sound, and story all revealed
+            with deliberate pacing.
           </p>
         </div>
       </section>
@@ -301,15 +330,21 @@ export default function RichFxHomePage() {
       <section className={styles.worlds} id="worlds" data-richfx-section>
         <div className={styles.sectionHeader}>
           <SectionKicker>Character Design / World Building</SectionKicker>
-          <h2 data-richfx-reveal>Continuity is the difference between a prompt and a world.</h2>
+          <h2 data-richfx-reveal>
+            Continuity is the difference between a prompt and a world.
+          </h2>
           <p data-richfx-reveal>
-            Character sheets, environments, props, and recurring visual rules give future generated
-            sequences something solid to return to.
+            Character sheets, environments, props, and recurring visual rules
+            give future generated sequences something solid to return to.
           </p>
         </div>
         <div className={styles.worldGrid}>
           {richFxWorldImages.map((image) => (
-            <figure className={styles.worldTile} data-richfx-reveal key={image.src}>
+            <figure
+              className={styles.worldTile}
+              data-richfx-reveal
+              key={image.src}
+            >
               <AssetImage asset={image} sizes="(max-width: 760px) 82vw, 30vw" />
             </figure>
           ))}
@@ -318,26 +353,39 @@ export default function RichFxHomePage() {
 
       <section className={styles.audio} id="audio" data-richfx-section>
         <div className={styles.audioImage} data-richfx-reveal>
-          <AssetImage asset={richFxAudioFeature.albumImage} sizes="(max-width: 760px) 76vw, 32vw" />
+          <AssetImage
+            asset={richFxAudioFeature.albumImage}
+            sizes="(max-width: 760px) 76vw, 32vw"
+          />
         </div>
         <div className={styles.audioCopy}>
           <SectionKicker>Music / Audio</SectionKicker>
           <h2 data-richfx-reveal>{richFxAudioFeature.title}</h2>
           <p data-richfx-reveal>{richFxAudioFeature.body}</p>
-          <audio controls preload="none" src={withBasePath(richFxAudioFeature.audioSrc)}>
+          <audio
+            controls
+            preload="none"
+            src={withBasePath(richFxAudioFeature.audioSrc)}
+          >
             Your browser does not support the audio element.
           </audio>
-          {richFxAudioFeature.credit ? <span>{richFxAudioFeature.credit}</span> : null}
+          {richFxAudioFeature.credit ? (
+            <span>{richFxAudioFeature.credit}</span>
+          ) : null}
         </div>
       </section>
 
-      <section className={styles.experiments} id="experiments" data-richfx-section>
+      <section
+        className={styles.experiments}
+        id="experiments"
+        data-richfx-section
+      >
         <div className={styles.sectionHeader}>
           <SectionKicker>Experiments / AI Lab</SectionKicker>
           <h2 data-richfx-reveal>Selected fragments from the lab.</h2>
           <p data-richfx-reveal>
-            A small gateway into the existing AI Lab experience, kept curated here so the full route
-            can remain a proper browseable lab.
+            A small gateway into the existing AI Lab experience, kept curated
+            here so the full route can remain a proper browseable lab.
           </p>
         </div>
         <div className={styles.experimentGrid}>
@@ -352,7 +400,9 @@ export default function RichFxHomePage() {
 
       <section className={styles.about} id="about" data-richfx-section>
         <SectionKicker>About / Philosophy</SectionKicker>
-        <h2 data-richfx-reveal>RichFX sits where story systems meet production craft.</h2>
+        <h2 data-richfx-reveal>
+          RichFX sits where story systems meet production craft.
+        </h2>
         <div className={styles.philosophyList}>
           {philosophyLines.map((line) => (
             <p data-richfx-reveal key={line}>

@@ -21,15 +21,21 @@ export const SESSION_REPLAY_EVENT_KIND_ORDER: readonly TimelineEventKind[] = [
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null;
 
-const isTimelineMetadataValue = (value: unknown): value is TimelineMetadataValue =>
+const isTimelineMetadataValue = (
+  value: unknown,
+): value is TimelineMetadataValue =>
   value === null || ["string", "number", "boolean"].includes(typeof value);
 
-const normalizeTimelineMetadata = (value: unknown): TimelineMetadata | undefined => {
+const normalizeTimelineMetadata = (
+  value: unknown,
+): TimelineMetadata | undefined => {
   if (!isRecord(value)) {
     return undefined;
   }
 
-  const entries = Object.entries(value).filter(([, nested]) => isTimelineMetadataValue(nested));
+  const entries = Object.entries(value).filter(([, nested]) =>
+    isTimelineMetadataValue(nested),
+  );
   if (entries.length === 0) {
     return undefined;
   }
@@ -44,7 +50,8 @@ const asStringOrFallback = (value: unknown, fallback: string): string =>
   typeof value === "string" && value.trim().length > 0 ? value : fallback;
 
 const isTimelineEventKind = (value: unknown): value is TimelineEventKind =>
-  typeof value === "string" && SESSION_REPLAY_EVENT_KIND_ORDER.includes(value as TimelineEventKind);
+  typeof value === "string" &&
+  SESSION_REPLAY_EVENT_KIND_ORDER.includes(value as TimelineEventKind);
 
 const normalizeReplayEvent = (
   value: unknown,
@@ -57,7 +64,9 @@ const normalizeReplayEvent = (
 
   const kind = isTimelineEventKind(value.kind) ? value.kind : null;
   const action =
-    typeof value.action === "string" && value.action.trim().length > 0 ? value.action.trim() : null;
+    typeof value.action === "string" && value.action.trim().length > 0
+      ? value.action.trim()
+      : null;
   const relativeMs = asFiniteNumberOrNull(value.relativeMs);
   if (!kind || !action || relativeMs === null) {
     return null;
@@ -72,12 +81,15 @@ const normalizeReplayEvent = (
     route: asStringOrFallback(value.route, fallbackRoute),
     kind,
     action,
-    durationMs: durationMs === null ? undefined : Math.max(0, Math.round(durationMs)),
+    durationMs:
+      durationMs === null ? undefined : Math.max(0, Math.round(durationMs)),
     metadata: normalizeTimelineMetadata(value.metadata),
   };
 };
 
-const normalizeReplayLongTask = (value: unknown): SessionReplayLongTaskSample | null => {
+const normalizeReplayLongTask = (
+  value: unknown,
+): SessionReplayLongTaskSample | null => {
   if (!isRecord(value)) {
     return null;
   }
@@ -94,14 +106,18 @@ const normalizeReplayLongTask = (value: unknown): SessionReplayLongTaskSample | 
   };
 };
 
-export function parseSessionReplayLitePayload(raw: unknown): SessionReplayLitePayload | null {
+export function parseSessionReplayLitePayload(
+  raw: unknown,
+): SessionReplayLitePayload | null {
   if (!isRecord(raw) || !Array.isArray(raw.events)) {
     return null;
   }
 
   const fallbackRoute = asStringOrFallback(raw.currentRoute, "/");
   const events = raw.events
-    .map((entry, index) => normalizeReplayEvent(entry, index + 1, fallbackRoute))
+    .map((entry, index) =>
+      normalizeReplayEvent(entry, index + 1, fallbackRoute),
+    )
     .filter((entry): entry is TimelineEvent => entry !== null)
     .sort((left, right) => left.relativeMs - right.relativeMs)
     .map((entry, index) => ({ ...entry, id: index + 1 }));
@@ -115,12 +131,21 @@ export function parseSessionReplayLitePayload(raw: unknown): SessionReplayLitePa
 
   return {
     exportedAt: asStringOrFallback(raw.exportedAt, new Date().toISOString()),
-    sessionStartedAt: asStringOrFallback(raw.sessionStartedAt, new Date().toISOString()),
+    sessionStartedAt: asStringOrFallback(
+      raw.sessionStartedAt,
+      new Date().toISOString(),
+    ),
     currentRoute: fallbackRoute,
     metrics: {
-      latestRouteRenderMs: asFiniteNumberOrNull(metricsRecord.latestRouteRenderMs),
-      latestRouteTransitionMs: asFiniteNumberOrNull(metricsRecord.latestRouteTransitionMs),
-      latestInteractionMs: asFiniteNumberOrNull(metricsRecord.latestInteractionMs),
+      latestRouteRenderMs: asFiniteNumberOrNull(
+        metricsRecord.latestRouteRenderMs,
+      ),
+      latestRouteTransitionMs: asFiniteNumberOrNull(
+        metricsRecord.latestRouteTransitionMs,
+      ),
+      latestInteractionMs: asFiniteNumberOrNull(
+        metricsRecord.latestInteractionMs,
+      ),
     },
     longTasks,
     events,

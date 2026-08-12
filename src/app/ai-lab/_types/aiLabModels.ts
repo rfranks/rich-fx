@@ -13,7 +13,10 @@ export type AILabFilterOption = {
   count: number;
 };
 
-export type AILabFilterOptionByCategory = Record<AILabFilterCategory, AILabFilterOption[]>;
+export type AILabFilterOptionByCategory = Record<
+  AILabFilterCategory,
+  AILabFilterOption[]
+>;
 
 export type AILabFilterSelection = {
   medium?: string;

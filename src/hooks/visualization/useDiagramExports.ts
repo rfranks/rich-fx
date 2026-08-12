@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type RefObject,
+} from "react";
 
 type UseDiagramExportsParams = {
   diagramCode: string;
@@ -35,7 +41,9 @@ export function useDiagramExports({
     }
 
     const widthAttr = Number.parseFloat(svgElement.getAttribute("width") || "");
-    const heightAttr = Number.parseFloat(svgElement.getAttribute("height") || "");
+    const heightAttr = Number.parseFloat(
+      svgElement.getAttribute("height") || "",
+    );
     if (
       Number.isFinite(widthAttr) &&
       widthAttr > 0 &&
@@ -56,7 +64,9 @@ export function useDiagramExports({
   }, []);
 
   const getRenderedSvg = useCallback(() => {
-    return (diagramRef.current?.querySelector("svg") as SVGSVGElement | null) ?? null;
+    return (
+      (diagramRef.current?.querySelector("svg") as SVGSVGElement | null) ?? null
+    );
   }, [diagramRef]);
 
   const getSerializedSvg = useCallback(() => {
@@ -66,7 +76,8 @@ export function useDiagramExports({
     }
 
     const clone = svgElement.cloneNode(true) as SVGSVGElement;
-    const { width: resolvedWidth, height: resolvedHeight } = resolveSvgSize(svgElement);
+    const { width: resolvedWidth, height: resolvedHeight } =
+      resolveSvgSize(svgElement);
     if (!clone.getAttribute("xmlns")) {
       clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     }
@@ -102,7 +113,8 @@ export function useDiagramExports({
       const exportImage = new window.Image();
       exportImage.decoding = "async";
       exportImage.onload = () => resolve(exportImage);
-      exportImage.onerror = () => reject(new Error("Unable to render SVG for PNG export."));
+      exportImage.onerror = () =>
+        reject(new Error("Unable to render SVG for PNG export."));
       exportImage.src = source;
     });
   }, []);
@@ -165,16 +177,27 @@ export function useDiagramExports({
       if (!svgRoot || svgRoot.nodeName.toLowerCase() !== "svg") {
         return null;
       }
-      const foreignObjects = Array.from(svgRoot.querySelectorAll("foreignObject"));
+      const foreignObjects = Array.from(
+        svgRoot.querySelectorAll("foreignObject"),
+      );
       if (foreignObjects.length === 0) {
         return null;
       }
 
       foreignObjects.forEach((foreignObject) => {
-        const label = foreignObject.textContent?.replace(/\s+/g, " ").trim() || "";
-        const foreignHeight = Number.parseFloat(foreignObject.getAttribute("height") || "");
-        const textY = Number.isFinite(foreignHeight) && foreignHeight > 0 ? foreignHeight / 2 : 12;
-        const replacement = parsed.createElementNS("http://www.w3.org/2000/svg", "text");
+        const label =
+          foreignObject.textContent?.replace(/\s+/g, " ").trim() || "";
+        const foreignHeight = Number.parseFloat(
+          foreignObject.getAttribute("height") || "",
+        );
+        const textY =
+          Number.isFinite(foreignHeight) && foreignHeight > 0
+            ? foreignHeight / 2
+            : 12;
+        const replacement = parsed.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text",
+        );
         replacement.setAttribute("x", "0");
         replacement.setAttribute("y", `${textY}`);
         replacement.setAttribute("fill", "#111111");
@@ -234,7 +257,9 @@ export function useDiagramExports({
       return;
     }
 
-    const svgBlob = new Blob([serialized.svgText], { type: "image/svg+xml;charset=utf-8" });
+    const svgBlob = new Blob([serialized.svgText], {
+      type: "image/svg+xml;charset=utf-8",
+    });
     triggerBlobDownload(svgBlob, `${getExportFileBaseName()}.svg`);
   }, [getExportFileBaseName, getSerializedSvg, triggerBlobDownload]);
 
@@ -253,7 +278,9 @@ export function useDiagramExports({
     const pixelRatio = Math.max(1, window.devicePixelRatio || 1);
 
     for (const candidateSvgText of svgCandidateTexts) {
-      const candidateBlob = new Blob([candidateSvgText], { type: "image/svg+xml;charset=utf-8" });
+      const candidateBlob = new Blob([candidateSvgText], {
+        type: "image/svg+xml;charset=utf-8",
+      });
       const blobUrl = window.URL.createObjectURL(candidateBlob);
       const dataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(candidateSvgText)}`;
       const imageSources = [blobUrl, dataUrl];

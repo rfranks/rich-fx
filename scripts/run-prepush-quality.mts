@@ -75,7 +75,9 @@ const runStep = async (stepName: (typeof QUALITY_STEPS)[number]) => {
   });
 
   if (result.error) {
-    process.stderr.write(`\n❌ pre-push failed while starting step: npm run ${stepName}\n`);
+    process.stderr.write(
+      `\n❌ pre-push failed while starting step: npm run ${stepName}\n`,
+    );
     process.stderr.write(`↪ error: ${result.error.message}\n`);
     process.stderr.write(`↪ rerun: npm run ${stepName}\n\n`);
     process.exit(1);

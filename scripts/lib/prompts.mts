@@ -8,7 +8,8 @@ export const labTypeChoices: ChoiceOption<string>[] = [
   {
     value: "default",
     label: "Default (image -> stylized -> motion)",
-    description: "Example: a portrait transformed into style and then short motion.",
+    description:
+      "Example: a portrait transformed into style and then short motion.",
   },
   {
     value: "book-to-limited-series",
@@ -18,7 +19,8 @@ export const labTypeChoices: ChoiceOption<string>[] = [
   {
     value: "work-to-series-adaptation",
     label: "Work to Series Adaptation",
-    description: "Example: source work and adaptation trailer/series artifacts.",
+    description:
+      "Example: source work and adaptation trailer/series artifacts.",
   },
   {
     value: "palmylyzer-pro",

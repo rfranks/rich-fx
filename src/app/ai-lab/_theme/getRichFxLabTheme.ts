@@ -27,10 +27,20 @@ const getRichFxFabricTokens = (mode: PaletteMode): FabricTokens => {
       level1: isDark ? "rgba(16, 14, 12, 0.86)" : "rgba(255, 243, 223, 0.74)",
       level2: isDark ? "rgba(22, 18, 14, 0.9)" : "rgba(255, 248, 236, 0.84)",
       level3: isDark ? "rgba(31, 25, 18, 0.94)" : "rgba(255, 252, 244, 0.92)",
-      border: alpha(isDark ? richFxCream : richFxStoneDark, isDark ? 0.16 : 0.22),
-      borderStrong: alpha(isDark ? richFxOrange : richFxOrangeDark, isDark ? 0.34 : 0.34),
-      shadowSoft: isDark ? "0 14px 48px rgba(0, 0, 0, 0.54)" : "0 14px 40px rgba(68, 45, 20, 0.16)",
-      shadowTight: isDark ? "0 8px 24px rgba(0, 0, 0, 0.44)" : "0 8px 22px rgba(68, 45, 20, 0.12)",
+      border: alpha(
+        isDark ? richFxCream : richFxStoneDark,
+        isDark ? 0.16 : 0.22,
+      ),
+      borderStrong: alpha(
+        isDark ? richFxOrange : richFxOrangeDark,
+        isDark ? 0.34 : 0.34,
+      ),
+      shadowSoft: isDark
+        ? "0 14px 48px rgba(0, 0, 0, 0.54)"
+        : "0 14px 40px rgba(68, 45, 20, 0.16)",
+      shadowTight: isDark
+        ? "0 8px 24px rgba(0, 0, 0, 0.44)"
+        : "0 8px 22px rgba(68, 45, 20, 0.12)",
       innerGlow: alpha(isDark ? richFxCream : "#ffffff", isDark ? 0.12 : 0.76),
     },
     blur: {

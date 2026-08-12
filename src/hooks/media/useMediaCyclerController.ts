@@ -42,18 +42,27 @@ export function useMediaCyclerController({
     }
 
     if (singlePanelActiveKey) {
-      return items.find((item) => item.key === singlePanelActiveKey) ?? items[0];
+      return (
+        items.find((item) => item.key === singlePanelActiveKey) ?? items[0]
+      );
     }
 
     return items[0];
   }, [items, singlePanelActiveKey]);
 
   const initialItem = resolveActiveItem();
-  const [renderedItem, setRenderedItem] = React.useState<MediaCyclerItem | null>(initialItem);
+  const [renderedItem, setRenderedItem] =
+    React.useState<MediaCyclerItem | null>(initialItem);
   const [isVisible, setIsVisible] = React.useState(true);
-  const [transitionDirection, setTransitionDirection] = React.useState<"left" | "right">("right");
-  const [metadataDialogItemKey, setMetadataDialogItemKey] = React.useState<string | null>(null);
-  const [markdownByKey, setMarkdownByKey] = React.useState<Record<string, string>>({});
+  const [transitionDirection, setTransitionDirection] = React.useState<
+    "left" | "right"
+  >("right");
+  const [metadataDialogItemKey, setMetadataDialogItemKey] = React.useState<
+    string | null
+  >(null);
+  const [markdownByKey, setMarkdownByKey] = React.useState<
+    Record<string, string>
+  >({});
 
   React.useEffect(() => {
     if (!singlePanel) {
@@ -94,25 +103,40 @@ export function useMediaCyclerController({
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [disableTransition, items, renderedItem, resolveActiveItem, singlePanel, transitionMs]);
+  }, [
+    disableTransition,
+    items,
+    renderedItem,
+    resolveActiveItem,
+    singlePanel,
+    transitionMs,
+  ]);
 
   const activeKey = renderedItem?.key ?? null;
-  const activeIndex = activeKey == null ? -1 : items.findIndex((item) => item.key === activeKey);
+  const activeIndex =
+    activeKey == null ? -1 : items.findIndex((item) => item.key === activeKey);
   const hasMultipleItems = items.length > 1;
   const previousItem = activeIndex > 0 ? items[activeIndex - 1] : null;
   const nextItem = activeIndex >= 0 ? items[activeIndex + 1] || null : null;
-  const isAtFinalItem = activeIndex >= 0 && activeIndex === Math.max(items.length - 1, 0);
+  const isAtFinalItem =
+    activeIndex >= 0 && activeIndex === Math.max(items.length - 1, 0);
   const canWrapToFirst = loopNavigation && isAtFinalItem && hasMultipleItems;
   const canWrapToLast =
-    loopNavigation && loopFromBeginning && activeIndex === 0 && hasMultipleItems;
+    loopNavigation &&
+    loopFromBeginning &&
+    activeIndex === 0 &&
+    hasMultipleItems;
   const previousDisabledRaw =
-    disableChevronPrevious ?? (!previousItem || !Boolean(previousItem.onSelect));
-  const nextDisabledRaw = disableChevronNext ?? (!nextItem || !Boolean(nextItem.onSelect));
+    disableChevronPrevious ??
+    (!previousItem || !Boolean(previousItem.onSelect));
+  const nextDisabledRaw =
+    disableChevronNext ?? (!nextItem || !Boolean(nextItem.onSelect));
   const previousDisabled = previousDisabledRaw && !canWrapToLast;
   const nextDisabled = nextDisabledRaw && !canWrapToFirst;
   const showLoopAction = canWrapToFirst;
   const loopDisabled = disableLoopNavigation;
-  const hideNextChevron = hideDisabledNextChevron && !showLoopAction && nextDisabled;
+  const hideNextChevron =
+    hideDisabledNextChevron && !showLoopAction && nextDisabled;
   const swipeRef = React.useRef<{
     startX: number;
     startY: number;
@@ -169,17 +193,20 @@ export function useMediaCyclerController({
     firstCycleItem?.onSelect?.();
   }, [items, loopDisabled, onLoopNavigation]);
 
-  const isInteractiveSwipeTarget = React.useCallback((target: EventTarget | null) => {
-    if (!(target instanceof HTMLElement)) {
-      return false;
-    }
+  const isInteractiveSwipeTarget = React.useCallback(
+    (target: EventTarget | null) => {
+      if (!(target instanceof HTMLElement)) {
+        return false;
+      }
 
-    return Boolean(
-      target.closest(
-        "a,button,input,textarea,select,summary,video,[role='button'],[role='link'],[data-no-swipe='true']",
-      ),
-    );
-  }, []);
+      return Boolean(
+        target.closest(
+          "a,button,input,textarea,select,summary,video,[role='button'],[role='link'],[data-no-swipe='true']",
+        ),
+      );
+    },
+    [],
+  );
 
   const handleSwipeStart = React.useCallback(
     (event: React.TouchEvent<HTMLElement>) => {
@@ -203,7 +230,12 @@ export function useMediaCyclerController({
   const handleSwipeMove = React.useCallback(
     (event: React.TouchEvent<HTMLElement>) => {
       const swipeState = swipeRef.current;
-      if (!allowSwipe || !swipeState || swipeState.blocked || event.touches.length !== 1) {
+      if (
+        !allowSwipe ||
+        !swipeState ||
+        swipeState.blocked ||
+        event.touches.length !== 1
+      ) {
         return;
       }
 

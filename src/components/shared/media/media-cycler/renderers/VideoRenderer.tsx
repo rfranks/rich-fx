@@ -16,7 +16,8 @@ export default function VideoRenderer({
   onMediaAction,
   onFirstRenderReady,
 }: VideoRendererProps) {
-  const resolvedPreviewVideoSxArray = flattenMediaCyclerSxArray(previewVideoSxArray);
+  const resolvedPreviewVideoSxArray =
+    flattenMediaCyclerSxArray(previewVideoSxArray);
   const hasReportedFirstRenderRef = React.useRef(false);
 
   const handleVideoLoaded = React.useCallback(() => {

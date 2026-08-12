@@ -1,6 +1,9 @@
 import type * as React from "react";
 import { RISK_FIELD_DEFINITIONS } from "@/consts/components/shared/markdownRiskHud";
-import type { RiskHudEntry, RiskTone } from "@/types/components/shared/markdownRiskHud";
+import type {
+  RiskHudEntry,
+  RiskTone,
+} from "@/types/components/shared/markdownRiskHud";
 
 export function extractPlainText(node: React.ReactNode): string {
   if (typeof node === "string" || typeof node === "number") {
@@ -53,7 +56,8 @@ export function extractRiskHudEntries(line: string): RiskHudEntry[] {
   }
 
   const markerAlternation = RISK_FIELD_DEFINITIONS.map(
-    (field) => `(?:${escapeRegExp(field.emoji)}\\s*)?${field.label.replace(/\s+/g, "\\s+")}\\s*:`,
+    (field) =>
+      `(?:${escapeRegExp(field.emoji)}\\s*)?${field.label.replace(/\s+/g, "\\s+")}\\s*:`,
   ).join("|");
   const markerRegex = new RegExp(markerAlternation, "gi");
 
@@ -122,7 +126,9 @@ export function extractRiskHudEntries(line: string): RiskHudEntry[] {
   ];
 }
 
-function classifySeverityLevel(value: string): "low" | "moderate" | "high" | null {
+function classifySeverityLevel(
+  value: string,
+): "low" | "moderate" | "high" | null {
   const normalizedValue = value.toLowerCase().trim();
   const percentageMatch = normalizedValue.match(/(\d{1,3})\s*%/);
   if (percentageMatch) {
@@ -138,7 +144,9 @@ function classifySeverityLevel(value: string): "low" | "moderate" | "high" | nul
     }
   }
 
-  if (/\b(very high|extreme|critical|severe|deadly|high)\b/i.test(normalizedValue)) {
+  if (
+    /\b(very high|extreme|critical|severe|deadly|high)\b/i.test(normalizedValue)
+  ) {
     return "high";
   }
 
@@ -162,7 +170,8 @@ export function getRiskTone(label: string, value: string): RiskTone | null {
   }
 
   const isPositiveDirection =
-    normalizedLabel.includes("success probability") || normalizedLabel.includes("reward potential");
+    normalizedLabel.includes("success probability") ||
+    normalizedLabel.includes("reward potential");
   const isNegativeDirection =
     normalizedLabel.includes("threat level") ||
     normalizedLabel.includes("injury risk") ||

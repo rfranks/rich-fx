@@ -45,8 +45,14 @@ export default function ImageLightbox(props: ImageLightboxProps) {
     () => toSxArray(previewContainerSx),
     [previewContainerSx],
   );
-  const previewImageSxArray = React.useMemo(() => toSxArray(previewImageSx), [previewImageSx]);
-  const kenBurnsImageSxArray = React.useMemo(() => toSxArray(kenBurnsImageSx), [kenBurnsImageSx]);
+  const previewImageSxArray = React.useMemo(
+    () => toSxArray(previewImageSx),
+    [previewImageSx],
+  );
+  const kenBurnsImageSxArray = React.useMemo(
+    () => toSxArray(kenBurnsImageSx),
+    [kenBurnsImageSx],
+  );
   const triggerSxArray = React.useMemo(() => toSxArray(triggerSx), [triggerSx]);
 
   const handleOpen = React.useCallback(
@@ -135,7 +141,10 @@ export default function ImageLightbox(props: ImageLightboxProps) {
             minHeight: 0,
             display: "flex",
             flexDirection: "column",
-            bgcolor: theme.palette.mode === "dark" ? "rgba(0,0,0,0.96)" : "rgba(11,18,30,0.92)",
+            bgcolor:
+              theme.palette.mode === "dark"
+                ? "rgba(0,0,0,0.96)"
+                : "rgba(11,18,30,0.92)",
           })}
         >
           <Box

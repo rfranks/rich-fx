@@ -12,7 +12,10 @@ class IntersectionObserverMock {
   }
 
   observe(target: Element) {
-    this.callback([{ isIntersecting: false, target } as IntersectionObserverEntry], this as never);
+    this.callback(
+      [{ isIntersecting: false, target } as IntersectionObserverEntry],
+      this as never,
+    );
   }
 
   unobserve() {}
@@ -34,7 +37,9 @@ describe("Diagram hydration stability", () => {
   });
 
   it("keeps server/client container ids stable during hydration", async () => {
-    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => undefined);
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
 
     const element = (
       <Diagram
@@ -48,7 +53,9 @@ describe("Diagram hydration stability", () => {
     const host = document.createElement("div");
     host.innerHTML = serverMarkup;
 
-    const serverContainerId = host.querySelector("[id$='-container']")?.getAttribute("id");
+    const serverContainerId = host
+      .querySelector("[id$='-container']")
+      ?.getAttribute("id");
     expect(serverContainerId).toBeTruthy();
 
     await act(async () => {
@@ -56,7 +63,9 @@ describe("Diagram hydration stability", () => {
       await Promise.resolve();
     });
 
-    const hydratedContainerId = host.querySelector("[id$='-container']")?.getAttribute("id");
+    const hydratedContainerId = host
+      .querySelector("[id$='-container']")
+      ?.getAttribute("id");
     expect(hydratedContainerId).toBe(serverContainerId);
 
     const hydrationErrors = consoleErrorSpy.mock.calls

@@ -14,7 +14,10 @@ import { useMediaCyclerController } from "@/hooks/media/useMediaCyclerController
 import { useMediaCyclerNavigation } from "@/hooks/media/useMediaCyclerNavigation";
 import { useMediaCyclerPrefetch } from "@/hooks/media/useMediaCyclerPrefetch";
 import { useMediaCyclerTelemetry } from "@/hooks/media/useMediaCyclerTelemetry";
-import { flattenMediaCyclerSxArray, toMediaCyclerSxArray } from "@/utils/media/mediaCyclerSx";
+import {
+  flattenMediaCyclerSxArray,
+  toMediaCyclerSxArray,
+} from "@/utils/media/mediaCyclerSx";
 import MediaCyclerItemRenderer from "./media-cycler/MediaCyclerItemRenderer";
 import MediaMetadataShell from "./media-cycler/MediaMetadataShell";
 import MediaRenderShell from "./media-cycler/MediaRenderShell";
@@ -52,7 +55,9 @@ export default function MediaCycler({
   const stackSxArray = toMediaCyclerSxArray(stackSx);
   const stackFlatSxArray = flattenMediaCyclerSxArray(stackSxArray);
   const navigationControlSxArray = toMediaCyclerSxArray(navigationControlSx);
-  const navigationControlFlatSxArray = flattenMediaCyclerSxArray(navigationControlSxArray);
+  const navigationControlFlatSxArray = flattenMediaCyclerSxArray(
+    navigationControlSxArray,
+  );
   const expandControlSxArray = toMediaCyclerSxArray(expandControlSx);
 
   const {
@@ -118,15 +123,19 @@ export default function MediaCycler({
     nextItem,
   });
 
-  const { navigatePrevious, navigateNext, navigateLoop, handleSinglePanelKeyDown } =
-    useMediaCyclerNavigation({
-      singlePanel,
-      renderedItem,
-      handleChevronPrevious,
-      handleChevronNext,
-      handleLoopNavigation,
-      emitMediaTelemetry,
-    });
+  const {
+    navigatePrevious,
+    navigateNext,
+    navigateLoop,
+    handleSinglePanelKeyDown,
+  } = useMediaCyclerNavigation({
+    singlePanel,
+    renderedItem,
+    handleChevronPrevious,
+    handleChevronNext,
+    handleLoopNavigation,
+    emitMediaTelemetry,
+  });
 
   const renderCyclerItem = React.useCallback(
     (item: MediaCyclerItem, navigationOverlay?: React.ReactNode) => (
@@ -192,7 +201,9 @@ export default function MediaCycler({
                 border: "1px solid",
                 borderColor: alpha(theme.palette.common.white, 0.22),
                 color:
-                  theme.palette.mode === "dark" ? theme.palette.grey[100] : theme.palette.grey[900],
+                  theme.palette.mode === "dark"
+                    ? theme.palette.grey[100]
+                    : theme.palette.grey[900],
                 bgcolor:
                   theme.palette.mode === "dark"
                     ? "rgba(2,6,23,0.65)"
@@ -221,7 +232,9 @@ export default function MediaCycler({
                 border: "1px solid",
                 borderColor: alpha(theme.palette.common.white, 0.22),
                 color:
-                  theme.palette.mode === "dark" ? theme.palette.grey[100] : theme.palette.grey[900],
+                  theme.palette.mode === "dark"
+                    ? theme.palette.grey[100]
+                    : theme.palette.grey[900],
                 bgcolor:
                   theme.palette.mode === "dark"
                     ? "rgba(2,6,23,0.72)"
@@ -260,7 +273,9 @@ export default function MediaCycler({
                 border: "1px solid",
                 borderColor: alpha(theme.palette.common.white, 0.22),
                 color:
-                  theme.palette.mode === "dark" ? theme.palette.grey[100] : theme.palette.grey[900],
+                  theme.palette.mode === "dark"
+                    ? theme.palette.grey[100]
+                    : theme.palette.grey[900],
                 bgcolor:
                   theme.palette.mode === "dark"
                     ? "rgba(2,6,23,0.65)"

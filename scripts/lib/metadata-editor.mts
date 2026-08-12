@@ -1,6 +1,8 @@
 export type JsonRecord = Record<string, unknown>;
 
-export function isPlainObject(value: unknown): value is Record<string, unknown> {
+export function isPlainObject(
+  value: unknown,
+): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
@@ -55,7 +57,11 @@ export function getValueAtPath(root: unknown, segments: string[]): unknown {
   return current;
 }
 
-export function setValueAtPath(root: JsonRecord, segments: string[], value: unknown): boolean {
+export function setValueAtPath(
+  root: JsonRecord,
+  segments: string[],
+  value: unknown,
+): boolean {
   if (!segments.length) {
     return false;
   }
@@ -109,7 +115,10 @@ export function setValueAtPath(root: JsonRecord, segments: string[], value: unkn
   return false;
 }
 
-export function deleteValueAtPath(root: JsonRecord, segments: string[]): boolean {
+export function deleteValueAtPath(
+  root: JsonRecord,
+  segments: string[],
+): boolean {
   if (!segments.length) {
     return false;
   }

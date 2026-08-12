@@ -4,7 +4,8 @@ import type {
   RouteInteractionBudgetSnapshot,
 } from "@/types/observability/routeInteractionBudgets";
 
-export const ROUTE_INTERACTION_BUDGET_STORAGE_KEY = "portfolio:route-interaction-budgets";
+export const ROUTE_INTERACTION_BUDGET_STORAGE_KEY =
+  "portfolio:route-interaction-budgets";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
@@ -13,7 +14,9 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 const asNullableNumber = (value: unknown): number | null =>
   typeof value === "number" && Number.isFinite(value) ? value : null;
 
-export function createEmptyRouteInteractionBudget(route: string): RouteInteractionBudget {
+export function createEmptyRouteInteractionBudget(
+  route: string,
+): RouteInteractionBudget {
   return {
     route,
     firstPagerMs: null,
@@ -63,7 +66,9 @@ export function loadRouteInteractionBudgetSnapshotFromStorage(): RouteInteractio
 
     return {
       generatedAt:
-        typeof parsed.generatedAt === "string" ? parsed.generatedAt : new Date().toISOString(),
+        typeof parsed.generatedAt === "string"
+          ? parsed.generatedAt
+          : new Date().toISOString(),
       routes,
     };
   } catch {
@@ -78,7 +83,10 @@ export function saveRouteInteractionBudgetSnapshotToStorage(
     return;
   }
 
-  window.localStorage.setItem(ROUTE_INTERACTION_BUDGET_STORAGE_KEY, JSON.stringify(snapshot));
+  window.localStorage.setItem(
+    ROUTE_INTERACTION_BUDGET_STORAGE_KEY,
+    JSON.stringify(snapshot),
+  );
 }
 
 export function updateRouteInteractionBudgetFromTimelineEvent(params: {
@@ -90,7 +98,9 @@ export function updateRouteInteractionBudgetFromTimelineEvent(params: {
   const nextRoutes = [...currentRoutes];
   const routeIndex = nextRoutes.findIndex((entry) => entry.route === route);
   const existing =
-    routeIndex >= 0 ? nextRoutes[routeIndex] : createEmptyRouteInteractionBudget(route);
+    routeIndex >= 0
+      ? nextRoutes[routeIndex]
+      : createEmptyRouteInteractionBudget(route);
   const nextEntry: RouteInteractionBudget = {
     ...existing,
     totalCapturedEvents: existing.totalCapturedEvents + 1,
@@ -109,7 +119,10 @@ export function updateRouteInteractionBudgetFromTimelineEvent(params: {
   ) {
     nextEntry.firstDiagramMs = params.event.relativeMs;
   }
-  if (params.event.kind === "interaction" && nextEntry.firstInteractionMs === null) {
+  if (
+    params.event.kind === "interaction" &&
+    nextEntry.firstInteractionMs === null
+  ) {
     nextEntry.firstInteractionMs = params.event.relativeMs;
   }
 
@@ -121,6 +134,8 @@ export function updateRouteInteractionBudgetFromTimelineEvent(params: {
 
   return {
     generatedAt: new Date().toISOString(),
-    routes: nextRoutes.sort((left, right) => left.route.localeCompare(right.route)),
+    routes: nextRoutes.sort((left, right) =>
+      left.route.localeCompare(right.route),
+    ),
   };
 }

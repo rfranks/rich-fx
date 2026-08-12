@@ -75,7 +75,10 @@ function resolveErrorMessage(params: {
   return `Request failed (${response.status} ${response.statusText}) for ${url}`;
 }
 
-function shouldRetryDefault(response: Response | null, error: unknown): boolean {
+function shouldRetryDefault(
+  response: Response | null,
+  error: unknown,
+): boolean {
   if (response) {
     return response.status === 429 || response.status >= 500;
   }
@@ -87,7 +90,10 @@ function shouldRetryDefault(response: Response | null, error: unknown): boolean 
   return true;
 }
 
-function createAbortReason(message: string, name: "AbortError" | "TimeoutError"): Error {
+function createAbortReason(
+  message: string,
+  name: "AbortError" | "TimeoutError",
+): Error {
   if (typeof DOMException !== "undefined") {
     return new DOMException(message, name);
   }
@@ -97,7 +103,11 @@ function createAbortReason(message: string, name: "AbortError" | "TimeoutError")
   return error;
 }
 
-type RetryPredicate = (response: Response | null, error: unknown, attempt: number) => boolean;
+type RetryPredicate = (
+  response: Response | null,
+  error: unknown,
+  attempt: number,
+) => boolean;
 
 type RequestWithRetryParams<TSuccess> = {
   url: string;
@@ -124,13 +134,19 @@ function mergeSignals(
 } {
   const controller = new AbortController();
   const timeout = setTimeout(() => {
-    controller.abort(createAbortReason(`Request timed out after ${timeoutMs}ms.`, "TimeoutError"));
+    controller.abort(
+      createAbortReason(
+        `Request timed out after ${timeoutMs}ms.`,
+        "TimeoutError",
+      ),
+    );
   }, timeoutMs);
 
   const onAbort = () => {
     if (parent?.aborted) {
       controller.abort(
-        parent.reason ?? createAbortReason("Request aborted by caller.", "AbortError"),
+        parent.reason ??
+          createAbortReason("Request aborted by caller.", "AbortError"),
       );
       return;
     }
@@ -140,7 +156,8 @@ function mergeSignals(
   if (parent) {
     if (parent.aborted) {
       controller.abort(
-        parent.reason ?? createAbortReason("Request aborted by caller.", "AbortError"),
+        parent.reason ??
+          createAbortReason("Request aborted by caller.", "AbortError"),
       );
     } else {
       parent.addEventListener("abort", onAbort, { once: true });
@@ -160,7 +177,10 @@ async function requestWithRetry<TSuccess>(
   params: RequestWithRetryParams<TSuccess>,
 ): Promise<{ data: TSuccess; response: Response }> {
   const retries = Math.max(0, params.retries ?? 0);
-  const retryDelayMs = Math.max(0, params.retryDelayMs ?? DEFAULT_RETRY_DELAY_MS);
+  const retryDelayMs = Math.max(
+    0,
+    params.retryDelayMs ?? DEFAULT_RETRY_DELAY_MS,
+  );
 
   let attempt = 0;
   let lastError: unknown;
@@ -193,7 +213,8 @@ async function requestWithRetry<TSuccess>(
 
       const canRetry =
         attempt < retries &&
-        (params.shouldRetry?.(response, error, attempt) ?? shouldRetryDefault(response, error));
+        (params.shouldRetry?.(response, error, attempt) ??
+          shouldRetryDefault(response, error));
 
       if (!canRetry) {
         if (params.throwOnHttpError === false) {
@@ -209,7 +230,8 @@ async function requestWithRetry<TSuccess>(
       lastError = error;
       const canRetry =
         attempt < retries &&
-        (params.shouldRetry?.(null, error, attempt) ?? shouldRetryDefault(null, error));
+        (params.shouldRetry?.(null, error, attempt) ??
+          shouldRetryDefault(null, error));
 
       if (!canRetry) {
         throw error;
@@ -262,8 +284,10 @@ export async function requestJsonWithProfile<T>(
   url: string,
   options: RequestJsonWithProfileOptions,
 ): Promise<{ data: T; response: Response }> {
-  const resolvedTimeoutMs = options.profileOverrides?.timeoutMs ?? options.profile.timeoutMs;
-  const resolvedRetries = options.profileOverrides?.retries ?? options.profile.retries;
+  const resolvedTimeoutMs =
+    options.profileOverrides?.timeoutMs ?? options.profile.timeoutMs;
+  const resolvedRetries =
+    options.profileOverrides?.retries ?? options.profile.retries;
   const resolvedRetryDelayMs =
     options.profileOverrides?.retryDelayMs ?? options.profile.retryDelayMs;
 

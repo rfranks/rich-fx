@@ -37,7 +37,9 @@ export default function DiagramCanvas({
       onKeyDown={onKeyDown}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
-      onPointerUp={onPointerUpOrLeave as React.PointerEventHandler<HTMLDivElement>}
+      onPointerUp={
+        onPointerUpOrLeave as React.PointerEventHandler<HTMLDivElement>
+      }
       onPointerLeave={onPointerUpOrLeave}
       onDoubleClick={onDoubleClick}
       topContent={toolbar}

@@ -47,16 +47,26 @@ describe("aiLabRegistry filters", () => {
   it("infers medium, style, and series tags from existing item fields", () => {
     const normalized = normalizeAILabItems(baseItems, fallbackImage);
 
-    const wonderlandItem = normalized.find((item) => item.slug === "white-rabbit");
+    const wonderlandItem = normalized.find(
+      (item) => item.slug === "white-rabbit",
+    );
     expect(wonderlandItem?.seriesTag).toBe("alice-in-wonderland");
-    expect(wonderlandItem?.mediumTags).toEqual(expect.arrayContaining(["image", "video"]));
-    expect(wonderlandItem?.styleTags).toEqual(expect.arrayContaining(["storybook", "cinematic"]));
+    expect(wonderlandItem?.mediumTags).toEqual(
+      expect.arrayContaining(["image", "video"]),
+    );
+    expect(wonderlandItem?.styleTags).toEqual(
+      expect.arrayContaining(["storybook", "cinematic"]),
+    );
 
     const songItem = normalized.find((item) => item.slug === "outta-time");
-    expect(songItem?.mediumTags).toEqual(expect.arrayContaining(["audio", "image"]));
+    expect(songItem?.mediumTags).toEqual(
+      expect.arrayContaining(["audio", "image"]),
+    );
     expect(songItem?.styleTags).toEqual(expect.arrayContaining(["music"]));
 
-    const zombieSequel = normalized.find((item) => item.slug === "zombie-chaos-2");
+    const zombieSequel = normalized.find(
+      (item) => item.slug === "zombie-chaos-2",
+    );
     expect(zombieSequel?.seriesTag).toBe("zombie-chaos");
   });
 
@@ -64,10 +74,14 @@ describe("aiLabRegistry filters", () => {
     const normalized = normalizeAILabItems(baseItems, fallbackImage);
     const options = resolveAILabFilterOptions(normalized);
 
-    const mediumAudio = options.medium.find((option) => option.value === "audio");
+    const mediumAudio = options.medium.find(
+      (option) => option.value === "audio",
+    );
     expect(mediumAudio?.count).toBe(1);
 
-    const seriesZombie = options.series.find((option) => option.value === "zombie-chaos");
+    const seriesZombie = options.series.find(
+      (option) => option.value === "zombie-chaos",
+    );
     expect(seriesZombie?.count).toBe(2);
 
     const filtered = filterAILabItems(normalized, {

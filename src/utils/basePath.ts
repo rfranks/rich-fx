@@ -55,18 +55,20 @@ const resolveBasePathFromRuntime = (): string => {
   }
 
   const fromRouterBasePath = normalizeBasePath(
-    (window as typeof window & { __NEXT_ROUTER_BASEPATH?: string }).__NEXT_ROUTER_BASEPATH,
+    (window as typeof window & { __NEXT_ROUTER_BASEPATH?: string })
+      .__NEXT_ROUTER_BASEPATH,
   );
   if (fromRouterBasePath) {
     cachedRuntimeBasePath = fromRouterBasePath;
     return cachedRuntimeBasePath;
   }
 
-  const assetNodes = document.querySelectorAll<HTMLScriptElement | HTMLLinkElement>(
-    "script[src*='/_next/'],link[href*='/_next/']",
-  );
+  const assetNodes = document.querySelectorAll<
+    HTMLScriptElement | HTMLLinkElement
+  >("script[src*='/_next/'],link[href*='/_next/']");
   for (const node of assetNodes) {
-    const candidateUrl = node instanceof HTMLScriptElement ? node.src : node.href;
+    const candidateUrl =
+      node instanceof HTMLScriptElement ? node.src : node.href;
     if (!candidateUrl) {
       continue;
     }
@@ -84,7 +86,10 @@ const resolveBasePathFromRuntime = (): string => {
   }
 
   const pathSegments = window.location.pathname.split("/").filter(Boolean);
-  if (window.location.hostname.endsWith(".github.io") && pathSegments.length > 0) {
+  if (
+    window.location.hostname.endsWith(".github.io") &&
+    pathSegments.length > 0
+  ) {
     cachedRuntimeBasePath = normalizeBasePath(`/${pathSegments[0]}`);
     return cachedRuntimeBasePath;
   }
@@ -127,7 +132,10 @@ export function withBasePath(path: string): string {
     return normalizedPath;
   }
 
-  if (path.startsWith("/") && (normalizedPath === base || normalizedPath.startsWith(`${base}/`))) {
+  if (
+    path.startsWith("/") &&
+    (normalizedPath === base || normalizedPath.startsWith(`${base}/`))
+  ) {
     return normalizedPath;
   }
 

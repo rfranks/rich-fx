@@ -48,7 +48,13 @@ export function normalizeSeriesParts(args: {
   seriesSourceHref?: string;
   seriesCaption?: string;
 }): SeriesMediaPart[] {
-  const { seriesParts, seriesMovie, seriesSource, seriesSourceHref, seriesCaption } = args;
+  const {
+    seriesParts,
+    seriesMovie,
+    seriesSource,
+    seriesSourceHref,
+    seriesCaption,
+  } = args;
   if (seriesParts.length > 0) {
     return seriesParts;
   }
@@ -67,11 +73,19 @@ export function normalizeSeriesParts(args: {
   ];
 }
 
-export function getWorkLabel(title: string, index: number, totalWorkParts: number): string {
+export function getWorkLabel(
+  title: string,
+  index: number,
+  totalWorkParts: number,
+): string {
   return `${title} - Part ${index + 1} of ${totalWorkParts}`;
 }
 
-export function getSeriesLabel(title: string, index: number, totalSeriesParts: number): string {
+export function getSeriesLabel(
+  title: string,
+  index: number,
+  totalSeriesParts: number,
+): string {
   return `${title} - Series - Part ${index + 1} of ${totalSeriesParts}`;
 }
 
@@ -95,7 +109,12 @@ export function nextRevealStep(args: {
   totalWorkParts: number;
   totalSeriesParts: number;
 }): RevealStep | null {
-  const { revealedWorkCount, revealedSeriesCount, totalWorkParts, totalSeriesParts } = args;
+  const {
+    revealedWorkCount,
+    revealedSeriesCount,
+    totalWorkParts,
+    totalSeriesParts,
+  } = args;
   if (revealedWorkCount < totalWorkParts) {
     return { kind: "work", index: revealedWorkCount };
   }

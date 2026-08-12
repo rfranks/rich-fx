@@ -19,7 +19,11 @@ export default function MarkdownContent({
   sx,
   variant = "body2",
 }: MarkdownContentProps) {
-  const renderRiskHudEntry = (entry: RiskHudEntry, component: "p" | "li" | "div", key?: string) => {
+  const renderRiskHudEntry = (
+    entry: RiskHudEntry,
+    component: "p" | "li" | "div",
+    key?: string,
+  ) => {
     const tone = getRiskTone(entry.labelText, entry.valueText);
     const toneColor =
       tone === "good"
@@ -31,7 +35,12 @@ export default function MarkdownContent({
             : color;
 
     return (
-      <Typography key={key} component={component} variant={variant} color={color}>
+      <Typography
+        key={key}
+        component={component}
+        variant={variant}
+        color={color}
+      >
         <Box component="span" sx={{ fontWeight: 600 }}>
           {entry.labelText}:
         </Box>{" "}
@@ -42,7 +51,10 @@ export default function MarkdownContent({
     );
   };
 
-  const renderRiskHudLine = (children: React.ReactNode, component: "p" | "li" = "p") => {
+  const renderRiskHudLine = (
+    children: React.ReactNode,
+    component: "p" | "li" = "p",
+  ) => {
     const line = extractPlainText(children).replace(/\s+/g, " ").trim();
     const entries = extractRiskHudEntries(line);
 
