@@ -13,45 +13,45 @@ const imageDimensionsByPath: Record<
   string,
   Pick<RichFxImageAsset, "width" | "height">
 > = {
-  "/rich-fx/23AF43D5-745F-4A76-A5B3-94B733A60A3C.png": {
+  "/assets/23AF43D5-745F-4A76-A5B3-94B733A60A3C.png": {
     width: 1672,
     height: 941,
   },
-  "/rich-fx/BC1631EC-DE1F-4F55-99E9-C38EC3877744.png": {
+  "/assets/BC1631EC-DE1F-4F55-99E9-C38EC3877744.png": {
     width: 1402,
     height: 1122,
   },
-  "/rich-fx/portfolio/MattRyman_Krangor/IMG_5244.PNG": {
+  "/assets/portfolio/MattRyman_Krangor/IMG_5244.PNG": {
     width: 1170,
     height: 2532,
   },
-  "/rich-fx/portfolio/MattRyman_Krangor/02A69E48-7048-408D-94C5-7860CF8A60DD.PNG":
+  "/assets/portfolio/MattRyman_Krangor/02A69E48-7048-408D-94C5-7860CF8A60DD.PNG":
     {
       width: 1122,
       height: 1402,
     },
-  "/rich-fx/portfolio/MattRyman_Krangor/52BBFAB7-C230-4D56-961D-0B4E5C6B0DB8.PNG":
+  "/assets/portfolio/MattRyman_Krangor/52BBFAB7-C230-4D56-961D-0B4E5C6B0DB8.PNG":
     {
       width: 1672,
       height: 941,
     },
-  "/rich-fx/portfolio/MattRyman_Krangor/D12A1792-8DCB-467C-A25B-5D99BF72CB51.PNG":
+  "/assets/portfolio/MattRyman_Krangor/D12A1792-8DCB-467C-A25B-5D99BF72CB51.PNG":
     {
       width: 1672,
       height: 941,
     },
-  "/rich-fx/portfolio/MattRyman_Krangor/0A341EE2-518A-4F61-8D74-E41B85C2E802.PNG":
+  "/assets/portfolio/MattRyman_Krangor/0A341EE2-518A-4F61-8D74-E41B85C2E802.PNG":
     {
       width: 1122,
       height: 1402,
     },
-  "/rich-fx/portfolio/MattRyman_Krangor/B87F8B13-D29E-4597-9033-D9DA1018E625.PNG":
+  "/assets/portfolio/MattRyman_Krangor/B87F8B13-D29E-4597-9033-D9DA1018E625.PNG":
     {
       width: 1086,
       height: 1448,
     },
   "/personal/images/ai-lab/kratos/stylistic.png": { width: 1122, height: 1402 },
-  "/rich-fx/portfolio/RichardFranksIn/RichardFranksIn_Alien/stylized.png": {
+  "/assets/portfolio/RichardFranksIn/RichardFranksIn_Alien/stylized.png": {
     width: 1536,
     height: 1024,
   },
@@ -189,12 +189,12 @@ const theRock = findLab("the-rock");
 const outtaTime = findLab("outta-time");
 
 export const richFxBrandPlate = imageAsset(
-  "/rich-fx/23AF43D5-745F-4A76-A5B3-94B733A60A3C.png",
+  "/assets/23AF43D5-745F-4A76-A5B3-94B733A60A3C.png",
   "RichFX Studios brand plate",
 );
 
 export const richFxServicePlate = imageAsset(
-  "/rich-fx/BC1631EC-DE1F-4F55-99E9-C38EC3877744.png",
+  "/assets/BC1631EC-DE1F-4F55-99E9-C38EC3877744.png",
   "RichFX services brand plate",
 );
 
@@ -207,7 +207,7 @@ export const richFxDndStages: RichFxPipelineStage[] = [
     title: "A real person becomes the anchor for a fantasy hero.",
     body: "The stage starts with a grounded reference so the transformation can keep a human center while the world gets more mythic.",
     image: imageAsset(
-      "/rich-fx/portfolio/MattRyman_Krangor/IMG_5244.PNG",
+      "/assets/portfolio/MattRyman_Krangor/IMG_5244.PNG",
       "Original portrait reference used for the Krangor fantasy VFX experiment",
     ),
   },
@@ -218,7 +218,7 @@ export const richFxDndStages: RichFxPipelineStage[] = [
       "Identity, armor, weapon, and palette lock into a repeatable design.",
     body: "Krangor becomes a production character: readable silhouette, ornate holy-avenger weapon, warm metal, white cloth, and ember-lit atmosphere.",
     image: imageAsset(
-      "/rich-fx/portfolio/MattRyman_Krangor/02A69E48-7048-408D-94C5-7860CF8A60DD.PNG",
+      "/assets/portfolio/MattRyman_Krangor/02A69E48-7048-408D-94C5-7860CF8A60DD.PNG",
       "Krangor character poster with armor and holy avenger weapon",
     ),
   },
@@ -228,7 +228,7 @@ export const richFxDndStages: RichFxPipelineStage[] = [
     title: "The shot list turns the character into a scene.",
     body: "Beat boards sketch the action rhythm, camera language, lighting notes, and emotional escalation before the sequence moves.",
     image: imageAsset(
-      "/rich-fx/portfolio/MattRyman_Krangor/52BBFAB7-C230-4D56-961D-0B4E5C6B0DB8.PNG",
+      "/assets/portfolio/MattRyman_Krangor/52BBFAB7-C230-4D56-961D-0B4E5C6B0DB8.PNG",
       "Storyboard prompt board for Krangor battling the red dragon",
     ),
   },
@@ -238,11 +238,11 @@ export const richFxDndStages: RichFxPipelineStage[] = [
     title: "The cinematic audio score gives the reveal its pulse.",
     body: "The score is treated as part of the VFX stage, not an afterthought: mood, scale, and timing become another production layer.",
     image: imageAsset(
-      "/rich-fx/portfolio/MattRyman_Krangor/D12A1792-8DCB-467C-A25B-5D99BF72CB51.PNG",
+      "/assets/portfolio/MattRyman_Krangor/D12A1792-8DCB-467C-A25B-5D99BF72CB51.PNG",
       "Storyboard prompt board for Krangor discovering an ancient relic",
     ),
     audio: {
-      src: "/rich-fx/portfolio/MattRyman_Krangor/krangor-the-holy.mp3",
+      src: "/assets/portfolio/MattRyman_Krangor/krangor-the-holy.mp3",
       label: "Krangor the Holy cinematic score",
       note: "Cinematic score reveal",
     },
@@ -253,7 +253,7 @@ export const richFxDndStages: RichFxPipelineStage[] = [
     title: "The final frame sells the scale of the world.",
     body: "A poster-like keyframe packages the character, threat, environment, and graphic tone into a single production target.",
     image: imageAsset(
-      "/rich-fx/portfolio/MattRyman_Krangor/B87F8B13-D29E-4597-9033-D9DA1018E625.PNG",
+      "/assets/portfolio/MattRyman_Krangor/B87F8B13-D29E-4597-9033-D9DA1018E625.PNG",
       "Krangor fantasy comic cover keyframe with red dragon",
     ),
   },
@@ -263,9 +263,9 @@ export const richFxDndStages: RichFxPipelineStage[] = [
     title: "The stage resolves into a motion test.",
     body: "The moving plate stays lightweight on the page until requested by the viewport, preserving the cinematic reveal without preloading the full file.",
     video: videoAsset(
-      "/rich-fx/portfolio/MattRyman_Krangor/Matt Ryman.MOV",
+      "/assets/portfolio/MattRyman_Krangor/Matt Ryman.MOV",
       "Krangor fantasy VFX motion test",
-      "/rich-fx/portfolio/MattRyman_Krangor/B87F8B13-D29E-4597-9033-D9DA1018E625.PNG",
+      "/assets/portfolio/MattRyman_Krangor/B87F8B13-D29E-4597-9033-D9DA1018E625.PNG",
     ),
   },
 ];

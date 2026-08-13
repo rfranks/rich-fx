@@ -245,7 +245,7 @@ export default function RichFxHomePage() {
       <nav className={styles.topNav} aria-label="RichFX homepage sections">
         <Link href="/" className={styles.navBrand}>
           <Image
-            src={withBasePath("/rich-fx/wordmark.png")}
+            src={withBasePath("/assets/wordmark.png")}
             alt="RichFX"
             width={1802}
             height={872}

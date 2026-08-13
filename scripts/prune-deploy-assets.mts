@@ -53,8 +53,8 @@ type PruneSummary = {
 const pruneTargets = [
   {
     label: "portfolio",
-    publicPathPrefix: "/rich-fx/portfolio/",
-    root: "public/rich-fx/portfolio",
+    publicPathPrefix: "/assets/portfolio/",
+    root: "public/assets/portfolio",
   },
   {
     label: "ai-lab",
@@ -64,9 +64,9 @@ const pruneTargets = [
 ] as const satisfies readonly PruneTarget[];
 
 const quotedStringPattern =
-  /(["'`])([^"'`\r\n]*(?:\/?public\/rich-fx\/portfolio\/|\/?public\/personal\/images\/ai-lab\/|\/rich-fx\/portfolio\/|\/personal\/images\/ai-lab\/)[^"'`\r\n]*)\1/g;
+  /(["'`])([^"'`\r\n]*(?:\/?public\/assets\/portfolio\/|\/?public\/personal\/images\/ai-lab\/|\/assets\/portfolio\/|\/personal\/images\/ai-lab\/)[^"'`\r\n]*)\1/g;
 const cssUrlPattern =
-  /url\(\s*(["']?)([^)"'\r\n]*(?:\/?public\/rich-fx\/portfolio\/|\/?public\/personal\/images\/ai-lab\/|\/rich-fx\/portfolio\/|\/personal\/images\/ai-lab\/)[^)"'\r\n]*)\1\s*\)/g;
+  /url\(\s*(["']?)([^)"'\r\n]*(?:\/?public\/assets\/portfolio\/|\/?public\/personal\/images\/ai-lab\/|\/assets\/portfolio\/|\/personal\/images\/ai-lab\/)[^)"'\r\n]*)\1\s*\)/g;
 
 function toPosixPath(value: string): string {
   return value.split(path.sep).join("/");
