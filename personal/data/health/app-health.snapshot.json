@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T23:57:50.503Z",
+  "generatedAt": "2026-08-13T00:16:56.577Z",
   "overallStatus": "warn",
   "checks": {
     "fileBudgets": "warn",
@@ -9,7 +9,7 @@
     "fileBudgets": {
       "key": "fileBudgets",
       "status": "warn",
-      "generatedAt": "2026-08-12T23:57:30.621Z",
+      "generatedAt": "2026-08-13T00:16:36.812Z",
       "summary": "File budget check passed.",
       "details": {
         "totals": {
@@ -52,7 +52,7 @@
     "testRunner": {
       "key": "testRunner",
       "status": "pass",
-      "generatedAt": "2026-08-12T23:57:50.503Z",
+      "generatedAt": "2026-08-13T00:16:56.577Z",
       "summary": "unit test runner passed for lane portfolio.",
       "details": {
         "suite": "unit",
