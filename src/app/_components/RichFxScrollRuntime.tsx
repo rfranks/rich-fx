@@ -37,6 +37,24 @@ const getStepObserverOptions = (): IntersectionObserverInit => {
   };
 };
 
+const hasStepTopEnteredViewport = (step: Element) =>
+  step.getBoundingClientRect().top <= window.innerHeight;
+
+const getVisibleStepScore = (step: HTMLElement) => {
+  const rect = step.getBoundingClientRect();
+  if (rect.top > window.innerHeight || rect.bottom < 0) {
+    return 0;
+  }
+
+  const visibleHeight = Math.max(
+    0,
+    Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0),
+  );
+  const stepCenter = rect.top + rect.height / 2;
+  const stickyTarget = window.innerHeight * 0.72;
+  return visibleHeight - Math.abs(stepCenter - stickyTarget) * 0.25;
+};
+
 export default function RichFxScrollRuntime() {
   useEffect(() => {
     const revealNodes = Array.from(
@@ -180,7 +198,12 @@ export default function RichFxScrollRuntime() {
 
       const observer = new IntersectionObserver((entries) => {
         const activeEntry = entries
-          .filter((entry) => entry.isIntersecting)
+          .filter(
+            (entry) =>
+              entry.isIntersecting &&
+              (window.innerWidth > 640 ||
+                hasStepTopEnteredViewport(entry.target)),
+          )
           .sort(
             (left, right) => right.intersectionRatio - left.intersectionRatio,
           )[0];
@@ -203,29 +226,22 @@ export default function RichFxScrollRuntime() {
         return;
       }
 
-      const activeBandTop = window.innerHeight * 0.18;
-      const activeBandBottom = window.innerHeight * 0.82;
       const activeNarrative = narratives
         .map((narrative) => {
-          const mediaTrack =
-            narrative.querySelector<HTMLElement>("[data-richfx-media-track]") ??
-            narrative;
-          const rect = mediaTrack.getBoundingClientRect();
-          const overlap = Math.max(
-            0,
-            Math.min(rect.bottom, activeBandBottom) -
-              Math.max(rect.top, activeBandTop),
+          const activeSteps = Array.from(
+            narrative.querySelectorAll<HTMLElement>(
+              `[data-richfx-step].${ACTIVE_CLASS}`,
+            ),
           );
-
-          return { narrative, overlap };
+          const score = Math.max(0, ...activeSteps.map(getVisibleStepScore));
+          return { narrative, score };
         })
-        .sort((left, right) => right.overlap - left.overlap)[0];
+        .sort((left, right) => right.score - left.score)[0];
 
       narratives.forEach((narrative) => {
         narrative.classList.toggle(
           MOBILE_MEDIA_OPEN_CLASS,
-          narrative === activeNarrative?.narrative &&
-            activeNarrative.overlap > 0,
+          narrative === activeNarrative?.narrative && activeNarrative.score > 0,
         );
       });
     };

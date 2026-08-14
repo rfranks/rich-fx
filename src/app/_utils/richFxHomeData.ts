@@ -359,8 +359,8 @@ export const richFxAudioFeature: RichFxAudioFeature = {
 
 export const richFxGatewayExperiments = [
   experimentFeature("emerald-legion"),
-  experimentFeature("the-rock"),
-  experimentFeature("outta-time"),
+  experimentFeature("caterpillar"),
+  experimentFeature("gatecrasher"),
   experimentFeature("kratos"),
   experimentFeature("he-man"),
   experimentFeature("stay-puffy"),

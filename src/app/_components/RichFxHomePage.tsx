@@ -216,24 +216,22 @@ export default function RichFxHomePage() {
   const vfxStages: RichFxPipelineStage[] = [
     {
       key: "source",
-      eyebrow: "01 / Plate",
-      title: "Start with a grounded image.",
-      body:
-        richFxVfxFeature.beforeImage?.alt ??
-        "A source frame gives the transformation an anchor.",
+      eyebrow: "01 / Source",
+      title: "Start with a source image, grounded in reality.",
+      body: "We start with a source frame, usually a real-world image, like a headshot or a portrait, which gives the visual effect transformation an anchor.",
       image: richFxVfxFeature.beforeImage,
     },
     {
       key: "look",
-      eyebrow: "02 / Look",
+      eyebrow: "02 / Transformation",
       title: "Push the frame into a stylized visual direction.",
-      body: "Composition, lighting, costume, and atmosphere become the design brief for the next pass.",
+      body: "Composition, lighting, costume, and atmosphere become the design brief for the next pass. Styles can vary from cinematic to artistic, and the AI can be guided to explore multiple directions.",
       image: richFxVfxFeature.stylizedImage,
     },
     {
       key: "motion",
       eyebrow: "03 / Motion",
-      title: "Let the shot move, then judge it like footage.",
+      title: "Bring the frame to life with motion and continuity.",
       body: richFxVfxFeature.blurb,
       video: richFxVfxFeature.video,
     },
