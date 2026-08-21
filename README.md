@@ -55,7 +55,7 @@ src/
   types/                       # shared type contracts
   consts/                      # shared constants/tokens/schema maps
 public/
-  personal/data/richFx.json
+  data/richFx.json
 docs/adr/                      # architecture decision records
 scripts/                       # quality checks + tooling
 ```
@@ -65,7 +65,7 @@ Private app modules live in underscore-prefixed folders. If logic gains cross-ap
 ## Architecture Principles
 
 1. **Contract-first data model**
-   - Source of truth: `public/personal/data/richFx.json`
+   - Source of truth: `public/data/richFx.json`
    - Schema: `src/consts/richFxSchema.ts`
    - Migrations: `src/utils/data/migrations/richFxMigrations.ts`
 
@@ -148,7 +148,7 @@ npm run build:search-index
 - Pre-push: multi-step quality pipeline (`npm run prepush`)
 - File budgets: `scripts/check-file-budgets.mts`
 - Bundle budgets: `scripts/check-bundle-budget.mts`
-- Health snapshots written to `public/personal/data/health/`
+- Health snapshots written to `public/data/health/`
 
 Important: this repository intentionally enforces file-size and bundle budgets. Prefer extraction and composition over raising budgets.
 
@@ -162,7 +162,7 @@ Command palette actions are generated from:
 Static artifact generation:
 
 - script: `scripts/build-search-index.mts`
-- output: `public/personal/data/search/static-search-index.json`
+- output: `public/data/search/static-search-index.json`
 - consumer: `src/components/portfolio/layout/AppBar.tsx` (with safe runtime fallback)
 
 ## Data Contract Governance

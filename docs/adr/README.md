@@ -23,3 +23,4 @@ Each ADR should use this structure:
 - `0004` Observability primitives
 - `0005` CLI command architecture
 - `0006` TypeScript hardening phases
+- `0007` App route ownership and test harness placement

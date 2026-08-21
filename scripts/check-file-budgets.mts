@@ -22,10 +22,10 @@ const ignoredDirs = new Set([
 const defaultBudget = 900;
 
 const exactBudgets: Record<string, number> = {
-  "src/app/ai-lab/_components/AILabAdaptation.tsx": 1650,
-  "src/app/ai-lab/_components/AILab.tsx": 1450,
-  "src/app/ai-lab/_components/AILabWorkSeries.tsx": 1150,
-  "src/components/shared/monitoring/NavigationTelemetry.tsx": 1000,
+  "src/app/ai-studio/_components/adaptation/Adaptation.tsx": 1650,
+  "src/app/ai-studio/_components/lab/Lab.tsx": 1450,
+  "src/app/ai-studio/_components/work-series/WorkSeries.tsx": 1150,
+  "src/components/shared/monitoring/navigation-telemetry/NavigationTelemetry.tsx": 1000,
   "src/hooks/html/usePanZoomViewport.ts": 1170,
 };
 

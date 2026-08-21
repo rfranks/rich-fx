@@ -1,0 +1,12 @@
+{
+  "key": "a11yRunner",
+  "status": "fail",
+  "generatedAt": "2026-08-21T08:15:53.622Z",
+  "summary": "a11y test runner failed for lane portfolio with exit code 1.",
+  "details": {
+    "suite": "a11y",
+    "lane": "portfolio",
+    "exitCode": 1,
+    "jestArgs": ["tests/accessibility", "--runInBand"]
+  }
+}

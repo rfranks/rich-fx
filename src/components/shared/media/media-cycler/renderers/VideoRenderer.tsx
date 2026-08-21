@@ -1,6 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import VideoLightbox from "@/components/shared/media/VideoLightbox";
+import VideoLightbox from "@/components/shared/media/video-lightbox/VideoLightbox";
 import type { VideoRendererProps } from "@/types/components/shared/media";
 import { flattenMediaCyclerSxArray } from "@/utils/media/mediaCyclerSx";
 import { createMediaActivateKeyDownHandler } from "@/utils/components/shared/media";

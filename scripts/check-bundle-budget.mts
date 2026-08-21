@@ -41,7 +41,7 @@ type QualityLane =
   | "zombiefish"
   | "rickbert-studio"
   | "dna"
-  | "ai-lab";
+  | "ai-studio";
 const validLanes: QualityLane[] = [
   "portfolio",
   "pathforger",
@@ -49,7 +49,7 @@ const validLanes: QualityLane[] = [
   "zombiefish",
   "rickbert-studio",
   "dna",
-  "ai-lab",
+  "ai-studio",
 ];
 
 type BudgetLimits = {
@@ -110,8 +110,8 @@ function laneRouteKey(lane: QualityLane): string | null {
   if (lane === "rickbert-studio") {
     return "/rickbert-studio";
   }
-  if (lane === "ai-lab") {
-    return "/ai-lab";
+  if (lane === "ai-studio") {
+    return "/ai-studio";
   }
   return `/${lane}`;
 }

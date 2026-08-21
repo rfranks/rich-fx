@@ -7,7 +7,7 @@ import { flattenMediaCyclerSxArray } from "@/utils/media/mediaCyclerSx";
 import { createMediaActivateKeyDownHandler } from "@/utils/components/shared/media";
 
 const LazyPDFContent = React.lazy(
-  () => import("@/components/shared/content/PDFContent"),
+  () => import("@/components/shared/content/pdf-content/PDFContent"),
 );
 
 export default function PdfRenderer({

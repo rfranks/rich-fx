@@ -136,10 +136,10 @@ const getFabricTokens = (mode: PaletteMode): FabricTokens => {
 
 export const fabricNestedSurfaceSx = (theme: Theme) => ({
   borderRadius: `${theme.fabric.radius.md}px`,
-  border: "1px solid var(--fabric-surface-border)",
-  backgroundColor: "var(--fabric-surface-2)",
-  boxShadow: `inset 0 1px 0 var(--fabric-inner-glow), ${theme.fabric.surface.shadowTight}`,
-  backdropFilter: "blur(var(--fabric-blur-sm))",
+  border: "1px solid var(--surface-border)",
+  backgroundColor: "var(--surface-2)",
+  boxShadow: `inset 0 1px 0 var(--inner-glow), ${theme.fabric.surface.shadowTight}`,
+  backdropFilter: "blur(var(--blur-sm))",
 });
 
 const createComponentOverrides = (
@@ -151,33 +151,33 @@ const createComponentOverrides = (
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          "--fabric-bg-base": tokens.background.base,
-          "--fabric-bg-layer": tokens.background.layer,
-          "--fabric-bg-radial-primary": tokens.background.radialPrimary,
-          "--fabric-bg-radial-secondary": tokens.background.radialSecondary,
-          "--fabric-surface-1": tokens.surface.level1,
-          "--fabric-surface-2": tokens.surface.level2,
-          "--fabric-surface-3": tokens.surface.level3,
-          "--fabric-surface-border": tokens.surface.border,
-          "--fabric-surface-border-strong": tokens.surface.borderStrong,
-          "--fabric-shadow-soft": tokens.surface.shadowSoft,
-          "--fabric-shadow-tight": tokens.surface.shadowTight,
-          "--fabric-inner-glow": tokens.surface.innerGlow,
-          "--fabric-blur-sm": tokens.blur.sm,
-          "--fabric-blur-md": tokens.blur.md,
-          "--fabric-blur-lg": tokens.blur.lg,
-          "--fabric-radius-sm": "12px",
-          "--fabric-radius-md": "18px",
-          "--fabric-radius-lg": "24px",
-          "--fabric-radius-xl": "30px",
-          "--fabric-radius-hero": "40px",
-          "--fabric-radius-capsule": "999px",
-          backgroundColor: "var(--fabric-bg-base)",
+          "--bg-base": tokens.background.base,
+          "--bg-layer": tokens.background.layer,
+          "--bg-radial-primary": tokens.background.radialPrimary,
+          "--bg-radial-secondary": tokens.background.radialSecondary,
+          "--surface-1": tokens.surface.level1,
+          "--surface-2": tokens.surface.level2,
+          "--surface-3": tokens.surface.level3,
+          "--surface-border": tokens.surface.border,
+          "--surface-border-strong": tokens.surface.borderStrong,
+          "--shadow-soft": tokens.surface.shadowSoft,
+          "--shadow-tight": tokens.surface.shadowTight,
+          "--inner-glow": tokens.surface.innerGlow,
+          "--blur-sm": tokens.blur.sm,
+          "--blur-md": tokens.blur.md,
+          "--blur-lg": tokens.blur.lg,
+          "--radius-sm": "12px",
+          "--radius-md": "18px",
+          "--radius-lg": "24px",
+          "--radius-xl": "30px",
+          "--radius-hero": "40px",
+          "--radius-capsule": "999px",
+          backgroundColor: "var(--bg-base)",
           backgroundImage: [
-            "radial-gradient(55rem 32rem at 4% -8%, var(--fabric-bg-radial-primary), transparent 66%)",
-            "radial-gradient(46rem 28rem at 94% -12%, var(--fabric-bg-radial-secondary), transparent 70%)",
+            "radial-gradient(55rem 32rem at 4% -8%, var(--bg-radial-primary), transparent 66%)",
+            "radial-gradient(46rem 28rem at 94% -12%, var(--bg-radial-secondary), transparent 70%)",
             `linear-gradient(120deg, transparent 0, transparent 34%, ${mode === "dark" ? "rgba(198, 218, 255, 0.05)" : "rgba(37, 64, 109, 0.06)"} 35%, transparent 36%, transparent 64%, ${mode === "dark" ? "rgba(198, 218, 255, 0.05)" : "rgba(37, 64, 109, 0.06)"} 65%, transparent 66%, transparent 100%)`,
-            "linear-gradient(180deg, var(--fabric-bg-layer), var(--fabric-bg-base))",
+            "linear-gradient(180deg, var(--bg-layer), var(--bg-base))",
           ].join(","),
           backgroundAttachment: "fixed",
         },
@@ -198,16 +198,16 @@ const createComponentOverrides = (
       styleOverrides: {
         root: ({ ownerState }) => ({
           position: "relative",
-          borderRadius: "var(--fabric-radius-lg)",
-          border: "1px solid var(--fabric-surface-border)",
-          backgroundColor: "var(--fabric-surface-1)",
+          borderRadius: "var(--radius-lg)",
+          border: "1px solid var(--surface-border)",
+          backgroundColor: "var(--surface-1)",
           backgroundImage:
-            "linear-gradient(180deg, var(--fabric-inner-glow), transparent 34%)",
-          backdropFilter: "blur(var(--fabric-blur-sm))",
-          boxShadow: "var(--fabric-shadow-soft)",
+            "linear-gradient(180deg, var(--inner-glow), transparent 34%)",
+          backdropFilter: "blur(var(--blur-sm))",
+          boxShadow: "var(--shadow-soft)",
           ...(ownerState.variant === "outlined" && {
-            borderColor: "var(--fabric-surface-border-strong)",
-            backgroundColor: "var(--fabric-surface-2)",
+            borderColor: "var(--surface-border-strong)",
+            backgroundColor: "var(--surface-2)",
           }),
         }),
       },
@@ -218,10 +218,10 @@ const createComponentOverrides = (
       },
       styleOverrides: {
         root: {
-          borderRadius: "var(--fabric-radius-xl)",
-          border: "1px solid var(--fabric-surface-border)",
-          backgroundColor: "var(--fabric-surface-1)",
-          boxShadow: "var(--fabric-shadow-soft)",
+          borderRadius: "var(--radius-xl)",
+          border: "1px solid var(--surface-border)",
+          backgroundColor: "var(--surface-1)",
+          boxShadow: "var(--shadow-soft)",
           overflow: "clip",
         },
       },
@@ -230,7 +230,7 @@ const createComponentOverrides = (
       styleOverrides: {
         root: {
           "& .MuiBackdrop-root": {
-            backdropFilter: "blur(var(--fabric-blur-md))",
+            backdropFilter: "blur(var(--blur-md))",
             backgroundColor:
               mode === "dark"
                 ? "rgba(3, 9, 18, 0.48)"
@@ -238,26 +238,26 @@ const createComponentOverrides = (
           },
         },
         paper: {
-          borderRadius: "var(--fabric-radius-xl)",
-          border: "1px solid var(--fabric-surface-border-strong)",
-          backgroundColor: "var(--fabric-surface-2)",
+          borderRadius: "var(--radius-xl)",
+          border: "1px solid var(--surface-border-strong)",
+          backgroundColor: "var(--surface-2)",
           backgroundImage:
-            "linear-gradient(180deg, var(--fabric-inner-glow), transparent 30%)",
-          backdropFilter: "blur(var(--fabric-blur-lg))",
-          boxShadow: "var(--fabric-shadow-soft)",
+            "linear-gradient(180deg, var(--inner-glow), transparent 30%)",
+          backdropFilter: "blur(var(--blur-lg))",
+          boxShadow: "var(--shadow-soft)",
         },
       },
     },
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          border: "1px solid var(--fabric-surface-border)",
-          borderRightColor: "var(--fabric-surface-border-strong)",
-          backgroundColor: "var(--fabric-surface-2)",
+          border: "1px solid var(--surface-border)",
+          borderRightColor: "var(--surface-border-strong)",
+          backgroundColor: "var(--surface-2)",
           backgroundImage:
-            "linear-gradient(180deg, var(--fabric-inner-glow), transparent 22%)",
-          backdropFilter: "blur(var(--fabric-blur-md))",
-          boxShadow: "var(--fabric-shadow-tight)",
+            "linear-gradient(180deg, var(--inner-glow), transparent 22%)",
+          backdropFilter: "blur(var(--blur-md))",
+          boxShadow: "var(--shadow-tight)",
         },
       },
     },
@@ -268,13 +268,13 @@ const createComponentOverrides = (
       },
       styleOverrides: {
         root: {
-          borderRadius: "var(--fabric-radius-xl)",
-          border: "1px solid var(--fabric-surface-border)",
-          backgroundColor: "var(--fabric-surface-2)",
+          borderRadius: "var(--radius-xl)",
+          border: "1px solid var(--surface-border)",
+          backgroundColor: "var(--surface-2)",
           backgroundImage:
-            "linear-gradient(180deg, var(--fabric-inner-glow), transparent 44%)",
-          backdropFilter: "blur(var(--fabric-blur-md))",
-          boxShadow: "var(--fabric-shadow-tight)",
+            "linear-gradient(180deg, var(--inner-glow), transparent 44%)",
+          backdropFilter: "blur(var(--blur-md))",
+          boxShadow: "var(--shadow-tight)",
         },
       },
     },
@@ -307,7 +307,7 @@ const createComponentOverrides = (
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => ({
-          borderRadius: "var(--fabric-radius-capsule)",
+          borderRadius: "var(--radius-capsule)",
           textTransform: "none",
           fontWeight: 600,
           letterSpacing: 0.1,
@@ -321,7 +321,7 @@ const createComponentOverrides = (
           ...(ownerState.variant === "contained" && {
             backgroundImage: `linear-gradient(180deg, ${alpha(theme.palette.primary.light, 0.95)}, ${theme.palette.primary.main})`,
             border: `1px solid ${alpha(theme.palette.primary.dark, 0.4)}`,
-            boxShadow: `inset 0 1px 0 ${alpha("#fff", 0.38)}, var(--fabric-shadow-tight)`,
+            boxShadow: `inset 0 1px 0 ${alpha("#fff", 0.38)}, var(--shadow-tight)`,
             "&:hover": {
               transform: "translateY(-1px)",
               backgroundImage: `linear-gradient(180deg, ${alpha(theme.palette.primary.light, 1)}, ${alpha(theme.palette.primary.main, 0.94)})`,
@@ -329,11 +329,11 @@ const createComponentOverrides = (
             },
           }),
           ...(ownerState.variant === "outlined" && {
-            borderColor: "var(--fabric-surface-border-strong)",
-            backgroundColor: "var(--fabric-surface-2)",
+            borderColor: "var(--surface-border-strong)",
+            backgroundColor: "var(--surface-2)",
             "&:hover": {
-              borderColor: "var(--fabric-surface-border-strong)",
-              backgroundColor: "var(--fabric-surface-3)",
+              borderColor: "var(--surface-border-strong)",
+              backgroundColor: "var(--surface-3)",
               transform: "translateY(-1px)",
             },
           }),
@@ -354,11 +354,11 @@ const createComponentOverrides = (
     MuiChip: {
       styleOverrides: {
         root: ({ theme }) => ({
-          borderRadius: "var(--fabric-radius-capsule)",
-          border: "1px solid var(--fabric-surface-border)",
-          backgroundColor: "var(--fabric-surface-2)",
-          boxShadow: `inset 0 1px 0 var(--fabric-inner-glow), ${theme.fabric.surface.shadowTight}`,
-          backdropFilter: "blur(var(--fabric-blur-sm))",
+          borderRadius: "var(--radius-capsule)",
+          border: "1px solid var(--surface-border)",
+          backgroundColor: "var(--surface-2)",
+          boxShadow: `inset 0 1px 0 var(--inner-glow), ${theme.fabric.surface.shadowTight}`,
+          backdropFilter: "blur(var(--blur-sm))",
           fontWeight: 500,
         }),
         filled: ({ theme }) => ({
@@ -378,27 +378,27 @@ const createComponentOverrides = (
     MuiInputBase: {
       styleOverrides: {
         root: {
-          borderRadius: "var(--fabric-radius-md)",
+          borderRadius: "var(--radius-md)",
         },
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
         root: ({ theme }) => ({
-          borderRadius: "var(--fabric-radius-md)",
-          backgroundColor: "var(--fabric-surface-2)",
-          boxShadow: `inset 0 1px 0 var(--fabric-inner-glow), 0 1px 0 ${alpha(theme.palette.common.white, mode === "dark" ? 0.04 : 0.46)}`,
+          borderRadius: "var(--radius-md)",
+          backgroundColor: "var(--surface-2)",
+          boxShadow: `inset 0 1px 0 var(--inner-glow), 0 1px 0 ${alpha(theme.palette.common.white, mode === "dark" ? 0.04 : 0.46)}`,
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "var(--fabric-surface-border)",
+            borderColor: "var(--surface-border)",
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "var(--fabric-surface-border-strong)",
+            borderColor: "var(--surface-border-strong)",
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: alpha(theme.palette.primary.main, 0.75),
           },
           "&.Mui-focused": {
-            boxShadow: `0 0 0 3px ${alpha(theme.palette.primary.main, 0.2)}, inset 0 1px 0 var(--fabric-inner-glow)`,
+            boxShadow: `0 0 0 3px ${alpha(theme.palette.primary.main, 0.2)}, inset 0 1px 0 var(--inner-glow)`,
           },
         }),
         input: ({ theme }) => ({
@@ -409,14 +409,14 @@ const createComponentOverrides = (
     MuiTabs: {
       styleOverrides: {
         root: {
-          borderRadius: "var(--fabric-radius-capsule)",
-          border: "1px solid var(--fabric-surface-border)",
-          backgroundColor: "var(--fabric-surface-2)",
+          borderRadius: "var(--radius-capsule)",
+          border: "1px solid var(--surface-border)",
+          backgroundColor: "var(--surface-2)",
           minHeight: 40,
           padding: 4,
         },
         indicator: ({ theme }) => ({
-          borderRadius: "var(--fabric-radius-capsule)",
+          borderRadius: "var(--radius-capsule)",
           height: "calc(100% - 8px)",
           margin: 4,
           backgroundColor: alpha(
@@ -432,7 +432,7 @@ const createComponentOverrides = (
         root: ({ theme }) => ({
           textTransform: "none",
           minHeight: 36,
-          borderRadius: "var(--fabric-radius-capsule)",
+          borderRadius: "var(--radius-capsule)",
           zIndex: 1,
           fontWeight: 600,
           color: theme.palette.text.secondary,
@@ -453,21 +453,21 @@ const createComponentOverrides = (
     MuiListItemButton: {
       styleOverrides: {
         root: ({ theme }) => ({
-          borderRadius: "var(--fabric-radius-md)",
+          borderRadius: "var(--radius-md)",
           border: "1px solid transparent",
           "&:hover": {
             backgroundColor: alpha(
               theme.palette.primary.main,
               mode === "dark" ? 0.16 : 0.1,
             ),
-            borderColor: "var(--fabric-surface-border)",
+            borderColor: "var(--surface-border)",
           },
           "&.Mui-selected": {
             backgroundColor: alpha(
               theme.palette.primary.main,
               mode === "dark" ? 0.22 : 0.14,
             ),
-            borderColor: "var(--fabric-surface-border-strong)",
+            borderColor: "var(--surface-border-strong)",
           },
           "&.Mui-selected:hover": {
             backgroundColor: alpha(
@@ -481,31 +481,31 @@ const createComponentOverrides = (
     MuiMenu: {
       styleOverrides: {
         paper: {
-          borderRadius: "var(--fabric-radius-lg)",
-          border: "1px solid var(--fabric-surface-border)",
-          backgroundColor: "var(--fabric-surface-2)",
-          backdropFilter: "blur(var(--fabric-blur-md))",
-          boxShadow: "var(--fabric-shadow-tight)",
+          borderRadius: "var(--radius-lg)",
+          border: "1px solid var(--surface-border)",
+          backgroundColor: "var(--surface-2)",
+          backdropFilter: "blur(var(--blur-md))",
+          boxShadow: "var(--shadow-tight)",
         },
       },
     },
     MuiPopover: {
       styleOverrides: {
         paper: {
-          borderRadius: "var(--fabric-radius-lg)",
-          border: "1px solid var(--fabric-surface-border)",
-          backgroundColor: "var(--fabric-surface-2)",
-          backdropFilter: "blur(var(--fabric-blur-md))",
+          borderRadius: "var(--radius-lg)",
+          border: "1px solid var(--surface-border)",
+          backgroundColor: "var(--surface-2)",
+          backdropFilter: "blur(var(--blur-md))",
         },
       },
     },
     MuiBottomNavigation: {
       styleOverrides: {
         root: {
-          borderRadius: "var(--fabric-radius-lg)",
-          border: "1px solid var(--fabric-surface-border)",
-          backgroundColor: "var(--fabric-surface-2)",
-          backdropFilter: "blur(var(--fabric-blur-sm))",
+          borderRadius: "var(--radius-lg)",
+          border: "1px solid var(--surface-border)",
+          backgroundColor: "var(--surface-2)",
+          backdropFilter: "blur(var(--blur-sm))",
         },
       },
     },

@@ -41,6 +41,21 @@ export type MediaCyclerProps = {
   allowSwipe?: boolean;
 };
 
+export type AssetImageAsset = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+export type AssetImageProps<TAsset extends AssetImageAsset = AssetImageAsset> =
+  {
+    asset: TAsset;
+    className?: string;
+    priority?: boolean;
+    sizes: string;
+  };
+
 export type DiagramLightBoxProps = {
   diagram: string;
   title: string;

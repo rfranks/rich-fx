@@ -1,6 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import InteractiveViewportShell from "../InteractiveViewportShell";
+import InteractiveViewportShell from "../interactive-viewport-shell/InteractiveViewportShell";
 import type { DiagramCanvasProps } from "@/types/components/shared/visualization";
 
 export default function DiagramCanvas({

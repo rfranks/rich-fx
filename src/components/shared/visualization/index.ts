@@ -1,5 +1,5 @@
-export { Diagram } from "./Diagram";
-export type { DiagramProps } from "./Diagram";
-export { default as Timeline } from "./Timeline";
-export type { TimelineEvent, TimelineProps } from "./Timeline";
-export { Waveform } from "./Waveform";
+export { Diagram } from "./diagram/Diagram";
+export type { DiagramProps } from "./diagram/Diagram";
+export { default as Timeline } from "./timeline/Timeline";
+export type { TimelineEvent, TimelineProps } from "./timeline/Timeline";
+export { Waveform } from "./waveform/Waveform";

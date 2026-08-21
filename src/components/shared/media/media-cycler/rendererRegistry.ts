@@ -26,23 +26,31 @@ const prefetchDiagramType = () => {
       module.prefetchDiagramRendererIntent();
     }),
   );
-  safeImport(import("@/components/shared/media/DiagramLightBox"));
+  safeImport(
+    import("@/components/shared/media/diagram-light-box/DiagramLightBox"),
+  );
   safeImport(import("mermaid"));
 };
 
 const mediaTypePrefetchLoaders: Record<MediaCyclerMediaType, () => void> = {
   image: () => {
     safeImport(import("./renderers/ImageRenderer"));
-    safeImport(import("@/components/shared/content/ImageContent"));
-    safeImport(import("@/components/shared/media/ImageLightbox"));
+    safeImport(
+      import("@/components/shared/content/image-content/ImageContent"),
+    );
+    safeImport(
+      import("@/components/shared/media/image-lightbox/ImageLightbox"),
+    );
   },
   video: () => {
     safeImport(import("./renderers/VideoRenderer"));
-    safeImport(import("@/components/shared/media/VideoLightbox"));
+    safeImport(
+      import("@/components/shared/media/video-lightbox/VideoLightbox"),
+    );
   },
   pdf: () => {
     safeImport(import("./renderers/PdfRenderer"));
-    safeImport(import("@/components/shared/content/PDFContent"));
+    safeImport(import("@/components/shared/content/pdf-content/PDFContent"));
     safeImport(import("pdfjs-dist"));
   },
   diagram: prefetchDiagramType,

@@ -5,7 +5,7 @@ import { createCliOutput } from "./lib/cli-output.mts";
 const out = createCliOutput();
 const rootDir = process.cwd();
 
-const SCAN_ROOTS = ["src", "public/personal/data"] as const;
+const SCAN_ROOTS = ["src", "public/data"] as const;
 const SCAN_EXTENSIONS = new Set([".ts", ".tsx", ".mts", ".js", ".json", ".md"]);
 const IGNORED_DIRS = new Set([
   "node_modules",
@@ -31,7 +31,7 @@ const KNOWN_STALE_ASSET_REFERENCES = new Set([
   "/personal/pdfs/resume.pdf",
 ]);
 const OPTIONAL_GENERATED_ASSET_PATH_PATTERNS = [
-  /^\/personal\/data\/health\/[A-Za-z0-9._-]+\.snapshot\.json$/,
+  /^\/data\/health\/[A-Za-z0-9._-]+\.snapshot\.json$/,
 ] as const;
 
 type AssetUsage = {

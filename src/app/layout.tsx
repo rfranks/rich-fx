@@ -3,7 +3,7 @@ import "./globals.css";
 import ThemeRegistry from "../providers/ThemeRegistry";
 import { portfolioApps } from "@/consts/richFx";
 import RichFxProvider from "@/providers/RichFxProvider";
-import NavigationTelemetry from "@/components/shared/monitoring/NavigationTelemetry";
+import NavigationTelemetry from "@/components/shared/monitoring/navigation-telemetry/NavigationTelemetry";
 import { withBasePath } from "@/utils/basePath";
 
 export const metadata: Metadata = {

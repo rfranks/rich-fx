@@ -21,6 +21,6 @@
     "out",
     "**/*.test.ts",
     "**/*.test.tsx",
-    "src/tests/**"
+    "tests/**"
   ]
 }

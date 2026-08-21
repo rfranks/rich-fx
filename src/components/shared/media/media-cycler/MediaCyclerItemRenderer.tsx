@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { alpha } from "@mui/material/styles";
-import MarkdownContent from "../../content/MarkdownContent";
+import MarkdownContent from "../../content/markdown-content/MarkdownContent";
 import { MEDIA_RENDERER_FALLBACK_SX } from "@/consts/components/shared/mediaCycler";
 import { useMediaCyclerItemRenderer } from "@/hooks/media/useMediaCyclerItemRenderer";
 import type {
@@ -169,7 +169,7 @@ export default function MediaCyclerItemRenderer({
           overflow: "auto",
           borderRadius: { xs: 0, sm: 0, md: "18px" },
           border: { xs: 0, sm: 0, md: "1px solid" },
-          borderColor: "var(--fabric-surface-border)",
+          borderColor: "var(--surface-border)",
           bgcolor:
             theme.palette.mode === "light"
               ? alpha(theme.palette.common.white, 0.7)

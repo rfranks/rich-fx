@@ -19,7 +19,7 @@ type QualityLane =
   | "games"
   | "rickbert-studio"
   | "dna"
-  | "ai-lab";
+  | "ai-studio";
 
 type ParsedArgs = {
   suite: Suite;
@@ -37,7 +37,7 @@ const VALID_LANES: QualityLane[] = [
   "games",
   "rickbert-studio",
   "dna",
-  "ai-lab",
+  "ai-studio",
 ];
 const LANE_TEST_PATTERN: Record<QualityLane, string | null> = {
   portfolio: null,
@@ -48,7 +48,7 @@ const LANE_TEST_PATTERN: Record<QualityLane, string | null> = {
   games: "warbirds|zombiefish|blasteroids|bookworm|games",
   "rickbert-studio": "rickbert",
   dna: "dna",
-  "ai-lab": "ai-lab|AILab",
+  "ai-studio": "ai-studio|AIStudio|AI Studio",
 };
 
 function parseArgs(argv: string[]): ParsedArgs {
@@ -87,7 +87,7 @@ function getSnapshotKeyForSuite(suite: Suite): HealthSnapshotKey {
 function getDefaultJestArgs(suite: Suite, lane: QualityLane): string[] {
   const lanePattern = LANE_TEST_PATTERN[lane];
   if (suite === "a11y") {
-    const args = ["src/tests/accessibility", "--runInBand"];
+    const args = ["tests/accessibility", "--runInBand"];
     if (lanePattern) {
       args.push("--passWithNoTests", "--testPathPattern", lanePattern);
     }

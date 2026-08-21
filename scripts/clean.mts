@@ -11,8 +11,8 @@ const cleanTargets = [
   ".turbo",
   "out",
   "coverage",
-  "public/personal/data/health",
-  "public/personal/data/search",
+  "public/data/health",
+  "public/data/search",
 ] as const;
 
 async function removeTarget(

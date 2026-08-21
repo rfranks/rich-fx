@@ -23,8 +23,17 @@ This file defines how agentic coding tools should work in this repository so the
   - `src/app/<app-name>/_types`
   - `src/app/<app-name>/_consts`
   - `src/app/<app-name>/_theme`
+- Route groups follow the same rule. The root homepage is implemented as `src/app/(home)/page.tsx`, with the route page shell under `src/app/(home)/_components` and route-owned state contracts under `_types` and `_consts`.
+- Route-specific page shells must live beside their route entrypoint:
+  - `src/app/what-we-do/page.tsx` uses `src/app/what-we-do/_components` for the What We Do page shell and `src/app/what-we-do/_types`, `_consts`, and `_utils` for route-owned contracts/data shaping.
+  - `src/app/ai-studio/page.tsx` and `src/app/ai-studio/PageClient.tsx` use `src/app/ai-studio/_components`, `_hooks`, `_types`, `_consts`, and `_utils`.
 - Treat underscore-prefixed app folders as private implementation details for that app surface.
+- Do not put route page shells in `src/app/_components`.
+- Components that are generic enough to be reused across app routes, or intentionally designed as app-level section primitives, should live in `src/app/_components` even if their first consumer is one route.
+- Current valid app-level shared components include `SiteHeader`, `Panel`, `SongRecording`, `RightsStamp`, `SourceCredit`, home viewers/CTA sections, and What We Do section primitives such as `SectionKicker`, `InlineVideo`, `ScoreReveal`, `StickyNarrative`, `ExperimentCard`, and `ScrollRuntime`.
 - If a module is reused across apps or portfolio surfaces, promote it out of app-private folders into global shared locations:
+  - app-route shared composites -> `src/app/_components`
+  - app-route shared type contracts -> `src/app/_types`
   - UI primitives/composites -> `src/components/shared`
   - reusable hooks -> `src/hooks`
   - reusable utilities -> `src/utils`
@@ -37,6 +46,8 @@ This file defines how agentic coding tools should work in this repository so the
 - `src/app`:
   - Route entrypoints, page/layout wiring, and app-local orchestration.
   - App-private internals stay in underscore folders under each app (`_components`, `_hooks`, `_utils`, `_types`, `_consts`, `_theme`).
+  - `src/app/_components` is for app-level reusable components and section primitives; route page shells stay in their route `_components`.
+  - `src/app/_types` is for app-route shared component contracts; route-owned data contracts can stay under route `_types` even when an app-level component consumes them.
 - `src/components`:
   - React component composition only.
   - `src/components/shared`: globally reusable, cross-app UI components.
@@ -66,6 +77,10 @@ This file defines how agentic coding tools should work in this repository so the
 
 ### 0.2) Shared component conventions
 
+- `src/app/_components` is app-shell shared, not globally shared. Use it for reusable app-route composites and section primitives that depend on Next app routing, app-level styling, or route-owned media contracts.
+- "Shared" here does not require two current consumers. A component may live in `src/app/_components` when it is intentionally generic enough for reuse and is not itself a route page shell.
+- Page-surface CSS modules stay beside the route page shell they style, even when app-level section components consume those classes.
+- `src/components/shared` is framework/domain shared and should remain reusable outside a single app route family.
 - `src/components/shared` is domain-first:
   - `content`, `media`, `loading`, `visualization`, `controls`, etc.
 - Keep shared component files as `PascalCase.tsx` in the domain folder.
@@ -76,7 +91,7 @@ This file defines how agentic coding tools should work in this repository so the
 
 ### 1) Contract-first data model
 
-- Source of truth: `public/personal/data/richFx.json`.
+- Source of truth: `public/data/richFx.json`.
 - Validate shape with `src/consts/richFxSchema.ts`.
 - Evolve shape through versioned migrations in `src/utils/data/migrations/richFxMigrations.ts`.
 - Validate content through the runtime schema and schema/migration tests.
@@ -140,8 +155,18 @@ This file defines how agentic coding tools should work in this repository so the
 ### 8) Extract consts/types/utils out of component files
 
 - Avoid heavy local constants/types/utils in component modules.
-- Place them in domain folders under `src/consts`, `src/types`, `src/utils`, or feature `_types/_utils`.
+- Place route-private items in the route `_consts`, `_types`, `_utils`, or `_hooks` folders.
+- Place app-route shared items in `src/app/_types` or app-level shared component folders when they are only used by `src/app/_components`.
+- Place globally reusable items in domain folders under `src/consts`, `src/types`, `src/utils`, or `src/hooks`.
 - Keep components mostly composition/render logic.
+- Avoid local `renderThing` JSX closures when a props-driven component is practical. Extract reusable visual fragments, such as source credits, rights stamps, media panels, and credit blocks, into their own component folders.
+
+### 9) Tests live outside production source
+
+- Project-level tests live in top-level `tests/`, not under `src/`.
+- Jest setup and mocks live under `tests/setup.ts` and `tests/mocks/*`.
+- Keep production imports in tests through the `@/` alias or explicit top-level paths; do not move test-only helpers into `src`.
+- If test location changes, update `jest.config.js`, `scripts/run-jest-with-health.mts`, and TypeScript exclude rules together.
 
 ## Agentic Change Workflow
 
@@ -174,11 +199,11 @@ Apply in this order when applicable:
 
 At minimum, update relevant tests when touching:
 
-- schema/migrations: `src/tests/richFxSchema.test.ts`
-- media behavior: `src/tests/MediaCycler.integration.test.tsx`
-- hydration-sensitive diagram behavior: `src/tests/Diagram.hydration.test.tsx`
-- presentation routing/deep links: contract tests under `src/tests/*routing*.test.ts`
-- accessibility impacts: tests under `src/tests/accessibility/`
+- schema/migrations: `tests/richFxSchema.test.ts`
+- media behavior: `tests/MediaCycler.integration.test.tsx`
+- hydration-sensitive diagram behavior: `tests/Diagram.hydration.test.tsx`
+- presentation routing/deep links: contract tests under `tests/*routing*.test.ts`
+- accessibility impacts: tests under `tests/accessibility/`
 
 ### Step 5: Run quality gates
 
@@ -211,18 +236,20 @@ Run targeted first, then full gate:
 
 Use this matrix as the minimum required verification set.
 
-| Change type                                                       | Required commands                                                                         | Optional/when needed                                                     |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Pure UI/layout/styling in existing component                      | `npm run check:file-budgets`, `npm run format:check`, `npm run typecheck`, `npm run lint` | `npm run test` if interaction behavior changed                           |
-| Pager/media/gesture/input behavior                                | `npm run check:file-budgets`, `npm run typecheck`, `npm run lint`, `npm run test`         | `npm run test:a11y` for keyboard/focus/dialog changes                    |
-| Shared component API changes (`src/components/shared/**`)         | `npm run check:file-budgets`, `npm run typecheck`, `npm run lint`, `npm run test`         | `npm run check:bundle-budget` for heavy media/visualization impacts      |
-| Hook/controller/orchestration refactors                           | `npm run check:file-budgets`, `npm run typecheck`, `npm run lint`, `npm run test`         | `npm run typecheck:strict` when tightening contracts                     |
-| `richFx.json` content-only edits                                  | `npm run test` when content affects routing/selection logic                               |                                                                          |
-| Schema/contract/migration edits (`richFxSchema`/migrations/types) | `npm run typecheck`, `npm run lint`, `npm run test`                                       | `npm run typecheck:strict` for stricter policy additions                 |
-| Routing/deep-link/project presentation contract changes           | `npm run typecheck`, `npm run lint`, `npm run test`                                       | `npm run check:bundle-budget` if lazy boundaries or route chunks changed |
-| Telemetry/observability changes                                   | `npm run typecheck`, `npm run lint`, `npm run test`                                       | capture/update health snapshots when relevant                            |
-| Script/tooling/CI checks (`scripts/**`, hooks, budgets)           | `npm run typecheck`, `npm run lint`, `npm run test`, `npm run check:repo-hygiene`         | run affected script directly (example: `npm run check:file-budgets`)     |
-| Pre-push readiness (any significant branch)                       | `npm run prepr`                                                                           | `npm run build` only when user asks or release-critical                  |
+| Change type                                                       | Required commands                                                                                         | Optional/when needed                                                     |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Pure UI/layout/styling in existing component                      | `npm run check:file-budgets`, `npm run format:check`, `npm run typecheck`, `npm run lint`                 | `npm run test` if interaction behavior changed                           |
+| Pager/media/gesture/input behavior                                | `npm run check:file-budgets`, `npm run typecheck`, `npm run lint`, `npm run test`                         | `npm run test:a11y` for keyboard/focus/dialog changes                    |
+| Shared component API changes (`src/components/shared/**`)         | `npm run check:file-budgets`, `npm run typecheck`, `npm run lint`, `npm run test`                         | `npm run check:bundle-budget` for heavy media/visualization impacts      |
+| App route shared component changes (`src/app/_components/**`)     | `npm run check:file-budgets`, `npm run typecheck`, `npm run lint`, `npm run test`                         | `npm run test:a11y` for dialogs/media/header navigation                  |
+| Route ownership moves (`src/app/<route>/**`, `src/app/(home)/**`) | `npm run check:file-budgets`, `npm run format:check`, `npm run typecheck`, `npm run lint`, `npm run test` | `npm run test:a11y` if navigation, media, or focus behavior moved        |
+| Hook/controller/orchestration refactors                           | `npm run check:file-budgets`, `npm run typecheck`, `npm run lint`, `npm run test`                         | `npm run typecheck:strict` when tightening contracts                     |
+| `richFx.json` content-only edits                                  | `npm run test` when content affects routing/selection logic                                               |                                                                          |
+| Schema/contract/migration edits (`richFxSchema`/migrations/types) | `npm run typecheck`, `npm run lint`, `npm run test`                                                       | `npm run typecheck:strict` for stricter policy additions                 |
+| Routing/deep-link/project presentation contract changes           | `npm run typecheck`, `npm run lint`, `npm run test`                                                       | `npm run check:bundle-budget` if lazy boundaries or route chunks changed |
+| Telemetry/observability changes                                   | `npm run typecheck`, `npm run lint`, `npm run test`                                                       | capture/update health snapshots when relevant                            |
+| Script/tooling/CI checks (`scripts/**`, hooks, budgets)           | `npm run typecheck`, `npm run lint`, `npm run test`, `npm run check:repo-hygiene`                         | run affected script directly (example: `npm run check:file-budgets`)     |
+| Pre-push readiness (any significant branch)                       | `npm run prepr`                                                                                           | `npm run build` only when user asks or release-critical                  |
 
 ### Step 7: Expensive checks policy
 

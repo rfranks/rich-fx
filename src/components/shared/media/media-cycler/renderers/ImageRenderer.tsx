@@ -2,8 +2,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import OpenInFull from "@mui/icons-material/OpenInFull";
 import { alpha } from "@mui/material/styles";
-import ImageContent from "@/components/shared/content/ImageContent";
-import ImageLightbox from "@/components/shared/media/ImageLightbox";
+import ImageContent from "@/components/shared/content/image-content/ImageContent";
+import ImageLightbox from "@/components/shared/media/image-lightbox/ImageLightbox";
 import type { ImageRendererProps } from "@/types/components/shared/media";
 import { flattenMediaCyclerSxArray } from "@/utils/media/mediaCyclerSx";
 

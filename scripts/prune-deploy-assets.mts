@@ -8,7 +8,7 @@ const args = new Set(process.argv.slice(2));
 const dryRun = args.has("--dry-run");
 
 const sourceRoots = ["src"] as const;
-const richFxDataPath = "public/personal/data/richFx.json";
+const richFxDataPath = "public/data/richFx.json";
 const sourceExtensions = new Set([
   ".css",
   ".js",
@@ -57,7 +57,7 @@ const pruneTargets = [
     root: "public/assets/portfolio",
   },
   {
-    label: "ai-lab",
+    label: "ai-studio",
     publicPathPrefix: "/personal/images/ai-lab/",
     root: "public/personal/images/ai-lab",
   },

@@ -94,6 +94,7 @@ export interface MarkdownContentProps {
   content: string;
   className?: string;
   color?: TypographyProps["color"];
+  preserveLineBreaks?: boolean;
   sx?: SxProps<Theme>;
   variant?: TypographyProps["variant"];
   riskHudColorize?: boolean;

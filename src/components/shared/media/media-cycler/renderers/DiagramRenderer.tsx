@@ -8,7 +8,7 @@ import {
 } from "@/utils/components/shared/media";
 
 const loadDiagramLightBoxModule = () =>
-  import("@/components/shared/media/DiagramLightBox");
+  import("@/components/shared/media/diagram-light-box/DiagramLightBox");
 const LazyDiagramLightBox = React.lazy(loadDiagramLightBoxModule);
 let hasPrefetchedDiagramIntent = false;
 

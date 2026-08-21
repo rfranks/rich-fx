@@ -6,11 +6,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..", "..");
 
-export const HEALTH_SNAPSHOT_PUBLIC_BASE_PATH = "/personal/data/health";
+export const HEALTH_SNAPSHOT_PUBLIC_BASE_PATH = "/data/health";
 export const HEALTH_SNAPSHOT_DIR = path.join(
   repoRoot,
   "public",
-  "personal",
   "data",
   "health",
 );
