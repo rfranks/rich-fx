@@ -100,10 +100,6 @@ export default function StartProjectEmailStep({
           message to paste into your favorite email client, or click Open email
           to open your default mailto: client.
         </Typography>
-        <Alert severity="warning" sx={{ mt: 2 }}>
-          Remember to attach any useful photos or reference files before sending
-          your email!
-        </Alert>
       </div>
       <div className={[styles.fieldGrid, styles.emailPreviewGrid].join(" ")}>
         <div className={[styles.fullField, styles.emailPreviewField].join(" ")}>

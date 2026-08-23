@@ -1,8 +1,7 @@
 import type {
   StartProjectFormState,
-  StartProjectMaterialId,
+  StartProjectOccasionOption,
   StartProjectOption,
-  StartProjectOutputId,
   StartProjectProjectType,
   StartProjectStep,
 } from "@/app/_types/startProjectWizard";
@@ -10,7 +9,6 @@ import { DEFAULT_IMAGE_STYLE_SAMPLE_SLUG } from "@/app/_consts/imageStyleSampler
 
 export const START_PROJECT_STEPS: StartProjectStep[] = [
   { id: "project", label: "Project" },
-  { id: "source", label: "Source" },
   { id: "details", label: "Details" },
   { id: "contact", label: "Contact" },
   { id: "email", label: "Email" },
@@ -68,88 +66,26 @@ export const START_PROJECT_PROJECT_OPTIONS: StartProjectOption<StartProjectProje
     },
   ];
 
-export const START_PROJECT_MATERIAL_OPTIONS: StartProjectOption<StartProjectMaterialId>[] =
-  [
-    {
-      id: "photos",
-      label: "Photos",
-      description: "Portraits, group shots, pets, places, or objects.",
-      iconKey: "spark",
-    },
-    {
-      id: "reference",
-      label: "Style reference",
-      description: "A look, world, genre, or example you like.",
-      iconKey: "cartoon",
-    },
-    {
-      id: "names-dates",
-      label: "Names and dates",
-      description: "Personal copy that needs to appear in the piece.",
-      iconKey: "calendar",
-    },
-    {
-      id: "story",
-      label: "Story idea",
-      description: "A scene, character, joke, or tiny narrative.",
-      iconKey: "movie",
-    },
-    {
-      id: "lyrics",
-      label: "Lyrics or phrases",
-      description: "Lines, titles, or musical direction.",
-      iconKey: "song",
-    },
-  ];
-
-export const START_PROJECT_OUTPUT_OPTIONS: StartProjectOption<StartProjectOutputId>[] =
-  [
-    {
-      id: "print-card",
-      label: "Print card",
-      description: "Card-ready image and text direction.",
-      iconKey: "holiday",
-    },
-    {
-      id: "calendar",
-      label: "Calendar",
-      description: "Month art, dates, and seasonal variations.",
-      iconKey: "calendar",
-    },
-    {
-      id: "image-set",
-      label: "Image set",
-      description: "Several polished still-image variations.",
-      iconKey: "cartoon",
-    },
-    {
-      id: "short-video",
-      label: "Short video",
-      description: "A compact cinematic motion render.",
-      iconKey: "movie",
-    },
-    {
-      id: "song",
-      label: "Song",
-      description: "Lyrics, voice, style, and finished audio.",
-      iconKey: "song",
-    },
-    {
-      id: "album-art",
-      label: "Album art",
-      description: "Cover art to wrap a song or gift.",
-      iconKey: "spark",
-    },
-  ];
+export const START_PROJECT_OCCASION_OPTIONS: StartProjectOccasionOption[] = [
+  { id: "gift", label: "Gift" },
+  { id: "holiday", label: "Holiday" },
+  { id: "birthday", label: "Birthday" },
+  { id: "vacation", label: "Vacation" },
+  { id: "retirement", label: "Retirement" },
+  { id: "wedding", label: "Wedding" },
+  { id: "birth", label: "Birth" },
+  { id: "just-because", label: "Just Because" },
+  { id: "anniversary", label: "Anniversary" },
+  { id: "graduation", label: "Graduation" },
+  { id: "memorial", label: "Memorial" },
+  { id: "business", label: "Business" },
+  { id: "other", label: "Other" },
+];
 
 export const START_PROJECT_INITIAL_FORM: StartProjectFormState = {
   projectType: "",
-  materials: [],
-  outputs: [],
-  featuredSubject: "",
-  sourceNotes: "",
-  styleDirection: "",
   imageStyleSlug: DEFAULT_IMAGE_STYLE_SAMPLE_SLUG,
+  occasionType: "",
   occasion: "",
   requiredText: "",
   deadline: "",

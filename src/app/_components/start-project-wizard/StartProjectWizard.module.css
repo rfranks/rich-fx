@@ -257,37 +257,25 @@
   grid-column: 1 / -1;
 }
 
-.chipField {
-  display: grid;
-  gap: 10px;
-  padding: 0;
-  border: 0;
-}
-
 .chipLegend {
+  margin: 0;
   color: var(--richfx-text);
+  font-family: inherit;
   font-size: 0.82rem;
   font-weight: 800;
+  line-height: normal;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-}
-
-.chipGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.dividerSection {
-  padding: 16px 0;
-  border-top: 1px solid var(--surface-border);
-  border-bottom: 1px solid var(--surface-border);
 }
 
 .imageStyleSelector {
   display: grid;
   gap: 10px;
+}
+
+.imageStyleDividerSection {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--surface-border);
 }
 
 .imageStylePicker {
@@ -489,10 +477,6 @@
 
   .fieldGrid {
     grid-template-columns: 1fr;
-  }
-
-  .dividerSection {
-    padding: 12px 0;
   }
 }
 

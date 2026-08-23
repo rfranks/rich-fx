@@ -33,7 +33,7 @@ export default function ImageStyleSampler({
         ...sample,
         key: sample.slug,
         label: formatImageStylePickerLabel(sample.label),
-        secondaryLabel: "Same portrait, different generated visual language.",
+        secondaryLabel: sample.description,
       })),
     [samples],
   );

@@ -1,46 +1,88 @@
+import { useEffect, useRef } from "react";
+import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { START_PROJECT_OUTPUT_OPTIONS } from "@/app/_consts/startProjectWizard";
+import { START_PROJECT_OCCASION_OPTIONS } from "@/app/_consts/startProjectWizard";
 import type {
-  StartProjectIconMap,
+  StartProjectOccasionId,
   StartProjectStepComponentProps,
 } from "@/app/_types/startProjectWizard";
-import StartProjectChipField from "./StartProjectChipField";
+import StartProjectImageStyleSelector from "./StartProjectImageStyleSelector";
 import styles from "./StartProjectWizard.module.css";
 
 export default function StartProjectDetailsStep({
   form,
-  iconMap,
   onChange,
-  onToggleOutput,
-}: StartProjectStepComponentProps & { iconMap: StartProjectIconMap }) {
+}: StartProjectStepComponentProps) {
+  const otherOccasionInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (form.occasionType === "other") {
+      otherOccasionInputRef.current?.focus();
+    }
+  }, [form.occasionType]);
+
+  const handleOccasionChange = (value: string) => {
+    const occasionType = value as StartProjectOccasionId | "";
+    const selectedOccasion = START_PROJECT_OCCASION_OPTIONS.find(
+      (option) => option.id === occasionType,
+    );
+
+    onChange("occasionType", occasionType);
+    onChange(
+      "occasion",
+      occasionType === "other" ? "" : (selectedOccasion?.label ?? ""),
+    );
+  };
+
   return (
     <div className={styles.stepBody}>
       <div>
         <Typography variant="h5" component="h2">
-          What does it need to become?
-        </Typography>
-        <Typography color="text.secondary">
-          Occasion, output, must-have copy, and timing.
+          What should we create?
         </Typography>
       </div>
-      <div className={styles.dividerSection}>
-        <StartProjectChipField
-          iconMap={iconMap}
-          legend="Desired output"
-          options={START_PROJECT_OUTPUT_OPTIONS}
-          selectedIds={form.outputs}
-          onToggle={onToggleOutput}
+      <div className={styles.imageStyleDividerSection}>
+        <StartProjectImageStyleSelector
+          selectedSlug={form.imageStyleSlug}
+          onChange={(value) => onChange("imageStyleSlug", value)}
         />
       </div>
       <div className={styles.fieldGrid}>
         <TextField
+          className={styles.fullField}
           label="Occasion or purpose"
-          value={form.occasion}
-          onChange={(event) => onChange("occasion", event.target.value)}
-        />
+          select
+          value={form.occasionType}
+          onChange={(event) => handleOccasionChange(event.target.value)}
+        >
+          <MenuItem disabled value="">
+            Select occasion or purpose
+          </MenuItem>
+          {START_PROJECT_OCCASION_OPTIONS.map((option) => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        {form.occasionType === "other" ? (
+          <TextField
+            className={styles.fullField}
+            inputRef={otherOccasionInputRef}
+            label="Other occasion or purpose"
+            value={form.occasion}
+            onChange={(event) => onChange("occasion", event.target.value)}
+          />
+        ) : null}
         <TextField
-          label="Timeline"
+          className={styles.fullField}
+          label="Target Delivery Date"
+          type="date"
+          slotProps={{
+            inputLabel: {
+              shrink: true,
+            },
+          }}
           value={form.deadline}
           onChange={(event) => onChange("deadline", event.target.value)}
         />

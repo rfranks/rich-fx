@@ -1,11 +1,6 @@
 import type { ReactNode } from "react";
 
-export type StartProjectStepId =
-  | "project"
-  | "source"
-  | "details"
-  | "contact"
-  | "email";
+export type StartProjectStepId = "project" | "details" | "contact" | "email";
 
 export type StartProjectProjectType =
   | "holiday-card"
@@ -17,20 +12,20 @@ export type StartProjectProjectType =
   | "song"
   | "not-sure";
 
-export type StartProjectMaterialId =
-  | "photos"
-  | "reference"
-  | "names-dates"
-  | "story"
-  | "lyrics";
-
-export type StartProjectOutputId =
-  | "print-card"
-  | "calendar"
-  | "image-set"
-  | "short-video"
-  | "song"
-  | "album-art";
+export type StartProjectOccasionId =
+  | "gift"
+  | "holiday"
+  | "birthday"
+  | "vacation"
+  | "retirement"
+  | "wedding"
+  | "birth"
+  | "just-because"
+  | "anniversary"
+  | "graduation"
+  | "memorial"
+  | "business"
+  | "other";
 
 export type StartProjectIconKey =
   | "holiday"
@@ -54,14 +49,15 @@ export type StartProjectStep = {
   label: string;
 };
 
+export type StartProjectOccasionOption = {
+  id: StartProjectOccasionId;
+  label: string;
+};
+
 export type StartProjectFormState = {
   projectType: StartProjectProjectType | "";
-  materials: StartProjectMaterialId[];
-  outputs: StartProjectOutputId[];
-  featuredSubject: string;
-  sourceNotes: string;
-  styleDirection: string;
   imageStyleSlug: string;
+  occasionType: StartProjectOccasionId | "";
   occasion: string;
   requiredText: string;
   deadline: string;
@@ -83,13 +79,6 @@ export type StartProjectChoiceCardProps<TId extends string> = {
   onSelect: (id: TId) => void;
 };
 
-export type StartProjectChipFieldProps<TId extends string> = {
-  legend: string;
-  options: StartProjectOption<TId>[];
-  selectedIds: TId[];
-  onToggle: (id: TId) => void;
-};
-
 export type StartProjectStepComponentProps = {
   form: StartProjectFormState;
   emailBody?: string;
@@ -97,8 +86,6 @@ export type StartProjectStepComponentProps = {
     key: TKey,
     value: StartProjectFormState[TKey],
   ) => void;
-  onToggleMaterial: (id: StartProjectMaterialId) => void;
-  onToggleOutput: (id: StartProjectOutputId) => void;
 };
 
 export type StartProjectIconMap = Record<StartProjectIconKey, ReactNode>;

@@ -20,7 +20,7 @@ export default function StartProjectProjectStep({
           What are we making?
         </Typography>
         <Typography color="text.secondary">
-          Pick the closest starting point.
+          Pick a starting point for your project.
         </Typography>
       </div>
       <div className={styles.choiceGrid}>

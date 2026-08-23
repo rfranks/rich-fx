@@ -33,20 +33,16 @@ import {
 import type {
   StartProjectFormState,
   StartProjectIconMap,
-  StartProjectMaterialId,
-  StartProjectOutputId,
   StartProjectWizardProps,
 } from "@/app/_types/startProjectWizard";
 import {
   buildStartProjectEmailBody,
   buildStartProjectMailto,
-  toggleStartProjectValue,
 } from "@/app/_utils/startProjectWizard";
 import StartProjectContactStep from "./StartProjectContactStep";
 import StartProjectDetailsStep from "./StartProjectDetailsStep";
 import StartProjectEmailStep from "./StartProjectEmailStep";
 import StartProjectProjectStep from "./StartProjectProjectStep";
-import StartProjectSourceStep from "./StartProjectSourceStep";
 import { useStartProjectBodyScrollLock } from "./useStartProjectBodyScrollLock";
 import styles from "./StartProjectWizard.module.css";
 
@@ -87,6 +83,7 @@ export default function StartProjectWizard({
     [],
   );
   const isLastStep = activeStep === START_PROJECT_STEPS.length - 1;
+  const activeStepId = START_PROJECT_STEPS[activeStep]?.id;
   const contactStepIndex = START_PROJECT_STEPS.findIndex(
     (step) => step.id === "contact",
   );
@@ -120,20 +117,6 @@ export default function StartProjectWizard({
     }
   };
 
-  const handleToggleMaterial = (id: StartProjectMaterialId) => {
-    setForm((currentForm) => ({
-      ...currentForm,
-      materials: toggleStartProjectValue(currentForm.materials, id),
-    }));
-  };
-
-  const handleToggleOutput = (id: StartProjectOutputId) => {
-    setForm((currentForm) => ({
-      ...currentForm,
-      outputs: toggleStartProjectValue(currentForm.outputs, id),
-    }));
-  };
-
   const handleNext = () => {
     goToStep(activeStep + 1);
   };
@@ -144,11 +127,7 @@ export default function StartProjectWizard({
 
   const handleReset = () => {
     goToStep(0);
-    setForm({
-      ...START_PROJECT_INITIAL_FORM,
-      materials: [],
-      outputs: [],
-    });
+    setForm(START_PROJECT_INITIAL_FORM);
   };
 
   const handleOpenEmail = () => {
@@ -159,8 +138,6 @@ export default function StartProjectWizard({
     form,
     iconMap,
     onChange: handleChange,
-    onToggleMaterial: handleToggleMaterial,
-    onToggleOutput: handleToggleOutput,
   };
 
   return (
@@ -229,18 +206,23 @@ export default function StartProjectWizard({
         <Box
           className={[
             styles.stepFrame,
-            activeStep === 4 ? styles.emailStepFrame : undefined,
+            activeStepId === "email" ? styles.emailStepFrame : undefined,
             stepDirection === "forward"
               ? styles.stepFrameForward
               : styles.stepFrameBack,
           ].join(" ")}
           key={activeStep}
         >
-          {activeStep === 0 ? <StartProjectProjectStep {...stepProps} /> : null}
-          {activeStep === 1 ? <StartProjectSourceStep {...stepProps} /> : null}
-          {activeStep === 2 ? <StartProjectDetailsStep {...stepProps} /> : null}
-          {activeStep === 3 ? <StartProjectContactStep {...stepProps} /> : null}
-          {activeStep === 4 ? (
+          {activeStepId === "project" ? (
+            <StartProjectProjectStep {...stepProps} />
+          ) : null}
+          {activeStepId === "details" ? (
+            <StartProjectDetailsStep {...stepProps} />
+          ) : null}
+          {activeStepId === "contact" ? (
+            <StartProjectContactStep {...stepProps} />
+          ) : null}
+          {activeStepId === "email" ? (
             <StartProjectEmailStep {...stepProps} emailBody={emailBody} />
           ) : null}
         </Box>

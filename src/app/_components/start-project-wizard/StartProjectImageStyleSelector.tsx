@@ -29,7 +29,7 @@ export default function StartProjectImageStyleSelector({
         ...sample,
         key: sample.slug,
         label: formatImageStylePickerLabel(sample.label),
-        secondaryLabel: "Same portrait, different generated visual language.",
+        secondaryLabel: sample.description,
       })),
     [],
   );
@@ -37,11 +37,9 @@ export default function StartProjectImageStyleSelector({
   return (
     <div className={styles.imageStyleSelector}>
       <div>
-        <Typography className={styles.chipLegend} component="h3">
-          Image style
-        </Typography>
+        <h3 className={styles.chipLegend}>Pick a visual style</h3>
         <Typography color="text.secondary" variant="body2">
-          Choose a visual language for this project&apos;s imagery.
+          Choose a visual style for your project.
         </Typography>
       </div>
       <Picker
