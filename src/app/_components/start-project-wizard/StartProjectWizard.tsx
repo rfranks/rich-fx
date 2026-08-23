@@ -11,6 +11,7 @@ import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import PaletteIcon from "@mui/icons-material/Palette";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
+import TheatersIcon from "@mui/icons-material/Theaters";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -77,6 +78,7 @@ export default function StartProjectWizard({
       fantasy: <CastleIcon sx={iconSx} />,
       game: <SportsEsportsIcon sx={iconSx} />,
       movie: <MovieCreationIcon sx={iconSx} />,
+      moviePoster: <TheatersIcon sx={iconSx} />,
       song: <MusicNoteIcon sx={iconSx} />,
       spark: <AutoAwesomeIcon sx={iconSx} />,
     }),

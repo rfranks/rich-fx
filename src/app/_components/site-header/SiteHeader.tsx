@@ -5,10 +5,20 @@ import StartProjectButton from "@/app/_components/start-project-button/StartProj
 import type { SiteHeaderProps } from "@/app/_types/siteHeader";
 import { withBasePath } from "@/utils/basePath";
 import styles from "./SiteHeader.module.css";
+import { useMemo } from "react";
 
 export default function SiteHeader({
   showStartProject = false,
+  showWhatWeDo = false,
 }: SiteHeaderProps) {
+  const LINKS = useMemo(() => {
+    if (!showWhatWeDo) {
+      return SITE_HEADER_LINKS.filter((link) => link.href !== "/what-we-do");
+    }
+
+    return SITE_HEADER_LINKS;
+  }, [showWhatWeDo]);
+
   return (
     <header className={styles.header}>
       <Link href="/" className={styles.brand} aria-label="RichFX home">
@@ -23,7 +33,7 @@ export default function SiteHeader({
         />
       </Link>
       <nav aria-label="Primary navigation">
-        {SITE_HEADER_LINKS.map((link) => (
+        {LINKS.map((link) => (
           <Link
             className={link.href === "/ai-studio" ? styles.handheldHidden : ""}
             href={link.href}

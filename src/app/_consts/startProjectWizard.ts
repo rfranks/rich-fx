@@ -53,6 +53,12 @@ export const START_PROJECT_PROJECT_OPTIONS: StartProjectOption<StartProjectProje
       iconKey: "movie",
     },
     {
+      id: "movie-poster",
+      label: "Movie Poster",
+      description: "A cinematic one-sheet for a person, story, or idea.",
+      iconKey: "moviePoster",
+    },
+    {
       id: "song",
       label: "Custom song",
       description: "Lyrics, audio, and album art from an idea.",

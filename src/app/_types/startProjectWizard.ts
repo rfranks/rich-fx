@@ -9,6 +9,7 @@ export type StartProjectProjectType =
   | "fantasy"
   | "game"
   | "movie"
+  | "movie-poster"
   | "song"
   | "not-sure";
 
@@ -34,6 +35,7 @@ export type StartProjectIconKey =
   | "fantasy"
   | "game"
   | "movie"
+  | "moviePoster"
   | "song"
   | "spark";
 
