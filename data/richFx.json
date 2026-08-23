@@ -176,7 +176,11 @@
       "stylizedSource": "AI generated image",
       "movieRendering": "/personal/images/ai-lab/kratos/movie.mp4",
       "movieSource": "AI generated video",
-      "movieCaption": "A slow-burning cinematic sequence emphasizing presence and power—wind, ash, and controlled motion frame a stoic warrior preparing for battle."
+      "movieCaption": "A slow-burning cinematic sequence emphasizing presence and power—wind, ash, and controlled motion frame a stoic warrior preparing for battle.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1122,
+      "stylizedRenderingHeight": 1402
     },
     {
       "slug": "the-creed",
@@ -191,7 +195,11 @@
       "stylizedSource": "AI generated image",
       "movieRendering": "/personal/images/ai-lab/the-creed/movie.mp4",
       "movieSource": "AI generated video",
-      "movieCaption": "A cinematic rooftop sequence blending stealth and motion, culminating in a controlled leap from the skyline into the unknown below."
+      "movieCaption": "A cinematic rooftop sequence blending stealth and motion, culminating in a controlled leap from the skyline into the unknown below.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1122,
+      "stylizedRenderingHeight": 1402
     },
     {
       "slug": "samus-aran",
@@ -210,7 +218,13 @@
       "storyboardCaption": "A storyboard-style planning frame that establishes the game-inspired action beat before motion.",
       "movieRendering": "/assets/portfolio/RichardFranksAs/RichardFranksAs_SamusAran/movie.mov",
       "movieSource": "AI generated video",
-      "movieCaption": "The armored sci-fi character direction becomes a short cinematic motion test with game-world energy, movement, and atmosphere."
+      "movieCaption": "The armored sci-fi character direction becomes a short cinematic motion test with game-world energy, movement, and atmosphere.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1536,
+      "stylizedRenderingHeight": 1024,
+      "storyboardImageWidth": 1536,
+      "storyboardImageHeight": 1024
     },
     {
       "slug": "ryu-from-street-fighter",
@@ -229,7 +243,13 @@
       "storyboardCaption": "A photorealistic game-character treatment that bridges the headshot reference and stylized action frame.",
       "movieRendering": "/assets/portfolio/RichardFranksAs/RichardFranksAs_RyuFromStreetFighter/movie.mp4",
       "movieSource": "AI generated video",
-      "movieCaption": "The game-fighter direction becomes a short cinematic motion test with arcade-style impact, movement, and atmosphere."
+      "movieCaption": "The game-fighter direction becomes a short cinematic motion test with arcade-style impact, movement, and atmosphere.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1402,
+      "stylizedRenderingHeight": 1122,
+      "storyboardImageWidth": 1402,
+      "storyboardImageHeight": 1122
     },
     {
       "slug": "bioshock",
@@ -248,7 +268,55 @@
       "storyboardCaption": "A storyboard-style planning frame that establishes the underwater game-inspired action beat before motion.",
       "movieRendering": "/assets/portfolio/RichardFranksIn/RichardFranksIn_BioShock/movie.mov",
       "movieSource": "AI generated video",
-      "movieCaption": "The underwater game-world direction becomes a short cinematic motion test with moody atmosphere, movement, and retro-futurist energy."
+      "movieCaption": "The underwater game-world direction becomes a short cinematic motion test with moody atmosphere, movement, and retro-futurist energy.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1402,
+      "stylizedRenderingHeight": 1122,
+      "storyboardImageWidth": 1536,
+      "storyboardImageHeight": 1024
+    }
+  ],
+  "dndCharacters": [
+    {
+      "slug": "dnd-necromancer",
+      "title": "Necromancer",
+      "orientation": "portrait",
+      "realisticImage": "/personal/images/personal/me-headshot.jpeg",
+      "realisticSource": "Professional headshot",
+      "realisticCaption": "It starts with a clean professional headshot before turning into a dark fantasy tabletop character portrait.",
+      "stylizedRendering": "/assets/portfolio/RichardFranksAs/RichardFranksAs_DnDNecromancer/stylistic.png",
+      "stylizedSource": "AI generated image",
+      "stylizedCaption": "The headshot is transformed into a DnD-style necromancer with arcane presence, dark robes, and cinematic fantasy atmosphere.",
+      "movieRendering": "/assets/portfolio/RichardFranksAs/RichardFranksAs_DnDNecromancer/movie.mov",
+      "movieSource": "AI generated video",
+      "movieCaption": "The necromancer portrait moves into a compact dark fantasy character reveal, with magic, atmosphere, and tabletop campaign energy brought into motion.",
+      "blurb": "DnD Necromancer! takes a polished headshot and reimagines it as a dark fantasy tabletop character. The piece turns a straightforward portrait into an arcane necromancer concept, complete with class identity, moody styling, and a cinematic motion beat that feels ready to drop into a campaign intro.",
+      "shortText": "A headshot becomes a dark fantasy necromancer.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1122,
+      "stylizedRenderingHeight": 1402
+    },
+    {
+      "slug": "dnd-volcano-golem",
+      "title": "Volcano Golem",
+      "orientation": "landscape",
+      "realisticImage": "/personal/images/personal/me-headshot.jpeg",
+      "realisticSource": "Professional headshot",
+      "realisticCaption": "It starts with a clean professional headshot before becoming a fire-lit tabletop monster portrait.",
+      "stylizedRendering": "/assets/portfolio/RichardFranksAs/RichardFranksAs_DnDVolcanoGolem/stylistic.png",
+      "stylizedSource": "AI generated image",
+      "stylizedCaption": "The headshot is transformed into a molten volcano golem with glowing orange eyes, cracked lava-stone armor, forge chains, smoke, and a looming reach through a dark fantasy chamber.",
+      "movieRendering": "/assets/portfolio/RichardFranksAs/RichardFranksAs_DnDVolcanoGolem/movie.mov",
+      "movieSource": "AI generated video",
+      "movieCaption": "The volcano golem portrait moves into a compact dark fantasy reveal, with firelight, molten cracks, and dungeon-forge atmosphere pushing the character toward campaign-boss energy.",
+      "blurb": "DnD Volcano Golem! takes a polished headshot and reimagines it as a towering molten-stone tabletop character. The piece turns a straightforward portrait into a fire-forged boss encounter, with lava cracks, glowing eyes, heavy chains, and a cinematic motion beat that feels ready for the moment the party realizes the room itself is waking up.",
+      "shortText": "A headshot becomes a molten DnD boss encounter.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 2532,
+      "stylizedRenderingHeight": 1170
     }
   ],
   "cartoons": [
@@ -266,7 +334,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as a normal portrait becomes a full fantasy action reveal as I power into a He-Man-inspired hero, riding into chaos with sword aloft, big-cartoon energy, and unapologetic toybox epicness.",
       "blurb": "He-Man! takes a polished headshot and hurls it straight into retro fantasy action. The result is a gleefully overpowered shenanigan, transforming an ordinary portrait into a muscle-bound cartoon hero charging into battle with sword, beast, villains, and maximum nostalgic spectacle.",
-      "shortText": "\"By the power of GreySkull!\""
+      "shortText": "\"By the power of GreySkull!\"",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "white-rabbit",
@@ -282,7 +354,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as a normal portrait turns into a frantic Wonderland character reveal as I become the White Rabbit, hurrying off with theatrical urgency, eccentric charm, and barely-contained panic.",
       "blurb": "White Rabbit takes a polished headshot and sends it racing straight into Wonderland. The result is a playful character shenanigan, transforming a straightforward portrait into a nervous, dapper, storybook creature full of hurried energy, magical oddness, and delightfully anxious charm.",
-      "shortText": "Professional headshot races into Wonderland panic."
+      "shortText": "Professional headshot races into Wonderland panic.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "cheshire-cat",
@@ -298,7 +374,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as a normal portrait slips into Wonderland weirdness as I become the Cheshire Cat, grinning through a surreal character reveal with playful menace and vanishing-cat energy.",
       "blurb": "Cheshire Cat takes a polished headshot and pushes it into sly Wonderland absurdity. The result is a mischievous character transformation, turning a straightforward portrait into a grinning, magical troublemaker with eerie charm, theatrical weirdness, and exactly the right amount of dreamlike nonsense.",
-      "shortText": "Grinning Wonderland mischief with eerie charm."
+      "shortText": "Grinning Wonderland mischief with eerie charm.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "caterpillar",
@@ -314,7 +394,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as an ordinary headshot slips into surreal Wonderland territory as I become the lounging caterpillar, smoking thoughtfully atop a mushroom in a strange enchanted forest.",
       "blurb": "Caterpillar takes a straightforward professional headshot and pushes it into full Wonderland absurdity. The result is a playful character transformation, turning a polished portrait into a dreamy, smoke-curled fantasy scene with mushroom-perch grandeur, eccentric charm, and just the right amount of surreal storybook nonsense.",
-      "shortText": "Hookah smoke, mushroom perch, and surreal poise."
+      "shortText": "Hookah smoke, mushroom perch, and surreal poise.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "dee-and-dum",
@@ -330,7 +414,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as a normal portrait turns into a ridiculous Wonderland character reveal as I split into Tweedle Dee and Tweedle Dum, waddling into synchronized chaos and cheerful nonsense.",
       "blurb": "Dee and Dum takes a polished professional headshot and sends it tumbling straight into Wonderland farce. The result is a gleefully ridiculous double-character transformation, turning one portrait into two rotund storybook troublemakers with bright costumes, matching grins, and just the right amount of theatrical silliness.",
-      "shortText": "One portrait split into double Wonderland trouble."
+      "shortText": "One portrait split into double Wonderland trouble.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "walrus",
@@ -346,7 +434,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as a normal headshot slips into surreal storybook territory as I become the Walrus, looming through a fanciful seaside scene with eccentric swagger, curious menace, and full Wonderland energy.",
       "blurb": "The Walrus and the Carpenter takes a polished headshot and pushes it into the strange theatrical world of the classic seaside tale. The result is a playful Alice-in-Wonderland shenanigan, transforming an ordinary portrait into a mustached, tusked, storybook oddball with Victorian flair, sly humor, and delightfully unsettling charm.",
-      "shortText": "Victorian seaside oddball with tusked swagger."
+      "shortText": "Victorian seaside oddball with tusked swagger.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "mad-hatter",
@@ -362,7 +454,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as an ordinary portrait turns into a full Mad Hatter transformation, with theatrical flair, enchanted tea-party chaos, and a stroll straight into a strange storybook world.",
       "blurb": "Mad Hatter takes a professional headshot and pushes it deep into whimsical fantasy. The result is a richly detailed Wonderland-style shenanigan where polished portraiture gives way to eccentric costume, magical atmosphere, and just enough absurdity to feel like tea time has become a full-blown character reveal.",
-      "shortText": "Tea-party eccentricity and theatrical costume fantasy."
+      "shortText": "Tea-party eccentricity and theatrical costume fantasy.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "king-of-hearts",
@@ -378,7 +474,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as a normal portrait turns into a whimsical royal character reveal as I become the pint-sized King of Hearts, strutting into Wonderland with tiny grandeur and oversized attitude.",
       "blurb": "King of Hearts takes a polished headshot and turns it into a compact burst of Wonderland royalty. The result is a playful character shenanigan, transforming a straightforward portrait into a miniature monarch with theatrical charm, regal swagger, and just enough absurdity to make the whole thing feel delightfully unhinged.",
-      "shortText": "Miniature monarch energy with oversized attitude."
+      "shortText": "Miniature monarch energy with oversized attitude.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "dragonballz",
@@ -394,7 +494,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as a normal headshot explodes into a full anime transformation sequence as I power up into a Super Saiyan, surrounded by crackling energy, wind, light, and unapologetic battle-ready swagger.",
       "blurb": "Super Saiyan! takes a polished headshot and launches it straight into anime escalation. The result is a full-power transformation shenanigan, turning an ordinary portrait into a screaming, glowing, aura-wrapped Super Saiyan character reveal with maximum intensity, theatrical energy, and absolutely no interest in staying subtle.",
-      "shortText": "Headshot detonates into full Super Saiyan power-up."
+      "shortText": "Headshot detonates into full Super Saiyan power-up.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1536,
+      "stylizedRenderingHeight": 1024
     }
   ],
   "videos": [
@@ -412,7 +516,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "The caricature turns into a short motion beat, leaning into Momma Helen's delighted reaction to her first taste of deep-fried frog legs.  The frogs are not impressed.",
       "blurb": "Momma Helen, reimagined as a full cartoon caricature, tries deep-fried frog legs for the first time and immediately loves them. The whole piece leans into that exact moment of delighted surprise, where one crispy bite turns into a kitchen-table legend and Momma Helen decides this absolutely belongs in the regular rotation.",
-      "shortText": "Frog legs, caricature chaos, and kitchen-table joy."
+      "shortText": "Frog legs, caricature chaos, and kitchen-table joy.",
+      "realisticImageWidth": 4032,
+      "realisticImageHeight": 3024,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "sumner-in-summer",
@@ -428,7 +536,11 @@
       "movieRendering": "/personal/images/ai-lab/sumner-in-summer/movie.mp4",
       "movieSource": "AI generated video",
       "movieCaption": "The scene kicks into motion as Sumner tears across the water in a full-on summer joyride, throwing spray and attitude in every direction.",
-      "blurb": "Sumner in Summer! takes a real jet-ski photo and turns it into a breezy, high-energy AI shenanigan built around sunshine, speed, and pure warm-weather fun. The whole piece leans into the thrill of the ride, transforming a great summer snapshot into a stylized action moment that feels like a vacation memory turned into its own little adventure."
+      "blurb": "Sumner in Summer! takes a real jet-ski photo and turns it into a breezy, high-energy AI shenanigan built around sunshine, speed, and pure warm-weather fun. The whole piece leans into the thrill of the ride, transforming a great summer snapshot into a stylized action moment that feels like a vacation memory turned into its own little adventure.",
+      "realisticImageWidth": 3456,
+      "realisticImageHeight": 2592,
+      "stylizedRenderingWidth": 1536,
+      "stylizedRenderingHeight": 1024
     },
     {
       "slug": "emerald-legion",
@@ -443,7 +555,11 @@
       "stylizedSource": "AI generated image",
       "movieRendering": "/personal/images/ai-lab/emerald-legion/movie.mov",
       "movieSource": "AI generated video",
-      "movieCaption": "A cinematic continuation beginning with an ancient emerald staff awakening with arcane energy before revealing the sorcerer and his assembled legion. Emerald light spreads across forgotten ruins as disciplined skeletal sentinels march in perfect unison beneath swirling mist, culminating in an epic wide shot of an army awaiting its master's command."
+      "movieCaption": "A cinematic continuation beginning with an ancient emerald staff awakening with arcane energy before revealing the sorcerer and his assembled legion. Emerald light spreads across forgotten ruins as disciplined skeletal sentinels march in perfect unison beneath swirling mist, culminating in an epic wide shot of an army awaiting its master's command.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1122,
+      "stylizedRenderingHeight": 1402
     },
     {
       "slug": "gatecrasher",
@@ -458,7 +574,11 @@
       "stylizedSource": "AI generated image",
       "movieRendering": "/personal/images/ai-lab/gatecrasher/movie.mov",
       "movieSource": "AI generated video",
-      "movieCaption": "A cinematic siege unfolds in driving rain as lightning illuminates the battlements. The fortress gate erupts behind a steadfast defender who turns to confront the breach, holding his ground while the storm and collapsing walls frame a heroic final stand."
+      "movieCaption": "A cinematic siege unfolds in driving rain as lightning illuminates the battlements. The fortress gate erupts behind a steadfast defender who turns to confront the breach, holding his ground while the storm and collapsing walls frame a heroic final stand.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1038,
+      "stylizedRenderingHeight": 1516
     },
     {
       "slug": "gollum",
@@ -473,7 +593,11 @@
       "stylizedSource": "AI generated image",
       "movieRendering": "/personal/images/ai-lab/gollum/movie.mp4",
       "movieSource": "AI generated video",
-      "movieCaption": "A tense, atmospheric sequence inside a shadowy cave where obsession takes hold, blending subtle motion, light flicker, and character intensity into a cinematic transformation."
+      "movieCaption": "A tense, atmospheric sequence inside a shadowy cave where obsession takes hold, blending subtle motion, light flicker, and character intensity into a cinematic transformation.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1086,
+      "stylizedRenderingHeight": 1448
     },
     {
       "slug": "gladiator",
@@ -488,7 +612,11 @@
       "stylizedSource": "AI generated image",
       "movieRendering": "/personal/images/ai-lab/gladiator/movie.mp4",
       "movieSource": "AI generated video",
-      "movieCaption": "A cinematic arena sequence emphasizing tension and motion, culminating in a suspended moment of confrontation between man and beast."
+      "movieCaption": "A cinematic arena sequence emphasizing tension and motion, culminating in a suspended moment of confrontation between man and beast.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1122,
+      "stylizedRenderingHeight": 1402
     },
     {
       "slug": "stay-puffy",
@@ -504,7 +632,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as a normal headshot erupts into a full-blown giant-monster rampage as I become Stay-Puffy, a roaring marshmallow menace hell bent on crushing the city in a smoky, apocalyptic burst of cinematic chaos.",
       "blurb": "Stay-Puffy! takes a polished professional headshot and mutates it into a giant marshmallow-monster shenanigan straight out of an apocalyptic 80s creature feature. The result is a city-smashing version of me, reimagined as a sailor-capped puff-beast hell bent on destruction, roaring through smoke, fire, and collapsing streets with giant-monster energy and just the right amount of absurdity.",
-      "shortText": "Headshot mutates into marshmallow-monster city destruction."
+      "shortText": "Headshot mutates into marshmallow-monster city destruction.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1448,
+      "stylizedRenderingHeight": 1086
     },
     {
       "slug": "budweiser-pacman",
@@ -517,7 +649,9 @@
       "movieSource": "AI generated video",
       "movieCaption": "The still gets pushed straight into motion, letting the arcade-meets-beer-sign energy do the work without an intermediate stylized frame.",
       "blurb": "A Budweiser-and-Pac-Man visual mashup that skips the caricature pass and goes straight from the photographed source into motion. This one plays more like a retro ad fragment: bright, weird, nostalgic, and just a little overcaffeinated.",
-      "shortText": "Retro arcade energy turned into ad-like motion."
+      "shortText": "Retro arcade energy turned into ad-like motion.",
+      "realisticImageWidth": 4032,
+      "realisticImageHeight": 3024
     },
     {
       "slug": "ricky-franks-jr-2b",
@@ -533,7 +667,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "The card fantasy comes alive in motion, pushing the baseball-daydream energy a step past the still frame.",
       "blurb": "Ricky Franks dreams of having his own Topps card and lining up at second base for the Red Sox. This shenanigan turns that baseball-kid fantasy into a trading-card moment, then lets it come to life in motion like a highlight reel from an alternate timeline.",
-      "shortText": "Baseball-card daydream meets highlight-reel fantasy."
+      "shortText": "Baseball-card daydream meets highlight-reel fantasy.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "millie-and-graham",
@@ -549,7 +687,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "The still moment turns into a small cinematic beat, leaning into the feeling that this was absolutely Millie's best day ever.",
       "blurb": "Brave little Millie meets her biggest best friend in Graham, a giant black horse who somehow manages to feel both enormous and gentle at the same time. The whole shenanigan leans into that instant connection, where Millie looks like she knows she just stumbled into the best day ever.",
-      "shortText": "Storybook courage and a gentle giant horse."
+      "shortText": "Storybook courage and a gentle giant horse.",
+      "realisticImageWidth": 1536,
+      "realisticImageHeight": 2048,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "universal-monster",
@@ -562,7 +704,9 @@
       "movieSource": "AI generated video",
       "movieCaption": "Universal energy comes alive in motion as the monsters close in and the whole scene tips into playful terror.",
       "blurb": "Universal comes alive and the monsters terrorize. This shenanigan takes a simple Richard Franks Jr. selfie and pushes it straight into a motion-heavy creature-feature beat, like a personal snapshot accidentally wandered onto a classic monster backlot.",
-      "shortText": "Selfie-to-creature-feature in one playful jump."
+      "shortText": "Selfie-to-creature-feature in one playful jump.",
+      "realisticImageWidth": 3088,
+      "realisticImageHeight": 2316
     },
     {
       "slug": "luck-o-the-irish",
@@ -578,7 +722,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "The whole bit tips into motion like a festive little fever dream, proving that if I have the luck of the Irish, it is definitely not always working.",
       "blurb": "Me as a St. Patty's Day leprechaun, because apparently I am a lot more Irish than expected according to 23andMe. The joke, of course, is that if I really do have the luck of the Irish, it sure does not show up on command.",
-      "shortText": "Leprechaun chaos with questionable Irish luck."
+      "shortText": "Leprechaun chaos with questionable Irish luck.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "rick-pinball-in-yarn",
@@ -594,7 +742,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "The whole scene springs to life in motion, like the machine woke up and decided Rick gets to have his pinball moment after all.",
       "blurb": "Rick gets his pinball on. This shenanigan takes a portrait and pushes it into a bizarre pinball-meets-yarn fever dream, where the lights are hot, the action is chaotic, and the whole thing feels like a bonus round built specifically for Rick.",
-      "shortText": "Pinball fever dream wrapped in yarn."
+      "shortText": "Pinball fever dream wrapped in yarn.",
+      "realisticImageWidth": 3456,
+      "realisticImageHeight": 4608,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "alien",
@@ -613,7 +765,63 @@
       "movieSource": "AI generated video",
       "movieCaption": "The still image moves into a tense sci-fi horror reveal, stretching the headshot into a close-quarters survival moment where the monster is already too close.",
       "blurb": "Alien! takes a polished headshot and seals it inside a sweaty, industrial sci-fi nightmare. The lab turns an ordinary portrait into a Nostromo-style survival beat, complete with shadowy corridors, a looming xenomorph, storyboarded suspense, and a cinematic reveal built around pure close-quarters dread.",
-      "shortText": "\"No one can hear you scream.\""
+      "shortText": "\"No one can hear you scream.\"",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1536,
+      "stylizedRenderingHeight": 1024,
+      "storyboardImageWidth": 1536,
+      "storyboardImageHeight": 1024
+    },
+    {
+      "slug": "batman-with-joker",
+      "title": "Batman with Joker!",
+      "orientation": "landscape",
+      "realisticImage": "/personal/images/personal/me-headshot.jpeg",
+      "realisticSource": "Professional headshot",
+      "realisticCaption": "It starts with a clean professional headshot before stepping into a tense comic-book interrogation room.",
+      "stylizedRendering": "/assets/portfolio/RichardFranksAs/RichardFranks_AsBatmanWithJoker/stylistic.png",
+      "stylizedSource": "AI generated image",
+      "stylizedCaption": "The headshot is recast as a dark armored interrogator across the table from a Joker-inspired rival, turning the portrait into a moody two-shot from a crime-thriller scene.",
+      "storyboardImage": "/assets/portfolio/RichardFranksAs/RichardFranks_AsBatmanWithJoker/storyboard.png",
+      "storyboardSource": "AI generated image",
+      "storyboardCaption": "The storyboard frames the interrogation across nine beats: the room, the stare-down, the taunts, the pressure, and the final promise that the game is not over.",
+      "movieRendering": "/assets/portfolio/RichardFranksAs/RichardFranks_AsBatmanWithJoker/movie.mp4",
+      "movieSource": "AI generated video",
+      "movieCaption": "The still image moves into a tense interrogation beat, leaning into shadow, restraint, and the charged silence between two adversaries at the table.",
+      "blurb": "Batman with Joker! takes a polished headshot and drops it into a dark comic-book interrogation room opposite a Joker-inspired rival. The piece turns an ordinary portrait into a cinematic crime-thriller beat, then extends the setup through storyboard and motion with brooding light, table-level tension, and a final stare-down built around control.",
+      "shortText": "Headshot enters a dark interrogation-room showdown.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 502,
+      "stylizedRenderingHeight": 238,
+      "storyboardImageWidth": 1536,
+      "storyboardImageHeight": 1024
+    },
+    {
+      "slug": "the-force-awakens",
+      "title": "The Force Awakens!",
+      "orientation": "landscape",
+      "realisticImage": "/personal/images/personal/me-headshot.jpeg",
+      "realisticSource": "Professional headshot",
+      "realisticCaption": "It starts with a clean professional headshot before boarding the Millennium Falcon for a cinematic Star Wars-style reunion.",
+      "stylizedRendering": "/assets/portfolio/RichardFranksIn/RichardFranksIn_SWTheForceAwakens/stylistic.png",
+      "stylizedSource": "AI generated image",
+      "stylizedCaption": "The headshot is recast inside the Millennium Falcon cockpit alongside Han and Chewie, turning the portrait into a polished sci-fi adventure frame.",
+      "storyboardImage": "/assets/portfolio/RichardFranksIn/RichardFranksIn_SWTheForceAwakens/storyboard.png",
+      "storyboardSource": "AI generated image",
+      "storyboardCaption": "The storyboard expands the reunion into five Falcon-set beats: old friends reconnect, the mission lands, hyperspace opens, and the crew is ready for anything.",
+      "movieRendering": "/assets/portfolio/RichardFranksIn/RichardFranksIn_SWTheForceAwakens/movie.mov",
+      "movieSource": "AI generated video",
+      "movieCaption": "The still image moves into a short cinematic Falcon sequence, leaning into old-friend warmth, cockpit light, and a jump-ready Star Wars adventure mood.",
+      "blurb": "The Force Awakens! takes a polished headshot and drops it into the Millennium Falcon for a cinematic reunion with Han and Chewie. The piece turns an ordinary portrait into a Star Wars-style adventure beat, then extends it through storyboard and motion as the cockpit comes alive around a crew ready for one more impossible mission.",
+      "shortText": "Headshot boards the Falcon for one more mission.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 467,
+      "stylizedRenderingHeight": 318,
+      "storyboardImageWidth": 1536,
+      "storyboardImageHeight": 1024
     },
     {
       "slug": "boom-team",
@@ -629,7 +837,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "Logan charges, Oscar triggers, and Devlin barrels in behind as the Boom Team erupts into a fast, cinematic burst of snowy mayhem.",
       "blurb": "Boom Team turns a chaotic character illustration into a full-on action gag, with Logan leading the charge, Oscar working the remote, and Devlin bringing big unhinged energy from the rear. It plays like a mischievous mini movie: part cartoon menace, part explosive comedy, and fully committed to the bit.",
-      "shortText": "Explosive cartoon mayhem led by Logan."
+      "shortText": "Explosive cartoon mayhem led by Logan.",
+      "realisticImageWidth": 4032,
+      "realisticImageHeight": 3024,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "game-over",
@@ -648,7 +860,11 @@
       "movieSource2": "AI generated video",
       "movieCaption2": "The second clip escalates the bit, with the Game Over pillow fully embracing its destructive little goblin energy and turning the truck ride into a full shenanigan meltdown.",
       "blurb": "Game Over starts with a genuine crane-game triumph: winning a pixelated FAO Schwarz pillow and proudly showing it off on the ride home. Then the shenanigan kicks in. The prize comes alive, turns into a mischievous destruction-loving creature, and transforms a wholesome victory lap into a full-blown backseat gremlin incident.",
-      "shortText": "Crane-game victory mutates into gremlin mayhem."
+      "shortText": "Crane-game victory mutates into gremlin mayhem.",
+      "realisticImageWidth": 4032,
+      "realisticImageHeight": 3024,
+      "stylizedRenderingWidth": 1536,
+      "stylizedRenderingHeight": 1024
     },
     {
       "slug": "christmas-card",
@@ -664,7 +880,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What should have been a simple Christmas card photo turns into a festive comedy as Zak and Graham refuse to cooperate, crowding in, mugging for attention, and making the whole holiday portrait delightfully impossible.",
       "blurb": "Christmas Card takes a well-meaning holiday photo op and turns it into a classic barnyard comedy. Anne and I try to hold it together while Zak and Graham, wearing Santa hats and absolutely no interest in behaving, steal the moment. The result is equal parts wholesome, chaotic, and exactly the kind of Christmas-card disaster worth remembering.",
-      "shortText": "Holiday portrait sabotage by scene-stealing horses."
+      "shortText": "Holiday portrait sabotage by scene-stealing horses.",
+      "realisticImageWidth": 5712,
+      "realisticImageHeight": 4284,
+      "stylizedRenderingWidth": 1536,
+      "stylizedRenderingHeight": 1024
     },
     {
       "slug": "zombie-chaos",
@@ -679,7 +899,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as a normal portrait turns into a gleefully unhinged zombie character reveal as I stagger into a chaotic undead scene with comic menace, absurd swagger, and total shenanigan energy.",
       "blurb": "Zombie Chaos! takes a polished headshot and sends it shambling into cartoon apocalypse territory. The result is a horror-comedy shenanigan that transforms an ordinary portrait into a grinning undead troublemaker, surrounded by creepy details, chaotic street-scene madness, and just enough absurdity to keep the whole thing more playful than grim.",
-      "shortText": "Undead cartoon menace with playful apocalypse vibes."
+      "shortText": "Undead cartoon menace with playful apocalypse vibes.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "zombie-chaos-2",
@@ -694,7 +918,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as an ordinary paired portrait mutates into a two-zombie rampage as Helen and I lurch through a chaotic undead world, hungry for brains, trouble, and maximum shenanigan energy.",
       "blurb": "Zombie Chaos 2! takes a simple photo pairing and pushes it straight into a comic-book zombie apocalypse. The result is a horror-comedy shenanigan that transforms Helen and me into brain-hunting undead troublemakers, surrounded by messy cartoon carnage, creepy humor, and the kind of playful apocalypse energy that makes the whole thing feel more ridiculous than grim.",
-      "shortText": "Zombie caricatures on the hunt for more brrraaaaiiinnnsss...!"
+      "shortText": "Zombie caricatures on the hunt for more brrraaaaiiinnnsss...!",
+      "realisticImageWidth": 2176,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 2048,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "little-anne-riding-hood",
@@ -710,7 +938,11 @@
       "movieSource": "AI generated video",
       "movieCaption": "What begins as a simple costume snapshot becomes a cinematic fairytale moment as Anne steps into the role of Little Red Riding Hood, moving through the dark woods with confidence, charm, and a lurking sense of trouble nearby.",
       "blurb": "Little Anne Riding Hood takes a real costume photo and pushes it into polished storybook fantasy. The result is a playful shenanigan that turns Anne into the star of her own moonlit fairytale, blending classic Red Riding Hood iconography with a more dramatic, cinematic edge and just enough wolf-at-the-edge-of-frame tension to make it fun.",
-      "shortText": "Costume photo transformed into moonlit fairytale."
+      "shortText": "Costume photo transformed into moonlit fairytale.",
+      "realisticImageWidth": 1152,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1024,
+      "stylizedRenderingHeight": 1536
     },
     {
       "slug": "the-rock",
@@ -756,7 +988,9 @@
         }
       ],
       "blurb": "The Rock starts as a tightly grounded survey-thriller at Uluru and opens into a prestige science-fiction mystery about an engineered structure hidden inside the monolith. The manuscript's first movement follows Mara Vance from anomaly scan to first contact; the episodes draft then scales that discovery into a serialized arc about a buried vessel, a waking storm, and a world sliding toward systems failure.",
-      "shortText": "Uluru survey thriller expanding into global sci-fi."
+      "shortText": "Uluru survey thriller expanding into global sci-fi.",
+      "bookCoverImageWidth": 1024,
+      "bookCoverImageHeight": 1536
     },
     {
       "slug": "creepy-cryptids",
@@ -807,7 +1041,9 @@
         }
       ],
       "blurb": "P.T. Barnum's Creepy Cryptids is a vintage horror art-book concept that reimagines obscure folkloric creatures as the headline attractions of a lost nineteenth-century traveling sideshow. Each creature is treated as both scholarship and spectacle: one page reads like an antique encyclopedia entry full of lore, maps, warnings, and taxonomy, while the facing page explodes into a sensational Barnum-style broadside. The result is a cabinet of international nightmares where eerie research meets carnival showmanship, and every spread asks what dreadful thing Barnum has dragged back this time.",
-      "shortText": "Victorian cryptid art-book adapted into anthology beats."
+      "shortText": "Victorian cryptid art-book adapted into anthology beats.",
+      "pagerOptionImageWidth": 1024,
+      "pagerOptionImageHeight": 1536
     }
   ],
   "analyses": [
@@ -832,7 +1068,15 @@
       "palmReadingMarkdownPath": "/personal/images/ai-lab/palmylyzer-rick/reading.md",
       "palmReadingSource": "AI generated reading",
       "blurb": "Palmylyzer Pro shows a full staged palm-reading pipeline: raw capture, analyzed image, line-map interpretation, and a final text reading grounded in the traced structures.",
-      "shortText": "Palm-reading pipeline from raw capture to reading."
+      "shortText": "Palm-reading pipeline from raw capture to reading.",
+      "realisticImageWidth": 1536,
+      "realisticImageHeight": 2048,
+      "rawImageWidth": 1536,
+      "rawImageHeight": 2048,
+      "analyzedImageWidth": 3072,
+      "analyzedImageHeight": 4096,
+      "palmLineAnalysisImageWidth": 1536,
+      "palmLineAnalysisImageHeight": 2048
     }
   ],
   "songs": [
@@ -855,7 +1099,11 @@
       "songLyricsMarkdownPath": "/assets/portfolio/Songs/outta-time/lyrics.md",
       "songLyricsSource": "Outta Time lyric sheet",
       "blurb": "Outta Time is a gritty country-trap Americana anthem about living hard, loving loud, and refusing to waste the little time we get. With dusty roads, dashboard clocks, lost years, and hard-earned wisdom, the song stares mortality straight in the face and answers with urgency, heart, and fire. It's a raw reminder to make the call, mend the fence, kiss your girl, chase the dream, and wring every last drop out of life before the night runs out.",
-      "shortText": "Country-trap anthem about urgency, love, and time."
+      "shortText": "Country-trap anthem about urgency, love, and time.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1024,
+      "songAlbumImageWidth": 1024,
+      "songAlbumImageHeight": 1024
     },
     {
       "slug": "twelfth-night-doodad",
@@ -876,7 +1124,36 @@
       "songLyricsMarkdownPath": "/assets/portfolio/Songs/twelfth-night-doodad/lyrics.md",
       "songLyricsSource": "Twelfth Night Doodad lyric sheet",
       "blurb": "Twelfth Night Doodad is a rowdy Christmas sing-along built around family myth, Saint Rick, Travis Elf, sleigh bells, cookie crumbs, and the impossible suspense of waiting for the mysterious doodad to arrive.",
-      "shortText": "Christmas sing-along about Saint Rick, Travis Elf, and a mysterious holiday doodad."
+      "shortText": "Christmas sing-along about Saint Rick, Travis Elf, and a mysterious holiday doodad.",
+      "realisticImageWidth": 1254,
+      "realisticImageHeight": 1254,
+      "songAlbumImageWidth": 1254,
+      "songAlbumImageHeight": 1254
+    },
+    {
+      "slug": "here-we-stand",
+      "type": "song-recording",
+      "title": "Here We Stand",
+      "orientation": "landscape",
+      "intentToCopyright": true,
+      "rightsNotice": "Intent to Copyright",
+      "realisticImage": "/assets/portfolio/Songs/here-we-stand/album.png",
+      "realisticSource": "Here We Stand album art",
+      "songAlbumImage": "/assets/portfolio/Songs/here-we-stand/album.png",
+      "songAlbumSource": "AI generated image",
+      "songAudio": "/assets/portfolio/Songs/here-we-stand/here-we-stand-americans.mp3",
+      "songAudioSource": "AI generated music",
+      "songAudioCaption": "Here We Stand by Frankie Richards.",
+      "songWrittenBy": "Richard Franks Jr",
+      "songPerformedBy": "Frankie Richards",
+      "songLyricsMarkdownPath": "/assets/portfolio/Songs/here-we-stand/lyrics.md",
+      "songLyricsSource": "Here We Stand lyric sheet",
+      "blurb": "Here We Stand is a big-hearted patriotic anthem built around acoustic guitar, military snare, gang vocals, and a full-band chorus. The song leans into shared place, shared labor, service, sacrifice, and the stubborn optimism of people standing together under one flag.",
+      "shortText": "Patriotic anthem with gang vocals, snare, and full-band lift.",
+      "realisticImageWidth": 1254,
+      "realisticImageHeight": 1254,
+      "songAlbumImageWidth": 1254,
+      "songAlbumImageHeight": 1254
     }
   ]
 }
