@@ -1,5 +1,5 @@
 export const START_PROJECT_EMAIL = {
-  to: "richardfranksjr@hotmail.com",
+  to: "inquiries@rich-fx.com",
   subject: "RichFX project starter",
 } as const;
 
