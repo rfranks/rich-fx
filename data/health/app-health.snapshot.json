@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-08-23T06:17:11.584Z",
-  "overallStatus": "fail",
+  "generatedAt": "2026-08-23T07:48:20.437Z",
+  "overallStatus": "warn",
   "checks": {
     "fileBudgets": "warn",
     "testRunner": "pass",
-    "a11yRunner": "fail"
+    "a11yRunner": "pass"
   },
   "snapshots": {
     "fileBudgets": {
       "key": "fileBudgets",
       "status": "warn",
-      "generatedAt": "2026-08-23T06:16:46.608Z",
+      "generatedAt": "2026-08-23T07:47:53.163Z",
       "summary": "File budget check passed.",
       "details": {
         "totals": {
-          "scannedFileCount": 232,
-          "codeFileCount": 232,
+          "scannedFileCount": 244,
+          "codeFileCount": 244,
           "violationCount": 0,
           "missingExactBudgetViolationCount": 0,
           "exactBudgetUnderuseViolationCount": 0,
@@ -53,7 +53,7 @@
     "testRunner": {
       "key": "testRunner",
       "status": "pass",
-      "generatedAt": "2026-08-23T06:17:11.584Z",
+      "generatedAt": "2026-08-23T07:48:20.437Z",
       "summary": "unit test runner passed for lane portfolio.",
       "details": {
         "suite": "unit",
@@ -64,13 +64,13 @@
     },
     "a11yRunner": {
       "key": "a11yRunner",
-      "status": "fail",
-      "generatedAt": "2026-08-21T08:15:53.622Z",
-      "summary": "a11y test runner failed for lane portfolio with exit code 1.",
+      "status": "pass",
+      "generatedAt": "2026-08-23T07:42:14.578Z",
+      "summary": "a11y test runner passed for lane portfolio.",
       "details": {
         "suite": "a11y",
         "lane": "portfolio",
-        "exitCode": 1,
+        "exitCode": 0,
         "jestArgs": [
           "tests/accessibility",
           "--runInBand"
