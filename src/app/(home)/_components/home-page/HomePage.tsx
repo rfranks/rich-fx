@@ -12,11 +12,13 @@ import BuildCarousel from "@/app/(home)/_components/build-carousel/BuildCarousel
 import BuildPicker from "@/app/(home)/_components/build-carousel/BuildPicker";
 import ImageStyleSampler from "@/app/(home)/_components/image-style-sampler/ImageStyleSampler";
 import VideoMovieRendering from "@/app/(home)/_components/video-movie-rendering/VideoMovieRendering";
+import { AssetImage } from "@/components/shared/media";
 import { BUILD_SECTION_OPTIONS_BY_KEY } from "@/app/(home)/_consts/buildCarousel";
 import { DEFAULT_CARD_PANEL } from "@/app/(home)/_consts/homePage";
 import { IMAGE_STYLE_SAMPLES } from "@/app/(home)/_consts/imageStyleSampler";
 import {
   CARTOON_RENDERING_ITEMS,
+  DND_CHARACTER_RENDERING_ITEMS,
   GAME_RENDERING_ITEMS,
   VIDEO_MOVIE_RENDERING_ITEMS,
 } from "@/app/(home)/_consts/videoMovieRendering";
@@ -29,6 +31,13 @@ import type {
 import { calendars, cards, songs } from "@/consts/richFx";
 import getRichFxTheme, { richFxThemeCssVariables } from "@/themes/richFxTheme";
 import styles from "@/app/(home)/_components/home-page/HomePage.module.css";
+
+const DND_LOGO_ASSET = {
+  src: "/assets/dnd-logo.png",
+  alt: "Dungeons and Dragons logo",
+  width: 1600,
+  height: 766,
+};
 
 export default function HomePage() {
   const theme = useMemo(() => getRichFxTheme("dark"), []);
@@ -126,6 +135,38 @@ export default function HomePage() {
           <VideoMovieRendering
             className={styles.heroVideoMovieRendering}
             items={CARTOON_RENDERING_ITEMS}
+          />
+        </section>
+      ),
+    },
+    {
+      ...BUILD_SECTION_OPTIONS_BY_KEY["dnd-character-rendering"],
+      previewImage: DND_CHARACTER_RENDERING_ITEMS[0]?.stylizedImage,
+      children: (
+        <section
+          className={styles.videoMovieSection}
+          aria-labelledby="dnd-character-rendering"
+        >
+          <div className={styles.sectionCopy}>
+            <h2 id="dnd-character-rendering">
+              Your photo can become a fantasy tabletop character.
+            </h2>
+            <p>
+              Start with a portrait and reshape it into a DnD-inspired hero or
+              villain with class identity, wardrobe, atmosphere, and a compact
+              cinematic motion render.
+            </p>
+          </div>
+
+          <VideoMovieRendering
+            className={styles.heroVideoMovieRendering}
+            items={DND_CHARACTER_RENDERING_ITEMS}
+            mediaOverlay={
+              <AssetImage
+                asset={DND_LOGO_ASSET}
+                sizes="(max-width: 620px) 98px, 150px"
+              />
+            }
           />
         </section>
       ),

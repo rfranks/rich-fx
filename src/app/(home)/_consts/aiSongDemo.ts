@@ -1,0 +1,1 @@
+export const AI_SONG_MENU_THUMBNAIL_SIZE = 69;

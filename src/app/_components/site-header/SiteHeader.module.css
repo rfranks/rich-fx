@@ -57,16 +57,35 @@
 }
 
 @media (max-width: 620px) {
+  .handheldHidden {
+    display: none;
+  }
+
   .header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
-    padding-bottom: 34px;
+    gap: 10px;
+    padding: 14px 12px;
   }
 
   .header nav {
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .header nav > a[href="/what-we-do"] {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    border: 1px solid var(--richfx-border);
+    border-radius: 8px;
+    background: rgba(255, 243, 223, 0.04);
+  }
+
+  .header nav > a[href="/what-we-do"]:hover {
+    border-color: rgba(255, 106, 0, 0.58);
+    background: var(--richfx-orange-soft);
   }
 }

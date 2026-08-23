@@ -24,11 +24,17 @@ export default function SiteHeader({
       </Link>
       <nav aria-label="Primary navigation">
         {SITE_HEADER_LINKS.map((link) => (
-          <Link href={link.href} key={link.href}>
+          <Link
+            className={link.href === "/ai-studio" ? styles.handheldHidden : ""}
+            href={link.href}
+            key={link.href}
+          >
             {link.label}
           </Link>
         ))}
-        {showStartProject ? <StartProjectButton variant="header" /> : null}
+        {showStartProject ? (
+          <StartProjectButton compactLabel="Start" variant="header" />
+        ) : null}
       </nav>
     </header>
   );

@@ -163,6 +163,7 @@ export type RichFx = {
   images: RichFxStudioItem[];
   videos: RichFxStudioItem[];
   games: RichFxStudioItem[];
+  dndCharacters: RichFxStudioItem[];
   cartoons: RichFxStudioItem[];
   analyses: RichFxStudioItem[];
   songs: RichFxStudioItem[];
@@ -262,6 +263,7 @@ export const normalizeRichFxData = (data: RichFxRawData): RichFx => {
   const images = rest.images ?? legacyItems.filter(isImageStudioItem);
   const videos = rest.videos ?? legacyItems.filter(isVideoStudioItem);
   const games = rest.games ?? [];
+  const dndCharacters = rest.dndCharacters ?? [];
   const cartoons = rest.cartoons ?? [];
   const analyses = rest.analyses ?? legacyItems.filter(isAnalysisStudioItem);
   const songs = rest.songs ?? legacyItems.filter(isSongStudioItem);
@@ -272,6 +274,7 @@ export const normalizeRichFxData = (data: RichFxRawData): RichFx => {
     !Array.isArray(images) ||
     !Array.isArray(videos) ||
     !Array.isArray(games) ||
+    !Array.isArray(dndCharacters) ||
     !Array.isArray(cartoons) ||
     !Array.isArray(analyses) ||
     !Array.isArray(songs) ||
@@ -291,6 +294,7 @@ export const normalizeRichFxData = (data: RichFxRawData): RichFx => {
     images,
     videos,
     games,
+    dndCharacters,
     cartoons,
     analyses,
     songs,
@@ -321,6 +325,7 @@ export const getAiStudioItems = (data: RichFx): RichFxStudioItem[] => [
   ...data.images,
   ...data.videos,
   ...data.games,
+  ...data.dndCharacters,
   ...data.cartoons,
   ...data.analyses,
   ...data.songs,
@@ -331,6 +336,7 @@ export const aiStudioItems = getAiStudioItems(richFx);
 export const cards = richFx.cards;
 export const calendars = richFx.calendars;
 export const cartoons = richFx.cartoons;
+export const dndCharacters = richFx.dndCharacters;
 export const games = richFx.games;
 export const songs = richFx.songs;
 

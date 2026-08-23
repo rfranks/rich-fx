@@ -11,7 +11,7 @@ export default function AudioPlayer({ src, onAudioRef }: AudioPlayerProps) {
       src={withBasePath(src)}
       ref={onAudioRef}
       sx={{
-        mt: 1,
+        mt: { xs: 0.5, sm: 1 },
         width: "100%",
       }}
     >

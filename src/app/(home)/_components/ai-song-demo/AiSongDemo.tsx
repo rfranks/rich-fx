@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 import SongRecording from "@/app/_components/song-recording/SongRecording";
-import { CARD_THUMBNAIL_SIZES } from "@/app/(home)/_consts/homePage";
+import { AI_SONG_MENU_THUMBNAIL_SIZE } from "@/app/(home)/_consts/aiSongDemo";
+import { Picker } from "@/components/shared/controls";
 import { AssetImage } from "@/components/shared/media";
 import { songs } from "@/consts/richFx";
 import {
@@ -25,36 +26,52 @@ export default function AiSongDemo() {
   const selectedSongIndex = selectedSong
     ? homeSongs.findIndex((song) => song.slug === selectedSong.slug)
     : -1;
+  const pickerItems = useMemo(
+    () =>
+      homeSongs.map((song) => ({
+        ...song,
+        key: song.slug,
+        label: song.title,
+        secondaryLabel: song.shortText ?? song.blurb,
+      })),
+    [],
+  );
 
   if (!selectedSong) {
     return null;
   }
 
+  const handleSelectSong = (index: number) => {
+    const nextSong = homeSongs[index];
+
+    if (nextSong) {
+      setSelectedSongSlug(nextSong.slug);
+    }
+  };
+
   return (
     <div className={styles.demo}>
       {homeSongs.length > 1 ? (
-        <div className={styles.picker} aria-label="Choose a song">
-          {homeSongs.map((song) => (
-            <button
-              className={[
-                styles.pickerButton,
-                song.slug === selectedSong.slug ? styles.active : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              key={song.slug}
-              onClick={() => setSelectedSongSlug(song.slug)}
-              type="button"
-            >
-              <AssetImage
-                asset={getSongAlbumAsset(song)}
-                sizes={CARD_THUMBNAIL_SIZES}
-                className={styles.thumbnail}
-              />
-              <span>{song.title}</span>
-            </button>
-          ))}
-        </div>
+        <Picker
+          ariaLabel="Choose a song"
+          className={styles.toolbar}
+          id="ai-song-selector-menu"
+          items={pickerItems}
+          menuMaxHeight={420}
+          menuMinWidth={{ xs: 320, sm: 460 }}
+          nextAriaLabel="Next song"
+          onSelectIndex={handleSelectSong}
+          previousAriaLabel="Previous song"
+          renderItemVisual={(song, className) => (
+            <AssetImage
+              asset={getSongAlbumAsset(song)}
+              sizes={`${AI_SONG_MENU_THUMBNAIL_SIZE}px`}
+              className={className}
+            />
+          )}
+          selectedIndex={selectedSongIndex}
+          selectorAriaLabel="Open song selector"
+        />
       ) : null}
 
       <div className={styles.recordingBody}>
@@ -75,6 +92,7 @@ export default function AiSongDemo() {
           songAudio={selectedSong.songAudio}
           songPerformedBy={selectedSong.songPerformedBy}
           songWrittenBy={selectedSong.songWrittenBy}
+          showTitle={false}
           title={selectedSong.title}
         />
       </div>

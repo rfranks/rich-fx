@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { AssetImageAsset } from "@/types/components/shared/media";
 
 export type VideoMovieRenderingPanelKey = "original" | "stylized" | "video";
@@ -25,4 +26,5 @@ export type VideoMovieRenderingProps = {
   className?: string;
   defaultItemSlug?: string;
   items?: VideoMovieRenderingItem[];
+  mediaOverlay?: ReactNode;
 };

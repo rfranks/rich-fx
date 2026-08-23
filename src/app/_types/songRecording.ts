@@ -22,6 +22,7 @@ export type SongRecordingProps = {
   lyricsSource?: string;
   lyricsSourceHref?: string;
   framedPanels?: boolean;
+  showTitle?: boolean;
 };
 
 export type CreditsProps = {
@@ -46,13 +47,8 @@ export type AlbumPanelProps = {
 };
 
 export type SongPanelProps = {
-  audioSrc: string;
   blurb: string;
-  intentToCopyright: boolean;
-  onAudioRef: AudioRefCallback;
   performedBy?: string;
-  rightsLabel: string;
-  rightsStampAngle: number;
   writtenBy?: string;
 };
 

@@ -44,3 +44,17 @@
   color: var(--richfx-black);
   transform: translateY(-1px);
 }
+
+.compactLabel {
+  display: none;
+}
+
+@media (max-width: 620px) {
+  .fullLabel {
+    display: none;
+  }
+
+  .compactLabel {
+    display: inline;
+  }
+}

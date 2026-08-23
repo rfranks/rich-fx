@@ -29,8 +29,7 @@
 }
 
 .ctaBar,
-.viewerHeader,
-.cardPicker button {
+.viewerHeader {
   display: flex;
   align-items: center;
 }
@@ -460,51 +459,8 @@
   transform: scale(1.025);
 }
 
-.cardPicker {
-  display: grid;
-  gap: 10px;
+.cardToolbar {
   margin-top: 4px;
-}
-
-.cardPicker {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.cardPicker button {
-  min-width: 0;
-  gap: 10px;
-  padding: 8px;
-  border: 1px solid var(--richfx-border);
-  border-radius: 8px;
-  background: rgba(255, 243, 223, 0.04);
-  color: var(--richfx-muted);
-  cursor: pointer;
-  text-align: left;
-  transition:
-    border-color 180ms ease,
-    background 180ms ease,
-    color 180ms ease;
-}
-
-.cardPicker button:hover,
-.cardPicker button.active {
-  border-color: rgba(255, 106, 0, 0.58);
-  background: var(--richfx-orange-soft);
-  color: var(--richfx-text);
-}
-
-.thumbnail {
-  width: 54px;
-  height: 64px;
-  flex: 0 0 auto;
-  border-radius: 6px;
-}
-
-.cardPicker span {
-  min-width: 0;
-  font-size: 0.82rem;
-  font-weight: 900;
-  line-height: 1.1;
 }
 
 .calendarSection {
@@ -684,7 +640,7 @@
   display: none;
 }
 
-.heroBuildExperience .cardPicker,
+.heroBuildExperience .cardToolbar,
 .heroBuildExperience .transformBar {
   flex: 0 0 auto;
 }
@@ -779,7 +735,7 @@
   }
 
   .heroBuildExperience > :last-child {
-    min-height: 760px;
+    min-height: 690px;
   }
 
   .heroCopy {
@@ -816,6 +772,10 @@
 }
 
 @media (max-width: 620px) {
+  .handheldHidden {
+    display: none;
+  }
+
   .page {
     --site-header-height: 158px;
   }
@@ -828,8 +788,42 @@
     font-size: clamp(3.1rem, 15vw, 5.1rem);
   }
 
+  .heroBuildExperience > :last-child {
+    min-height: 610px;
+  }
+
+  .heroBuildExperience .holidayCardSection,
+  .heroBuildExperience .calendarSection,
+  .heroBuildExperience .styleSamplerSection,
+  .heroBuildExperience .videoMovieSection,
+  .heroBuildExperience .songSection {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .heroBuildExperience .sectionCopy h2 {
+    margin-top: 4px;
+    font-size: 1rem;
+  }
+
+  .heroBuildExperience .sectionCopy p:not(.eyebrow) {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    line-height: 1.32;
+  }
+
+  .heroBuildExperience .flipViewer {
+    margin-top: 8px;
+  }
+
   .flipViewer {
     width: min(100%, 420px);
+  }
+
+  .showOriginal .cardFace,
+  .showCard .originalFace {
+    opacity: 0;
+    visibility: hidden;
   }
 
   .viewerHeader {
@@ -839,10 +833,6 @@
 
   .magicToggle {
     width: 100%;
-  }
-
-  .cardPicker {
-    grid-template-columns: 1fr;
   }
 
   .calendarFrame {

@@ -12,7 +12,9 @@ import type { Theme } from "@mui/material/styles";
 import { MediaCycler } from "@/components/shared/media";
 import type { MediaCyclerItem } from "@/components/shared/media";
 import Panel from "@/app/_components/panel/Panel";
+import InlineRightsStamp from "@/app/_components/rights-stamp/InlineRightsStamp";
 import AlbumPanel from "./album-panel/AlbumPanel";
+import AudioPlayer from "./audio-player/AudioPlayer";
 import LyricsPanel from "./lyrics-panel/LyricsPanel";
 import SongPanel from "./song-panel/SongPanel";
 import type {
@@ -22,7 +24,6 @@ import type {
 import { withBasePath } from "@/utils/basePath";
 
 export default function SongRecording({
-  rank,
   title,
   blurb,
   intentToCopyright = false,
@@ -36,6 +37,7 @@ export default function SongRecording({
   lyricsSource,
   lyricsSourceHref,
   framedPanels = true,
+  showTitle = true,
 }: SongRecordingProps) {
   const [lyricsMarkdown, setLyricsMarkdown] = useState<string | null>(null);
   const [isLyricsLoading, setIsLyricsLoading] = useState(false);
@@ -50,7 +52,6 @@ export default function SongRecording({
   });
   const hasLyricsPanel = Boolean(lyricsMarkdownPath);
   const rightsLabel = rightsNotice || "Intent to Copyright";
-  const rightsStampAngle = ((rank * 7) % 17) - 8;
 
   useEffect(() => {
     setActiveSongPanelKey("song");
@@ -201,13 +202,8 @@ export default function SongRecording({
         },
         customContent: (
           <SongPanel
-            audioSrc={songAudio}
             blurb={blurb}
-            intentToCopyright={intentToCopyright}
-            onAudioRef={attachAudioRef}
             performedBy={songPerformedBy}
-            rightsLabel={rightsLabel}
-            rightsStampAngle={rightsStampAngle}
             writtenBy={songWrittenBy}
           />
         ),
@@ -300,9 +296,9 @@ export default function SongRecording({
   })();
 
   return (
-    <Panel className="overflow-hidden">
+    <Panel className="overflow-hidden" sx={{ p: { xs: 1, sm: 2 } }}>
       <Stack
-        spacing={2}
+        spacing={{ xs: 1, sm: 2 }}
         sx={{
           minWidth: 0,
           maxWidth: "100%",
@@ -311,16 +307,29 @@ export default function SongRecording({
           overflow: "hidden",
         }}
       >
-        <Typography
-          variant="h4"
+        <Box
           sx={{
             flex: "0 0 auto",
-            fontSize: { xs: "1.55rem", md: "1.9rem" },
-            lineHeight: 1.05,
+            minWidth: 0,
+            display: "grid",
+            justifyItems: "start",
+            gap: { xs: 0.5, sm: 0.75 },
           }}
         >
-          {title}
-        </Typography>
+          {showTitle ? (
+            <Typography
+              variant="h4"
+              sx={{
+                fontSize: { xs: "1.32rem", sm: "1.55rem", md: "1.9rem" },
+                lineHeight: 1.05,
+              }}
+            >
+              {title}
+            </Typography>
+          ) : null}
+          <InlineRightsStamp label={rightsLabel} visible={intentToCopyright} />
+          <AudioPlayer src={songAudio} onAudioRef={attachAudioRef} />
+        </Box>
 
         <Box
           sx={{
@@ -328,7 +337,7 @@ export default function SongRecording({
             border: framedPanels ? "1px solid" : 0,
             borderColor: framedPanels ? "var(--surface-border)" : "transparent",
             backgroundColor: framedPanels ? "var(--surface-1)" : "transparent",
-            p: { xs: 1, md: 1.25 },
+            p: { xs: 0.5, md: 1.25 },
             minHeight: 0,
             flex: "1 1 0%",
             width: "100%",
@@ -362,9 +371,9 @@ export default function SongRecording({
             gridTemplateColumns: hasLyricsPanel
               ? "repeat(3, minmax(0, 1fr))"
               : "repeat(2, minmax(0, 1fr))",
-            gap: 1,
+            gap: { xs: 0.5, sm: 1 },
             flex: "0 0 auto",
-            p: 0.5,
+            p: { xs: 0.375, sm: 0.5 },
             border: "1px solid",
             borderColor: "var(--surface-border)",
             borderRadius: "8px",
@@ -377,11 +386,11 @@ export default function SongRecording({
             aria-pressed={activeSongPanelKey === "song"}
             onClick={() => switchSongPanel("song")}
             sx={(theme) => ({
-              minHeight: 42,
+              minHeight: { xs: 36, sm: 42 },
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: 1,
+              gap: { xs: 0.5, sm: 1 },
               border: 0,
               borderRadius: "6px",
               backgroundColor:
@@ -394,9 +403,9 @@ export default function SongRecording({
                   : "text.secondary",
               cursor: "pointer",
               font: "inherit",
-              fontSize: "0.72rem",
+              fontSize: { xs: "0.66rem", sm: "0.72rem" },
               fontWeight: 900,
-              letterSpacing: "0.08em",
+              letterSpacing: { xs: "0.04em", sm: "0.08em" },
               textTransform: "uppercase",
               transition:
                 "background 180ms ease, color 180ms ease, transform 180ms ease",
@@ -416,11 +425,11 @@ export default function SongRecording({
             aria-pressed={activeSongPanelKey === "album"}
             onClick={() => switchSongPanel("album")}
             sx={(theme) => ({
-              minHeight: 42,
+              minHeight: { xs: 36, sm: 42 },
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: 1,
+              gap: { xs: 0.5, sm: 1 },
               border: 0,
               borderRadius: "6px",
               backgroundColor:
@@ -433,9 +442,9 @@ export default function SongRecording({
                   : "text.secondary",
               cursor: "pointer",
               font: "inherit",
-              fontSize: "0.72rem",
+              fontSize: { xs: "0.66rem", sm: "0.72rem" },
               fontWeight: 900,
-              letterSpacing: "0.08em",
+              letterSpacing: { xs: "0.04em", sm: "0.08em" },
               textTransform: "uppercase",
               transition:
                 "background 180ms ease, color 180ms ease, transform 180ms ease",
@@ -447,7 +456,18 @@ export default function SongRecording({
             })}
           >
             <ImageIcon fontSize="small" aria-hidden="true" />
-            <span>Album Art</span>
+            <Box
+              component="span"
+              sx={{ display: { xs: "inline", sm: "none" } }}
+            >
+              Art
+            </Box>
+            <Box
+              component="span"
+              sx={{ display: { xs: "none", sm: "inline" } }}
+            >
+              Album Art
+            </Box>
           </Box>
           {hasLyricsPanel ? (
             <Box
@@ -456,11 +476,11 @@ export default function SongRecording({
               aria-pressed={activeSongPanelKey === "lyrics"}
               onClick={() => switchSongPanel("lyrics")}
               sx={(theme) => ({
-                minHeight: 42,
+                minHeight: { xs: 36, sm: 42 },
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: 1,
+                gap: { xs: 0.5, sm: 1 },
                 border: 0,
                 borderRadius: "6px",
                 backgroundColor:
@@ -473,9 +493,9 @@ export default function SongRecording({
                     : "text.secondary",
                 cursor: "pointer",
                 font: "inherit",
-                fontSize: "0.72rem",
+                fontSize: { xs: "0.66rem", sm: "0.72rem" },
                 fontWeight: 900,
-                letterSpacing: "0.08em",
+                letterSpacing: { xs: "0.04em", sm: "0.08em" },
                 textTransform: "uppercase",
                 transition:
                   "background 180ms ease, color 180ms ease, transform 180ms ease",

@@ -1,15 +1,10 @@
 "use client";
 
-import { type MouseEvent, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import ImageIcon from "@mui/icons-material/Image";
 import MovieIcon from "@mui/icons-material/Movie";
-import Chip from "@mui/material/Chip";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Typography from "@mui/material/Typography";
-import { ChevronLeft, ChevronRight, MoreVert } from "@mui/icons-material";
+import { Picker } from "@/components/shared/controls";
 import {
   AssetImage,
   ImageLightbox,
@@ -54,6 +49,7 @@ export default function VideoMovieRendering({
   className,
   defaultItemSlug = DEFAULT_VIDEO_MOVIE_RENDERING_SLUG,
   items = VIDEO_MOVIE_RENDERING_ITEMS,
+  mediaOverlay,
 }: VideoMovieRenderingProps) {
   const initialIndex = useMemo(() => {
     const defaultIndex = items.findIndex(
@@ -66,12 +62,18 @@ export default function VideoMovieRendering({
   const [activePanelKey, setActivePanelKey] =
     useState<VideoMovieRenderingPanelKey>("original");
   const [canAutoplayVideo, setCanAutoplayVideo] = useState(false);
-  const [selectorAnchorEl, setSelectorAnchorEl] = useState<HTMLElement | null>(
-    null,
-  );
   const previewVideoRef = useRef<HTMLVideoElement | null>(null);
   const selectedItem = items[selectedItemIndex] ?? items[0];
-  const selectorOpen = Boolean(selectorAnchorEl);
+  const pickerItems = useMemo(
+    () =>
+      items.map((item) => ({
+        ...item,
+        key: item.slug,
+        label: item.title,
+        secondaryLabel: item.shortText || item.blurb,
+      })),
+    [items],
+  );
 
   useEffect(() => {
     if (activePanelKey !== "video") {
@@ -101,35 +103,9 @@ export default function VideoMovieRendering({
     return null;
   }
 
-  const cycleTo = (direction: 1 | -1) => {
-    setSelectedItemIndex((currentIndex) => {
-      const nextIndex = currentIndex + direction;
-
-      if (nextIndex < 0) {
-        return items.length - 1;
-      }
-
-      if (nextIndex >= items.length) {
-        return 0;
-      }
-
-      return nextIndex;
-    });
-    setActivePanelKey("original");
-  };
-
-  const handleSelectorOpen = (event: MouseEvent<HTMLElement>) => {
-    setSelectorAnchorEl(event.currentTarget);
-  };
-
-  const handleSelectorClose = () => {
-    setSelectorAnchorEl(null);
-  };
-
   const handleSelectItem = (index: number) => {
     setSelectedItemIndex(index);
     setActivePanelKey("original");
-    setSelectorAnchorEl(null);
   };
 
   const renderImagePanel = (
@@ -172,61 +148,25 @@ export default function VideoMovieRendering({
   return (
     <div className={[styles.rendering, className].filter(Boolean).join(" ")}>
       {items.length > 1 ? (
-        <div className={styles.itemPicker}>
-          <IconButton
-            aria-label="Previous video example"
-            size="small"
-            onClick={() => cycleTo(-1)}
-          >
-            <ChevronLeft />
-          </IconButton>
-          <Chip
-            clickable
-            color="primary"
-            variant="outlined"
-            onClick={handleSelectorOpen}
-            label={
-              <Typography component="span" className={styles.pickerLabel}>
-                {selectedItem.title}
-              </Typography>
-            }
-            aria-haspopup="menu"
-            aria-expanded={selectorOpen ? "true" : undefined}
-            aria-controls={
-              selectorOpen ? "video-rendering-selector-menu" : undefined
-            }
-            sx={{
-              minWidth: 0,
-              maxWidth: "100%",
-              justifySelf: "stretch",
-              "& .MuiChip-label": {
-                width: "100%",
-                overflow: "hidden",
-                display: "block",
-              },
-            }}
-          />
-          <IconButton
-            aria-label="Next video example"
-            size="small"
-            onClick={() => cycleTo(1)}
-          >
-            <ChevronRight />
-          </IconButton>
-          <IconButton
-            aria-label="Open video example selector"
-            size="small"
-            onClick={handleSelectorOpen}
-            aria-haspopup="menu"
-            aria-expanded={selectorOpen ? "true" : undefined}
-            aria-controls={
-              selectorOpen ? "video-rendering-selector-menu" : undefined
-            }
-            sx={{ display: { xs: "none", sm: "inline-flex" } }}
-          >
-            <MoreVert fontSize="small" />
-          </IconButton>
-        </div>
+        <Picker
+          ariaLabel="Choose a video example"
+          className={styles.itemPicker}
+          id="video-rendering-selector-menu"
+          items={pickerItems}
+          labelClassName={styles.pickerLabel}
+          nextAriaLabel="Next video example"
+          onSelectIndex={handleSelectItem}
+          previousAriaLabel="Previous video example"
+          renderItemVisual={(item, className) => (
+            <AssetImage
+              asset={item.stylizedImage}
+              sizes={`${VIDEO_MOVIE_RENDERING_MENU_THUMBNAIL_SIZE}px`}
+              className={className}
+            />
+          )}
+          selectedIndex={selectedItemIndex}
+          selectorAriaLabel="Open video example selector"
+        />
       ) : null}
 
       <div className={styles.stage}>
@@ -279,6 +219,9 @@ export default function VideoMovieRendering({
             }}
           />
         </div>
+        {mediaOverlay ? (
+          <div className={styles.mediaOverlay}>{mediaOverlay}</div>
+        ) : null}
       </div>
 
       <div className={styles.panelBar} aria-label="Choose rendering stage">
@@ -300,67 +243,6 @@ export default function VideoMovieRendering({
           );
         })}
       </div>
-
-      <Menu
-        id="video-rendering-selector-menu"
-        anchorEl={selectorAnchorEl}
-        open={selectorOpen}
-        onClose={handleSelectorClose}
-        slotProps={{
-          paper: {
-            sx: {
-              maxHeight: 560,
-              minWidth: { xs: 340, sm: 480 },
-            },
-          },
-        }}
-      >
-        {items.map((item, index) => (
-          <MenuItem
-            key={item.slug}
-            selected={index === selectedItemIndex}
-            onClick={() => handleSelectItem(index)}
-          >
-            <div className={styles.menuItem}>
-              <AssetImage
-                asset={item.stylizedImage}
-                sizes={`${VIDEO_MOVIE_RENDERING_MENU_THUMBNAIL_SIZE}px`}
-                className={styles.menuImage}
-              />
-              <div className={styles.menuText}>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    fontWeight: 600,
-                    fontSize: "1.16rem",
-                    lineHeight: 1.25,
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {item.title}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  color="text.secondary"
-                  sx={{
-                    mt: 0.25,
-                    fontSize: "1rem",
-                    lineHeight: 1.3,
-                    display: "block",
-                    whiteSpace: "normal",
-                    wordBreak: "break-word",
-                    overflowWrap: "anywhere",
-                  }}
-                >
-                  {item.shortText || item.blurb}
-                </Typography>
-              </div>
-            </div>
-          </MenuItem>
-        ))}
-      </Menu>
     </div>
   );
 }

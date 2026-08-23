@@ -1,19 +1,18 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import AutoFixHigh from "@mui/icons-material/AutoFixHigh";
 import PhotoIcon from "@mui/icons-material/Photo";
+import { Picker } from "@/components/shared/controls";
 import { AssetImage, ImageLightbox } from "@/components/shared/media";
-import {
-  CARD_PREVIEW_SIZES,
-  CARD_THUMBNAIL_SIZES,
-} from "@/app/(home)/_consts/homePage";
+import { CARD_PREVIEW_SIZES } from "@/app/(home)/_consts/homePage";
 import type { HolidayCardViewerProps } from "@/app/_types/holidayCardViewer";
 import { cards, type RichFxCard } from "@/consts/richFx";
 import { withBasePath } from "@/utils/basePath";
 import styles from "@/app/(home)/_components/home-page/HomePage.module.css";
 
 const CARD_SLIDE_DURATION_MS = 560;
+const CARD_MENU_THUMBNAIL_SIZE = 69;
 
 export default function HolidayCardViewer({
   activeCardPanel,
@@ -25,6 +24,19 @@ export default function HolidayCardViewer({
   const previousSelectedCardRef = useRef(selectedCard);
   const [outgoingCard, setOutgoingCard] = useState<RichFxCard | null>(null);
   const [isSliding, setIsSliding] = useState(false);
+  const selectedCardIndex = cards.findIndex(
+    (card) => card.slug === selectedCard.slug,
+  );
+  const pickerItems = useMemo(
+    () =>
+      cards.map((card) => ({
+        ...card,
+        key: card.slug,
+        label: card.holiday,
+        secondaryLabel: card.name,
+      })),
+    [],
+  );
   const selectedPreview =
     activeCardPanel === "card" ? selectedCard.card : selectedCard.original;
   const selectedPreviewTitle =
@@ -53,6 +65,14 @@ export default function HolidayCardViewer({
 
     return () => window.clearTimeout(timer);
   }, [selectedCard]);
+
+  const handleSelectCard = (index: number) => {
+    const nextCard = cards[index];
+
+    if (nextCard) {
+      onSelectCard(nextCard.slug);
+    }
+  };
 
   const renderCardPreview = (card: RichFxCard) => (
     <div
@@ -85,23 +105,26 @@ export default function HolidayCardViewer({
     <div className={styles.viewer} aria-label="Holiday card examples">
       <div className={styles.viewerHeader}></div>
 
-      <div className={styles.cardPicker} aria-label="Choose a card example">
-        {cards.map((card) => (
-          <button
-            type="button"
-            className={card.slug === selectedCard.slug ? styles.active : ""}
-            onClick={() => onSelectCard(card.slug)}
-            key={card.slug}
-          >
+      {cards.length > 1 ? (
+        <Picker
+          ariaLabel="Choose a card example"
+          className={styles.cardToolbar}
+          id="holiday-card-selector-menu"
+          items={pickerItems}
+          nextAriaLabel="Next holiday card"
+          onSelectIndex={handleSelectCard}
+          previousAriaLabel="Previous holiday card"
+          renderItemVisual={(card, className) => (
             <AssetImage
               asset={card.card}
-              sizes={CARD_THUMBNAIL_SIZES}
-              className={styles.thumbnail}
+              sizes={`${CARD_MENU_THUMBNAIL_SIZE}px`}
+              className={className}
             />
-            <span>{card.holiday}</span>
-          </button>
-        ))}
-      </div>
+          )}
+          selectedIndex={selectedCardIndex}
+          selectorAriaLabel="Open holiday card selector"
+        />
+      ) : null}
 
       <ImageLightbox
         src={withBasePath(selectedPreview.src)}

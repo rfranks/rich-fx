@@ -21,6 +21,16 @@ const IMAGE_DIMENSIONS_BY_PATH: Record<
     width: 1536,
     height: 1024,
   },
+  "/assets/portfolio/RichardFranksIn/RichardFranksIn_SWTheForceAwakens/stylistic.png":
+    {
+      width: 467,
+      height: 318,
+    },
+  "/assets/portfolio/RichardFranksAs/RichardFranksAs_DnDNecromancer/stylistic.png":
+    {
+      width: 1122,
+      height: 1402,
+    },
   "/personal/images/ai-lab/gollum/realistic.jpeg": {
     width: 1024,
     height: 1536,

@@ -10,7 +10,11 @@ export default function CtaBar({ className }: CtaBarProps) {
   return (
     <div className={classNames}>
       {HOME_PAGE_CTAS.map((cta) => (
-        <Link href={cta.href} key={cta.href}>
+        <Link
+          className={cta.href === "/ai-studio" ? styles.handheldHidden : ""}
+          href={cta.href}
+          key={cta.href}
+        >
           {cta.label}
         </Link>
       ))}

@@ -9,10 +9,6 @@
 }
 
 .toolbar {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto auto;
-  align-items: center;
-  gap: 8px;
   flex: 0 0 auto;
 }
 
@@ -57,34 +53,18 @@
   transform: scale(1.025);
 }
 
-.menuItem {
-  display: grid;
-  grid-template-columns: 69px minmax(0, 1fr);
-  column-gap: 13px;
-  align-items: start;
-}
-
-.menuImage {
-  width: 69px;
-  height: 69px;
-  margin-top: 2px;
-  flex-shrink: 0;
-  border: 1px solid var(--richfx-border);
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.menuText {
-  min-width: 0;
-}
-
 @media (max-width: 620px) {
   .sampler {
-    height: 720px;
+    height: 600px;
     min-height: 0;
+    gap: 8px;
   }
 
-  .toolbar {
-    grid-template-columns: auto minmax(0, 1fr) auto;
+  .styleLabel {
+    top: 8px;
+    left: 8px;
+    padding: 5px 7px;
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
   }
 }

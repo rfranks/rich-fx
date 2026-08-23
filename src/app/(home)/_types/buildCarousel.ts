@@ -5,6 +5,7 @@ export type BuildSectionKey =
   | "holiday-card"
   | "image-style-sampler"
   | "cartoon-rendering"
+  | "dnd-character-rendering"
   | "game-rendering"
   | "video-movie-rendering"
   | "calendar"
@@ -13,6 +14,7 @@ export type BuildSectionKey =
 export type BuildSectionOption = {
   key: BuildSectionKey;
   label: string;
+  shortLabel?: string;
   shortText: string;
   previewImage?: AssetImageAsset;
 };

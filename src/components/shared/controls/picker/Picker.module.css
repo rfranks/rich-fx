@@ -1,0 +1,82 @@
+.toolbar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.label {
+  min-width: 0;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fullLabel {
+  display: inline;
+}
+
+.shortLabel {
+  display: none;
+}
+
+.menuItem {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 69px minmax(0, 1fr);
+  column-gap: 13px;
+  align-items: start;
+}
+
+.visual {
+  width: 69px;
+  height: 69px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.text {
+  min-width: 0;
+}
+
+.badge {
+  width: 69px;
+  height: 69px;
+  margin-top: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--richfx-border);
+  border-radius: 8px;
+  background:
+    linear-gradient(120deg, rgba(255, 106, 0, 0.18), rgba(255, 243, 223, 0.06)),
+    #050505;
+  color: var(--richfx-orange);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.image {
+  width: 69px;
+  height: 69px;
+  display: block;
+  border: 1px solid var(--richfx-border);
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+@media (max-width: 620px) {
+  .toolbar {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .hasShortLabel .fullLabel {
+    display: none;
+  }
+
+  .hasShortLabel .shortLabel {
+    display: inline;
+  }
+}
