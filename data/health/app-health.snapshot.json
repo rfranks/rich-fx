@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-23T08:29:02.352Z",
+  "generatedAt": "2026-08-23T10:43:28.451Z",
   "overallStatus": "warn",
   "checks": {
     "fileBudgets": "warn",
@@ -10,12 +10,12 @@
     "fileBudgets": {
       "key": "fileBudgets",
       "status": "warn",
-      "generatedAt": "2026-08-23T08:28:35.315Z",
+      "generatedAt": "2026-08-23T10:43:01.264Z",
       "summary": "File budget check passed.",
       "details": {
         "totals": {
-          "scannedFileCount": 244,
-          "codeFileCount": 244,
+          "scannedFileCount": 245,
+          "codeFileCount": 245,
           "violationCount": 0,
           "missingExactBudgetViolationCount": 0,
           "exactBudgetUnderuseViolationCount": 0,
@@ -53,7 +53,7 @@
     "testRunner": {
       "key": "testRunner",
       "status": "pass",
-      "generatedAt": "2026-08-23T08:29:02.352Z",
+      "generatedAt": "2026-08-23T10:43:28.451Z",
       "summary": "unit test runner passed for lane portfolio.",
       "details": {
         "suite": "unit",
