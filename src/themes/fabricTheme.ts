@@ -387,7 +387,14 @@ const createComponentOverrides = (
         root: ({ theme }) => ({
           borderRadius: "var(--radius-md)",
           backgroundColor: "var(--surface-2)",
+          colorScheme: theme.palette.mode,
           boxShadow: `inset 0 1px 0 var(--inner-glow), 0 1px 0 ${alpha(theme.palette.common.white, mode === "dark" ? 0.04 : 0.46)}`,
+          "&:has(input:-webkit-autofill), &:has(textarea:-webkit-autofill)": {
+            backgroundColor: "var(--bg-layer)",
+            backgroundImage: "none",
+            boxShadow: "0 0 0 1000px var(--bg-layer) inset",
+            WebkitBoxShadow: "0 0 0 1000px var(--bg-layer) inset",
+          },
           "& .MuiOutlinedInput-notchedOutline": {
             borderColor: "var(--surface-border)",
           },
@@ -403,6 +410,20 @@ const createComponentOverrides = (
         }),
         input: ({ theme }) => ({
           paddingBlock: theme.spacing(1.25),
+          color: theme.palette.text.primary,
+          WebkitTextFillColor: `${theme.palette.text.primary} !important`,
+          "&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus":
+            {
+              backgroundColor: "var(--bg-layer)",
+              backgroundImage: "none",
+              boxShadow: "0 0 0 1000px var(--bg-layer) inset",
+              caretColor: theme.palette.text.primary,
+              color: theme.palette.text.primary,
+              transition: "background-color 9999s ease-out 0s",
+              WebkitBackgroundClip: "border-box",
+              WebkitBoxShadow: "0 0 0 1000px var(--bg-layer) inset",
+              WebkitTextFillColor: `${theme.palette.text.primary} !important`,
+            },
         }),
       },
     },

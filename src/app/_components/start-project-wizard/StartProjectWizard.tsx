@@ -47,6 +47,7 @@ import StartProjectDetailsStep from "./StartProjectDetailsStep";
 import StartProjectEmailStep from "./StartProjectEmailStep";
 import StartProjectProjectStep from "./StartProjectProjectStep";
 import StartProjectSourceStep from "./StartProjectSourceStep";
+import { useStartProjectBodyScrollLock } from "./useStartProjectBodyScrollLock";
 import styles from "./StartProjectWizard.module.css";
 
 const iconSx = { fontSize: 34 };
@@ -57,6 +58,8 @@ export default function StartProjectWizard({
 }: StartProjectWizardProps) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  useStartProjectBodyScrollLock(open);
+
   const [activeStep, setActiveStep] = useState(0);
   const [stepDirection, setStepDirection] = useState<"forward" | "back">(
     "forward",
@@ -175,6 +178,7 @@ export default function StartProjectWizard({
           borderRadius: fullScreen ? 0 : 2,
           backgroundImage: "none",
           height: fullScreen ? "100%" : "min(840px, calc(100vh - 64px))",
+          overscrollBehavior: "contain",
           width: fullScreen ? "100%" : "min(900px, calc(100vw - 64px))",
         },
       }}
@@ -205,7 +209,11 @@ export default function StartProjectWizard({
         </span>
       </DialogTitle>
       <DialogContent className={styles.content}>
-        <Stepper activeStep={activeStep} alternativeLabel={!fullScreen}>
+        <Stepper
+          activeStep={activeStep}
+          alternativeLabel
+          className={styles.stepper}
+        >
           {START_PROJECT_STEPS.map((step, index) => (
             <Step key={step.id}>
               {index < activeStep ? (
@@ -221,6 +229,7 @@ export default function StartProjectWizard({
         <Box
           className={[
             styles.stepFrame,
+            activeStep === 4 ? styles.emailStepFrame : undefined,
             stepDirection === "forward"
               ? styles.stepFrameForward
               : styles.stepFrameBack,

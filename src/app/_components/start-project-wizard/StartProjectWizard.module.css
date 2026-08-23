@@ -22,10 +22,31 @@
   grid-template-rows: auto minmax(0, 1fr);
   align-content: start;
   gap: 22px;
+  min-height: 0;
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+.stepper {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  min-width: 0;
+  padding: 0 0 16px;
+  border-bottom: 1px solid var(--surface-border);
+  background: #000000;
 }
 
 .stepFrame {
   min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.emailStepFrame {
+  display: grid;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .stepFrameForward {
@@ -51,7 +72,6 @@
   position: relative;
   width: 100%;
   min-height: 156px;
-  display: grid;
   align-content: start;
   justify-items: start;
   gap: 12px;
@@ -68,6 +88,12 @@
     box-shadow 180ms ease,
     color 180ms ease,
     transform 180ms ease;
+}
+
+.choiceCard.choiceCard {
+  display: grid;
+  justify-content: stretch;
+  text-align: left;
 }
 
 .choiceCard:hover {
@@ -139,6 +165,88 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
+}
+
+.fieldGrid :global(.MuiFormControl-root),
+.fieldGrid :global(.MuiInputBase-root),
+.fieldGrid :global(.MuiInputBase-input) {
+  color-scheme: dark;
+}
+
+.fieldGrid :global(.MuiOutlinedInput-root) {
+  background-color: var(--surface-2);
+  background-image: none;
+}
+
+.fieldGrid :global(.MuiInputBase-input) {
+  background-color: transparent;
+  box-shadow: 0 0 0 1000px var(--bg-layer) inset;
+  color: var(--richfx-text) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-layer) inset;
+  -webkit-text-fill-color: var(--richfx-text) !important;
+}
+
+.fieldGrid :global(input:autofill),
+.fieldGrid :global(input:autofill:hover),
+.fieldGrid :global(input:autofill:focus),
+.fieldGrid :global(input:-webkit-autofill),
+.fieldGrid :global(input:-webkit-autofill:hover),
+.fieldGrid :global(input:-webkit-autofill:focus),
+.fieldGrid :global(textarea:autofill),
+.fieldGrid :global(textarea:autofill:hover),
+.fieldGrid :global(textarea:autofill:focus),
+.fieldGrid :global(textarea:-webkit-autofill),
+.fieldGrid :global(textarea:-webkit-autofill:hover),
+.fieldGrid :global(textarea:-webkit-autofill:focus) {
+  border-radius: inherit;
+  background-color: #101010 !important;
+  background-image: none !important;
+  background-clip: border-box !important;
+  box-shadow: 0 0 0 1000px #101010 inset !important;
+  caret-color: var(--richfx-text) !important;
+  color: var(--richfx-text) !important;
+  transition: background-color 9999s ease-out 0s;
+  -webkit-background-clip: border-box !important;
+  -webkit-box-shadow: 0 0 0 1000px #101010 inset !important;
+  -webkit-text-fill-color: var(--richfx-text) !important;
+}
+
+.fieldGrid :global(.MuiOutlinedInput-root:has(input:autofill)),
+.fieldGrid :global(.MuiOutlinedInput-root:has(textarea:autofill)),
+.fieldGrid :global(.MuiOutlinedInput-root:has(input:-webkit-autofill)),
+.fieldGrid :global(.MuiOutlinedInput-root:has(textarea:-webkit-autofill)) {
+  background-color: #101010 !important;
+  background-image: none !important;
+  box-shadow: 0 0 0 1000px #101010 inset !important;
+  color-scheme: dark;
+  -webkit-box-shadow: 0 0 0 1000px #101010 inset !important;
+}
+
+.contactTextField.contactTextField {
+  color-scheme: dark;
+}
+
+.contactTextField.contactTextField :global(.MuiOutlinedInput-root) {
+  background-color: var(--surface-2);
+  background-image: none;
+}
+
+.contactTextField.contactTextField :global(input:autofill),
+.contactTextField.contactTextField :global(input:autofill:hover),
+.contactTextField.contactTextField :global(input:autofill:focus),
+.contactTextField.contactTextField :global(input:-webkit-autofill),
+.contactTextField.contactTextField :global(input:-webkit-autofill:hover),
+.contactTextField.contactTextField :global(input:-webkit-autofill:focus) {
+  background-color: #101010 !important;
+  background-image: none !important;
+  background-clip: border-box !important;
+  box-shadow: 0 0 0 1000px #101010 inset !important;
+  caret-color: var(--richfx-text) !important;
+  color: var(--richfx-text) !important;
+  transition: background-color 9999s ease-out 0s;
+  -webkit-background-clip: border-box !important;
+  -webkit-box-shadow: 0 0 0 1000px #101010 inset !important;
+  -webkit-text-fill-color: var(--richfx-text) !important;
 }
 
 .contactFieldGrid {
@@ -221,18 +329,170 @@
   font-family: var(--font-geist-mono, monospace);
 }
 
-.emailPreviewField {
-  min-width: 0;
+.emailStepBody {
+  min-height: 0;
 }
 
-.copyEmailAdornment {
-  align-self: flex-start;
-  margin-top: 4px;
+.emailStepIntro {
+  min-height: 0;
+}
+
+.emailPreviewGrid {
+  min-height: 0;
+}
+
+.emailPreviewField {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+}
+
+.emailPreviewField :global(.MuiInputBase-inputMultiline) {
+  padding-right: 52px;
+}
+
+.copyEmailButtonFrame {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  display: inline-flex;
+}
+
+.copyEmailButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-2);
+  color: var(--richfx-text);
+}
+
+.copyEmailButton:hover {
+  background: var(--surface-3, var(--surface-2));
 }
 
 @media (max-width: 640px) {
+  .dialogTitle {
+    gap: 12px;
+  }
+
+  .dialogTitle > span:first-child {
+    min-width: 0;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .content {
+    gap: 16px;
+  }
+
+  .stepper :global(.MuiStepLabel-label) {
+    margin-top: 4px;
+    font-size: 0.72rem;
+    line-height: 1.15;
+  }
+
+  .stepper {
+    padding-bottom: 12px;
+  }
+
+  .stepBody {
+    gap: 14px;
+  }
+
+  .choiceGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .choiceCard.choiceCard {
+    min-height: 74px;
+    grid-template-columns: 44px minmax(0, 1fr);
+    align-items: center;
+    align-content: center;
+    justify-content: stretch;
+    justify-items: start;
+    gap: 12px;
+    padding: 12px;
+    text-align: left;
+  }
+
+  .choiceIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .choiceText {
+    min-width: 0;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .choiceText span {
+    font-size: 0.82rem;
+  }
+
+  .copyEmailButton {
+    width: 44px;
+    height: 44px;
+  }
+
+  .emailStepFrame,
+  .emailStepBody,
+  .emailPreviewGrid,
+  .emailPreviewField,
+  .emailPreviewField :global(.MuiFormControl-root),
+  .emailPreviewField :global(.MuiInputBase-root) {
+    min-height: 0;
+  }
+
+  .emailStepFrame,
+  .emailStepBody,
+  .emailPreviewGrid,
+  .emailPreviewField,
+  .emailPreviewField :global(.MuiFormControl-root) {
+    height: 100%;
+  }
+
+  .emailStepFrame,
+  .emailStepBody,
+  .emailPreviewGrid,
+  .emailPreviewField {
+    overflow: hidden;
+  }
+
+  .emailStepBody {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .emailPreviewGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .emailPreviewField {
+    display: grid;
+  }
+
+  .emailPreviewField :global(.MuiInputBase-root) {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr);
+    height: 100%;
+    align-items: stretch;
+  }
+
+  .emailPreviewField :global(.MuiInputBase-inputMultiline) {
+    min-height: 0 !important;
+    height: 100% !important;
+    overflow: auto !important;
+  }
+
   .fieldGrid {
     grid-template-columns: 1fr;
+  }
+
+  .dividerSection {
+    padding: 12px 0;
   }
 }
 

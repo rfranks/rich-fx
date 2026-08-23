@@ -34,12 +34,14 @@ export default function StartProjectContactStep({
       </div>
       <div className={[styles.fieldGrid, styles.contactFieldGrid].join(" ")}>
         <TextField
+          className={styles.contactTextField}
           label="Name"
           required
           value={form.name}
           onChange={(event) => onChange("name", event.target.value)}
         />
         <TextField
+          className={styles.contactTextField}
           label="Reply email"
           required
           type="email"
@@ -47,6 +49,7 @@ export default function StartProjectContactStep({
           onChange={(event) => onChange("replyEmail", event.target.value)}
         />
         <TextField
+          className={styles.contactTextField}
           label="Phone"
           type="tel"
           placeholder="+1 (555) 123 - 4567"
