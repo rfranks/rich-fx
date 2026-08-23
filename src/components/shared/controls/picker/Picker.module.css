@@ -14,6 +14,23 @@
   white-space: nowrap;
 }
 
+.selectedContent {
+  min-width: 0;
+  display: inline-grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.selectedVisual {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
 .fullLabel {
   display: inline;
 }
@@ -61,6 +78,15 @@
 .image {
   width: 69px;
   height: 69px;
+  display: block;
+  border: 1px solid var(--richfx-border);
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.selectedImage {
+  width: 34px;
+  height: 34px;
   display: block;
   border: 1px solid var(--richfx-border);
   border-radius: 8px;

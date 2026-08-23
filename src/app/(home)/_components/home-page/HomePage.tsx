@@ -15,7 +15,7 @@ import VideoMovieRendering from "@/app/(home)/_components/video-movie-rendering/
 import { AssetImage } from "@/components/shared/media";
 import { BUILD_SECTION_OPTIONS_BY_KEY } from "@/app/(home)/_consts/buildCarousel";
 import { DEFAULT_CARD_PANEL } from "@/app/(home)/_consts/homePage";
-import { IMAGE_STYLE_SAMPLES } from "@/app/(home)/_consts/imageStyleSampler";
+import { IMAGE_STYLE_SAMPLES } from "@/app/_consts/imageStyleSampler";
 import {
   CARTOON_RENDERING_ITEMS,
   DND_CHARACTER_RENDERING_ITEMS,

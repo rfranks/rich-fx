@@ -8,9 +8,9 @@ import {
   IMAGE_STYLE_MENU_THUMBNAIL_SIZE,
   IMAGE_STYLE_SAMPLES,
   IMAGE_STYLE_SAMPLE_SIZES,
-} from "@/app/(home)/_consts/imageStyleSampler";
-import type { ImageStyleSamplerProps } from "@/app/(home)/_types/imageStyleSampler";
-import { formatImageStylePickerLabel } from "@/app/(home)/_utils/imageStyleSampler";
+} from "@/app/_consts/imageStyleSampler";
+import type { ImageStyleSamplerProps } from "@/app/_types/imageStyleSampler";
+import { formatImageStylePickerLabel } from "@/app/_utils/imageStyleSampler";
 import { withBasePath } from "@/utils/basePath";
 import styles from "./ImageStyleSampler.module.css";
 

@@ -28,6 +28,8 @@ export type PickerProps<TItem extends PickerItem> = {
   onSelectIndex: (index: number) => void;
   previousAriaLabel: string;
   renderItemVisual?: (item: TItem, className: string) => ReactNode;
+  renderSelectedVisual?: (item: TItem, className: string) => ReactNode;
+  selectedVisualClassName?: string;
   selectedIndex: number;
   selectorAriaLabel: string;
 };
@@ -66,6 +68,8 @@ export default function Picker<TItem extends PickerItem>({
   onSelectIndex,
   previousAriaLabel,
   renderItemVisual,
+  renderSelectedVisual,
+  selectedVisualClassName,
   selectedIndex,
   selectorAriaLabel,
 }: PickerProps<TItem>) {
@@ -131,14 +135,24 @@ export default function Picker<TItem extends PickerItem>({
           variant="outlined"
           onClick={handleSelectorOpen}
           label={
-            <Typography component="span" className={selectedLabelClassNames}>
-              <span className={styles.fullLabel}>{selectedItem.label}</span>
-              {selectedItem.shortLabel ? (
-                <span className={styles.shortLabel}>
-                  {selectedItem.shortLabel}
+            <span className={styles.selectedContent}>
+              {renderSelectedVisual ? (
+                <span className={styles.selectedVisual} aria-hidden="true">
+                  {renderSelectedVisual(
+                    selectedItem,
+                    selectedVisualClassName ?? styles.selectedImage,
+                  )}
                 </span>
               ) : null}
-            </Typography>
+              <Typography component="span" className={selectedLabelClassNames}>
+                <span className={styles.fullLabel}>{selectedItem.label}</span>
+                {selectedItem.shortLabel ? (
+                  <span className={styles.shortLabel}>
+                    {selectedItem.shortLabel}
+                  </span>
+                ) : null}
+              </Typography>
+            </span>
           }
           aria-label={`${selectorAriaLabel}: ${selectedItem.label}`}
           aria-haspopup="menu"

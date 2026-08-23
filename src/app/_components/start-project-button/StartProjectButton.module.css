@@ -7,7 +7,9 @@
   border-radius: 8px;
   background: var(--richfx-orange);
   color: var(--richfx-black);
+  cursor: pointer;
   font-weight: 900;
+  font-family: inherit;
   text-decoration: none;
   text-transform: uppercase;
   transition:

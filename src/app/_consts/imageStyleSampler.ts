@@ -1,5 +1,5 @@
-import type { ImageStyleSample } from "@/app/(home)/_types/imageStyleSampler";
-import { formatImageStyleLabel } from "@/app/(home)/_utils/imageStyleSampler";
+import type { ImageStyleSample } from "@/app/_types/imageStyleSampler";
+import { formatImageStyleLabel } from "@/app/_utils/imageStyleSampler";
 
 const IMAGE_STYLE_SAMPLER_BASE_PATH = "/assets/image-style-sampler";
 const IMAGE_STYLE_SAMPLE_SLUGS = [
