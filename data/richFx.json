@@ -162,6 +162,33 @@
   ],
   "schemaVersion": 3,
   "images": [],
+  "artwork": [
+    {
+      "slug": "stained-glass-heart",
+      "title": "Stained Glass Heartbeat",
+      "orientation": "square",
+      "originalArt": "/assets/portfolio/AIArtRendering/stained-glass-heart/originalArt.png",
+      "originalArtSource": "Original artwork",
+      "originalArtCaption": "A hand-drawn anatomical heart composed like a stained-glass window, with pencil linework, warm cream glass panels, red and blue vessels, branching details, and a decorative arched frame.",
+      "aiArt": "/assets/portfolio/AIArtRendering/stained-glass-heart/aiArt.png",
+      "aiArtSource": "AI generated artwork",
+      "aiArtCaption": "The original sketch is transformed into a polished backlit stained-glass render, preserving the anatomical heart, branching vessels, jewel-toned border, and cathedral-window composition while adding richer glass texture and cinematic glow.",
+      "storyboardImage": "/assets/portfolio/AIArtRendering/stained-glass-heart/storyboard.png",
+      "storyboardSource": "AI generated storyboard",
+      "storyboardCaption": "The storyboard plans a five-beat heartbeat loop, moving from rest to contraction, peak glow, release, and a seamless return to the resting state.",
+      "movieRendering": "/assets/portfolio/AIArtRendering/stained-glass-heart/motion.mp4",
+      "movieSource": "AI generated video",
+      "movieCaption": "The stained-glass heart becomes a compact motion loop where the warm backlight pulses with the heartbeat and the glass chambers subtly expand and relax.",
+      "blurb": "Stained Glass Heartbeat starts with a hand-drawn anatomical heart inside a cathedral-style stained-glass frame, then pushes the artwork into a luminous AI render with richer glass, deeper color, and a warm internal glow. The optional storyboard and motion pass turn the still composition into a short heartbeat loop while preserving the original structure and handmade idea.",
+      "shortText": "Hand-drawn stained-glass heart becomes a glowing heartbeat loop.",
+      "originalArtWidth": 1254,
+      "originalArtHeight": 1254,
+      "aiArtWidth": 1254,
+      "aiArtHeight": 1254,
+      "storyboardImageWidth": 1536,
+      "storyboardImageHeight": 1024
+    }
+  ],
   "games": [
     {
       "slug": "kratos",
@@ -822,6 +849,26 @@
       "stylizedRenderingHeight": 318,
       "storyboardImageWidth": 1536,
       "storyboardImageHeight": 1024
+    },
+    {
+      "slug": "iron-man-2-monaco",
+      "title": "Iron Man 2 Monaco!",
+      "orientation": "landscape",
+      "realisticImage": "/personal/images/personal/me-headshot.jpeg",
+      "realisticSource": "Professional headshot",
+      "realisticCaption": "It starts with a clean professional headshot before stepping onto the Monaco Grand Prix circuit for a suitcase-armor movie moment.",
+      "stylizedRendering": "/assets/portfolio/RichardFranksAs/RichardFranksAs_IronMan2/stylistic.png",
+      "stylizedSource": "AI generated image",
+      "stylizedCaption": "The headshot is recast as an armored Monaco street-circuit hero shot, with red chrome plating, packed grandstands, Riviera buildings, and a sunlit race-day standoff.",
+      "movieRendering": "/assets/portfolio/RichardFranksAs/RichardFranksAs_IronMan2/movie.mp4",
+      "movieSource": "AI generated video",
+      "movieCaption": "The still image moves into a compact Monaco Grand Prix action beat, turning the suitcase-armor reveal into a short cinematic race-track confrontation.",
+      "blurb": "Iron Man 2 Monaco! takes a polished headshot and drops it into the Monaco Grand Prix suitcase scene energy from Iron Man 2. The piece turns an ordinary portrait into a sunlit street-circuit action frame, complete with red armored plating, roaring grandstands, Riviera architecture, and a short motion beat built around the instant the hero steps onto the track.",
+      "shortText": "Headshot enters a Monaco Grand Prix armor reveal.",
+      "realisticImageWidth": 1024,
+      "realisticImageHeight": 1536,
+      "stylizedRenderingWidth": 1672,
+      "stylizedRenderingHeight": 941
     },
     {
       "slug": "boom-team",
