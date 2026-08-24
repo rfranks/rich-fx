@@ -48,10 +48,22 @@ export type RichFxStudioItem = Record<string, unknown> & {
   realisticSource?: string;
   realisticSourceHref?: string;
   realisticCaption?: string;
+  originalArt?: string;
+  originalArtSource?: string;
+  originalArtSourceHref?: string;
+  originalArtCaption?: string;
+  originalArtWidth?: number;
+  originalArtHeight?: number;
   stylizedRendering?: string;
   stylizedSource?: string;
   stylizedSourceHref?: string;
   stylizedCaption?: string;
+  aiArt?: string;
+  aiArtSource?: string;
+  aiArtSourceHref?: string;
+  aiArtCaption?: string;
+  aiArtWidth?: number;
+  aiArtHeight?: number;
   storyboardImage?: string;
   storyboardSource?: string;
   storyboardSourceHref?: string;
@@ -161,6 +173,7 @@ export type RichFx = {
   contactCTA?: Record<string, unknown>;
   portfolioApps: RichFxPortfolioApps;
   images: RichFxStudioItem[];
+  artwork: RichFxStudioItem[];
   videos: RichFxStudioItem[];
   games: RichFxStudioItem[];
   dndCharacters: RichFxStudioItem[];
@@ -261,6 +274,7 @@ export const normalizeRichFxData = (data: RichFxRawData): RichFx => {
     : undefined;
   const legacyItems = legacyAiLab?.items ?? olderLegacyAiLab?.items ?? [];
   const images = rest.images ?? legacyItems.filter(isImageStudioItem);
+  const artwork = rest.artwork ?? [];
   const videos = rest.videos ?? legacyItems.filter(isVideoStudioItem);
   const games = rest.games ?? [];
   const dndCharacters = rest.dndCharacters ?? [];
@@ -272,6 +286,7 @@ export const normalizeRichFxData = (data: RichFxRawData): RichFx => {
     !portfolioApps?.site ||
     !portfolioApps.aiStudio ||
     !Array.isArray(images) ||
+    !Array.isArray(artwork) ||
     !Array.isArray(videos) ||
     !Array.isArray(games) ||
     !Array.isArray(dndCharacters) ||
@@ -292,6 +307,7 @@ export const normalizeRichFxData = (data: RichFxRawData): RichFx => {
       aiStudio: portfolioApps.aiStudio,
     },
     images,
+    artwork,
     videos,
     games,
     dndCharacters,
@@ -333,6 +349,7 @@ export const getAiStudioItems = (data: RichFx): RichFxStudioItem[] => [
 
 export const portfolioApps = richFx.portfolioApps;
 export const aiStudioItems = getAiStudioItems(richFx);
+export const artwork = richFx.artwork;
 export const cards = richFx.cards;
 export const calendars = richFx.calendars;
 export const cartoons = richFx.cartoons;

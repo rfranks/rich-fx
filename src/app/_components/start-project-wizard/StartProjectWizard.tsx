@@ -9,6 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MovieCreationIcon from "@mui/icons-material/MovieCreation";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import PaletteIcon from "@mui/icons-material/Palette";
+import BrushIcon from "@mui/icons-material/Brush";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import TheatersIcon from "@mui/icons-material/Theaters";
@@ -73,6 +74,7 @@ export default function StartProjectWizard({
   const iconMap: StartProjectIconMap = useMemo(
     () => ({
       holiday: <CardGiftcardIcon sx={iconSx} />,
+      artwork: <BrushIcon sx={iconSx} />,
       calendar: <CalendarMonthIcon sx={iconSx} />,
       cartoon: <PaletteIcon sx={iconSx} />,
       fantasy: <CastleIcon sx={iconSx} />,

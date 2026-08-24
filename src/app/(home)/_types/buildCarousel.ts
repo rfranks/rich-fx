@@ -3,6 +3,7 @@ import type { AssetImageAsset } from "@/types/components/shared/media";
 
 export type BuildSectionKey =
   | "holiday-card"
+  | "artwork-rendering"
   | "image-style-sampler"
   | "cartoon-rendering"
   | "dnd-character-rendering"

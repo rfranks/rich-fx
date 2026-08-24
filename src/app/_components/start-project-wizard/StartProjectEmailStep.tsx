@@ -96,9 +96,9 @@ export default function StartProjectEmailStep({
           Ready to open the email?
         </Typography>
         <Typography color="text.secondary">
-          Review the message, then send it from your email app. You can copy the
-          message to paste into your favorite email client, or click Open email
-          to open your default mailto: client.
+          Review the message, then send it from your default email app by
+          clicking the &quot;Open email&quot; button or copy the message to
+          paste and send to inquiries@rich-fx.com.
         </Typography>
       </div>
       <div className={[styles.fieldGrid, styles.emailPreviewGrid].join(" ")}>
@@ -133,6 +133,10 @@ export default function StartProjectEmailStep({
           </span>
         </div>
       </div>
+      <Alert className={styles.emailSendAlert} severity="warning">
+        Remember to attach any useful photos or reference files before sending
+        your email.
+      </Alert>
       <Snackbar
         anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
         autoHideDuration={COPY_SUCCESS_DURATION_MS}

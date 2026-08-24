@@ -32,6 +32,14 @@ export default function StartProjectChoiceCard<TId extends string>({
         <strong>{option.label}</strong>
         <span>{option.description}</span>
       </span>
+      <span className={styles.choicePriceGroup}>
+        {option.originalPrice ? (
+          <span className={styles.choiceOriginalPrice}>
+            Originally: {option.originalPrice}
+          </span>
+        ) : null}
+        <span className={styles.choicePrice}>{option.priceRange}</span>
+      </span>
     </ButtonBase>
   );
 }

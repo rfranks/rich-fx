@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -7,6 +7,7 @@ import type {
   StartProjectOccasionId,
   StartProjectStepComponentProps,
 } from "@/app/_types/startProjectWizard";
+import { getStartProjectMinimumDeliveryDate } from "@/app/_utils/startProjectWizard";
 import StartProjectImageStyleSelector from "./StartProjectImageStyleSelector";
 import styles from "./StartProjectWizard.module.css";
 
@@ -15,6 +16,10 @@ export default function StartProjectDetailsStep({
   onChange,
 }: StartProjectStepComponentProps) {
   const otherOccasionInputRef = useRef<HTMLInputElement | null>(null);
+  const minimumDeliveryDate = useMemo(
+    () => getStartProjectMinimumDeliveryDate(),
+    [],
+  );
 
   useEffect(() => {
     if (form.occasionType === "other") {
@@ -33,6 +38,15 @@ export default function StartProjectDetailsStep({
       "occasion",
       occasionType === "other" ? "" : (selectedOccasion?.label ?? ""),
     );
+  };
+
+  const handleDeadlineChange = (value: string) => {
+    if (value && value < minimumDeliveryDate) {
+      onChange("deadline", minimumDeliveryDate);
+      return;
+    }
+
+    onChange("deadline", value);
   };
 
   return (
@@ -79,12 +93,15 @@ export default function StartProjectDetailsStep({
           label="Target Delivery Date"
           type="date"
           slotProps={{
+            htmlInput: {
+              min: minimumDeliveryDate,
+            },
             inputLabel: {
               shrink: true,
             },
           }}
           value={form.deadline}
-          onChange={(event) => onChange("deadline", event.target.value)}
+          onChange={(event) => handleDeadlineChange(event.target.value)}
         />
         <TextField
           className={styles.fullField}

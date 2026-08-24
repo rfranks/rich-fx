@@ -45,6 +45,8 @@
 
 .emailStepFrame {
   display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  height: 100%;
   min-height: 0;
   overflow: hidden;
 }
@@ -101,24 +103,14 @@
   transform: translateY(-1px);
 }
 
-.choiceCardSelected {
-  border-color: rgba(255, 106, 0, 0.8);
-  border-radius: 8px;
+.choiceCard.choiceCardSelected {
+  padding: 20px;
+  border: 2px solid var(--richfx-orange);
+  border-radius: 5px;
   background:
     linear-gradient(180deg, rgba(255, 106, 0, 0.2), rgba(255, 106, 0, 0.09)),
     var(--surface-2);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 106, 0, 0.72),
-    0 0 0 3px rgba(255, 106, 0, 0.28);
-}
-
-.choiceCardSelected::before {
-  position: absolute;
-  inset: 0;
-  border: 2px solid var(--richfx-orange);
-  border-radius: inherit;
-  content: "";
-  pointer-events: none;
+  box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.18);
 }
 
 .choiceIcon {
@@ -157,8 +149,36 @@
   line-height: 1.35;
 }
 
+.choicePriceGroup {
+  align-self: end;
+  display: grid;
+  gap: 3px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.choiceOriginalPrice {
+  color: var(--richfx-orange);
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1.1;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.choicePrice {
+  color: var(--richfx-text);
+  font-size: 0.92rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
 .choiceCardSelected .choiceText span {
   color: var(--richfx-text);
+}
+
+.choiceCardSelected .choicePrice {
+  color: #ffffff;
 }
 
 .fieldGrid {
@@ -249,6 +269,60 @@
   -webkit-text-fill-color: var(--richfx-text) !important;
 }
 
+.contactInput.contactInput {
+  background-color: transparent !important;
+  caret-color: var(--richfx-text) !important;
+  color: var(--richfx-text) !important;
+  -webkit-text-fill-color: var(--richfx-text) !important;
+}
+
+.contactInput.contactInput:-webkit-autofill,
+.contactInput.contactInput:-webkit-autofill:hover,
+.contactInput.contactInput:-webkit-autofill:focus {
+  background-color: #101010 !important;
+  background-image: none !important;
+  background-clip: border-box !important;
+  box-shadow: 0 0 0 1000px #101010 inset !important;
+  caret-color: var(--richfx-text) !important;
+  color: var(--richfx-text) !important;
+  text-shadow: 0 0 0 var(--richfx-text) !important;
+  transition: background-color 9999s ease-out 0s;
+  -webkit-background-clip: border-box !important;
+  -webkit-box-shadow: 0 0 0 1000px #101010 inset !important;
+  -webkit-text-fill-color: var(--richfx-text) !important;
+}
+
+.contactInput.contactInput:autofill,
+.contactInput.contactInput:autofill:hover,
+.contactInput.contactInput:autofill:focus {
+  background-color: #101010 !important;
+  background-image: none !important;
+  background-clip: border-box !important;
+  box-shadow: 0 0 0 1000px #101010 inset !important;
+  caret-color: var(--richfx-text) !important;
+  color: var(--richfx-text) !important;
+  text-shadow: 0 0 0 var(--richfx-text) !important;
+  transition: background-color 9999s ease-out 0s;
+  -webkit-background-clip: border-box !important;
+  -webkit-box-shadow: 0 0 0 1000px #101010 inset !important;
+  -webkit-text-fill-color: var(--richfx-text) !important;
+}
+
+.contactInput.contactInput:-internal-autofill-selected {
+  background-color: #101010 !important;
+  background-image: none !important;
+  box-shadow: 0 0 0 1000px #101010 inset !important;
+  color: var(--richfx-text) !important;
+  -webkit-box-shadow: 0 0 0 1000px #101010 inset !important;
+  -webkit-text-fill-color: var(--richfx-text) !important;
+}
+
+.contactInput.contactInput:-webkit-autofill::first-line {
+  color: var(--richfx-text) !important;
+  font-family: inherit;
+  -webkit-text-fill-color: var(--richfx-text) !important;
+}
+
 .contactFieldGrid {
   grid-template-columns: 1fr;
 }
@@ -318,7 +392,11 @@
 }
 
 .emailStepBody {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
   min-height: 0;
+  overflow: hidden;
 }
 
 .emailStepIntro {
@@ -326,17 +404,51 @@
 }
 
 .emailPreviewGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  height: 100%;
   min-height: 0;
+  overflow: hidden;
 }
 
 .emailPreviewField {
   position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
   min-width: 0;
   min-height: 0;
+  overflow: hidden;
+}
+
+.emailPreviewField,
+.emailPreviewField :global(.MuiFormControl-root) {
+  height: 100%;
+}
+
+.emailPreviewField :global(.MuiFormControl-root),
+.emailPreviewField :global(.MuiInputBase-root) {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  min-height: 0;
+  max-height: 100%;
+}
+
+.emailPreviewField :global(.MuiInputBase-root) {
+  height: 100%;
+  align-items: stretch;
 }
 
 .emailPreviewField :global(.MuiInputBase-inputMultiline) {
+  min-height: 0 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow: auto !important;
   padding-right: 52px;
+}
+
+.emailSendAlert {
+  margin-top: 2px;
 }
 
 .copyEmailButtonFrame {
@@ -416,6 +528,16 @@
     text-align: left;
   }
 
+  .choicePriceGroup {
+    grid-column: 2;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .choicePrice {
+    font-size: 0.86rem;
+  }
+
   .choiceText span {
     font-size: 0.82rem;
   }
@@ -425,54 +547,30 @@
     height: 44px;
   }
 
-  .emailStepFrame,
-  .emailStepBody,
+  .emailStepFrame {
+    min-height: 0;
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .emailStepBody {
+    grid-template-rows: auto;
+    height: auto;
+    min-height: min-content;
+    overflow: visible;
+  }
+
   .emailPreviewGrid,
   .emailPreviewField,
   .emailPreviewField :global(.MuiFormControl-root),
   .emailPreviewField :global(.MuiInputBase-root) {
-    min-height: 0;
-  }
-
-  .emailStepFrame,
-  .emailStepBody,
-  .emailPreviewGrid,
-  .emailPreviewField,
-  .emailPreviewField :global(.MuiFormControl-root) {
-    height: 100%;
-  }
-
-  .emailStepFrame,
-  .emailStepBody,
-  .emailPreviewGrid,
-  .emailPreviewField {
-    overflow: hidden;
-  }
-
-  .emailStepBody {
-    grid-template-rows: auto minmax(0, 1fr);
-  }
-
-  .emailPreviewGrid {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .emailPreviewField {
-    display: grid;
-  }
-
-  .emailPreviewField :global(.MuiInputBase-root) {
-    display: grid;
-    grid-template-rows: minmax(0, 1fr);
-    height: 100%;
-    align-items: stretch;
+    height: auto;
   }
 
   .emailPreviewField :global(.MuiInputBase-inputMultiline) {
-    min-height: 0 !important;
-    height: 100% !important;
-    overflow: auto !important;
+    min-height: 240px !important;
+    max-height: 44vh !important;
   }
 
   .fieldGrid {

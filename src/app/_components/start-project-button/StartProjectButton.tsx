@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import ButtonBase from "@mui/material/ButtonBase";
-import { START_PROJECT_CTA } from "@/app/_consts/startProject";
+import {
+  START_PROJECT_CTA,
+  START_PROJECT_ETSY_URL,
+  USE_ETSY,
+} from "@/app/_consts/startProject";
 import StartProjectWizard from "@/app/_components/start-project-wizard/StartProjectWizard";
 import type { StartProjectButtonProps } from "@/app/_types/startProject";
 import styles from "./StartProjectButton.module.css";
@@ -17,14 +21,23 @@ export default function StartProjectButton({
     .filter(Boolean)
     .join(" ");
 
+  const handleClick = () => {
+    if (USE_ETSY) {
+      window.open(START_PROJECT_ETSY_URL, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    setWizardOpen(true);
+  };
+
   return (
     <>
       <ButtonBase
-        aria-haspopup="dialog"
+        aria-haspopup={USE_ETSY ? undefined : "dialog"}
         aria-label={START_PROJECT_CTA.label}
         className={classNames}
         focusRipple
-        onClick={() => setWizardOpen(true)}
+        onClick={handleClick}
         sx={{
           bgcolor: "var(--richfx-orange)",
           borderColor: "var(--richfx-orange)",
@@ -48,10 +61,12 @@ export default function StartProjectButton({
           </span>
         ) : null}
       </ButtonBase>
-      <StartProjectWizard
-        open={wizardOpen}
-        onClose={() => setWizardOpen(false)}
-      />
+      {USE_ETSY ? null : (
+        <StartProjectWizard
+          open={wizardOpen}
+          onClose={() => setWizardOpen(false)}
+        />
+      )}
     </>
   );
 }

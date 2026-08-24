@@ -37,6 +37,13 @@ export default function StartProjectContactStep({
           className={styles.contactTextField}
           label="Name"
           required
+          slotProps={{
+            htmlInput: {
+              autoComplete: "name",
+              className: styles.contactInput,
+              name: "name",
+            },
+          }}
           value={form.name}
           onChange={(event) => onChange("name", event.target.value)}
         />
@@ -44,6 +51,13 @@ export default function StartProjectContactStep({
           className={styles.contactTextField}
           label="Reply email"
           required
+          slotProps={{
+            htmlInput: {
+              autoComplete: "email",
+              className: styles.contactInput,
+              name: "email",
+            },
+          }}
           type="email"
           value={form.replyEmail}
           onChange={(event) => onChange("replyEmail", event.target.value)}
@@ -53,6 +67,13 @@ export default function StartProjectContactStep({
           label="Phone"
           type="tel"
           placeholder="+1 (555) 123 - 4567"
+          slotProps={{
+            htmlInput: {
+              autoComplete: "tel",
+              className: styles.contactInput,
+              name: "tel",
+            },
+          }}
           value={form.phone}
           onChange={(event) => handlePhoneChange(event.target.value)}
         />

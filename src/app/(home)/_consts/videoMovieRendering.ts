@@ -10,6 +10,7 @@ export const VIDEO_MOVIE_RENDERING_SLUGS = [
   "alien",
   "batman-with-joker",
   "the-force-awakens",
+  "iron-man-2-monaco",
   "gollum",
   "gladiator",
   "stay-puffy",

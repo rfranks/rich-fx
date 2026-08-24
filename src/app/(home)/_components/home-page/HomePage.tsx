@@ -8,11 +8,13 @@ import SiteHeader from "@/app/_components/site-header/SiteHeader";
 import HeroIntro from "@/app/_components/hero-intro/HeroIntro";
 import HolidayCardViewer from "@/app/_components/holiday-card-viewer/HolidayCardViewer";
 import AiSongDemo from "@/app/(home)/_components/ai-song-demo/AiSongDemo";
+import ArtworkRendering from "@/app/(home)/_components/artwork-rendering/ArtworkRendering";
 import BuildCarousel from "@/app/(home)/_components/build-carousel/BuildCarousel";
 import BuildPicker from "@/app/(home)/_components/build-carousel/BuildPicker";
 import ImageStyleSampler from "@/app/(home)/_components/image-style-sampler/ImageStyleSampler";
 import VideoMovieRendering from "@/app/(home)/_components/video-movie-rendering/VideoMovieRendering";
 import { AssetImage } from "@/components/shared/media";
+import { ARTWORK_RENDERING_ITEMS } from "@/app/(home)/_consts/artworkRendering";
 import { BUILD_SECTION_OPTIONS_BY_KEY } from "@/app/(home)/_consts/buildCarousel";
 import { DEFAULT_CARD_PANEL } from "@/app/(home)/_consts/homePage";
 import { IMAGE_STYLE_SAMPLES } from "@/app/_consts/imageStyleSampler";
@@ -110,6 +112,29 @@ export default function HomePage() {
             }}
             onSelectCardPanel={setActiveCardPanel}
           />
+        </section>
+      ),
+    },
+    {
+      ...BUILD_SECTION_OPTIONS_BY_KEY["artwork-rendering"],
+      previewImage: ARTWORK_RENDERING_ITEMS[0]?.aiArt,
+      children: (
+        <section
+          className={styles.videoMovieSection}
+          aria-labelledby="artwork-rendering"
+        >
+          <div className={styles.sectionCopy}>
+            <h2 id="artwork-rendering">
+              Your artwork can become a polished AI rendering.
+            </h2>
+            <p>
+              Start with an original drawing, sketch, or design, then push it
+              into a finished AI-rendered artwork with richer materials,
+              lighting, and optional motion.
+            </p>
+          </div>
+
+          <ArtworkRendering className={styles.heroVideoMovieRendering} />
         </section>
       ),
     },

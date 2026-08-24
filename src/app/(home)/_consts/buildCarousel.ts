@@ -13,6 +13,13 @@ export const BUILD_SECTION_OPTIONS_BY_KEY: Record<
     shortLabel: "Holiday Cards",
     shortText: "Turn a favorite photo into a polished seasonal card.",
   },
+  "artwork-rendering": {
+    key: "artwork-rendering",
+    label: "AI Your Own Artwork",
+    shortLabel: "AI Artwork",
+    shortText:
+      "Transform original artwork into polished AI renders and optional motion.",
+  },
   "image-style-sampler": {
     key: "image-style-sampler",
     label: "Supported Image Types",

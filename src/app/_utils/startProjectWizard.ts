@@ -6,8 +6,13 @@ import type {
   StartProjectProjectType,
 } from "@/app/_types/startProjectWizard";
 
+const START_PROJECT_MIN_DELIVERY_OFFSET_DAYS = 3;
+
 const projectLabels = new Map(
   START_PROJECT_PROJECT_OPTIONS.map((option) => [option.id, option.label]),
+);
+const projectPriceRanges = new Map(
+  START_PROJECT_PROJECT_OPTIONS.map((option) => [option.id, option.priceRange]),
 );
 const imageStyleLabels = new Map(
   IMAGE_STYLE_SAMPLES.map((sample) => [sample.slug, sample.label]),
@@ -16,9 +21,31 @@ const imageStyleLabels = new Map(
 const line = (label: string, value: string) =>
   value.trim() ? `${label}: ${value.trim()}` : "";
 
+const formatDateInputValue = (date: Date) => {
+  const year = date.getFullYear();
+  const month = `${date.getMonth() + 1}`.padStart(2, "0");
+  const day = `${date.getDate()}`.padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
+
+export const getStartProjectMinimumDeliveryDate = (baseDate = new Date()) => {
+  const minimumDate = new Date(baseDate);
+
+  minimumDate.setHours(0, 0, 0, 0);
+  minimumDate.setDate(
+    minimumDate.getDate() + START_PROJECT_MIN_DELIVERY_OFFSET_DAYS,
+  );
+
+  return formatDateInputValue(minimumDate);
+};
+
 export const buildStartProjectEmailBody = (form: StartProjectFormState) => {
   const projectType = form.projectType
     ? (projectLabels.get(form.projectType) ?? form.projectType)
+    : "";
+  const projectPriceRange = form.projectType
+    ? (projectPriceRanges.get(form.projectType) ?? "")
     : "";
   const imageStyle = form.imageStyleSlug
     ? (imageStyleLabels.get(form.imageStyleSlug) ?? form.imageStyleSlug)
@@ -30,6 +57,7 @@ export const buildStartProjectEmailBody = (form: StartProjectFormState) => {
     "I would like to start a project.",
     "",
     line("Project type", projectType),
+    line("Estimated price range", projectPriceRange),
     line("Image style", imageStyle),
     line("Occasion or purpose", form.occasion),
     line("Required text", form.requiredText),

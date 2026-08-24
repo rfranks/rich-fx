@@ -26,6 +26,10 @@ const IMAGE_DIMENSIONS_BY_PATH: Record<
       width: 467,
       height: 318,
     },
+  "/assets/portfolio/RichardFranksAs/RichardFranksAs_IronMan2/stylistic.png": {
+    width: 1672,
+    height: 941,
+  },
   "/assets/portfolio/RichardFranksAs/RichardFranksAs_DnDNecromancer/stylistic.png":
     {
       width: 1122,

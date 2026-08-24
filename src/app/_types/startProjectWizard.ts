@@ -4,6 +4,7 @@ export type StartProjectStepId = "project" | "details" | "contact" | "email";
 
 export type StartProjectProjectType =
   | "holiday-card"
+  | "artwork"
   | "calendar"
   | "cartoon"
   | "fantasy"
@@ -30,6 +31,7 @@ export type StartProjectOccasionId =
 
 export type StartProjectIconKey =
   | "holiday"
+  | "artwork"
   | "calendar"
   | "cartoon"
   | "fantasy"
@@ -44,6 +46,8 @@ export type StartProjectOption<TId extends string> = {
   label: string;
   description: string;
   iconKey: StartProjectIconKey;
+  originalPrice?: string;
+  priceRange: string;
 };
 
 export type StartProjectStep = {
