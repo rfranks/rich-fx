@@ -1,8 +1,14 @@
+"use client";
+
+import EmojiObjectsOutlinedIcon from "@mui/icons-material/EmojiObjectsOutlined";
+import RouteOutlinedIcon from "@mui/icons-material/RouteOutlined";
+import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { useState } from "react";
+import { AssetImage } from "@/components/shared/media";
 import {
   CONTEST_STEPS,
   QUICK_FLOW,
@@ -10,6 +16,8 @@ import {
 import styles from "@/app/coolkidscolor/_components/cool-kids-color-page/CoolKidsColorPage.module.css";
 
 export default function HowToEnterSection() {
+  const [expandedStep, setExpandedStep] = useState<string | null>(null);
+
   return (
     <Box
       component="section"
@@ -18,9 +26,14 @@ export default function HowToEnterSection() {
     >
       <Container maxWidth="xl">
         <Box className={styles.sectionHeader}>
-          <Typography className={styles.kicker}>Quick Contest Flow</Typography>
-          <Typography id="how-to-enter" component="h2" variant="h2">
-            Print it, color it, snap it, post it, tag it.
+          <Typography
+            id="how-to-enter"
+            component="h2"
+            variant="h2"
+            className={styles.flowTitle}
+          >
+            <RouteOutlinedIcon aria-hidden="true" />
+            <span>Contest Flow</span>
           </Typography>
         </Box>
         <Stack
@@ -31,29 +44,62 @@ export default function HowToEnterSection() {
           flexWrap="wrap"
           aria-label="Compact entry flow"
         >
-          {QUICK_FLOW.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
+          {CONTEST_STEPS.map((item, index) => {
+            const isExpanded = expandedStep === item.step;
+            const panelId = `contest-step-${item.step}-details`;
+
+            return (
+              <li
+                className={`${styles.flowStep} ${styles[item.accent]} ${
+                  isExpanded ? styles.flowStepActive : ""
+                }`}
+                key={item.step}
+              >
+                <button
+                  type="button"
+                  className={styles.flowChip}
+                  aria-expanded={isExpanded}
+                  aria-controls={panelId}
+                  onClick={() => setExpandedStep(isExpanded ? null : item.step)}
+                >
+                  <span className={styles.flowNumber}>{item.step}</span>
+                  <span className={styles.flowLabel}>{QUICK_FLOW[index]}</span>
+                </button>
+                <Box
+                  id={panelId}
+                  className={`${styles.flowDetails} ${
+                    isExpanded ? styles.flowDetailsActive : ""
+                  }`}
+                  aria-hidden={!isExpanded}
+                >
+                  <Box className={styles.flowDetailsInner}>
+                    <Box>
+                      <Typography component="h3" variant="h3">
+                        {item.title}
+                      </Typography>
+                      <Typography>{item.body}</Typography>
+                    </Box>
+                    {item.clipart ? (
+                      <AssetImage
+                        asset={item.clipart}
+                        className={styles.flowStepArt}
+                        sizes="96px"
+                      />
+                    ) : null}
+                  </Box>
+                </Box>
+              </li>
+            );
+          })}
         </Stack>
-        <Box component="ol" className={styles.stepGrid}>
-          {CONTEST_STEPS.map((item) => (
-            <Card
-              component="li"
-              className={`${styles.stepCard} ${styles[item.accent]}`}
-              key={item.step}
-            >
-              <span>{item.step}</span>
-              <Typography component="h3" variant="h3">
-                {item.title}
-              </Typography>
-              <Typography>{item.body}</Typography>
-            </Card>
-          ))}
-        </Box>
-        <Box className={styles.requiredCallout}>
+        <Alert
+          severity="info"
+          icon={<EmojiObjectsOutlinedIcon fontSize="inherit" />}
+          className={styles.requiredCallout}
+        >
           <strong>Tag RichFX + include #coolkidscolor</strong>
           <span>Both are required for entry</span>
-        </Box>
+        </Alert>
       </Container>
     </Box>
   );

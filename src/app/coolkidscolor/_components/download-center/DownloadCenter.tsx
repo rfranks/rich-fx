@@ -1,3 +1,4 @@
+import DownloadForOfflineOutlinedIcon from "@mui/icons-material/DownloadForOfflineOutlined";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
@@ -22,10 +23,16 @@ export default function DownloadCenter() {
     >
       <Container maxWidth="xl">
         <Box className={styles.sectionHeader}>
-          <Typography className={styles.kicker}>
-            Download / Print Center
+          <Typography
+            id="downloads"
+            component="h2"
+            variant="h2"
+            className={styles.downloadTitle}
+          >
+            <DownloadForOfflineOutlinedIcon aria-hidden="true" />
+            <span>Download / Print Center</span>
           </Typography>
-          <Typography id="downloads" component="h2" variant="h2">
+          <Typography className={styles.sectionLead}>
             Everything a grown-up needs, right where it should be.
           </Typography>
         </Box>

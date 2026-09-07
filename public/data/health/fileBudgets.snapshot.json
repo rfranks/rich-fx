@@ -1,12 +1,12 @@
 {
   "key": "fileBudgets",
   "status": "warn",
-  "generatedAt": "2026-09-07T17:27:04.863Z",
+  "generatedAt": "2026-09-07T21:02:33.224Z",
   "summary": "File budget check passed.",
   "details": {
     "totals": {
-      "scannedFileCount": 264,
-      "codeFileCount": 264,
+      "scannedFileCount": 263,
+      "codeFileCount": 263,
       "violationCount": 0,
       "missingExactBudgetViolationCount": 0,
       "exactBudgetUnderuseViolationCount": 0,

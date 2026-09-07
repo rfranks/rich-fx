@@ -41,6 +41,7 @@ export type ContestStep = {
   title: string;
   body: string;
   accent: "blue" | "orange" | "pink" | "green" | "purple";
+  clipart?: ShowcaseImage;
 };
 
 export type PrizeTier = {
@@ -49,6 +50,11 @@ export type PrizeTier = {
   title: string;
   retailValue: string;
   body: string;
+  clipart?: ShowcaseImage;
+  bodyLink?: {
+    label: string;
+    href: string;
+  };
   callout?: string;
 };
 
@@ -57,7 +63,37 @@ export type DateMilestone = {
   label: string;
   date: string;
   machineDate: string;
+  icon: "labor" | "thanksgiving" | "christmas";
+  clipart?: ShowcaseImage;
 };
+
+export type JudgingCriterionIcon =
+  | "spark"
+  | "fingerprint"
+  | "palette"
+  | "imagination"
+  | "effort"
+  | "detail"
+  | "technique"
+  | "impact"
+  | "personality"
+  | "age";
+
+export type JudgingCriterion = {
+  label: string;
+  icon: JudgingCriterionIcon;
+  clipart?: ShowcaseImage;
+};
+
+export type InfoCardIcon =
+  | "free"
+  | "people"
+  | "original"
+  | "duplicate"
+  | "winner"
+  | "keep"
+  | "public"
+  | "likes";
 
 export type ShowcaseImage = {
   src: string;
@@ -70,6 +106,9 @@ export type ShowcaseImage = {
 export type InfoCard = {
   title: string;
   body: string;
+  icon: InfoCardIcon;
+  accent: "blue" | "orange" | "pink" | "green" | "purple";
+  clipart?: ShowcaseImage;
 };
 
 export type FaqItem = {

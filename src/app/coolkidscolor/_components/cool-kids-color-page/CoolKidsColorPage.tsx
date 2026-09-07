@@ -1,7 +1,6 @@
 "use client";
 
 import SiteHeader from "@/app/_components/site-header/SiteHeader";
-import ColoringBookShowcase from "@/app/coolkidscolor/_components/coloring-book-showcase/ColoringBookShowcase";
 import ContestFaq from "@/app/coolkidscolor/_components/contest-faq/ContestFaq";
 import ContestHero from "@/app/coolkidscolor/_components/contest-hero/ContestHero";
 import DatesSection from "@/app/coolkidscolor/_components/dates-section/DatesSection";
@@ -26,7 +25,6 @@ export default function CoolKidsColorPage() {
         <JudgingSection />
         <GoodThingsToKnowSection />
         <DownloadCenter />
-        <ColoringBookShowcase />
         <ContestFaq />
         <FinalContestCta />
       </main>

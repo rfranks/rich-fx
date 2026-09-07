@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import CheckCircleIcon from "@mui/icons-material/CheckCircleOutline";
+import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 import { AssetImage } from "@/components/shared/media";
 import {
   JUDGING_CRITERIA,
@@ -21,9 +21,14 @@ export default function JudgingSection() {
       <Container maxWidth="xl">
         <Box className={styles.judgingLayout}>
           <Box className={styles.sectionHeader}>
-            <Typography className={styles.kicker}>How To Win</Typography>
-            <Typography id="judging" component="h2" variant="h2">
-              You do NOT have to be perfect to win.
+            <Typography
+              id="judging"
+              component="h2"
+              variant="h2"
+              className={styles.judgingTitle}
+            >
+              <WorkspacePremiumOutlinedIcon aria-hidden="true" />
+              <span>How To Win</span>
             </Typography>
             <Typography className={styles.sectionLead}>
               This is a creative judged contest. RichFX looks for imagination,
@@ -40,9 +45,15 @@ export default function JudgingSection() {
         </Box>
         <Box className={styles.criteriaGrid}>
           {JUDGING_CRITERIA.map((item) => (
-            <Card className={styles.criteriaCard} key={item}>
-              <CheckCircleIcon aria-hidden="true" />
-              <span>{item}</span>
+            <Card className={styles.criteriaCard} key={item.label}>
+              {item.clipart ? (
+                <AssetImage
+                  asset={item.clipart}
+                  className={styles.criteriaClipart}
+                  sizes="42px"
+                />
+              ) : null}
+              <span>{item.label}</span>
             </Card>
           ))}
         </Box>

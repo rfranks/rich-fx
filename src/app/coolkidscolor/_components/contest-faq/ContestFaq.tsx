@@ -4,6 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import ContactSupportOutlinedIcon from "@mui/icons-material/ContactSupportOutlined";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FAQ_ITEMS } from "@/app/coolkidscolor/_consts/coolKidsColor";
 import styles from "@/app/coolkidscolor/_components/cool-kids-color-page/CoolKidsColorPage.module.css";
@@ -17,9 +18,14 @@ export default function ContestFaq() {
     >
       <Container maxWidth="lg">
         <Box className={styles.sectionHeader}>
-          <Typography className={styles.kicker}>FAQ</Typography>
-          <Typography id="contest-faq" component="h2" variant="h2">
-            Questions parents and artists ask first.
+          <Typography
+            id="contest-faq"
+            component="h2"
+            variant="h2"
+            className={styles.faqTitle}
+          >
+            <ContactSupportOutlinedIcon aria-hidden="true" />
+            <span>Questions parents and artists ask first.</span>
           </Typography>
         </Box>
         <Box className={styles.faqList}>
