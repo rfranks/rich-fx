@@ -1,0 +1,229 @@
+{
+  "visual_contact_sheet": "coolkidscolor_clipart_QA_contact_sheet.png",
+  "assets": [
+    {
+      "filename": "header_smiling_star.png",
+      "status": "PASS",
+      "transparent_pixels": 4372,
+      "opaque_pixels": 4012,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "header_red_pencil.png",
+      "status": "PASS",
+      "transparent_pixels": 2401,
+      "opaque_pixels": 1501,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "header_smiling_heart.png",
+      "status": "PASS",
+      "transparent_pixels": 2381,
+      "opaque_pixels": 2969,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "crayon_cup.png",
+      "status": "PASS",
+      "transparent_pixels": 4841,
+      "opaque_pixels": 8965,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "boy_holding_phone.png",
+      "status": "PASS",
+      "transparent_pixels": 22933,
+      "opaque_pixels": 37740,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "camera.png",
+      "status": "PASS",
+      "transparent_pixels": 3040,
+      "opaque_pixels": 5877,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "grownup_child_tablet.png",
+      "status": "PASS",
+      "transparent_pixels": 28272,
+      "opaque_pixels": 47538,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "hashtag_character.png",
+      "status": "PASS",
+      "transparent_pixels": 3698,
+      "opaque_pixels": 5893,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "calendar_sep7.png",
+      "status": "PASS",
+      "transparent_pixels": 2076,
+      "opaque_pixels": 5196,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "pumpkin_autumn_leaves.png",
+      "status": "PASS",
+      "transparent_pixels": 4850,
+      "opaque_pixels": 5329,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "christmas_tree.png",
+      "status": "PASS",
+      "transparent_pixels": 5077,
+      "opaque_pixels": 4285,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "boy_holding_trophy.png",
+      "status": "PASS",
+      "transparent_pixels": 16513,
+      "opaque_pixels": 25480,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "how_to_win_star_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 912,
+      "opaque_pixels": 446,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "how_to_win_palette_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 778,
+      "opaque_pixels": 798,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "how_to_win_thought_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 1108,
+      "opaque_pixels": 221,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "how_to_win_trophy_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 710,
+      "opaque_pixels": 363,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "how_to_win_magnifier_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 822,
+      "opaque_pixels": 538,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "how_to_win_red_heart_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 765,
+      "opaque_pixels": 492,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "how_to_win_purple_heart_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 575,
+      "opaque_pixels": 297,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "how_to_win_shield_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 570,
+      "opaque_pixels": 385,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "how_to_win_smiley_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 766,
+      "opaque_pixels": 782,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "cool_things_gift_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 1049,
+      "opaque_pixels": 1199,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "cool_things_kids_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 1104,
+      "opaque_pixels": 1000,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "cool_things_paper_pencil_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 1720,
+      "opaque_pixels": 663,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "cool_things_no_duplicate_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 1022,
+      "opaque_pixels": 1253,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "cool_things_lock_icon.png",
+      "status": "PASS",
+      "transparent_pixels": 1211,
+      "opaque_pixels": 1596,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "grand_prize_trophy.png",
+      "status": "PASS",
+      "transparent_pixels": 4451,
+      "opaque_pixels": 4384,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "personalized_coloring_book.png",
+      "status": "PASS",
+      "transparent_pixels": 3103,
+      "opaque_pixels": 11251,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "video_clapperboard.png",
+      "status": "PASS",
+      "transparent_pixels": 2991,
+      "opaque_pixels": 4256,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "gift_box_large.png",
+      "status": "PASS",
+      "transparent_pixels": 4030,
+      "opaque_pixels": 6554,
+      "edge_opaque_fraction": 0.0
+    },
+    {
+      "filename": "bottom_dragon.png",
+      "status": "PASS",
+      "transparent_pixels": 9650,
+      "opaque_pixels": 16950,
+      "edge_opaque_fraction": 0.3148
+    },
+    {
+      "filename": "bottom_robot.png",
+      "status": "PASS",
+      "transparent_pixels": 14371,
+      "opaque_pixels": 15005,
+      "edge_opaque_fraction": 0.1311
+    }
+  ]
+}

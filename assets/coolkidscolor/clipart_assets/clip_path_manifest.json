@@ -1,0 +1,575 @@
+{
+  "source_file": "90E805BC-484F-46B2-B351-BFF956380C2B.png",
+  "source_size_px": [1103, 1426],
+  "asset_count": 32,
+  "assets": [
+    {
+      "filename": "header_smiling_star.png",
+      "polygon_source_px": [
+        [10, 18],
+        [72, 16],
+        [98, 53],
+        [85, 99],
+        [53, 117],
+        [21, 100],
+        [8, 68]
+      ],
+      "initial_bbox_source_px": [5, 13, 101, 120],
+      "trimmed_top_left_source_px": [13, 24],
+      "output_size_px": [89, 97],
+      "opaque_pixels": 4012,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "header_red_pencil.png",
+      "polygon_source_px": [
+        [15, 137],
+        [45, 128],
+        [91, 163],
+        [89, 186],
+        [64, 201],
+        [21, 169]
+      ],
+      "initial_bbox_source_px": [12, 125, 94, 204],
+      "trimmed_top_left_source_px": [29, 142],
+      "output_size_px": [66, 61],
+      "opaque_pixels": 1501,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "header_smiling_heart.png",
+      "polygon_source_px": [
+        [1004, 24],
+        [1064, 13],
+        [1094, 43],
+        [1082, 93],
+        [1034, 112],
+        [997, 82]
+      ],
+      "initial_bbox_source_px": [994, 10, 1097, 115],
+      "trimmed_top_left_source_px": [1011, 12],
+      "output_size_px": [77, 72],
+      "opaque_pixels": 2969,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "crayon_cup.png",
+      "polygon_source_px": [
+        [260, 460],
+        [359, 456],
+        [377, 494],
+        [369, 566],
+        [340, 593],
+        [286, 590],
+        [264, 559]
+      ],
+      "initial_bbox_source_px": [257, 453, 380, 596],
+      "trimmed_top_left_source_px": [272, 456],
+      "output_size_px": [106, 135],
+      "opaque_pixels": 8965,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "boy_holding_phone.png",
+      "polygon_source_px": [
+        [410, 279],
+        [468, 261],
+        [519, 280],
+        [558, 315],
+        [599, 293],
+        [651, 302],
+        [668, 349],
+        [654, 396],
+        [630, 422],
+        [607, 498],
+        [559, 514],
+        [515, 500],
+        [475, 481],
+        [441, 454],
+        [414, 416]
+      ],
+      "initial_bbox_source_px": [407, 258, 671, 517],
+      "trimmed_top_left_source_px": [407, 279],
+      "output_size_px": [265, 233],
+      "opaque_pixels": 37740,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "camera.png",
+      "polygon_source_px": [
+        [558, 535],
+        [630, 529],
+        [664, 548],
+        [669, 597],
+        [649, 627],
+        [592, 621],
+        [559, 602]
+      ],
+      "initial_bbox_source_px": [555, 526, 672, 630],
+      "trimmed_top_left_source_px": [566, 545],
+      "output_size_px": [107, 86],
+      "opaque_pixels": 5877,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "grownup_child_tablet.png",
+      "polygon_source_px": [
+        [820, 340],
+        [899, 325],
+        [957, 334],
+        [1010, 365],
+        [1043, 421],
+        [1057, 495],
+        [1057, 594],
+        [1035, 640],
+        [987, 646],
+        [936, 632],
+        [889, 620],
+        [843, 598],
+        [820, 555],
+        [814, 500],
+        [821, 451]
+      ],
+      "initial_bbox_source_px": [811, 322, 1060, 649],
+      "trimmed_top_left_source_px": [825, 325],
+      "output_size_px": [236, 325],
+      "opaque_pixels": 47538,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "hashtag_character.png",
+      "polygon_source_px": [
+        [40, 736],
+        [112, 731],
+        [145, 750],
+        [153, 799],
+        [138, 834],
+        [94, 847],
+        [49, 836],
+        [31, 806]
+      ],
+      "initial_bbox_source_px": [28, 728, 156, 850],
+      "trimmed_top_left_source_px": [37, 737],
+      "output_size_px": [93, 108],
+      "opaque_pixels": 5893,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "calendar_sep7.png",
+      "polygon_source_px": [
+        [592, 724],
+        [661, 719],
+        [683, 739],
+        [683, 786],
+        [663, 809],
+        [603, 807],
+        [586, 788],
+        [585, 746]
+      ],
+      "initial_bbox_source_px": [582, 716, 686, 812],
+      "trimmed_top_left_source_px": [598, 725],
+      "output_size_px": [86, 88],
+      "opaque_pixels": 5196,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "pumpkin_autumn_leaves.png",
+      "polygon_source_px": [
+        [753, 726],
+        [817, 718],
+        [851, 740],
+        [876, 766],
+        [864, 807],
+        [823, 819],
+        [781, 807],
+        [747, 782]
+      ],
+      "initial_bbox_source_px": [744, 715, 879, 822],
+      "trimmed_top_left_source_px": [753, 720],
+      "output_size_px": [117, 90],
+      "opaque_pixels": 5329,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "christmas_tree.png",
+      "polygon_source_px": [
+        [957, 718],
+        [1005, 713],
+        [1041, 745],
+        [1051, 791],
+        [1029, 815],
+        [977, 814],
+        [946, 790],
+        [947, 751]
+      ],
+      "initial_bbox_source_px": [943, 710, 1054, 818],
+      "trimmed_top_left_source_px": [953, 710],
+      "output_size_px": [89, 109],
+      "opaque_pixels": 4285,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "boy_holding_trophy.png",
+      "polygon_source_px": [
+        [188, 944],
+        [252, 928],
+        [300, 940],
+        [342, 977],
+        [376, 1034],
+        [390, 1115],
+        [379, 1185],
+        [336, 1211],
+        [278, 1203],
+        [229, 1182],
+        [198, 1137],
+        [181, 1069]
+      ],
+      "initial_bbox_source_px": [178, 925, 393, 1214],
+      "trimmed_top_left_source_px": [199, 961],
+      "output_size_px": [189, 226],
+      "opaque_pixels": 25480,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "how_to_win_star_icon.png",
+      "polygon_source_px": [
+        [38, 976],
+        [58, 972],
+        [70, 988],
+        [64, 1008],
+        [45, 1014],
+        [31, 999]
+      ],
+      "initial_bbox_source_px": [28, 969, 73, 1017],
+      "trimmed_top_left_source_px": [33, 981],
+      "output_size_px": [39, 37],
+      "opaque_pixels": 446,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "how_to_win_palette_icon.png",
+      "polygon_source_px": [
+        [35, 1019],
+        [60, 1017],
+        [73, 1032],
+        [69, 1050],
+        [52, 1058],
+        [33, 1048]
+      ],
+      "initial_bbox_source_px": [30, 1014, 76, 1061],
+      "trimmed_top_left_source_px": [30, 1014],
+      "output_size_px": [41, 41],
+      "opaque_pixels": 798,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "how_to_win_thought_icon.png",
+      "polygon_source_px": [
+        [34, 1061],
+        [63, 1058],
+        [72, 1076],
+        [63, 1092],
+        [43, 1096],
+        [31, 1081]
+      ],
+      "initial_bbox_source_px": [28, 1055, 75, 1099],
+      "trimmed_top_left_source_px": [30, 1055],
+      "output_size_px": [42, 35],
+      "opaque_pixels": 221,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "how_to_win_trophy_icon.png",
+      "polygon_source_px": [
+        [34, 1100],
+        [59, 1098],
+        [71, 1113],
+        [65, 1130],
+        [49, 1137],
+        [32, 1126]
+      ],
+      "initial_bbox_source_px": [29, 1095, 74, 1140],
+      "trimmed_top_left_source_px": [30, 1095],
+      "output_size_px": [40, 29],
+      "opaque_pixels": 363,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "how_to_win_magnifier_icon.png",
+      "polygon_source_px": [
+        [34, 1118],
+        [61, 1117],
+        [69, 1129],
+        [66, 1145],
+        [51, 1151],
+        [34, 1144]
+      ],
+      "initial_bbox_source_px": [31, 1114, 72, 1154],
+      "trimmed_top_left_source_px": [31, 1117],
+      "output_size_px": [39, 37],
+      "opaque_pixels": 538,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "how_to_win_red_heart_icon.png",
+      "polygon_source_px": [
+        [35, 1150],
+        [61, 1150],
+        [69, 1163],
+        [62, 1179],
+        [48, 1185],
+        [34, 1173]
+      ],
+      "initial_bbox_source_px": [31, 1147, 72, 1188],
+      "trimmed_top_left_source_px": [34, 1149],
+      "output_size_px": [37, 36],
+      "opaque_pixels": 492,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "how_to_win_purple_heart_icon.png",
+      "polygon_source_px": [
+        [37, 1186],
+        [60, 1185],
+        [66, 1197],
+        [60, 1211],
+        [48, 1216],
+        [36, 1206]
+      ],
+      "initial_bbox_source_px": [33, 1182, 69, 1219],
+      "trimmed_top_left_source_px": [36, 1189],
+      "output_size_px": [31, 30],
+      "opaque_pixels": 297,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "how_to_win_shield_icon.png",
+      "polygon_source_px": [
+        [38, 1212],
+        [61, 1212],
+        [66, 1226],
+        [62, 1241],
+        [50, 1247],
+        [38, 1237]
+      ],
+      "initial_bbox_source_px": [35, 1209, 69, 1250],
+      "trimmed_top_left_source_px": [36, 1211],
+      "output_size_px": [31, 33],
+      "opaque_pixels": 385,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "how_to_win_smiley_icon.png",
+      "polygon_source_px": [
+        [35, 1243],
+        [63, 1242],
+        [70, 1258],
+        [64, 1276],
+        [49, 1283],
+        [34, 1272]
+      ],
+      "initial_bbox_source_px": [31, 1239, 73, 1286],
+      "trimmed_top_left_source_px": [31, 1239],
+      "output_size_px": [41, 40],
+      "opaque_pixels": 782,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "cool_things_gift_icon.png",
+      "polygon_source_px": [
+        [420, 974],
+        [454, 968],
+        [469, 982],
+        [468, 1019],
+        [453, 1030],
+        [423, 1026],
+        [414, 1006]
+      ],
+      "initial_bbox_source_px": [411, 965, 472, 1033],
+      "trimmed_top_left_source_px": [420, 988],
+      "output_size_px": [52, 46],
+      "opaque_pixels": 1199,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "cool_things_kids_icon.png",
+      "polygon_source_px": [
+        [418, 1029],
+        [458, 1026],
+        [473, 1042],
+        [468, 1064],
+        [450, 1076],
+        [424, 1072],
+        [411, 1055]
+      ],
+      "initial_bbox_source_px": [408, 1023, 476, 1079],
+      "trimmed_top_left_source_px": [414, 1043],
+      "output_size_px": [61, 37],
+      "opaque_pixels": 1000,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "cool_things_paper_pencil_icon.png",
+      "polygon_source_px": [
+        [419, 1079],
+        [459, 1076],
+        [470, 1093],
+        [468, 1124],
+        [447, 1134],
+        [421, 1128],
+        [412, 1106]
+      ],
+      "initial_bbox_source_px": [409, 1073, 473, 1137],
+      "trimmed_top_left_source_px": [418, 1091],
+      "output_size_px": [56, 47],
+      "opaque_pixels": 663,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "cool_things_no_duplicate_icon.png",
+      "polygon_source_px": [
+        [419, 1138],
+        [458, 1137],
+        [471, 1153],
+        [469, 1179],
+        [451, 1190],
+        [426, 1187],
+        [413, 1172]
+      ],
+      "initial_bbox_source_px": [410, 1134, 474, 1193],
+      "trimmed_top_left_source_px": [420, 1148],
+      "output_size_px": [52, 46],
+      "opaque_pixels": 1253,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "cool_things_lock_icon.png",
+      "polygon_source_px": [
+        [422, 1194],
+        [458, 1192],
+        [468, 1209],
+        [467, 1239],
+        [451, 1251],
+        [427, 1247],
+        [416, 1228]
+      ],
+      "initial_bbox_source_px": [413, 1189, 471, 1254],
+      "trimmed_top_left_source_px": [421, 1196],
+      "output_size_px": [50, 59],
+      "opaque_pixels": 1596,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "grand_prize_trophy.png",
+      "polygon_source_px": [
+        [687, 1018],
+        [736, 1014],
+        [773, 1036],
+        [778, 1090],
+        [758, 1126],
+        [715, 1132],
+        [685, 1103],
+        [676, 1060]
+      ],
+      "initial_bbox_source_px": [673, 1011, 781, 1135],
+      "trimmed_top_left_source_px": [688, 1030],
+      "output_size_px": [89, 103],
+      "opaque_pixels": 4384,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "personalized_coloring_book.png",
+      "polygon_source_px": [
+        [967, 1036],
+        [1006, 1028],
+        [1045, 1032],
+        [1084, 1042],
+        [1087, 1084],
+        [1083, 1111],
+        [1058, 1125],
+        [1027, 1124],
+        [999, 1131],
+        [971, 1120],
+        [960, 1087],
+        [960, 1054]
+      ],
+      "initial_bbox_source_px": [957, 1025, 1090, 1134],
+      "trimmed_top_left_source_px": [957, 1025],
+      "output_size_px": [134, 110],
+      "opaque_pixels": 11251,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "video_clapperboard.png",
+      "polygon_source_px": [
+        [687, 1141],
+        [743, 1138],
+        [787, 1155],
+        [794, 1205],
+        [776, 1233],
+        [720, 1234],
+        [684, 1209],
+        [676, 1173]
+      ],
+      "initial_bbox_source_px": [673, 1135, 797, 1237],
+      "trimmed_top_left_source_px": [688, 1149],
+      "output_size_px": [85, 89],
+      "opaque_pixels": 4256,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "gift_box_large.png",
+      "polygon_source_px": [
+        [930, 1141],
+        [987, 1133],
+        [1037, 1150],
+        [1054, 1191],
+        [1045, 1242],
+        [1000, 1261],
+        [949, 1248],
+        [920, 1214]
+      ],
+      "initial_bbox_source_px": [917, 1130, 1057, 1264],
+      "trimmed_top_left_source_px": [949, 1165],
+      "output_size_px": [109, 100],
+      "opaque_pixels": 6554,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "bottom_dragon.png",
+      "polygon_source_px": [
+        [0, 1284],
+        [46, 1275],
+        [94, 1284],
+        [130, 1310],
+        [165, 1347],
+        [179, 1392],
+        [169, 1426],
+        [0, 1426]
+      ],
+      "initial_bbox_source_px": [0, 1272, 182, 1425],
+      "trimmed_top_left_source_px": [0, 1277],
+      "output_size_px": [183, 149],
+      "opaque_pixels": 16950,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    },
+    {
+      "filename": "bottom_robot.png",
+      "polygon_source_px": [
+        [924, 1277],
+        [969, 1262],
+        [1018, 1264],
+        [1066, 1290],
+        [1103, 1324],
+        [1103, 1426],
+        [929, 1426],
+        [912, 1384]
+      ],
+      "initial_bbox_source_px": [909, 1259, 1102, 1425],
+      "trimmed_top_left_source_px": [916, 1259],
+      "output_size_px": [180, 167],
+      "opaque_pixels": 15005,
+      "background_method": "polygon mask + edge-connected local-background removal + antialiased alpha"
+    }
+  ]
+}

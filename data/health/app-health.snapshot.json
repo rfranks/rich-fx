@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T17:37:42.792Z",
+  "generatedAt": "2026-09-07T21:07:39.685Z",
   "overallStatus": "warn",
   "checks": {
     "fileBudgets": "warn",
@@ -11,12 +11,12 @@
     "fileBudgets": {
       "key": "fileBudgets",
       "status": "warn",
-      "generatedAt": "2026-09-07T17:37:17.925Z",
+      "generatedAt": "2026-09-07T21:07:07.500Z",
       "summary": "File budget check passed.",
       "details": {
         "totals": {
-          "scannedFileCount": 264,
-          "codeFileCount": 264,
+          "scannedFileCount": 263,
+          "codeFileCount": 263,
           "violationCount": 0,
           "missingExactBudgetViolationCount": 0,
           "exactBudgetUnderuseViolationCount": 0,
@@ -54,7 +54,7 @@
     "testRunner": {
       "key": "testRunner",
       "status": "pass",
-      "generatedAt": "2026-09-07T17:37:42.792Z",
+      "generatedAt": "2026-09-07T21:07:39.685Z",
       "summary": "unit test runner passed for lane portfolio.",
       "details": {
         "suite": "unit",
@@ -66,7 +66,7 @@
     "a11yRunner": {
       "key": "a11yRunner",
       "status": "pass",
-      "generatedAt": "2026-09-07T17:26:34.810Z",
+      "generatedAt": "2026-09-07T20:53:35.518Z",
       "summary": "a11y test runner passed for lane portfolio.",
       "details": {
         "suite": "a11y",
