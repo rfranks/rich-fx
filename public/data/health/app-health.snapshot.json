@@ -1,21 +1,22 @@
 {
-  "generatedAt": "2026-08-23T07:43:13.598Z",
+  "generatedAt": "2026-09-07T17:27:10.894Z",
   "overallStatus": "warn",
   "checks": {
     "fileBudgets": "warn",
     "testRunner": "pass",
-    "a11yRunner": "pass"
+    "a11yRunner": "pass",
+    "bundleBudget": "pass"
   },
   "snapshots": {
     "fileBudgets": {
       "key": "fileBudgets",
       "status": "warn",
-      "generatedAt": "2026-08-23T07:43:13.598Z",
+      "generatedAt": "2026-09-07T17:27:04.863Z",
       "summary": "File budget check passed.",
       "details": {
         "totals": {
-          "scannedFileCount": 244,
-          "codeFileCount": 244,
+          "scannedFileCount": 264,
+          "codeFileCount": 264,
           "violationCount": 0,
           "missingExactBudgetViolationCount": 0,
           "exactBudgetUnderuseViolationCount": 0,
@@ -53,7 +54,7 @@
     "testRunner": {
       "key": "testRunner",
       "status": "pass",
-      "generatedAt": "2026-08-23T07:31:58.806Z",
+      "generatedAt": "2026-09-07T17:27:10.894Z",
       "summary": "unit test runner passed for lane portfolio.",
       "details": {
         "suite": "unit",
@@ -65,7 +66,7 @@
     "a11yRunner": {
       "key": "a11yRunner",
       "status": "pass",
-      "generatedAt": "2026-08-23T07:42:14.578Z",
+      "generatedAt": "2026-09-07T17:26:34.810Z",
       "summary": "a11y test runner passed for lane portfolio.",
       "details": {
         "suite": "a11y",
@@ -74,6 +75,240 @@
         "jestArgs": [
           "tests/accessibility",
           "--runInBand"
+        ]
+      }
+    },
+    "bundleBudget": {
+      "key": "bundleBudget",
+      "status": "pass",
+      "generatedAt": "2026-09-07T17:07:04.785Z",
+      "summary": "Bundle budget checks passed (portfolio lane).",
+      "details": {
+        "lane": "portfolio",
+        "totals": {
+          "totalKb": 7504,
+          "maxTotalKb": 25000,
+          "largestKb": 655,
+          "maxLargestKb": 3000,
+          "chunkCount": 141,
+          "largestChunkRel": ".next/static/chunks/e7c587e5d04225ce.js"
+        },
+        "failures": {
+          "globalFailed": false,
+          "globalExceededButIgnored": false,
+          "sectionFailureCount": 0,
+          "routeFailureCount": 0
+        },
+        "scope": {
+          "lane": "portfolio",
+          "routePrefix": null,
+          "discoveredRouteCount": 5,
+          "scopedRouteCount": 5
+        },
+        "sections": [
+          {
+            "section": "portfolio",
+            "routeCount": 2,
+            "chunkCount": 16,
+            "totalKb": 895,
+            "largestKb": 228,
+            "largestChunkRel": ".next/static/chunks/324636a5713f933c.js",
+            "budget": {
+              "maxTotalKb": 25000,
+              "maxLargestKb": 3000
+            },
+            "withinBudget": true
+          },
+          {
+            "section": "coolkidscolor",
+            "routeCount": 1,
+            "chunkCount": 16,
+            "totalKb": 875,
+            "largestKb": 228,
+            "largestChunkRel": ".next/static/chunks/73af1985574cc98b.js",
+            "budget": {
+              "maxTotalKb": 25000,
+              "maxLargestKb": 3000
+            },
+            "withinBudget": true
+          },
+          {
+            "section": "what-we-do",
+            "routeCount": 1,
+            "chunkCount": 15,
+            "totalKb": 824,
+            "largestKb": 228,
+            "largestChunkRel": ".next/static/chunks/2d03934638fa1608.js",
+            "budget": {
+              "maxTotalKb": 25000,
+              "maxLargestKb": 3000
+            },
+            "withinBudget": true
+          },
+          {
+            "section": "ai-studio",
+            "routeCount": 1,
+            "chunkCount": 15,
+            "totalKb": 818,
+            "largestKb": 228,
+            "largestChunkRel": ".next/static/chunks/925d5df846959cf0.js",
+            "budget": {
+              "maxTotalKb": 25000,
+              "maxLargestKb": 3000
+            },
+            "withinBudget": true
+          }
+        ],
+        "routes": [
+          {
+            "route": "/",
+            "section": "portfolio",
+            "chunkCount": 16,
+            "totalKb": 895,
+            "largestKb": 228,
+            "largestChunkRel": ".next/static/chunks/324636a5713f933c.js",
+            "budget": {
+              "maxTotalKb": 25000,
+              "maxLargestKb": 3000
+            },
+            "withinBudget": true,
+            "missingChunkRefs": [],
+            "chunkRefs": [
+              "/_next/static/chunks/049d74fb39a4e328.js",
+              "/_next/static/chunks/0e29682919e7b781.js",
+              "/_next/static/chunks/1ad9d593afc18a8f.js",
+              "/_next/static/chunks/297aad9d3c69e79d.js",
+              "/_next/static/chunks/324636a5713f933c.js",
+              "/_next/static/chunks/38ddf98f38a51ecb.js",
+              "/_next/static/chunks/50e9976ff048d588.js",
+              "/_next/static/chunks/524775bb5d16d3a4.js",
+              "/_next/static/chunks/53a8efa492f8a78a.js",
+              "/_next/static/chunks/6a7993b07cb97bb3.js",
+              "/_next/static/chunks/6da2eb2fe544e1a5.js",
+              "/_next/static/chunks/72479d98c5c6e797.js",
+              "/_next/static/chunks/971189d2ce7e9148.js",
+              "/_next/static/chunks/b3c320326cf7def4.js",
+              "/_next/static/chunks/ddaa47f02238498a.js",
+              "/_next/static/chunks/e73edddf25087a35.js"
+            ]
+          },
+          {
+            "route": "/coolkidscolor",
+            "section": "coolkidscolor",
+            "chunkCount": 16,
+            "totalKb": 875,
+            "largestKb": 228,
+            "largestChunkRel": ".next/static/chunks/73af1985574cc98b.js",
+            "budget": {
+              "maxTotalKb": 25000,
+              "maxLargestKb": 3000
+            },
+            "withinBudget": true,
+            "missingChunkRefs": [],
+            "chunkRefs": [
+              "/_next/static/chunks/0e29682919e7b781.js",
+              "/_next/static/chunks/297aad9d3c69e79d.js",
+              "/_next/static/chunks/524775bb5d16d3a4.js",
+              "/_next/static/chunks/53a8efa492f8a78a.js",
+              "/_next/static/chunks/6a7993b07cb97bb3.js",
+              "/_next/static/chunks/73af1985574cc98b.js",
+              "/_next/static/chunks/8ea7c3a4cbbcafd4.js",
+              "/_next/static/chunks/971189d2ce7e9148.js",
+              "/_next/static/chunks/b3c320326cf7def4.js",
+              "/_next/static/chunks/b4bc65b68e0cf5b4.js",
+              "/_next/static/chunks/c3fba54d5e00bbf8.js",
+              "/_next/static/chunks/dcd195bdda26ecc5.js",
+              "/_next/static/chunks/de29e077497fab0a.js",
+              "/_next/static/chunks/e73edddf25087a35.js",
+              "/_next/static/chunks/e7859f7271f89cf2.js",
+              "/_next/static/chunks/eeb0685e68bb85fc.js"
+            ]
+          },
+          {
+            "route": "/what-we-do",
+            "section": "what-we-do",
+            "chunkCount": 15,
+            "totalKb": 824,
+            "largestKb": 228,
+            "largestChunkRel": ".next/static/chunks/2d03934638fa1608.js",
+            "budget": {
+              "maxTotalKb": 25000,
+              "maxLargestKb": 3000
+            },
+            "withinBudget": true,
+            "missingChunkRefs": [],
+            "chunkRefs": [
+              "/_next/static/chunks/049d74fb39a4e328.js",
+              "/_next/static/chunks/0e29682919e7b781.js",
+              "/_next/static/chunks/297aad9d3c69e79d.js",
+              "/_next/static/chunks/2d03934638fa1608.js",
+              "/_next/static/chunks/50e9976ff048d588.js",
+              "/_next/static/chunks/527394f369941b90.js",
+              "/_next/static/chunks/53a8efa492f8a78a.js",
+              "/_next/static/chunks/65288d72f531abcf.js",
+              "/_next/static/chunks/6a7993b07cb97bb3.js",
+              "/_next/static/chunks/971189d2ce7e9148.js",
+              "/_next/static/chunks/a53bcb7eec7cefa0.js",
+              "/_next/static/chunks/b3c320326cf7def4.js",
+              "/_next/static/chunks/b4bc65b68e0cf5b4.js",
+              "/_next/static/chunks/e2024e1b1edf3139.js",
+              "/_next/static/chunks/e73edddf25087a35.js"
+            ]
+          },
+          {
+            "route": "/ai-studio",
+            "section": "ai-studio",
+            "chunkCount": 15,
+            "totalKb": 818,
+            "largestKb": 228,
+            "largestChunkRel": ".next/static/chunks/925d5df846959cf0.js",
+            "budget": {
+              "maxTotalKb": 25000,
+              "maxLargestKb": 3000
+            },
+            "withinBudget": true,
+            "missingChunkRefs": [],
+            "chunkRefs": [
+              "/_next/static/chunks/0e29682919e7b781.js",
+              "/_next/static/chunks/18c2b26a6186aec3.js",
+              "/_next/static/chunks/1a66f40fc4b2d811.js",
+              "/_next/static/chunks/2694688b6dd60ddf.js",
+              "/_next/static/chunks/297aad9d3c69e79d.js",
+              "/_next/static/chunks/3adf391ca6b64ded.js",
+              "/_next/static/chunks/524775bb5d16d3a4.js",
+              "/_next/static/chunks/52698594a79d8a9c.js",
+              "/_next/static/chunks/53a8efa492f8a78a.js",
+              "/_next/static/chunks/6a7993b07cb97bb3.js",
+              "/_next/static/chunks/925d5df846959cf0.js",
+              "/_next/static/chunks/971189d2ce7e9148.js",
+              "/_next/static/chunks/9c55d209b2663b35.js",
+              "/_next/static/chunks/b3c320326cf7def4.js",
+              "/_next/static/chunks/e73edddf25087a35.js"
+            ]
+          },
+          {
+            "route": "/_not-found",
+            "section": "portfolio",
+            "chunkCount": 7,
+            "totalKb": 246,
+            "largestKb": 72,
+            "largestChunkRel": ".next/static/chunks/b3c320326cf7def4.js",
+            "budget": {
+              "maxTotalKb": 25000,
+              "maxLargestKb": 3000
+            },
+            "withinBudget": true,
+            "missingChunkRefs": [],
+            "chunkRefs": [
+              "/_next/static/chunks/0e29682919e7b781.js",
+              "/_next/static/chunks/297aad9d3c69e79d.js",
+              "/_next/static/chunks/53a8efa492f8a78a.js",
+              "/_next/static/chunks/6a7993b07cb97bb3.js",
+              "/_next/static/chunks/971189d2ce7e9148.js",
+              "/_next/static/chunks/b3c320326cf7def4.js",
+              "/_next/static/chunks/e73edddf25087a35.js"
+            ]
+          }
         ]
       }
     }

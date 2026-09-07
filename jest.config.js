@@ -3,9 +3,9 @@ module.exports = {
   testEnvironment: "jsdom",
   testMatch: ["**/tests/**/*.test.ts", "**/tests/**/*.test.tsx"],
   moduleNameMapper: {
+    "\\.(css|less|sass|scss)$": "<rootDir>/tests/mocks/styleMock.ts",
     "^@/(.*)$": "<rootDir>/src/$1",
     "^uuid$": "<rootDir>/tests/mocks/uuidMock.ts",
-    "\\.(css|less|sass|scss)$": "<rootDir>/tests/mocks/styleMock.ts",
   },
   testPathIgnorePatterns: [
     "/tests/resumeIngest.test.ts",

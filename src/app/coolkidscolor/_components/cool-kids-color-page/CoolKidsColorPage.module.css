@@ -1,0 +1,829 @@
+.page {
+  --richfx-black: #071225;
+  --richfx-ink: #0f1b2f;
+  --richfx-panel: #fffefa;
+  --richfx-border: rgba(9, 87, 184, 0.28);
+  --richfx-text: #fff9ed;
+  --richfx-muted: rgba(255, 249, 237, 0.74);
+  --richfx-orange: #f97316;
+  --richfx-orange-soft: rgba(249, 115, 22, 0.18);
+  --paper: #fff9ed;
+  --ink: #14213d;
+  --muted: #4a5568;
+  --blue: #0957b8;
+  --sky: #20a4f3;
+  --green: #268c3f;
+  --yellow: #ffd338;
+  --orange: #f97316;
+  --pink: #e12b58;
+  --purple: #7c3eb5;
+  --red: #d82727;
+  --line: #0b4fa8;
+  min-height: 100svh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(
+      circle at 10% 8%,
+      rgba(255, 211, 56, 0.3),
+      transparent 24rem
+    ),
+    radial-gradient(
+      circle at 92% 12%,
+      rgba(225, 43, 88, 0.16),
+      transparent 28rem
+    ),
+    linear-gradient(90deg, rgba(9, 87, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(38, 140, 63, 0.07) 1px, transparent 1px),
+    var(--paper);
+  background-size:
+    auto,
+    auto,
+    34px 34px,
+    34px 34px,
+    auto;
+  color: var(--ink);
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+.page img {
+  display: block;
+  max-width: 100%;
+}
+
+.hero,
+.section,
+.downloadBand,
+.finalCta {
+  position: relative;
+  padding-block: clamp(72px, 9vw, 128px);
+}
+
+.hero {
+  padding-top: clamp(118px, 13vw, 168px);
+}
+
+.hero::before,
+.section::before,
+.downloadBand::before,
+.finalCta::before {
+  content: "";
+  position: absolute;
+  inset-inline: clamp(12px, 3vw, 34px);
+  top: 24px;
+  height: 9px;
+  border-block: 3px solid var(--line);
+  border-radius: 999px;
+  opacity: 0.82;
+  pointer-events: none;
+}
+
+.heroInner,
+.judgingLayout,
+.showcaseIntro {
+  display: grid;
+  align-items: center;
+  gap: clamp(28px, 5vw, 72px);
+}
+
+.heroInner {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.48fr);
+}
+
+.heroCopy,
+.sectionHeader {
+  max-width: 920px;
+}
+
+.kicker,
+.cardEyebrow {
+  color: var(--red);
+  font-family: "Gloria Hallelujah", Roboto, sans-serif;
+  font-size: clamp(1rem, 1.2vw, 1.18rem);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.hero h1,
+.sectionHeader h2,
+.showcaseIntro h2,
+.finalCta h2 {
+  margin-top: 14px;
+  color: var(--ink);
+  font-size: clamp(3.2rem, 8vw, 7.9rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-shadow:
+    3px 3px 0 #ffffff,
+    6px 6px 0 rgba(9, 87, 184, 0.18);
+}
+
+.hero h1 span {
+  display: block;
+  color: var(--blue);
+}
+
+.heroLine,
+.sectionLead,
+.showcaseIntro p,
+.downloadCard p,
+.infoCard p,
+.faqItem p,
+.finalSteps,
+.disclaimer,
+.studioLine {
+  color: var(--muted);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.62;
+}
+
+.heroLine {
+  max-width: 760px;
+  margin-top: 24px;
+  color: #26334f;
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
+  font-weight: 700;
+}
+
+.statusChip:global(.MuiChip-root),
+.yellowChip:global(.MuiChip-root),
+.greenChip:global(.MuiChip-root) {
+  min-height: 36px;
+  border: 2px solid currentColor;
+  box-shadow: 0 5px 0 rgba(20, 33, 61, 0.16);
+}
+
+.statusChip:global(.MuiChip-root) {
+  color: #ffffff;
+  background: var(--pink);
+}
+
+.yellowChip:global(.MuiChip-root) {
+  color: var(--ink);
+  background: var(--yellow);
+}
+
+.greenChip:global(.MuiChip-root) {
+  color: #ffffff;
+  background: var(--green);
+}
+
+.badgeRow {
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.badgeRow span {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: #ffffff;
+  color: var(--blue);
+  font-weight: 900;
+  box-shadow: 5px 5px 0 rgba(20, 33, 61, 0.16);
+}
+
+.heroActions,
+.cardActions,
+.finalLinks {
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.actionButton:global(.MuiButton-root) {
+  min-height: 52px;
+  border-width: 3px;
+  border-radius: 8px;
+  padding-inline: 18px;
+  font-size: 0.98rem;
+  box-shadow: 0 5px 0 rgba(20, 33, 61, 0.16);
+}
+
+.primaryCta:global(.MuiButton-root) {
+  border-color: var(--ink);
+  background: var(--orange);
+  color: #ffffff;
+}
+
+.primaryCta:global(.MuiButton-root):hover {
+  background: #e95f08;
+}
+
+.secondaryCta:global(.MuiButton-root) {
+  border-color: var(--blue);
+  background: #ffffff;
+  color: var(--blue);
+}
+
+.secondaryCta:global(.MuiButton-root):hover {
+  border-color: var(--pink);
+  background: #fff0f5;
+}
+
+.actionButton:global(.Mui-disabled) {
+  box-shadow: none;
+}
+
+.adultsWelcome {
+  margin-top: 22px;
+  color: var(--blue);
+  font-family: "Gloria Hallelujah", Roboto, sans-serif;
+  font-size: clamp(1.35rem, 2.2vw, 2.1rem);
+  font-weight: 700;
+}
+
+.studioLine {
+  max-width: 720px;
+  margin-top: 8px;
+}
+
+.heroArtwork,
+.showcaseCard,
+.glanceImage {
+  overflow: hidden;
+  border: 4px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 10px 10px 0 rgba(9, 87, 184, 0.14);
+  transform: rotate(1deg);
+}
+
+.heroArtwork {
+  justify-self: center;
+  width: min(100%, 520px);
+  padding: 14px;
+}
+
+.heroArtwork img {
+  width: 100%;
+  height: auto;
+}
+
+.heroArtwork figcaption,
+.showcaseCard figcaption {
+  padding-top: 10px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.sectionHeader h2,
+.showcaseIntro h2,
+.finalCta h2 {
+  max-width: 1050px;
+  font-size: clamp(2.2rem, 5.6vw, 5.5rem);
+}
+
+.sectionLead {
+  max-width: 780px;
+  margin-top: 22px;
+}
+
+.flowStrip,
+.stepGrid,
+.dateGrid,
+.prizeGrid,
+.criteriaGrid,
+.infoGrid,
+.downloadGrid,
+.showcaseGrid,
+.faqList {
+  margin-top: clamp(28px, 4.5vw, 54px);
+}
+
+.flowStrip {
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.flowStrip li {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border: 3px dashed var(--orange);
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: #ffffff;
+  color: var(--ink);
+  font-family: "Gloria Hallelujah", Roboto, sans-serif;
+  font-weight: 700;
+}
+
+.stepGrid,
+.dateGrid,
+.prizeGrid,
+.criteriaGrid,
+.infoGrid,
+.downloadGrid,
+.showcaseGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.stepGrid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  padding: 0;
+  list-style: none;
+}
+
+.stepCard:global(.MuiCard-root),
+.dateCard:global(.MuiCard-root),
+.prizeCard:global(.MuiCard-root),
+.criteriaCard:global(.MuiCard-root),
+.infoCard:global(.MuiCard-root),
+.downloadCard:global(.MuiCard-root) {
+  border: 4px solid var(--accent, var(--blue));
+  border-radius: 8px;
+  background: #fffefa;
+  box-shadow: 7px 7px 0 rgba(20, 33, 61, 0.12);
+}
+
+.stepCard:global(.MuiCard-root) {
+  min-height: 278px;
+  padding: 20px;
+}
+
+.blue {
+  --accent: var(--blue);
+}
+
+.orange {
+  --accent: var(--orange);
+}
+
+.pink {
+  --accent: var(--pink);
+}
+
+.green {
+  --accent: var(--green);
+}
+
+.purple {
+  --accent: var(--purple);
+}
+
+.stepCard span {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 1.45rem;
+  font-weight: 900;
+}
+
+.stepCard h3,
+.prizeCard h3,
+.downloadCard h3,
+.infoCard h3,
+.parentNote h3,
+.faqItem h3 {
+  margin-top: 16px;
+  color: var(--ink);
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.stepCard p,
+.prizeCard p {
+  margin-top: 14px;
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.requiredCallout,
+.parentNote {
+  max-width: 980px;
+  margin-top: 22px;
+  border: 4px solid var(--green);
+  border-radius: 8px;
+  padding: clamp(18px, 3vw, 26px);
+  background: #f2ffe5;
+  box-shadow: 7px 7px 0 rgba(38, 140, 63, 0.14);
+}
+
+.requiredCallout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.requiredCallout strong {
+  color: var(--green);
+  font-size: clamp(1.35rem, 2.8vw, 2.55rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.requiredCallout span {
+  color: var(--ink);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.dateGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dateCard:global(.MuiCard-root) {
+  min-height: 230px;
+  padding: clamp(20px, 3vw, 30px);
+}
+
+.dateCard svg,
+.prizeCard svg,
+.criteriaCard svg,
+.infoCard svg {
+  color: var(--accent, var(--orange));
+  font-size: 2.3rem;
+}
+
+.dateCard p,
+.prizeCard > p:first-of-type,
+.cardEyebrow {
+  color: var(--accent, var(--red));
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.dateCard strong {
+  display: block;
+  margin-top: 16px;
+  color: var(--ink);
+  font-size: clamp(1.3rem, 2.2vw, 2rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.dateCard time {
+  display: block;
+  margin-top: 14px;
+  color: var(--blue);
+  font-size: clamp(1.3rem, 2.3vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.prizeGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.prizeCard:global(.MuiCard-root) {
+  --accent: var(--orange);
+  padding: clamp(22px, 3vw, 34px);
+}
+
+.prizeCard:nth-child(2) {
+  --accent: var(--pink);
+}
+
+.prizeCard strong {
+  display: block;
+  margin-top: 12px;
+  color: var(--blue);
+  font-size: clamp(1.7rem, 3.2vw, 3rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.prizeCard span {
+  display: block;
+  margin-top: 16px;
+  color: var(--green);
+  font-weight: 900;
+}
+
+.prizeCard em {
+  display: block;
+  margin-top: 18px;
+  color: var(--pink);
+  font-size: clamp(1.12rem, 1.7vw, 1.42rem);
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.28;
+}
+
+.totalValue {
+  margin-top: 24px;
+  color: var(--ink);
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.totalValue strong {
+  color: var(--orange);
+}
+
+.judgingLayout,
+.showcaseIntro {
+  grid-template-columns: minmax(0, 0.9fr) minmax(300px, 0.55fr);
+}
+
+.glanceImage {
+  transform: rotate(-1deg);
+}
+
+.glanceImage img {
+  width: 100%;
+  height: auto;
+}
+
+.criteriaGrid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.criteriaCard:global(.MuiCard-root),
+.infoCard:global(.MuiCard-root) {
+  --accent: var(--green);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 74px;
+  padding: 14px;
+  font-weight: 900;
+}
+
+.parentNote {
+  border-color: var(--blue);
+  background: #eef7ff;
+}
+
+.parentNote h3 {
+  margin-top: 0;
+}
+
+.infoGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.infoCard:global(.MuiCard-root) {
+  --accent: var(--purple);
+  display: block;
+  min-height: 210px;
+  padding: 20px;
+}
+
+.infoCard h3 {
+  margin-top: 12px;
+}
+
+.downloadBand {
+  background:
+    linear-gradient(180deg, rgba(32, 164, 243, 0.12), rgba(255, 211, 56, 0.18)),
+    rgba(255, 255, 255, 0.52);
+}
+
+.downloadGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.downloadCard:global(.MuiCard-root) {
+  --accent: var(--blue);
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: clamp(20px, 3vw, 30px);
+}
+
+.downloadCard:nth-child(2n) {
+  --accent: var(--green);
+}
+
+.downloadCard:nth-child(3n) {
+  --accent: var(--orange);
+}
+
+.downloadCard h3,
+.downloadCard p {
+  margin: 0;
+}
+
+.downloadCard ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.resourcePreview {
+  width: min(100%, 190px);
+  margin: 0 0 6px;
+  overflow: hidden;
+  border: 2px solid rgba(20, 33, 61, 0.16);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.resourcePreview img {
+  width: 100%;
+  height: auto;
+}
+
+.cardActions {
+  align-self: end;
+}
+
+.showcaseGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.showcaseCard {
+  margin: 0;
+  padding: 12px;
+}
+
+.showcaseCard img {
+  width: 100%;
+  height: auto;
+}
+
+.textCta,
+.finalLinks a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 20px;
+  border-bottom: 3px solid var(--orange);
+  color: var(--blue);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.textCta:focus-visible,
+.finalLinks a:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 4px;
+}
+
+.faqList {
+  display: grid;
+  gap: 12px;
+}
+
+.faqItem:global(.MuiAccordion-root) {
+  border: 3px solid var(--blue);
+  background: #ffffff;
+  box-shadow: 5px 5px 0 rgba(20, 33, 61, 0.12);
+}
+
+.faqItem h3 {
+  margin-top: 0;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+}
+
+.finalCta {
+  min-height: 70svh;
+  display: grid;
+  align-items: center;
+  background:
+    linear-gradient(180deg, rgba(255, 249, 237, 0.15), rgba(7, 18, 37, 0.96)),
+    var(--blue);
+  color: #ffffff;
+  text-align: center;
+}
+
+.finalCta h2,
+.finalCta .kicker,
+.finalSteps,
+.disclaimer,
+.brandClose {
+  color: #ffffff;
+}
+
+.finalCta h2 {
+  text-shadow:
+    3px 3px 0 var(--blue),
+    6px 6px 0 rgba(255, 211, 56, 0.3);
+}
+
+.finalCta .heroActions,
+.finalLinks {
+  justify-content: center;
+}
+
+.finalSteps,
+.disclaimer,
+.brandClose {
+  margin-top: 24px;
+}
+
+.disclaimer {
+  max-width: 860px;
+  margin-inline: auto;
+  opacity: 0.82;
+}
+
+.brandClose {
+  color: var(--yellow);
+  font-family: "Gloria Hallelujah", Roboto, sans-serif;
+  font-size: clamp(1.2rem, 2vw, 1.75rem);
+  font-weight: 700;
+}
+
+@media (max-width: 1160px) {
+  .heroInner,
+  .judgingLayout,
+  .showcaseIntro {
+    grid-template-columns: 1fr;
+  }
+
+  .stepGrid,
+  .criteriaGrid,
+  .infoGrid,
+  .downloadGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .heroArtwork {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero,
+  .section,
+  .downloadBand,
+  .finalCta {
+    padding-block: 66px;
+  }
+
+  .hero {
+    padding-top: 112px;
+  }
+
+  .hero h1,
+  .sectionHeader h2,
+  .showcaseIntro h2,
+  .finalCta h2 {
+    font-size: clamp(2.45rem, 15vw, 4.2rem);
+  }
+
+  .heroActions,
+  .cardActions,
+  .finalLinks {
+    flex-direction: column;
+  }
+
+  .actionButton:global(.MuiButton-root) {
+    width: 100%;
+  }
+
+  .stepGrid,
+  .dateGrid,
+  .prizeGrid,
+  .criteriaGrid,
+  .infoGrid,
+  .downloadGrid,
+  .showcaseGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .stepCard:global(.MuiCard-root),
+  .dateCard:global(.MuiCard-root),
+  .infoCard:global(.MuiCard-root) {
+    min-height: auto;
+  }
+
+  .requiredCallout {
+    align-items: flex-start;
+  }
+
+  .resourcePreview {
+    width: min(100%, 230px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .heroArtwork,
+  .showcaseCard,
+  .glanceImage {
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .heroArtwork:hover,
+  .showcaseCard:hover,
+  .glanceImage:hover {
+    transform: rotate(0deg) translateY(-2px);
+    box-shadow: 12px 12px 0 rgba(9, 87, 184, 0.2);
+  }
+}
