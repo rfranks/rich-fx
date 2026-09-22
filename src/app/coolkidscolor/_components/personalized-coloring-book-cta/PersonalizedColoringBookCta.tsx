@@ -9,7 +9,11 @@ import styles from "@/app/coolkidscolor/_components/cool-kids-color-page/CoolKid
 
 export default function PersonalizedColoringBookCta() {
   return (
-    <Box component="section" className={styles.personalizedBookBanner}>
+    <Box
+      aria-label="Personalized coloring book"
+      component="aside"
+      className={styles.personalizedBookBanner}
+    >
       <Container maxWidth="xl">
         <Box
           aria-label="Get your personalized coloring book now on Etsy"

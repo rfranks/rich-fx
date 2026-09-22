@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export type ContestStatus =
   | "prelaunch"
   | "open"
@@ -114,4 +116,15 @@ export type InfoCard = {
 export type FaqItem = {
   question: string;
   answer: string;
+};
+
+export type ContestCarouselSlide = {
+  id: string;
+  label: string;
+  content: ReactNode;
+};
+
+export type ContestSectionCarouselProps = {
+  slides: ContestCarouselSlide[];
+  autoAdvanceMs?: number;
 };

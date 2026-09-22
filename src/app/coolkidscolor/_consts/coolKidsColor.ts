@@ -18,6 +18,7 @@ export const PERSONALIZED_COLORING_BOOK_URL =
   "https://www.etsy.com/listing/4563805859/personalized-coloring-book-from-your";
 export const RICHFX_HOME_URL = "https://rich-fx.ai";
 export const COOL_KIDS_COLOR_STATUS: ContestStatus = "open";
+export const COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS = 12_000;
 
 export const CLIPART_ASSETS = {
   headerSmilingStar: {

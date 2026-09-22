@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T03:39:44.540Z",
+  "generatedAt": "2026-09-22T07:25:56.550Z",
   "overallStatus": "warn",
   "checks": {
     "fileBudgets": "warn",
@@ -11,12 +11,12 @@
     "fileBudgets": {
       "key": "fileBudgets",
       "status": "warn",
-      "generatedAt": "2026-09-22T03:39:44.540Z",
+      "generatedAt": "2026-09-22T07:23:19.500Z",
       "summary": "File budget check passed.",
       "details": {
         "totals": {
-          "scannedFileCount": 264,
-          "codeFileCount": 264,
+          "scannedFileCount": 265,
+          "codeFileCount": 265,
           "violationCount": 0,
           "missingExactBudgetViolationCount": 0,
           "exactBudgetUnderuseViolationCount": 0,
@@ -54,19 +54,21 @@
     "testRunner": {
       "key": "testRunner",
       "status": "pass",
-      "generatedAt": "2026-09-22T03:11:48.359Z",
+      "generatedAt": "2026-09-22T07:25:37.195Z",
       "summary": "unit test runner passed for lane portfolio.",
       "details": {
         "suite": "unit",
         "lane": "portfolio",
         "exitCode": 0,
-        "jestArgs": []
+        "jestArgs": [
+          "coolKidsColorPage.test.tsx"
+        ]
       }
     },
     "a11yRunner": {
       "key": "a11yRunner",
       "status": "pass",
-      "generatedAt": "2026-09-22T03:11:21.765Z",
+      "generatedAt": "2026-09-22T07:25:56.550Z",
       "summary": "a11y test runner passed for lane portfolio.",
       "details": {
         "suite": "a11y",

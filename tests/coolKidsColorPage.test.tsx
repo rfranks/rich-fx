@@ -1,6 +1,7 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import DownloadAction from "@/app/coolkidscolor/_components/download-action/DownloadAction";
 import CoolKidsColorPage from "@/app/coolkidscolor/_components/cool-kids-color-page/CoolKidsColorPage";
+import { COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS } from "@/app/coolkidscolor/_consts/coolKidsColor";
 import type { DownloadAsset } from "@/app/coolkidscolor/_types/coolKidsColor";
 
 jest.mock("next/image", () => {
@@ -45,6 +46,57 @@ function expectAssetImage(container: HTMLElement, filename: string) {
 }
 
 describe("/coolkidscolor landing page", () => {
+  it("automatically advances the section carousel and supports pausing", () => {
+    jest.useFakeTimers();
+
+    try {
+      render(<CoolKidsColorPage />);
+
+      expect(
+        screen.getByRole("region", {
+          name: /cool kids color contest sections/i,
+        }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(/showing section 1 of 9: 2026 contest/i),
+      ).toBeInTheDocument();
+
+      act(() => {
+        jest.advanceTimersByTime(COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS);
+      });
+
+      expect(
+        screen.getByText(/showing section 2 of 9: contest flow/i),
+      ).toBeInTheDocument();
+
+      fireEvent.click(
+        screen.getByRole("button", {
+          name: /pause automatic section rotation/i,
+        }),
+      );
+
+      act(() => {
+        jest.advanceTimersByTime(COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS * 2);
+      });
+
+      expect(
+        screen.getByText(/showing section 2 of 9: contest flow/i),
+      ).toBeInTheDocument();
+
+      fireEvent.click(
+        screen.getByRole("button", {
+          name: /show next contest section/i,
+        }),
+      );
+
+      expect(
+        screen.getByText(/showing section 3 of 9: important dates/i),
+      ).toBeInTheDocument();
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   it("renders the contest hierarchy and required entry messaging", () => {
     const { container } = render(<CoolKidsColorPage />);
 
@@ -347,7 +399,17 @@ describe("/coolkidscolor landing page", () => {
         'img[src$="personalized-coloring-book-cta-banner.jpg"]',
       ),
     ).toBeInTheDocument();
-    expect(container.querySelector("main > section")).toContainElement(
+    expect(
+      screen.getByRole("complementary", {
+        name: /personalized coloring book/i,
+      }),
+    ).toContainElement(personalizedBookCta);
+    expect(
+      screen.getByRole("region", {
+        name: /cool kids color contest sections/i,
+      }),
+    ).not.toContainElement(personalizedBookCta);
+    expect(container.querySelector("main")).toContainElement(
       personalizedBookCta,
     );
 
