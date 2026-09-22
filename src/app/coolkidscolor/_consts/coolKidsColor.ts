@@ -19,6 +19,9 @@ export const PERSONALIZED_COLORING_BOOK_URL =
 export const RICHFX_HOME_URL = "https://rich-fx.ai";
 export const COOL_KIDS_COLOR_STATUS: ContestStatus = "open";
 export const COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS = 12_000;
+export const COOL_KIDS_COLOR_SWIPE_AXIS_LOCK_PX = 8;
+export const COOL_KIDS_COLOR_SWIPE_MIN_DISTANCE_PX = 56;
+export const COOL_KIDS_COLOR_SWIPE_DISTANCE_RATIO = 0.16;
 
 export const CLIPART_ASSETS = {
   headerSmilingStar: {

@@ -4,6 +4,26 @@ import CoolKidsColorPage from "@/app/coolkidscolor/_components/cool-kids-color-p
 import { COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS } from "@/app/coolkidscolor/_consts/coolKidsColor";
 import type { DownloadAsset } from "@/app/coolkidscolor/_types/coolKidsColor";
 
+class TestPointerEvent extends MouseEvent {
+  readonly isPrimary: boolean;
+  readonly pointerId: number;
+  readonly pointerType: string;
+
+  constructor(type: string, init: PointerEventInit = {}) {
+    super(type, init);
+    this.isPrimary = init.isPrimary ?? true;
+    this.pointerId = init.pointerId ?? 0;
+    this.pointerType = init.pointerType ?? "mouse";
+  }
+}
+
+if (typeof window.PointerEvent === "undefined") {
+  Object.defineProperty(window, "PointerEvent", {
+    configurable: true,
+    value: TestPointerEvent,
+  });
+}
+
 jest.mock("next/image", () => {
   const React = jest.requireActual<typeof import("react")>("react");
 
@@ -95,6 +115,92 @@ describe("/coolkidscolor landing page", () => {
     } finally {
       jest.useRealTimers();
     }
+  });
+
+  it("supports horizontal drag and swipe navigation without hijacking vertical scroll", () => {
+    render(<CoolKidsColorPage />);
+    const viewport = screen.getByTestId("contest-carousel-viewport");
+
+    fireEvent.pointerDown(viewport, {
+      button: 0,
+      clientX: 360,
+      clientY: 220,
+      isPrimary: true,
+      pointerId: 1,
+      pointerType: "touch",
+    });
+    fireEvent.pointerMove(viewport, {
+      clientX: 160,
+      clientY: 228,
+      isPrimary: true,
+      pointerId: 1,
+      pointerType: "touch",
+    });
+    fireEvent.pointerUp(viewport, {
+      clientX: 160,
+      clientY: 228,
+      isPrimary: true,
+      pointerId: 1,
+      pointerType: "touch",
+    });
+
+    expect(
+      screen.getByText(/showing section 2 of 9: contest flow/i),
+    ).toBeInTheDocument();
+
+    fireEvent.pointerDown(viewport, {
+      button: 0,
+      clientX: 240,
+      clientY: 180,
+      isPrimary: true,
+      pointerId: 2,
+      pointerType: "touch",
+    });
+    fireEvent.pointerMove(viewport, {
+      clientX: 232,
+      clientY: 340,
+      isPrimary: true,
+      pointerId: 2,
+      pointerType: "touch",
+    });
+    fireEvent.pointerUp(viewport, {
+      clientX: 232,
+      clientY: 340,
+      isPrimary: true,
+      pointerId: 2,
+      pointerType: "touch",
+    });
+
+    expect(
+      screen.getByText(/showing section 2 of 9: contest flow/i),
+    ).toBeInTheDocument();
+
+    fireEvent.pointerDown(viewport, {
+      button: 0,
+      clientX: 160,
+      clientY: 220,
+      isPrimary: true,
+      pointerId: 3,
+      pointerType: "mouse",
+    });
+    fireEvent.pointerMove(viewport, {
+      clientX: 360,
+      clientY: 224,
+      isPrimary: true,
+      pointerId: 3,
+      pointerType: "mouse",
+    });
+    fireEvent.pointerUp(viewport, {
+      clientX: 360,
+      clientY: 224,
+      isPrimary: true,
+      pointerId: 3,
+      pointerType: "mouse",
+    });
+
+    expect(
+      screen.getByText(/showing section 1 of 9: 2026 contest/i),
+    ).toBeInTheDocument();
   });
 
   it("renders the contest hierarchy and required entry messaging", () => {

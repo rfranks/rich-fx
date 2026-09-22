@@ -12,15 +12,24 @@ import Tooltip from "@mui/material/Tooltip";
 import {
   useCallback,
   useEffect,
+  useRef,
   useState,
   type CSSProperties,
   type FocusEvent,
+  type PointerEvent as ReactPointerEvent,
 } from "react";
-import { COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS } from "@/app/coolkidscolor/_consts/coolKidsColor";
+import {
+  COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS,
+  COOL_KIDS_COLOR_SWIPE_AXIS_LOCK_PX,
+  COOL_KIDS_COLOR_SWIPE_DISTANCE_RATIO,
+  COOL_KIDS_COLOR_SWIPE_MIN_DISTANCE_PX,
+} from "@/app/coolkidscolor/_consts/coolKidsColor";
 import type { ContestSectionCarouselProps } from "@/app/coolkidscolor/_types/coolKidsColor";
 import styles from "./ContestSectionCarousel.module.css";
 
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+const INTERACTIVE_SELECTOR =
+  'a, button, input, select, textarea, [role="button"], [role="combobox"]';
 
 export default function ContestSectionCarousel({
   slides,
@@ -30,6 +39,23 @@ export default function ContestSectionCarousel({
   const [isPaused, setIsPaused] = useState(false);
   const [hasCarouselFocus, setHasCarouselFocus] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const gestureRef = useRef<{
+    pointerId: number | null;
+    startX: number;
+    startY: number;
+    deltaX: number;
+    axis: "horizontal" | "vertical" | null;
+  }>({
+    pointerId: null,
+    startX: 0,
+    startY: 0,
+    deltaX: 0,
+    axis: null,
+  });
+  const suppressClickRef = useRef(false);
   const slideCount = slides.length;
 
   const goToSlide = useCallback(
@@ -69,6 +95,7 @@ export default function ContestSectionCarousel({
     autoAdvanceMs > 0 &&
     !isPaused &&
     !hasCarouselFocus &&
+    !isDragging &&
     !prefersReducedMotion;
 
   useEffect(() => {
@@ -95,6 +122,105 @@ export default function ContestSectionCarousel({
     }
   };
 
+  const resetGesture = () => {
+    gestureRef.current = {
+      pointerId: null,
+      startX: 0,
+      startY: 0,
+      deltaX: 0,
+      axis: null,
+    };
+    setDragOffset(0);
+    setIsDragging(false);
+  };
+
+  const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement;
+    const isUnsupportedMouseButton =
+      event.pointerType === "mouse" && event.button !== 0;
+
+    if (
+      event.isPrimary === false ||
+      isUnsupportedMouseButton ||
+      target.closest(INTERACTIVE_SELECTOR)
+    ) {
+      return;
+    }
+
+    gestureRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      deltaX: 0,
+      axis: null,
+    };
+    suppressClickRef.current = false;
+    setIsDragging(true);
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+
+  const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const gesture = gestureRef.current;
+    if (gesture.pointerId !== event.pointerId) return;
+
+    const deltaX = event.clientX - gesture.startX;
+    const deltaY = event.clientY - gesture.startY;
+
+    if (
+      gesture.axis === null &&
+      Math.max(Math.abs(deltaX), Math.abs(deltaY)) >=
+        COOL_KIDS_COLOR_SWIPE_AXIS_LOCK_PX
+    ) {
+      gesture.axis =
+        Math.abs(deltaX) > Math.abs(deltaY) ? "horizontal" : "vertical";
+    }
+
+    if (gesture.axis !== "horizontal") return;
+
+    event.preventDefault();
+    gesture.deltaX = deltaX;
+    suppressClickRef.current = true;
+
+    const isPullingPastStart = activeIndex === 0 && deltaX > 0;
+    const isPullingPastEnd = activeIndex === slideCount - 1 && deltaX < 0;
+    setDragOffset(
+      isPullingPastStart || isPullingPastEnd ? deltaX * 0.22 : deltaX,
+    );
+  };
+
+  const handlePointerEnd = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const gesture = gestureRef.current;
+    if (gesture.pointerId !== event.pointerId) return;
+
+    const viewportWidth = viewportRef.current?.clientWidth ?? 0;
+    const swipeDistance = Math.max(
+      COOL_KIDS_COLOR_SWIPE_MIN_DISTANCE_PX,
+      viewportWidth * COOL_KIDS_COLOR_SWIPE_DISTANCE_RATIO,
+    );
+
+    if (gesture.axis === "horizontal") {
+      if (gesture.deltaX <= -swipeDistance && activeIndex < slideCount - 1) {
+        goToNextSlide();
+      } else if (gesture.deltaX >= swipeDistance && activeIndex > 0) {
+        goToPreviousSlide();
+      }
+    }
+
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    resetGesture();
+  };
+
+  const handlePointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (gestureRef.current.pointerId !== event.pointerId) return;
+
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    resetGesture();
+  };
+
   return (
     <Box
       aria-label="Cool Kids Color contest sections"
@@ -104,10 +230,27 @@ export default function ContestSectionCarousel({
       onBlur={handleCarouselBlur}
       onFocus={() => setHasCarouselFocus(true)}
     >
-      <Box className={styles.viewport}>
+      <Box
+        className={styles.viewport}
+        data-testid="contest-carousel-viewport"
+        onClickCapture={(event) => {
+          if (!suppressClickRef.current) return;
+          event.preventDefault();
+          event.stopPropagation();
+          suppressClickRef.current = false;
+        }}
+        onDragStart={(event) => event.preventDefault()}
+        onPointerCancel={handlePointerCancel}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerEnd}
+        ref={viewportRef}
+      >
         <Box
-          className={styles.track}
-          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+          className={`${styles.track} ${isDragging ? styles.trackDragging : ""}`}
+          style={{
+            transform: `translate3d(calc(-${activeIndex * 100}% + ${dragOffset}px), 0, 0)`,
+          }}
         >
           {slides.map((slide, index) => (
             <div

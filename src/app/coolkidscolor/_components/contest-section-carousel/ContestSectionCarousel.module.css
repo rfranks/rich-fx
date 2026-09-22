@@ -96,6 +96,8 @@
 .viewport {
   min-height: 0;
   overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
 }
 
 .track {
@@ -103,6 +105,15 @@
   display: flex;
   transition: transform 520ms cubic-bezier(0.2, 0.74, 0.24, 1);
   will-change: transform;
+}
+
+.trackDragging {
+  transition: none;
+  user-select: none;
+}
+
+.viewport:has(.trackDragging) {
+  cursor: grabbing;
 }
 
 .slide {
