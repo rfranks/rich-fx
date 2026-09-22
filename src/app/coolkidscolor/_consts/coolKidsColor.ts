@@ -14,6 +14,8 @@ export const COOL_KIDS_COLOR_ROUTE = "/coolkidscolor";
 export const COOL_KIDS_COLOR_ASSET_BASE_PATH = "/assets/coolkidscolor/";
 const CLIPART_ASSET_BASE_PATH = `${COOL_KIDS_COLOR_ASSET_BASE_PATH}clipart_assets/`;
 export const ETSY_SHOP_URL = "https://www.etsy.com/shop/RichFX";
+export const PERSONALIZED_COLORING_BOOK_URL =
+  "https://www.etsy.com/listing/4563805859/personalized-coloring-book-from-your";
 export const RICHFX_HOME_URL = "https://rich-fx.ai";
 export const COOL_KIDS_COLOR_STATUS: ContestStatus = "open";
 
@@ -250,6 +252,14 @@ export const HERO_ARTWORK: ShowcaseImage = {
   width: 612,
   height: 792,
   title: "Official Contest Page",
+};
+
+export const PERSONALIZED_COLORING_BOOK_CTA: ShowcaseImage = {
+  src: `${COOL_KIDS_COLOR_ASSET_BASE_PATH}personalized-coloring-book-cta-banner.jpg`,
+  alt: "Get your personalized coloring book now! A friendly RichFX robot presents an open custom dragon coloring book.",
+  width: 2172,
+  height: 724,
+  title: "Get Your Personalized Coloring Book Now",
 };
 
 export const SHOWCASE_IMAGES: ShowcaseImage[] = [
@@ -508,7 +518,7 @@ export const PRIZE_TIERS: PrizeTier[] = [
     clipart: CLIPART_ASSETS.personalizedColoringBook,
     bodyLink: {
       label: "coloring book",
-      href: "https://www.etsy.com/listing/4563805859/personalized-coloring-book-from-your",
+      href: PERSONALIZED_COLORING_BOOK_URL,
     },
   },
   {

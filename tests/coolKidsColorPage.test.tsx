@@ -332,7 +332,24 @@ describe("/coolkidscolor landing page", () => {
   });
 
   it("links to the RichFX Etsy shop and renders real asset previews", () => {
-    render(<CoolKidsColorPage />);
+    const { container } = render(<CoolKidsColorPage />);
+
+    const personalizedBookCta = screen.getByRole("link", {
+      name: /get your personalized coloring book now on etsy/i,
+    });
+
+    expect(personalizedBookCta).toHaveAttribute(
+      "href",
+      "https://www.etsy.com/listing/4563805859/personalized-coloring-book-from-your",
+    );
+    expect(
+      personalizedBookCta.querySelector(
+        'img[src$="personalized-coloring-book-cta-banner.jpg"]',
+      ),
+    ).toBeInTheDocument();
+    expect(container.querySelector("main > section")).toContainElement(
+      personalizedBookCta,
+    );
 
     expect(
       screen.getByRole("link", {
