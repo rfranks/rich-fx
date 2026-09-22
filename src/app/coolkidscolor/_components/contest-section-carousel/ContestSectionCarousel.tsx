@@ -18,6 +18,7 @@ import {
   type FocusEvent,
   type PointerEvent as ReactPointerEvent,
 } from "react";
+import { usePrefersReducedMotion } from "@/app/coolkidscolor/_hooks/usePrefersReducedMotion";
 import {
   COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS,
   COOL_KIDS_COLOR_SWIPE_AXIS_LOCK_PX,
@@ -27,7 +28,6 @@ import {
 import type { ContestSectionCarouselProps } from "@/app/coolkidscolor/_types/coolKidsColor";
 import styles from "./ContestSectionCarousel.module.css";
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const INTERACTIVE_SELECTOR =
   'a, button, input, select, textarea, [role="button"], [role="combobox"]';
 
@@ -38,7 +38,7 @@ export default function ContestSectionCarousel({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [hasCarouselFocus, setHasCarouselFocus] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const viewportRef = useRef<HTMLDivElement | null>(null);
@@ -75,20 +75,21 @@ export default function ContestSectionCarousel({
   }, [slideCount]);
 
   useEffect(() => {
-    if (typeof window.matchMedia !== "function") return;
+    const showHashedSlide = () => {
+      const hash = window.location.hash.slice(1);
+      const hashedIndex = slides.findIndex(
+        (slide) => `coolkidscolor-${slide.id}` === hash,
+      );
 
-    const mediaQuery = window.matchMedia(REDUCED_MOTION_QUERY);
-    const updateMotionPreference = () => {
-      setPrefersReducedMotion(mediaQuery.matches);
+      if (hashedIndex >= 0) {
+        setActiveIndex(hashedIndex);
+      }
     };
 
-    updateMotionPreference();
-    mediaQuery.addEventListener("change", updateMotionPreference);
-
-    return () => {
-      mediaQuery.removeEventListener("change", updateMotionPreference);
-    };
-  }, []);
+    showHashedSlide();
+    window.addEventListener("hashchange", showHashedSlide);
+    return () => window.removeEventListener("hashchange", showHashedSlide);
+  }, [slides]);
 
   const shouldAutoAdvance =
     slideCount > 1 &&
@@ -258,6 +259,7 @@ export default function ContestSectionCarousel({
               aria-roledescription="slide"
               className={styles.slide}
               data-slide-id={slide.id}
+              id={`coolkidscolor-${slide.id}`}
               inert={index !== activeIndex ? true : undefined}
               key={slide.id}
               role="group"

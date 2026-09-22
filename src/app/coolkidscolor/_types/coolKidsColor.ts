@@ -105,6 +105,15 @@ export type ShowcaseImage = {
   title: string;
 };
 
+export type PromotionalBanner = {
+  id: string;
+  label: string;
+  ariaLabel: string;
+  href: string;
+  image: ShowcaseImage;
+  openInNewTab?: boolean;
+};
+
 export type InfoCard = {
   title: string;
   body: string;

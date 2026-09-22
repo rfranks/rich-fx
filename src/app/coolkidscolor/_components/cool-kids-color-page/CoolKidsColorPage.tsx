@@ -1,6 +1,7 @@
 "use client";
 
 import SiteHeader from "@/app/_components/site-header/SiteHeader";
+import AboutCoolKidsColorSection from "@/app/coolkidscolor/_components/about-cool-kids-color-section/AboutCoolKidsColorSection";
 import ContestFaq from "@/app/coolkidscolor/_components/contest-faq/ContestFaq";
 import ContestHero from "@/app/coolkidscolor/_components/contest-hero/ContestHero";
 import ContestSectionCarousel from "@/app/coolkidscolor/_components/contest-section-carousel/ContestSectionCarousel";
@@ -18,6 +19,11 @@ import styles from "./CoolKidsColorPage.module.css";
 
 export default function CoolKidsColorPage() {
   const slides: ContestCarouselSlide[] = [
+    {
+      id: "about",
+      label: "About Us",
+      content: <AboutCoolKidsColorSection />,
+    },
     {
       id: "contest",
       label: "2026 Contest",

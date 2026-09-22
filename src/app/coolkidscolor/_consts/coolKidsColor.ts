@@ -7,6 +7,7 @@ import type {
   InfoCard,
   JudgingCriterion,
   PrizeTier,
+  PromotionalBanner,
   ShowcaseImage,
 } from "@/app/coolkidscolor/_types/coolKidsColor";
 
@@ -18,7 +19,8 @@ export const PERSONALIZED_COLORING_BOOK_URL =
   "https://www.etsy.com/listing/4563805859/personalized-coloring-book-from-your";
 export const RICHFX_HOME_URL = "https://rich-fx.ai";
 export const COOL_KIDS_COLOR_STATUS: ContestStatus = "open";
-export const COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS = 12_000;
+export const COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS = 24_000;
+export const COOL_KIDS_COLOR_PROMO_INTERVAL_MS = 8_000;
 export const COOL_KIDS_COLOR_SWIPE_AXIS_LOCK_PX = 8;
 export const COOL_KIDS_COLOR_SWIPE_MIN_DISTANCE_PX = 56;
 export const COOL_KIDS_COLOR_SWIPE_DISTANCE_RATIO = 0.16;
@@ -265,6 +267,73 @@ export const PERSONALIZED_COLORING_BOOK_CTA: ShowcaseImage = {
   height: 724,
   title: "Get Your Personalized Coloring Book Now",
 };
+
+export const COOL_KIDS_COLOR_PROMOTIONS = [
+  {
+    id: "etsy",
+    label: "Personalized coloring book",
+    ariaLabel: "Get your personalized coloring book now on Etsy",
+    href: PERSONALIZED_COLORING_BOOK_URL,
+    openInNewTab: true,
+    image: PERSONALIZED_COLORING_BOOK_CTA,
+  },
+  {
+    id: "facebook",
+    label: "Cool Kids Color Facebook page",
+    ariaLabel: "Visit the Cool Kids Color Facebook page",
+    href: "https://www.facebook.com/people/Cool-Kids-Color/61594602423203/",
+    openInNewTab: true,
+    image: {
+      src: `${COOL_KIDS_COLOR_ASSET_BASE_PATH}coolkidscolor-facebook-cta-banner.png`,
+      alt: "Check out our Cool Kids Color Facebook page!",
+      width: 2172,
+      height: 724,
+      title: "Cool Kids Color on Facebook",
+    },
+  },
+  {
+    id: "contest",
+    label: "Enter the contest",
+    ariaLabel: "Open the Cool Kids Color contest section",
+    href: "#coolkidscolor-contest",
+    openInNewTab: false,
+    image: {
+      src: `${COOL_KIDS_COLOR_ASSET_BASE_PATH}coolkidscolor-contest-cta-banner.png`,
+      alt: "Enter to win the contest!",
+      width: 2172,
+      height: 724,
+      title: "Enter the Cool Kids Color Contest",
+    },
+  },
+  {
+    id: "contact",
+    label: "Contact RichFX",
+    ariaLabel: "Email RichFX with Cool Kids Color ideas or questions",
+    href: "mailto:inquiries@rich-fx.com?subject=Cool%20Kids%20Color%20question",
+    openInNewTab: false,
+    image: {
+      src: `${COOL_KIDS_COLOR_ASSET_BASE_PATH}coolkidscolor-contact-cta-banner.png`,
+      alt: "Contact us with ideas or questions at inquiries@rich-fx.com!",
+      width: 2172,
+      height: 724,
+      title: "Contact Cool Kids Color",
+    },
+  },
+  {
+    id: "linkedin",
+    label: "RichFX Studios on LinkedIn",
+    ariaLabel: "Follow RichFX Studios on LinkedIn",
+    href: "https://www.linkedin.com/company/richfx-studios-llc/posts/",
+    openInNewTab: true,
+    image: {
+      src: `${COOL_KIDS_COLOR_ASSET_BASE_PATH}coolkidscolor-linkedin-cta-banner.png`,
+      alt: "Follow us on LinkedIn!",
+      width: 2172,
+      height: 724,
+      title: "Follow RichFX Studios on LinkedIn",
+    },
+  },
+] as const satisfies readonly PromotionalBanner[];
 
 export const RICHFX_STUDIOS_WORDMARK: ShowcaseImage = {
   src: "/assets/wordmark.png",

@@ -1,7 +1,10 @@
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import DownloadAction from "@/app/coolkidscolor/_components/download-action/DownloadAction";
 import CoolKidsColorPage from "@/app/coolkidscolor/_components/cool-kids-color-page/CoolKidsColorPage";
-import { COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS } from "@/app/coolkidscolor/_consts/coolKidsColor";
+import {
+  COOL_KIDS_COLOR_CAROUSEL_INTERVAL_MS,
+  COOL_KIDS_COLOR_PROMO_INTERVAL_MS,
+} from "@/app/coolkidscolor/_consts/coolKidsColor";
 import type { DownloadAsset } from "@/app/coolkidscolor/_types/coolKidsColor";
 
 class TestPointerEvent extends MouseEvent {
@@ -78,7 +81,7 @@ describe("/coolkidscolor landing page", () => {
         }),
       ).toBeInTheDocument();
       expect(
-        screen.getByText(/showing section 1 of 9: 2026 contest/i),
+        screen.getByText(/showing section 1 of 10: about us/i),
       ).toBeInTheDocument();
 
       act(() => {
@@ -86,7 +89,7 @@ describe("/coolkidscolor landing page", () => {
       });
 
       expect(
-        screen.getByText(/showing section 2 of 9: contest flow/i),
+        screen.getByText(/showing section 2 of 10: 2026 contest/i),
       ).toBeInTheDocument();
 
       fireEvent.click(
@@ -100,7 +103,7 @@ describe("/coolkidscolor landing page", () => {
       });
 
       expect(
-        screen.getByText(/showing section 2 of 9: contest flow/i),
+        screen.getByText(/showing section 2 of 10: 2026 contest/i),
       ).toBeInTheDocument();
 
       fireEvent.click(
@@ -110,7 +113,7 @@ describe("/coolkidscolor landing page", () => {
       );
 
       expect(
-        screen.getByText(/showing section 3 of 9: important dates/i),
+        screen.getByText(/showing section 3 of 10: contest flow/i),
       ).toBeInTheDocument();
     } finally {
       jest.useRealTimers();
@@ -145,7 +148,7 @@ describe("/coolkidscolor landing page", () => {
     });
 
     expect(
-      screen.getByText(/showing section 2 of 9: contest flow/i),
+      screen.getByText(/showing section 2 of 10: 2026 contest/i),
     ).toBeInTheDocument();
 
     fireEvent.pointerDown(viewport, {
@@ -172,7 +175,7 @@ describe("/coolkidscolor landing page", () => {
     });
 
     expect(
-      screen.getByText(/showing section 2 of 9: contest flow/i),
+      screen.getByText(/showing section 2 of 10: 2026 contest/i),
     ).toBeInTheDocument();
 
     fireEvent.pointerDown(viewport, {
@@ -199,8 +202,42 @@ describe("/coolkidscolor landing page", () => {
     });
 
     expect(
-      screen.getByText(/showing section 1 of 9: 2026 contest/i),
+      screen.getByText(/showing section 1 of 10: about us/i),
     ).toBeInTheDocument();
+  });
+
+  it("introduces Cool Kids Color with storefront and contact links", () => {
+    const { container } = render(<CoolKidsColorPage />);
+    const heading = screen.getByRole("heading", {
+      level: 2,
+      name: /about us/i,
+    });
+    const aboutSection = heading.closest("section");
+
+    expect(aboutSection).not.toBeNull();
+    if (!aboutSection) return;
+
+    expect(
+      within(aboutSection).getByText(
+        (_, element) =>
+          element?.tagName === "P" &&
+          element.textContent === "Welcome to Cool Kids Color!",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(aboutSection).getByText(/your dog skiing in the alps/i),
+    ).toBeInTheDocument();
+    expect(
+      within(aboutSection).getByRole("link", {
+        name: /visit our etsy store/i,
+      }),
+    ).toHaveAttribute("href", "https://www.etsy.com/shop/RichFX");
+    expect(
+      within(aboutSection).getByRole("link", { name: /email richfx/i }),
+    ).toHaveAttribute("href", "mailto:inquiries@rich-fx.com");
+    expectAssetImage(container, "grownup_child_tablet.png");
+    expectAssetImage(container, "personalized_coloring_book.png");
+    expectAssetImage(container, "crayon_cup.png");
   });
 
   it("renders the contest hierarchy and required entry messaging", () => {
@@ -513,7 +550,7 @@ describe("/coolkidscolor landing page", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByRole("complementary", {
-        name: /personalized coloring book/i,
+        name: /featured cool kids color links/i,
       }),
     ).toContainElement(personalizedBookCta);
     expect(
@@ -540,6 +577,97 @@ describe("/coolkidscolor landing page", () => {
         /preview of the printable #coolkidscolor offline flyer/i,
       ).length,
     ).toBeGreaterThan(0);
+  });
+
+  it("rotates featured links, supports pausing, and opens matching destinations", () => {
+    jest.useFakeTimers();
+
+    try {
+      render(<CoolKidsColorPage />);
+
+      expect(
+        screen.getByRole("link", {
+          name: /get your personalized coloring book now on etsy/i,
+        }),
+      ).toHaveAttribute(
+        "href",
+        "https://www.etsy.com/listing/4563805859/personalized-coloring-book-from-your",
+      );
+
+      act(() => {
+        jest.advanceTimersByTime(COOL_KIDS_COLOR_PROMO_INTERVAL_MS);
+      });
+
+      const facebookLink = screen.getByRole("link", {
+        name: /visit the cool kids color facebook page/i,
+      });
+      expect(facebookLink).toHaveAttribute(
+        "href",
+        "https://www.facebook.com/people/Cool-Kids-Color/61594602423203/",
+      );
+      expect(
+        facebookLink.querySelector(
+          'img[src$="coolkidscolor-facebook-cta-banner.png"]',
+        ),
+      ).toBeInTheDocument();
+
+      fireEvent.click(
+        screen.getByRole("button", {
+          name: /pause featured link rotation/i,
+        }),
+      );
+      act(() => {
+        jest.advanceTimersByTime(COOL_KIDS_COLOR_PROMO_INTERVAL_MS * 2);
+      });
+      expect(
+        screen.getByRole("link", {
+          name: /visit the cool kids color facebook page/i,
+        }),
+      ).toBeInTheDocument();
+
+      fireEvent.click(
+        screen.getByRole("button", { name: /show enter the contest/i }),
+      );
+      const contestLink = screen.getByRole("link", {
+        name: /open the cool kids color contest section/i,
+      });
+      expect(contestLink).toHaveAttribute("href", "#coolkidscolor-contest");
+
+      window.location.hash = "#coolkidscolor-contest";
+      fireEvent(window, new HashChangeEvent("hashchange"));
+      expect(
+        screen.getByText(/showing section 2 of 10: 2026 contest/i),
+      ).toBeInTheDocument();
+
+      fireEvent.click(
+        screen.getByRole("button", { name: /show contact richfx/i }),
+      );
+      expect(
+        screen.getByRole("link", {
+          name: /email richfx with cool kids color ideas or questions/i,
+        }),
+      ).toHaveAttribute(
+        "href",
+        "mailto:inquiries@rich-fx.com?subject=Cool%20Kids%20Color%20question",
+      );
+
+      fireEvent.click(
+        screen.getByRole("button", {
+          name: /show richfx studios on linkedin/i,
+        }),
+      );
+      expect(
+        screen.getByRole("link", {
+          name: /follow richfx studios on linkedin/i,
+        }),
+      ).toHaveAttribute(
+        "href",
+        "https://www.linkedin.com/company/richfx-studios-llc/posts/",
+      );
+    } finally {
+      window.history.replaceState(null, "", window.location.pathname);
+      jest.useRealTimers();
+    }
   });
 
   it("does not say #adultswelcome is required for entry", () => {
