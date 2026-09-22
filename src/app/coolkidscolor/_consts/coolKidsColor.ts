@@ -263,6 +263,14 @@ export const PERSONALIZED_COLORING_BOOK_CTA: ShowcaseImage = {
   title: "Get Your Personalized Coloring Book Now",
 };
 
+export const RICHFX_STUDIOS_WORDMARK: ShowcaseImage = {
+  src: "/assets/wordmark.png",
+  alt: "RichFX Studios",
+  width: 1802,
+  height: 872,
+  title: "RichFX Studios",
+};
+
 export const SHOWCASE_IMAGES: ShowcaseImage[] = [
   {
     src: "/assets/coolkidscolor/coolkidscolor-2026-entry-sheet-preview.png",

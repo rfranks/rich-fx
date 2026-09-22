@@ -1133,52 +1133,163 @@
 }
 
 .finalCta {
-  min-height: 70svh;
+  --studio-black: #030303;
+  --studio-ink: #080706;
+  --studio-text: #fff3df;
+  --studio-muted: rgba(255, 243, 223, 0.68);
+  --studio-border: rgba(255, 244, 224, 0.16);
+  --studio-orange: #ff6a00;
+  min-height: 100%;
   display: grid;
   align-items: center;
   background:
-    linear-gradient(180deg, rgba(255, 249, 237, 0.15), rgba(7, 18, 37, 0.96)),
-    var(--blue);
-  color: #ffffff;
-  text-align: center;
+    linear-gradient(115deg, rgba(255, 106, 0, 0.1), transparent 36%),
+    linear-gradient(180deg, var(--studio-ink), var(--studio-black));
+  color: var(--studio-text);
+  text-align: left;
 }
 
-.finalCta h2,
-.finalCta .kicker,
-.finalSteps,
-.disclaimer,
-.brandClose {
-  color: #ffffff;
+.finalStudioLayout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.68fr) minmax(0, 1.32fr);
+  align-items: center;
+  gap: clamp(30px, 5vw, 72px);
+}
+
+.finalStudioBrand {
+  min-width: 0;
+  padding-right: clamp(28px, 4vw, 58px);
+  border-right: 1px solid var(--studio-border);
+}
+
+.finalStudioWordmark {
+  width: min(100%, 420px);
+  height: auto;
+}
+
+.finalStudioLabel,
+.finalStudioPromise,
+.finalCta .kicker {
+  text-transform: uppercase;
+}
+
+.finalStudioLabel {
+  margin-top: 16px;
+  color: var(--studio-orange);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.finalStudioPromise {
+  max-width: 430px;
+  margin-top: 12px;
+  color: var(--studio-muted);
+  font-size: clamp(0.92rem, 1.25vw, 1.1rem);
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.finalStudioContent {
+  min-width: 0;
+}
+
+.finalCta .kicker {
+  color: var(--studio-orange);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
 }
 
 .finalCta h2 {
-  text-shadow:
-    3px 3px 0 var(--blue),
-    6px 6px 0 rgba(255, 211, 56, 0.3);
+  max-width: 780px;
+  margin-top: 16px;
+  color: var(--studio-text);
+  font-size: clamp(2.35rem, 5vw, 5rem);
+  line-height: 0.9;
+  text-shadow: none;
 }
 
-.finalCta .heroActions,
+.finalSteps {
+  max-width: 760px;
+  margin-top: 22px;
+  color: var(--studio-muted);
+  font-size: clamp(0.98rem, 1.35vw, 1.16rem);
+}
+
+.finalCta .heroActions {
+  justify-content: flex-start;
+  margin-top: 26px;
+}
+
+.finalCta .actionButton:global(.MuiButton-root) {
+  border-color: var(--studio-orange);
+  background: var(--studio-orange);
+  color: var(--studio-black);
+  box-shadow: none;
+}
+
+.finalCta .actionButton:global(.MuiButton-root):hover {
+  border-color: #ff8a38;
+  background: #ff8a38;
+}
+
 .finalLinks {
-  justify-content: center;
+  justify-content: flex-start;
+  margin-top: 18px;
 }
 
-.finalSteps,
-.disclaimer,
-.brandClose {
-  margin-top: 24px;
+.finalLinks a {
+  min-height: 42px;
+  margin-top: 0;
+  border: 1px solid var(--studio-border);
+  border-radius: 8px;
+  padding: 0 16px;
+  color: var(--studio-text);
+  background: rgba(255, 243, 223, 0.04);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+}
+
+.finalLinks a:hover {
+  border-color: rgba(255, 106, 0, 0.58);
+  background: rgba(255, 106, 0, 0.2);
+}
+
+.finalLinks a:last-child {
+  border-color: var(--studio-orange);
+  color: var(--studio-black);
+  background: var(--studio-orange);
+}
+
+.finalStudioFooter {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: clamp(28px, 4vw, 44px);
+  padding-top: 18px;
+  border-top: 1px solid var(--studio-border);
 }
 
 .disclaimer {
-  max-width: 860px;
-  margin-inline: auto;
-  opacity: 0.82;
+  max-width: 780px;
+  margin: 0;
+  color: var(--studio-muted);
+  font-size: 0.78rem;
+  line-height: 1.55;
 }
 
 .brandClose {
-  color: var(--yellow);
-  font-family: "Gloria Hallelujah", Roboto, sans-serif;
-  font-size: clamp(1.2rem, 2vw, 1.75rem);
-  font-weight: 700;
+  flex: 0 0 auto;
+  margin: 0;
+  color: var(--studio-text);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 1160px) {
@@ -1227,6 +1338,32 @@
 
   .hero h1 {
     font-size: clamp(1.9rem, 10vw, 3.35rem);
+  }
+
+  .finalStudioLayout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .finalStudioBrand {
+    padding: 0 0 24px;
+    border-right: 0;
+    border-bottom: 1px solid var(--studio-border);
+  }
+
+  .finalStudioWordmark {
+    width: min(72vw, 280px);
+  }
+
+  .finalStudioFooter {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .finalLinks a {
+    width: 100%;
+    justify-content: center;
   }
 
   .heroActions,

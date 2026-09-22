@@ -268,6 +268,12 @@ describe("/coolkidscolor landing page", () => {
     expect(
       screen.getByText(/building better worlds since 2026/i),
     ).toBeVisible();
+    expect(
+      screen.getByRole("img", { name: /richfx studios/i }),
+    ).toHaveAttribute("src", "/assets/wordmark.png");
+    expect(
+      screen.getByRole("link", { name: /explore richfx studios/i }),
+    ).toHaveAttribute("href", "https://rich-fx.ai");
     expectAssetImage(container, "header_smiling_star.png");
     expectAssetImage(container, "header_red_pencil.png");
     expectAssetImage(container, "header_smiling_heart.png");
